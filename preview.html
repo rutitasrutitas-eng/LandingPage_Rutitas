@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
+  <title>Rutitas — Vista previa de diseño</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <style>.preview-close {border:0}.qr-unavailable svg {width:54px;height:54px}</style>
+</head>
+<body>
+<div class="site-shell">
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#inicio"><img src="public/assets/rutitas-emblema.png" alt=""><span>Rutitas<b>.</b></span></a>
+    <nav class="desktop-nav" aria-label="Navegación principal"><button data-panel="funciona">Cómo funciona</button><button data-panel="seguridad">Seguridad</button><button data-panel="proyecto">El proyecto</button></nav>
+    <div class="top-status"><span class="status-dot"></span> Próximamente</div>
+  </header>
+  <main class="hero-layout" id="inicio">
+    <section class="hero-copy">
+      <div class="hero-intro"><span class="intro-icon">✦</span>TU COMUNIDAD. TU RUTA.</div>
+      <img class="hero-logo" src="public/assets/rutitas-logo.png" alt="Rutitas, universidad, camino y marcador">
+      <h1>La uni se vive<br><em>en el camino.</em></h1>
+      <p class="hero-subtitle">Compartir el trayecto también<br class="desktop-break"> es parte de la experiencia.</p>
+      <div class="hero-actions">
+        <button class="primary-cta" data-panel="funciona">Descubre Rutitas <span>➜</span></button>
+        <button class="text-cta" data-panel="proyecto">Conoce el proyecto ↗</button>
+      </div>
+      <div class="hero-trust"><span class="trust-mark">◈</span><span>PROYECTO PILOTO UNIVERSITARIO</span></div>
+    </section>
+    <section class="visual-stage" aria-label="Mockup y QR">
+      <div class="stage-grid"></div><div class="stage-sun"></div><div class="stage-orbit one"></div><div class="stage-orbit two"></div>
+      <div class="floating-tag"><span class="tag-check">✓</span>Conectando caminos <span class="tag-star">✦</span></div>
+      <div class="phone" aria-label="Vista ilustrativa de una futura aplicación Rutitas">
+        <div class="phone-camera"></div><div class="phone-content">
+          <div class="phone-status"><b>9:41</b><span>●●● ▰</span></div>
+          <div class="phone-brand"><span class="app-brand-glyph">♧</span>rutitas <span class="mini-demo">DEMO</span></div>
+          <div class="phone-greeting">¡Hola! 👋</div>
+          <div class="phone-headline">Tu próxima ruta<br>comienza aquí.</div>
+          <div class="phone-search"><span>📍</span><span>¿A dónde vamos?</span><span style="margin-left:auto;color:#0e57b1">→</span></div>
+          <div class="mini-map"><span class="road road-1"></span><span class="road road-2"></span><span class="road road-3"></span><span class="map-curve"></span><span class="map-dot one"></span><span class="map-dot two"></span><span class="map-label">Ruta de ejemplo</span></div>
+          <div class="trip-label">Rutas para ti <span>Ver todas →</span></div>
+          <div class="mini-trip"><div class="trip-icon">🚗</div><div class="trip-meta"><b>Centro <span>→</span> Campus</b><small>07:30 · Trayecto ilustrativo</small></div><span class="trip-arrow">→</span></div>
+          <div class="phone-bottom"><span>⌂</span><span>⌕</span><span>♡</span><span>◯</span></div>
+        </div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-visual"><div class="qr-unavailable" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M15 14v3m0 4h3v-3h3m-3-4h3v3"/></svg><span class="qr-spark">✦</span></div></div>
+        <div class="qr-details"><span class="qr-eyebrow">EN TU CELULAR</span><strong>Muy pronto</strong><span>El QR estará aquí.</span><span class="qr-pending"><span></span> En preparación</span></div>
+      </div>
+      <div class="stage-caption"><span class="caption-dash"></span> UNA NUEVA FORMA DE MOVERSE JUNTOS</div>
+    </section>
+  </main>
+  <footer class="site-footer"><span><span class="footer-dot"></span> Piloto universitario · UTTT</span><span>Diseñado para conectar caminos <span class="footer-star">✳</span></span></footer>
+</div>
+<script>
+  const data={
+    funciona: ['UNA IDEA SIMPLE','El camino se comparte.','Rutitas busca conectar a personas de una misma comunidad universitaria para organizar trayectos.', [['01','Conecta','Forma parte de tu comunidad.'],['02','Encuentra','Explora trayectos disponibles.'],['03','Comparte','Organiza tu próxima salida.']]],
+    proyecto:['CONOCE RUTITAS','Más cerca, en comunidad.','Un proyecto de movilidad compartida pensado para estudiantes, con piloto inicial en la UTTT. La aplicación todavía está en desarrollo.',[['✦','Universitario','Pensado para comunidades educativas.'],['✦','Colaborativo','Para organizar trayectos compartidos.'],['✦','En desarrollo','Las funciones aún no están disponibles al público.']]],
+    seguridad:['DISEÑADO CON CUIDADO','Confianza desde el inicio.','La verificación de comunidad y la privacidad forman parte de los requisitos previstos para Rutitas. Aún no son servicios activos.',[['✓','Comunidad','Verificación institucional prevista.'],['✓','Privacidad','Protección de información personal.'],['✓','Encuentros','Preferencia por puntos públicos.']]]
+  };
+  let dialog;
+  function close(){dialog?.remove();dialog=null;}
+  function openInfo(type){const [eyebrow,title,description,points]=data[type]; close();dialog=document.createElement('div');dialog.className='modal-backdrop';dialog.innerHTML=`<section class="info-modal" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title"><button class="modal-close" aria-label="Cerrar información" type="button">×</button><div class="modal-eyebrow">${eyebrow}</div><h2 id="preview-modal-title">${title}</h2><p>${description}</p><div class="modal-points">${points.map(([n,t,d])=>`<div class="modal-point"><span class="point-num">${n}</span><div><strong>${t}</strong><span>${d}</span></div></div>`).join('')}</div><button class="modal-done">Entendido ✓</button></section>`;dialog.addEventListener('click',e=>{if(e.target===dialog||e.target.closest('.modal-close,.modal-done'))close()});document.body.append(dialog);dialog.querySelector('.modal-close').focus();}
+  document.querySelectorAll('[data-panel]').forEach(button=>button.addEventListener('click',()=>openInfo(button.dataset.panel)));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')close()});
+</script>
+</body></html>
