@@ -2,7 +2,7 @@ name: Quality and security checks
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feature/landing-001-compliance]
   workflow_dispatch:
 
 permissions:
