@@ -1,6 +1,6 @@
 # Memoria de Rutitas Landing
 
-**Estado de la iniciativa:** en curso; Constitución pendiente de ratificación.
+**Estado de la iniciativa:** cambios locales implementados; revisión de Preview, datos legales y ratificación humana pendientes.
 **Última actualización:** 2026-11-05.
 
 ## Hechos confirmados en el repo
@@ -8,8 +8,8 @@
 - Landing React 19 + TypeScript 5.7 + Vite 6, con estilos CSS propios.
 - El mockup está rotulado DEMO; el proyecto informa que la app sigue en desarrollo.
 - `VITE_APP_URL` estaba vacío; la tarjeta QR ya muestra «Muy pronto» sin enlace.
-- No se encontraron rutas legales, formularios, backend, endpoint de borrado, GA4 ni URL de Google Play en el repositorio auditado.
-- La producción existente servía en `landing-page-rutitas.vercel.app`; esta iniciativa no autoriza modificarla.
+- En la auditoría inicial no se encontraron rutas legales, formularios, backend, endpoint de borrado, GA4 ni URL de Google Play.
+- La producción existente sirve la portada en `landing-page-rutitas.vercel.app`; la comprobación pública de 2026-11-05 mostró `404 NOT_FOUND` en `/privacidad` y `/eliminar-cuenta`.
 
 ## Decisiones
 
@@ -23,8 +23,9 @@
 
 - 2026-11-05: auditoría inicial completada en `docs/auditoria-inicial.md`.
 - 2026-11-05: implementación de rutas legales, configuración opcional de Google Play/GA4, consentimiento, pruebas, CI y trazabilidad.
-- 2026-11-05: Vitest, Playwright, lint, typecheck, build y verificación SDD pasaron localmente. Auditoría npm encontró avisos moderados; no se aplicó `--force`.
-- Pendiente: revisión de Preview, aprobación del aviso, definición real del mecanismo de eliminación, Measurement ID/validación Realtime, URL de Google Play, CI remoto y ratificación de Constitución.
+- 2026-11-05: revalidación LANDING-002, Vitest 11/11, Playwright 9 aprobadas/1 omitida, lint, typecheck, build y SDD pasan localmente.
+- 2026-11-05: advisory GHSA-g3hv-75wg-m249 corregido con override `minimatch ^11.0.1`; lockfile resuelve 11.0.4; `npm audit` devuelve cero vulnerabilidades. `npm ci` limpio en carpeta temporal fuera de OneDrive pasa; el reintento directo en el repo falló por bloqueos Windows `EBUSY` al borrar `node_modules`.
+- Pendiente: PRs separados para LANDING-001/002, ejecución remota de CI/Gitleaks, acceso de equipo Vercel y Preview, aprobación del aviso, proceso real de eliminación, Measurement ID/Realtime, URL Play y ratificación de Constitución.
 
 ## Información que no se debe guardar aquí
 

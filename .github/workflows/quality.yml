@@ -2,7 +2,8 @@ name: Quality and security checks
 
 on:
   pull_request:
-    branches: [main]
+    # Temporal: el PR apilado LANDING-002 apunta a esta rama.
+    branches: [main, feature/landing-001-compliance]
   workflow_dispatch:
 
 permissions:
@@ -60,8 +61,8 @@ jobs:
       - name: Browser tests
         run: npm run test:e2e
 
-      - name: Dependency audit (high and critical)
-        run: npm audit --audit-level=high
+      - name: Dependency audit
+        run: npm audit
 
       - name: Publish test evidence
         if: always()
