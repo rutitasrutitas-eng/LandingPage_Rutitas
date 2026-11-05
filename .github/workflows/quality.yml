@@ -60,8 +60,8 @@ jobs:
       - name: Browser tests
         run: npm run test:e2e
 
-      - name: Dependency audit (high and critical)
-        run: npm audit --audit-level=high
+      - name: Dependency audit
+        run: npm audit
 
       - name: Publish test evidence
         if: always()
