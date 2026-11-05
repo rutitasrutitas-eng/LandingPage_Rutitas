@@ -71,10 +71,10 @@ Se agregó `overrides.minimatch: ^11.0.1`; el lock resuelve `11.0.4`, manteniend
 
 Se publicaron dos ramas, sin forzar actualizaciones:
 
-1. `feature/landing-001-compliance` parte de `main`, con commit `61efe04a5613033e5fed74107c7133e134b43fc9`. PR previsto: [comparar con main](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/compare/main...feature/landing-001-compliance?expand=1). El conector rechazó la creación del Draft PR con HTTP 403; por tanto aún no existe URL de PR.
-2. `feature/landing-002-release` parte del commit de LANDING-001. PR previsto, apilado inicialmente sobre `feature/landing-001-compliance`: [comparar con LANDING-001](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/compare/feature/landing-001-compliance...feature/landing-002-release?expand=1). La rama está publicada; el Draft PR tampoco se ha creado.
+1. `feature/landing-001-compliance` parte de `main`, con commit `61efe04a5613033e5fed74107c7133e134b43fc9`. PR previsto: [comparar con main](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/compare/main...feature/landing-001-compliance?expand=1). El conector rechazó la creación del Draft PR con HTTP 403; por tanto aún no existe número ni URL de PR.
+2. `feature/landing-002-release` parte del commit de LANDING-001 y apunta actualmente a `9c38104c37ff3ebbc0d86e8347fee4a23805d0a1`. PR previsto, apilado inicialmente sobre `feature/landing-001-compliance`: [comparar con LANDING-001](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/compare/feature/landing-001-compliance...feature/landing-002-release?expand=1). La rama está publicada; el Draft PR tampoco se ha creado.
 
-El SHA de punta de la rama LANDING-002 y su estado de publicación se registran en el historial de Git. No se han creado PRs, comentarios ni ejecuciones de Actions. El archivo workflow sí está en ambas ramas, pero no en `main`; los eventos configurados son `pull_request`, así que no existe un run de CI que pueda atribuirse a esta entrega mientras no se creen los PRs. No se ocultaron fallos. Se requiere conceder a la integración de GitHub permiso de escritura de Pull requests (y lectura de Actions para consultar runs) o completar los Draft PRs desde GitHub. No se fusionará ningún PR.
+GitHub devolvió para el commit 001 el check externo `Vercel: success`, con destino [deployment 3Zxrqis85J2dbJvZsz36jVVtmcfp](https://vercel.com/rutitasrutitas-8977/landing-page-rutitas/3Zxrqis85J2dbJvZsz36jVVtmcfp); para el commit 002 devolvió `Vercel: success`, con destino [deployment 7vFvS5ZxroNPzPAbb4EAmnrhfvDm](https://vercel.com/rutitasrutitas-8977/landing-page-rutitas/7vFvS5ZxroNPzPAbb4EAmnrhfvDm). `GitHub Actions` no devuelve ejecuciones para ninguno de los SHA. Gitleaks no se ejecutó localmente (Docker no está instalado) y no hay un run remoto del workflow. El archivo workflow está en ambas ramas, pero no en `main`; está configurado para `pull_request`, así que no hay run de CI mientras no se creen los PRs. No se ocultaron fallos. La integración requiere escritura de Pull requests y lectura de Actions para abrir los Draft PRs y consultar sus ejecuciones. No se fusionará ningún PR.
 
 ## 8. Estado Vercel, producción y Preview
 
@@ -82,7 +82,7 @@ El SHA de punta de la rama LANDING-002 y su estado de publicación se registran 
 - `https://landing-page-rutitas.vercel.app/privacidad`: `404 NOT_FOUND`.
 - `https://landing-page-rutitas.vercel.app/eliminar-cuenta`: `404 NOT_FOUND`.
 - Esto confirma que la producción aún no contiene las rutas de LANDING-001. No se inspeccionaron errores de consola del navegador en el control público.
-- No se obtuvo una URL Preview para las ramas. El conector Vercel respondió 403 para el equipo `rutitasrutitas-8977`; no se abrió sesión de autorización ni se cambió el proyecto. El check Vercel del commit base no acredita una Preview nueva. Al no estar creados los PRs, tampoco se confirmó si la configuración del proyecto crea Preview al recibir solo una rama.
+- GitHub reporta check Vercel `success` para ambos commits de rama (destinos enlazados arriba), evidencia de que Vercel procesó deployments asociados. No se pudo leer su metadato/URL de Preview: Vercel respondió 403 para el equipo `rutitasrutitas-8977`. Por eso no se validó portada, `/privacidad` ni `/eliminar-cuenta` en Preview y no se determina su URL pública. El enlace de aprobación creado por la herramienta oficial también respondió 404 `Team not found` con el team ID y el slug. Producción ya comprobada mantiene las dos rutas en 404; ese resultado no describe la Preview.
 - `vercel.json` mantiene la regla SPA local y se parsea; falta probarla en Preview una vez enviada la rama autorizada.
 
 ## 9. GA4 y Google Play
@@ -114,7 +114,7 @@ El SHA de punta de la rama LANDING-002 y su estado de publicación se registran 
 | GA4 y Play | Administradores de esas propiedades | No hay identificación ni evento/enlace real. |
 | Habilitar creación de Draft PRs y consultar Actions | Administrador GitHub | La integración devolvió 403 al crear PR; branches están publicadas. |
 | Ejecutar Gitleaks y CI | Administrador GitHub | Aún no existe un run remoto; Docker no está instalado localmente. |
-| Autorizar scope Vercel y revisar Preview | Administrador Vercel | El acceso al equipo fue denegado (403); producción tiene 404 en rutas legales. |
+| Autorizar scope Vercel y revisar Preview | Administrador Vercel | El acceso de lectura fue denegado (403) y el generador oficial de consentimiento devolvió 404 `Team not found`; no se obtuvieron las URL/metadata para validar rutas. |
 | Protección de `main` | Administrador GitHub | No verificada por permiso admin; una auditoría no prueba reglas. |
 
 ## 13. Publicación y reversión
@@ -128,8 +128,8 @@ El SHA de punta de la rama LANDING-002 y su estado de publicación se registran 
 
 ## 14. Acciones pendientes de acceso
 
-La autorización del usuario para publicar ramas y abrir Draft PRs ya fue otorgada. Falta habilitar la escritura de Pull requests para la conexión GitHub de Codex: al intentar crear PR1, GitHub respondió `403 Resource not accessible by integration`; la CLI `gh` tampoco está instalada. Tras conceder ese alcance, crear PR1 hacia `main`, esperar sus checks, y luego crear PR2 hacia `feature/landing-001-compliance`. Mantener ambos en Draft y sin merge.
+La autorización del usuario para publicar ramas y abrir Draft PRs ya fue otorgada. Falta habilitar la escritura de Pull requests para la conexión GitHub de Codex: al intentar crear PR1, GitHub respondió `403 Resource not accessible by integration`; la CLI `gh` tampoco está instalada. Tras conceder ese alcance, crear PR1 hacia `main`, esperar sus checks, y luego crear PR2 hacia `feature/landing-001-compliance`. Mantener ambos en Draft y sin merge. Las comparaciones directas disponibles son [LANDING-001 → main](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/compare/main...feature/landing-001-compliance?expand=1) y [LANDING-002 → LANDING-001](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/compare/feature/landing-001-compliance...feature/landing-002-release?expand=1); son enlaces para iniciar los PR, no PRs ya creados.
 
-Para Vercel, autorizar desde la conexión oficial de Vercel en Codex el acceso al team `rutitasrutitas-8977` (slug visible `rutitasrutitas-8977`). Aprobar únicamente la conexión/alcance del equipo necesario para leer proyectos y deployments; no se requiere cambiar el proyecto, dominios, facturación ni variables. Después revisar si existe Preview y validar las tres rutas si se proporciona.
+Para Vercel, la herramienta oficial de autorización de equipo no pudo generar el enlace: respondió `404 Team not found` tanto con el ID `team_DkoPaNhiPIS1xwsaaVJbkMOO` como con el slug `rutitasrutitas-8977`. El administrador debe verificar que el equipo corresponde a la cuenta/conexión Vercel activa y habilitar el alcance a ese equipo desde el flujo oficial de consentimiento de Vercel para Codex. Después reintentar la lectura de los dos deployments reportados, obtener sus URLs públicas y validar portada, `/privacidad` y `/eliminar-cuenta`. No se requiere cambiar el proyecto, dominios, facturación ni variables.
 
 La autorización de ramas y PRs no autoriza despliegue productivo, cambios de configuración Vercel, ratificación legal, GA4 o uso de Google Play. Esas decisiones permanecen separadas.
