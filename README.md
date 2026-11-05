@@ -1,61 +1,84 @@
-# Rutitas — Landing page oficial (propuesta visual)
+# Rutitas — Landing page
 
-Landing **React + TypeScript + Vite**, responsive, **sin scroll de página**, usando el logo proporcionado. Presentación clara del proyecto y QR listo para abrir la aplicación cuando se publique.
+Landing estática de Rutitas, construida con React 19, TypeScript 5.7 y Vite 6. Conserva la identidad visual existente y presenta el proyecto como piloto universitario en desarrollo.
 
-## Requisitos
+## Requisitos y ejecución local
 
-- Node.js 20.19+ o 22.12+
-- npm
-
-## Ejecutar
+- Node.js 24 recomendado (Node 20.19+ o 22.12+ puede funcionar según las versiones resueltas).
+- npm.
 
 ```bash
-npm install
+npm ci
 cp .env.example .env
 npm run dev
 ```
 
-Abre la URL local mostrada por Vite (habitualmente `http://localhost:5173`).
+En PowerShell, copia `.env.example` a `.env` con `Copy-Item .env.example .env`. No publiques `.env`.
 
-## Configurar QR real
+## Rutas
 
-En `.env`:
+- `/`: presentación existente y modales informativos.
+- `/privacidad`: borrador visible pendiente de información confirmada y revisión humana; no es aviso definitivo.
+- `/eliminar-cuenta`: explica que el repositorio no confirma un proceso real; no recibe solicitudes ni datos.
+
+Las páginas legales usan navegación HTML y cargan directamente en Vercel mediante el rewrite SPA versionado en `vercel.json`. La configuración está basada en la [guía oficial de Vercel para Vite y deep links](https://vercel.com/docs/frameworks/frontend/vite).
+
+## Variables opcionales
+
+`.env.example` contiene valores vacíos. La landing no requiere variables para cargar.
+
+### Google Play
+
+Configura `VITE_GOOGLE_PLAY_URL` únicamente cuando exista una ficha pública oficial de Rutitas:
 
 ```env
-VITE_APP_URL=https://URL-OFICIAL-REAL-DE-LA-APP
+VITE_GOOGLE_PLAY_URL=https://play.google.com/store/apps/details?id=PAQUETE_REAL
 ```
 
-**Reemplaza** el valor de ejemplo por la URL oficial de Google Play o la página oficial de acceso. No pongas una dirección ficticia. Guarda y reinicia el servidor para ver el QR real y el enlace accesible. Por seguridad solo se aceptan URLs `https://`.
+La aplicación valida el dominio y la ruta de Google Play y conserva únicamente el parámetro `id`. `VITE_APP_URL` se acepta temporalmente como alias solo si también es una ficha de Play válida. No pongas ejemplos ficticios. Sin URL válida no se muestra enlace ni QR funcional y permanece «Muy pronto».
 
-Si el enlace no está configurado, la tarjeta muestra **“Muy pronto / El QR estará aquí”** y un símbolo decorativo, no un código QR engañoso.
+### Google Analytics 4
 
-## Construir para hosting
+1. El administrador configura `VITE_GA_MEASUREMENT_ID` con el Measurement ID real `G-...` en el entorno local/de despliegue.
+2. Sin ID válido no se carga `gtag.js` ni aparece el control de Analytics.
+3. Con ID válido se solicita consentimiento opt-in. La elección queda en el almacenamiento local del navegador; se puede cambiar en «Preferencias de analítica».
+4. Los pageviews se envían manualmente una vez por ruta completa con `send_page_view: false`; no se incluyen query strings, nombres, correos ni tokens.
+5. En GA4, revisa la opción de medición mejorada «Cambios de página según eventos del historial del navegador» para evitar eventos duplicados si en el futuro se cambia a navegación SPA.
+6. Solo el administrador con acceso a la propiedad puede verificar eventos reales en Tag Assistant y GA4 Realtime. Este repositorio no contiene una Measurement ID y no acredita eventos reales.
+
+La configuración del ID en Vercel requiere acceso al proyecto y autorización; no se hizo como parte de esta modificación local.
+
+## Scripts
 
 ```bash
-npm run build
+npm run dev          # servidor de desarrollo
+npm run lint         # ESLint
+npm run typecheck    # TypeScript
+npm run test         # pruebas unitarias/integración con Vitest
+npm run test:e2e     # pruebas de navegador con Playwright
+npm run sdd:verify   # estructura y trazabilidad documental
+npm run build        # compilación de producción
+npm run preview      # vista local de dist
+npm audit --audit-level=high
 ```
 
-Publica el contenido de `dist/` en tu hosting estático (por ejemplo, GitHub Pages, Netlify, Vercel o Firebase Hosting). Configura la variable `VITE_APP_URL` en el entorno de compilación antes del build. El proyecto no necesita backend.
+Para pruebas Playwright, instala Chromium una sola vez con `npx playwright install chromium`.
 
-## Estructura
+## SDD y DevSecOps
 
-- `src/App.tsx`: landing de una sola pantalla, ilustración UI y modales informativos.
-- `src/styles.css`: diseño responsive escritorio/tablet/móvil, sin scroll en la pantalla principal.
-- `public/assets/`: logo original recortado, variante transparente y emblema, derivados del archivo facilitado.
-- `preview.html`: **vista previa estática** autónoma. Ábrela sin instalar dependencias para apreciar el diseño; los componentes React viven en `src/`.
-- `.env.example`: configuración de la URL oficial.
+- Constitución propuesta: `.specify/memory/constitution.md` (**PENDIENTE_RATIFICACION**).
+- Especificación, plan, tareas y checklist: `specs/001-landing-compliance/`.
+- Auditoría, arquitectura, requisitos docentes, pruebas y trazabilidad: `docs/`.
+- `Memoria.md` guarda decisiones no confidenciales.
+- `.github/workflows/quality.yml` ejecuta calidad y seguridad en Pull Requests; no publica a producción.
+- `.github/dependabot.yml` propone actualizaciones controladas de dependencias y Actions.
+- El administrador del repo debe exigir el check `Verify landing page` en protección de `main`; esa política no se cambió.
+- Vercel puede generar Preview mediante la integración ya existente. No se modificaron ajustes remotos, dominios o variables.
 
-## Características
+## Revisión pendiente del equipo
 
-- No-scroll de página en dimensiones habituales. Los diálogos pueden desplazarse internamente por accesibilidad si el texto no cabe en pantallas muy pequeñas.
-- Modal “Cómo funciona” y “El proyecto”; opciones de “Seguridad” con lenguaje prospectivo (no se presentan funciones como implementadas).
-- QR real y clicable solo cuando existe URL verificada y configurada.
-- Mockup claramente identificado como DEMO con datos ficticios; no se simula reserva, GPS ni disponibilidad real.
-- HTML semántico, foco visible, cierre de diálogos con Escape y compatibilidad con `prefers-reduced-motion`.
+Antes de usar o publicar páginas legales como definitivas, completar `docs/requisitos-profesor.md` con el responsable, contacto de privacidad, datos y finalidades reales, proveedores, almacenamiento/medidas verificadas y conservación. Confirmar también el mecanismo de eliminación con backend/soporte, la política de Analytics y la URL de Google Play. Los marcadores de revisión no son texto legal aprobado.
 
-## Limitaciones y revisión
+## Alcance de esta entrega
 
-- La landing no recoge datos personales ni tiene formularios/analítica/pagos.
-- Debe confirmarse licencia/derecho de uso del logo facilitado y cualquier política de marca vigente.
-- Falta integrar la URL real de la app y someter la página a pruebas manuales de accesibilidad y dispositivos.
-- No se ejecutó build de React en este entorno de entrega: no hubo conexión a npm para instalar dependencias. Se entrega todo el código fuente.
+Se hacen cambios incrementales; no se desarrolla el backend ni la app móvil, no se crea una API de eliminación, no se envían solicitudes a Analytics, no se inventan datos legales ni URL de tienda, y no se hicieron commits, push o despliegues productivos.

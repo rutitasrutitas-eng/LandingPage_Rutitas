@@ -1,17 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
+import AnalyticsConsent from './AnalyticsConsent'
+import { AccountDeletionPage, NotFoundPage, PrivacyPage } from './LegalPages'
+import { googlePlayUrl } from './config'
+import SiteFooter from './SiteFooter'
 
 type ModalId = 'funciona' | 'proyecto' | 'seguridad' | null
 
 type IconName = 'arrow' | 'route' | 'pin' | 'close' | 'shield' | 'car' | 'spark' | 'check' | 'external' | 'qr'
-
-const configuredUrl = (import.meta.env.VITE_APP_URL || '').trim()
-const appUrl = (() => {
-  try {
-    const url = new URL(configuredUrl)
-    return url.protocol === 'https:' ? url.toString() : ''
-  } catch { return '' }
-})()
 
 function Icon({ name, size = 20, className = '' }: { name: IconName, size?: number, className?: string }) {
   const shared = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, className, 'aria-hidden': true as const }
@@ -47,23 +43,41 @@ function Mockup() {
 }
 
 function QrCard() {
-  return <div className={`qr-card ${appUrl ? 'qr-live' : ''}`}>
+  return <div className={`qr-card ${googlePlayUrl ? 'qr-live' : ''}`}>
     <div className="qr-visual">
-      {appUrl ? <QRCodeSVG value={appUrl} size={106} marginSize={1} bgColor="#ffffff" fgColor="#071e4b" title="Código QR para abrir Rutitas" /> : <div className="qr-unavailable" aria-hidden="true"><Icon name="qr" size={54} /><span className="qr-spark">✦</span></div>}
+      {googlePlayUrl ? <QRCodeSVG value={googlePlayUrl} size={106} marginSize={1} bgColor="#ffffff" fgColor="#071e4b" title="Código QR para abrir Rutitas en Google Play" /> : <div className="qr-unavailable" aria-hidden="true"><Icon name="qr" size={54} /><span className="qr-spark">✦</span></div>}
     </div>
-    <div className="qr-details"><span className="qr-eyebrow">EN TU CELULAR</span><strong>{appUrl ? 'Escanea y vamos' : 'Muy pronto'}</strong><span>{appUrl ? 'Tu app a un escaneo.' : 'El QR estará aquí.'}</span>
-      {appUrl ? <a className="qr-link" href={appUrl} target="_blank" rel="noopener noreferrer">Abrir enlace <Icon name="external" size={13}/></a> : <span className="qr-pending"><span/> En preparación</span>}
+    <div className="qr-details"><span className="qr-eyebrow">EN TU CELULAR</span><strong>{googlePlayUrl ? 'Escanea y vamos' : 'Muy pronto'}</strong><span>{googlePlayUrl ? 'Tu app a un escaneo.' : 'El QR estará aquí.'}</span>
+      {googlePlayUrl ? <a className="qr-link" href={googlePlayUrl} target="_blank" rel="noopener noreferrer" aria-label="Descargar Rutitas en Google Play">Google Play <Icon name="external" size={13}/></a> : <span className="qr-pending"><span/> En preparación</span>}
     </div>
   </div>
 }
 
 function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLElement>(null)
   useEffect(() => {
     closeRef.current?.focus()
-    const handleEsc = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose() }
-    document.addEventListener('keydown', handleEsc)
-    return () => document.removeEventListener('keydown', handleEsc)
+    const handleKeys = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (event.key !== 'Tab') return
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+      if (!focusable?.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKeys)
+    return () => document.removeEventListener('keydown', handleKeys)
   }, [onClose])
   const content = {
     funciona: {
@@ -80,7 +94,7 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
     }
   }[view]
   return <div className="modal-backdrop" onMouseDown={event => { if(event.target === event.currentTarget) onClose() }}>
-    <section className="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+    <section ref={dialogRef} className="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
       <button ref={closeRef} className="modal-close" aria-label="Cerrar información" onClick={onClose}><Icon name="close" size={20}/></button>
       <div className="modal-eyebrow">{content.eyebrow}</div><h2 id="modal-title">{content.title}</h2><p id="modal-description">{content.description}</p>
       <div className="modal-points">{content.points.map(([n, t, d]) => <div className="modal-point" key={t}><span className="point-num">{n}</span><div><strong>{t}</strong><span>{d}</span></div></div>)}</div>
@@ -89,22 +103,31 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
   </div>
 }
 
-export default function App() {
+function HomePage() {
   const [modal, setModal] = useState<ModalId>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const openModal = (event: MouseEvent<HTMLButtonElement>, view: Exclude<ModalId, null>) => {
+    triggerRef.current = event.currentTarget
+    setModal(view)
+  }
+  const closeModal = useCallback(() => setModal(null), [])
+  useEffect(() => {
+    if (modal === null) triggerRef.current?.focus()
+  }, [modal])
   return <div className="site-shell">
     <div className="ambient ambient-a" aria-hidden="true"/><div className="ambient ambient-b" aria-hidden="true"/>
     <header className="topbar">
       <a className="brand" href="#inicio" aria-label="Rutitas — inicio"><img src="/assets/rutitas-emblema.png" alt=""/><span>Rutitas<b>.</b></span></a>
-      <nav className="desktop-nav" aria-label="Navegación principal"><button onClick={() => setModal('funciona')}>Cómo funciona</button><button onClick={() => setModal('seguridad')}>Seguridad</button><button onClick={() => setModal('proyecto')}>El proyecto</button></nav>
+      <nav className="desktop-nav" aria-label="Navegación principal"><button onClick={event => openModal(event, 'funciona')}>Cómo funciona</button><button onClick={event => openModal(event, 'seguridad')}>Seguridad</button><button onClick={event => openModal(event, 'proyecto')}>El proyecto</button></nav>
       <div className="top-status"><span className="status-dot"/> Próximamente</div>
     </header>
     <main id="inicio" className="hero-layout">
       <section className="hero-copy" aria-label="Presentación de Rutitas">
         <div className="hero-intro"><span className="intro-icon"><Icon name="spark" size={15}/></span> TU COMUNIDAD. TU RUTA.</div>
         <img className="hero-logo" src="/assets/rutitas-logo.png" alt="Rutitas, logo con universidad, camino y marcador"/>
-        <h1>La uni se vive<br/><em>en el camino.</em></h1>
+        <h1>La uni se vive<br />{' '}<em>en el camino.</em></h1>
         <p className="hero-subtitle">Compartir el trayecto también<br className="desktop-break"/> es parte de la experiencia.</p>
-        <div className="hero-actions"><button className="primary-cta" onClick={() => setModal('funciona')}>Descubre Rutitas <span><Icon name="arrow" size={20}/></span></button><button className="text-cta" onClick={() => setModal('proyecto')}>Conoce el proyecto <Icon name="external" size={16}/></button></div>
+        <div className="hero-actions"><button className="primary-cta" onClick={event => openModal(event, 'funciona')}>Descubre Rutitas <span><Icon name="arrow" size={20}/></span></button><button className="text-cta" onClick={event => openModal(event, 'proyecto')}>Conoce el proyecto <Icon name="external" size={16}/></button></div>
         <div className="hero-trust"><span className="trust-mark"><Icon name="shield" size={16}/></span><span>PROYECTO PILOTO UNIVERSITARIO</span></div>
       </section>
       <section className="visual-stage" aria-label="Vista ilustrativa de la aplicación y acceso por QR">
@@ -115,7 +138,31 @@ export default function App() {
         <div className="stage-caption"><span className="caption-dash"/> UNA NUEVA FORMA DE MOVERSE JUNTOS</div>
       </section>
     </main>
-    <footer className="site-footer"><span><span className="footer-dot"/> Piloto universitario · UTTT</span><span>Diseñado para conectar caminos <span className="footer-star">✳</span></span></footer>
-    {modal && <Modal view={modal} onClose={() => setModal(null)} />}
+    <SiteFooter />
+    {modal && <Modal view={modal} onClose={closeModal} />}
   </div>
+}
+
+export default function App() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+
+  useEffect(() => {
+    document.title = path === '/privacidad'
+      ? 'Aviso de privacidad — Rutitas'
+      : path === '/eliminar-cuenta'
+        ? 'Eliminación de cuenta — Rutitas'
+        : path === '/'
+          ? 'Rutitas — Tu comunidad, tu ruta'
+          : 'Página no encontrada — Rutitas'
+  }, [path])
+
+  const page = path === '/'
+    ? <HomePage />
+    : path === '/privacidad'
+      ? <PrivacyPage />
+      : path === '/eliminar-cuenta'
+        ? <AccountDeletionPage />
+        : <NotFoundPage />
+
+  return <>{page}<AnalyticsConsent /></>
 }
