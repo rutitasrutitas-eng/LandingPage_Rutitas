@@ -48,7 +48,7 @@ Entorno: Windows, Node.js 24.20.0, npm, Chromium de Playwright; Vite 6.4.5 desde
 | SDD/trazabilidad | `npm run sdd:verify` | Aprobado: 12 documentos requeridos, 10 requisitos trazados. |
 | JSON/YAML | Node JSON.parse; paquete YAML temporal para análisis sintáctico | `package.json`, `vercel.json` y los dos archivos YAML válidos. |
 | Diff whitespace | `git diff --check` | Aprobado; solo avisos de normalización CRLF de Git. |
-| Dependencias | `npm audit --audit-level=high` | Exit 0 para umbral alto; npm reporta 10 alertas moderadas vinculadas a `minimatch` (GHSA-g3hv-75wg-m249). `--force` propone cambio mayor de ESLint; no aplicado en LANDING-001. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0 para umbral alto; npm reporta 10 alertas moderadas vinculadas a `minimatch` (GHSA-g3hv-75wg-m249). `--force` propone cambio mayor de ESLint; no aplicado. |
 
 ## No ejecutado / pendiente
 
@@ -60,3 +60,16 @@ Entorno: Windows, Node.js 24.20.0, npm, Chromium de Playwright; Vite 6.4.5 desde
 - No es posible validar visualmente tablets físicas; se capturaron y revisaron screenshots Playwright en escritorio y Pixel 7 emulados, además del test legal a 320 px.
 
 Una comprobación local no acredita eventos reales de GA4 ni la ficha Play, aprobación legal, controles remotos de GitHub o una publicación de Vercel.
+
+## Revalidación de liberación — LANDING-002 — 2026-11-05
+
+| Control | Resultado real | Nota |
+|---|---|---|
+| Instalación | `npm ci` aprobado al inicio (antes del override); después el `npm ci` directo en OneDrive falló dos veces con `EBUSY` al eliminar archivos bloqueados de `node_modules`. `npm install` reparó el árbol y una copia temporal limpia de `package.json` + `package-lock.json` ejecutó `npm ci` con exit 0. | La limitación es de bloqueo de archivos en Windows/OneDrive; el lock actual se instaló reproduciblemente fuera de esa carpeta. |
+| Dependencias | `npm ls minimatch --all` muestra `minimatch@11.0.4` compartido por ESLint 10 y typescript-eslint; `npm ls minimatch --omit=dev` no encuentra dependencia de producción. | La rama afectada anterior era `10.2.6`, solo de desarrollo. |
+| Auditoría | `npm audit` | Exit 0, 0 vulnerabilidades tras override. |
+| Lint / tipos / unitarias | `npm run lint`, `npm run typecheck`, `npm run test` | Aprobados; Vitest 11/11. |
+| E2E / build / SDD | `npm run test:e2e`, `npm run build`, `npm run sdd:verify` | E2E 9 aprobadas y 1 omitida por variante desktop-only; build aprobado; verificador ahora incluye specs 001/002. |
+| Git diff | `git diff --check` | Exit 0. |
+
+Gitleaks no se ejecutó localmente porque Docker no está instalado; no hay workflow LANDING-001 en la rama remota, por tanto el control no se pudo lanzar en Actions sin publicar la rama. El workflow local de LANDING-002 quedó configurado para escanear el historial completo con `--redact`, antes de instalar dependencias.

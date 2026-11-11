@@ -1,0 +1,22 @@
+# Checklist de aceptación — LANDING-002
+
+- [x] Se registró branch, HEAD, remoto y estado local antes de cambios.
+- [x] Se repitieron lint, typecheck, unitarias, Playwright, SDD y build.
+- [x] Se analizó `minimatch` y se probó el override con versión corregida.
+- [x] `npm audit` actual informa 0 vulnerabilidades.
+- [x] La instalación limpia del lockfile se verificó en carpeta temporal fuera de OneDrive.
+- [x] Se cambió el workflow a auditoría estricta, Gitleaks redactado temprano y permisos de solo lectura.
+- [x] Se crearon los cuatro documentos SDD 002 y la lista de aprobación legal.
+- [x] La matriz distingue estado real y dependencias; Constitución continúa pendiente.
+- [x] Se confirmó el repo y que no hay PRs; el workflow aún no está en la rama remota.
+- [x] Home pública cargó; rutas públicas de privacidad/eliminación respondieron `404 NOT_FOUND`.
+- [ ] Gitleaks se ejecuta y aprueba en GitHub Actions.
+- [ ] PR de LANDING-001 se crea, revisa y fusiona con aprobación.
+- [ ] PR de LANDING-002 se crea y revisa por separado.
+- [ ] Vercel Preview se genera y pasa validaciones manuales y E2E.
+- [ ] La Constitución SDD se ratifica expresamente.
+- [ ] El responsable entrega y aprueba los datos/textos legales.
+- [ ] Existe proceso seguro real de eliminación de cuentas.
+- [ ] GA4 se configura con ID aprobado y evento Realtime verificado.
+- [ ] Google Play proporciona URL pública oficial que valida el botón y QR.
+- [ ] El administrador autoriza la publicación; la versión productiva y rollback quedan verificados.
