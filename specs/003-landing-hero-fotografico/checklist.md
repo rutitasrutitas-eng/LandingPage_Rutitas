@@ -15,10 +15,10 @@
 - [x] 1440×900, 1366×768, 768×1024, 390×844 y 320×568 sin overflow ni controles cortados (Playwright).
 - [x] Navegación por teclado, Escape, foco modal y rutas legales directas/recarga verificados; consentimiento opt-in cubierto por Vitest existente.
 - [x] lint, typecheck, Vitest 14/14, Playwright 10/10, build, SDD 22 documentos y npm audit 0 vulnerabilidades.
-- [ ] Gitleaks y GitHub Actions aprobados en la rama publicada.
+- [x] Gitleaks y GitHub Actions aprobados en la rama publicada (run #11; SHA `a930de11b32c3397468c24773ed290055a7364eb`).
 
 ## Entrega
 
 - [x] Capturas desktop/móvil guardadas fuera del repo y registradas en el reporte.
-- [ ] PR Draft hacia main abierto; SHA, checks y Preview registrados por evidencia.
+- [x] PR Draft #9 hacia main abierto; SHA, checks y enlace/estado de Preview registrados. Inspección de Preview y rutas sigue pendiente por autorización efectiva del equipo.
 - [ ] Sin merge, deploy de producción, cambios Vercel o aprobación legal automática.

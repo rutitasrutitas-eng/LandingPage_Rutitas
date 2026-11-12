@@ -8,7 +8,7 @@
 | L3-T-004 | Implementar header, hero fotográfico y CTAs | Completada | App.tsx y styles.css |
 | L3-T-005 | Reubicar mockup DEMO y QR fuera del hero | Completada | Sección secundaria identificada en App.tsx |
 | L3-T-006 | Ampliar pruebas unitarias y Playwright responsive | Completada | Vitest 14/14; Playwright 10/10 en ambas configuraciones |
-| L3-T-007 | Actualizar SDD 003, trazabilidad y memoria | En progreso | Especificación, plan, tareas, checklist y matriz listos; Memoria/reporte por cerrar |
+| L3-T-007 | Actualizar SDD 003, trazabilidad y memoria | Completada | Especificación, plan, tareas, checklist, matriz, Memoria y reporte publicados |
 | L3-T-008 | Ejecutar validación local solicitada | Completada | npm ci, lint, typecheck, Vitest, Playwright, build, SDD y npm audit pasan |
-| L3-T-009 | Crear commit, push y Draft PR a main | Pendiente | Crear commit y publicar rama; no fusionar ni desplegar |
-| L3-T-010 | Revisar Preview y documentar rutas/capturas | Parcial | Capturas locales disponibles; Preview remoto bloqueado por scope Vercel |
+| L3-T-009 | Crear commit, push y Draft PR a main | Completada | SHA `a930de11b32c3397468c24773ed290055a7364eb`; PR #9 Draft |
+| L3-T-010 | Revisar Preview y documentar rutas/capturas | Parcial | Preview reportada Ready por Vercel; rutas no inspeccionables hasta propagación del acceso autorizado |

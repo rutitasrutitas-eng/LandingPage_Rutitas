@@ -36,7 +36,9 @@
 - `npm ci`, lint, typecheck, Vitest 14/14, Playwright 10/10, build, SDD (22 documentos) y `npm audit` (0 vulnerabilidades) pasan localmente. Viewports E2E: 1440×900, 1366×768, 768×1024, 390×844 y 320×568. Rutas legales con navegación/recarga directa verificadas localmente.
 - Capturas inspeccionadas: `C:\Users\rafle\OneDrive\Desktop\anterior\_LANDING_003_Evidencia_2026-11-12\LANDING_003_desktop.png` y `...\LANDING_003_mobile.png`.
 - Informe: `docs/REPORTE_LANDING_003.md`; especificación, plan, tareas y checklist: `specs/003-landing-hero-fotografico/`.
-- Pendiente de commit, push, Draft PR y Actions/Gitleaks remotos al cerrar esta memoria. Preview Vercel no verificada por acceso denegado al scope `dxrxxgsos-projects`; no se modificaron permisos/configuración ni producción.
+- Commit de implementación `a930de11b32c3397468c24773ed290055a7364eb` publicado en `feature/landing-003-hero-fotografico`; Draft PR #9 a `main`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9. No fusionado.
+- GitHub Actions run #11 (`43248682077`) pasó completo, incluido Gitleaks, SDD, lint, typecheck, build, Vitest, Playwright y `npm audit`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43248682077.
+- Comentario de Vercel reporta Preview `Ready`: https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/. No se pudo inspeccionar su contenido ni rutas legales: el conector devuelve 403 para `dxrxxgsos-projects` (`team_y4UzDPbxO9438fV2gd6GolFA`). El enlace oficial de autorización fue generado y el usuario indicó que lo abriría/aprobaría; no se modificaron settings de proyecto ni producción.
 - Se mantiene «Próximamente», sin URL de Google Play; no se añadieron teléfonos al tablero. Analytics, rutas legales, valores de configuración y requisitos LANDING-001/002 permanecen sin cambios funcionales. Constitución continúa `PENDIENTE_RATIFICACION`; textos legales siguen sin aprobación automática.
 
 ## Información que no se debe guardar aquí
