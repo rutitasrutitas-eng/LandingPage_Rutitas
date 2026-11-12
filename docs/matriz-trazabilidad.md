@@ -33,3 +33,16 @@ Actualiza la columna de estado tras la revisión final y cita evidencia ejecutad
 | L002-REQ-012 Publicación y reversión | IMPLEMENTADO LOCALMENTE | `specs/002-landing-release/plan.md`, `docs/REPORTE_LANDING_002.md` | Runbook documentado; no se accionó producción | Aprobación del administrador Vercel | Publicar solo tras PR revisado y Preview aceptado |
 | L002-REQ-013 Verificación producción | PARCIAL | `docs/REPORTE_LANDING_002.md` | Home pública abre; ambas rutas legales devuelven `404 NOT_FOUND` | Publicación aprobada | Resolver PR/Preview, después publicar y comprobar rutas |
 | L002-REQ-014 Evidencias y entrega | PARCIAL | `docs/REPORTE_LANDING_002.md`, `docs/pruebas.md` | Evidencias locales documentadas; sin SHA nuevo, CI ni Preview | Push y permisos Vercel | Adjuntar SHA/check-run/URL Preview/capturas cuando existan |
+
+## Trazabilidad de rediseño fotográfico — LANDING-003
+
+| Requisito | Especificación | Código/documento | Prueba/evidencia | Estado |
+|---|---|---|---|---|
+| L003-REQ-001 Identidad oficial | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `public/assets/rutitas-logo.png` | Logo SHA256 sin cambio; Playwright home; hash anterior y actual coinciden | Verificado localmente; CI pendiente |
+| L003-REQ-002 Hero con foto limpia | `specs/003-landing-hero-fotografico/spec.md` | `public/assets/rutitas-auto-hero*.webp`, `src/App.tsx` | Tres hashes coinciden con manifiesto; Playwright home y capturas escritorio/móvil inspeccionadas | Verificado localmente; CI pendiente |
+| L003-REQ-003 Texto y acciones | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, modales existentes | Vitest CTAs; Playwright CTA | Verificado localmente |
+| L003-REQ-004 Navegación | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `src/styles.css` | Vitest foco; Playwright móvil/teclado y Escape | Verificado localmente |
+| L003-REQ-005 DEMO y Play condicional | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `src/config.ts` | Vitest sin URL Play; Playwright sección DEMO/QR | Verificado localmente; URL Play pendiente |
+| L003-REQ-006 Responsive y accesibilidad | `specs/003-landing-hero-fotografico/spec.md` | `src/styles.css`, `e2e/landing.spec.ts` | 10 E2E, cinco viewports, sin overflow; capturas 1440×900 y 390×844 | Verificado localmente |
+| L003-REQ-007 Conservar legal, GA4 y Vercel | `specs/003-landing-hero-fotografico/spec.md` | `src/LegalPages.tsx`, `src/analytics.ts`, `vercel.json` | 10 E2E navegan y recargan ambas rutas; config legal/GA4/Vercel sin diff | Verificado localmente; Preview remoto pendiente |
+| L003-REQ-008 Evidencia y SDD | `specs/003-landing-hero-fotografico/spec.md` | `Memoria.md`, esta matriz, reporte y workflow CI | SDD 22 docs, reporte, hashes, capturas; run CI/PR aún no disponibles | Local completo; remoto pendiente |
