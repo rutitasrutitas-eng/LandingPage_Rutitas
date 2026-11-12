@@ -1,9 +1,10 @@
 # Reporte de corrección — LANDING-003 sin scroll
 
-**Estado:** corrección implementada y validación local completa; pendiente publicar esta actualización en la rama existente y confirmar GitHub Actions/Gitleaks.
+**Estado:** corrección publicada en el PR Draft #9; validaciones locales y GitHub Actions/Gitleaks aprobadas. Preview de Vercel protegida y no inspeccionada.
 **Fecha:** 2026-11-12
 **Rama:** `feature/landing-003-hero-fotografico`
 **HEAD inicial revisado:** `5728d395ca10ccea552a8e318c64978e0f886595`
+**Commit correctivo (HEAD final):** `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`
 **Draft PR:** [#9 hacia `main`](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9); abierto, sin fusionar al iniciar la corrección.
 **Constitución SDD:** `PENDIENTE_RATIFICACION`.
 
@@ -56,7 +57,9 @@ Las rutas `/privacidad` y `/eliminar-cuenta` se comprueban con navegación/recar
 | `npm run build` | Aprobada |
 | `npm run sdd:verify` | Aprobada: 22 documentos, 10 requisitos 001, 14 requisitos 002 y 8 requisitos 003 trazados |
 | `npm audit --audit-level=high` | Aprobada: 0 vulnerabilidades |
-| GitHub Actions / Gitleaks | Pendiente del push de esta corrección |
+| GitHub Actions | Aprobada en el nuevo HEAD; run [#16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259000683) |
+| Gitleaks | Aprobado en run #16: `Scan Git history for secrets (pinned Gitleaks image)` terminó `success` |
+| SDD, lint, typecheck, build, unit/integration, Playwright y audit remotos | Todos los pasos terminaron `success` en run #16; Playwright y audit no se omitieron |
 
 ## Capturas y archivo de métricas
 
@@ -68,10 +71,12 @@ Capturas de tamaño viewport real (sin `fullPage`) y mediciones JSON, guardadas 
 
 ## Preview de Vercel
 
-No se generaron enlaces temporales de autorización. `vercel` CLI no está instalada y el repositorio no tiene `.vercel/project.json`. La apertura de Edge desde el control de escritorio fue bloqueada porque no pudo determinar la URL actual con confianza; no se hicieron cambios en Dashboard. La Preview no está verificada por esta corrección. Si GitHub/Vercel sigue indicando deployment Ready, eso solo acredita el estado del deployment, no la inspección de portada o rutas.
+No se generaron enlaces temporales de autorización. `vercel` CLI no está instalada y el repositorio no tiene `.vercel/project.json`. GitHub muestra el check Vercel `success` con URL [Preview](https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/), pero la solicitud anónima devuelve HTTP 302 hacia el inicio de sesión SSO y la lectura del listado de deployments desde el conector devuelve HTTP 403 para el equipo `rutitasrutitas-8977`. Por ello no se confirmó que el deployment corresponda al SHA `54e0ecb1f4e0e03165afb794bed94a70d37d74c7` ni se inspeccionaron visualmente portada o rutas en Vercel. El estado de build `success` no sustituye esa verificación. No se cambió Dashboard ni configuración de Vercel.
 
 ## Estado de entrega
 
-- Rama existente y PR Draft #9 a `main`; al redactar esta sección, queda publicar el commit correctivo y comprobar sus nuevos jobs remotos.
+- Rama `feature/landing-003-hero-fotografico`, HEAD `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`, publicado al PR Draft #9. `main` continúa en `46522503f38c99b136948e7da1adf491207128f7`; el PR permanece abierto, Draft y sin fusionar.
+- Run [GitHub Actions #16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259000683): job `Verify landing page` aprobado. Gitleaks, verificación SDD, lint, typecheck, build, Vitest, Playwright, auditoría de dependencias y publicación de evidencia pasaron.
+- Preview: deployment check de Vercel aparece `success`, pero el contenido permanece bloqueado por SSO (302) y la API responde 403. SHA de deployment y contenido visual no verificados; no se generó enlace temporal.
 - Google Play sigue sin URL oficial y no se muestra como disponible. El validador de URL permanece en `src/config.ts`.
 - No se modifican `main`, dominios, credenciales, producción ni aprobaciones legales. El PR no se fusiona.

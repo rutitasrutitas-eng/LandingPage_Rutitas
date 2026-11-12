@@ -1,6 +1,6 @@
 # Memoria de Rutitas Landing
 
-**Estado de la iniciativa:** corrección LANDING-003 implementada localmente en la rama publicada; suite local aprobada. Pendientes push, CI/Gitleaks de esta corrección e inspección autenticada de Preview.
+**Estado de la iniciativa:** corrección LANDING-003 publicada en PR Draft #9; validaciones locales y CI/Gitleaks aprobados. Preview protegida por SSO y no verificada.
 **Última actualización:** 2026-11-12.
 
 ## Hechos confirmados en el repo
@@ -33,14 +33,15 @@
 
 ## LANDING-003 — corrección de portada sin scroll
 
-**Actualización:** 2026-11-12. HEAD revisado antes del cambio: `5728d395ca10ccea552a8e318c64978e0f886595`. Misma rama/PR #9; no se creó una rama ni PR nuevos.
+**Actualización:** 2026-11-12. HEAD revisado antes del cambio: `5728d395ca10ccea552a8e318c64978e0f886595`. Commit correctivo: `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`. Misma rama y PR #9; no se creó rama ni PR nuevos.
 
 - Se eliminaron de Home la sección «Una vista de demostración», teléfono DEMO, tarjeta QR, componentes y estilos asociados. Se retiró la dependencia `qrcode.react`; el validador de URL oficial se mantiene en `src/config.ts`.
 - Header, hero y footer ahora ocupan exactamente el viewport mediante el flex shell; el contenido no se oculta para simular que cabe. El menú móvil se superpone al documento y no aumenta su altura.
 - Pruebas locales aprobadas después de `npm ci`: lint, typecheck, Vitest 14/14, Playwright 8/8 por cada uno de Chromium y mobile-chromium, build, SDD 22 documentos y `npm audit --audit-level=high` con 0 vulnerabilidades.
 - Playwright registra siete viewports (1440×900, 1366×768, 768×1024, 390×844, 375×667, 320×568, 844×390). En todos `document` y `body` igualan viewport en ambos ejes, `scrollY` queda en 0, y header, intro, lema, subtítulo, dos CTAs, bloque de confianza y footer están dentro de la pantalla. Rueda, gesto táctil y scroll programático no desplazan Home; las páginas legales conservan scroll natural.
 - Evidencia viewport (no `fullPage`) y JSON de mediciones, hashes y rutas en `docs/REPORTE_LANDING_003.md`. Carpeta externa `C:\Users\rafle\OneDrive\Desktop\anterior\_LANDING_003_Sin_Scroll_Evidencia_2026-11-12`.
-- CI/Gitleaks de la nueva corrección: pendiente de publicar el commit. Preview de Vercel: no verificada; CLI no instalada, `.vercel/project.json` ausente y Dashboard no accesible desde la sesión de escritorio. No se generaron enlaces temporales SSO.
+- GitHub Actions run #16 (`43259000683`) para el commit correctivo terminó aprobado: Gitleaks, SDD, lint, typecheck, build, pruebas unitarias/integración, Playwright, auditoría de dependencias y publicación de evidencia, todos `success`. [Run #16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259000683).
+- Preview de Vercel: check del PR `success` con URL disponible, pero no se confirmó el SHA del deployment ni se inspeccionó el contenido. La URL devuelve HTTP 302 a SSO y la API de despliegues devuelve HTTP 403 para el equipo; CLI no instalada, `.vercel/project.json` ausente. No se generaron enlaces temporales SSO.
 - Se mantiene Google Play sin URL inventada, rutas legales, GA4 con consentimiento, logo original, botones/modales y PR Draft #9 sin fusionar. Constitución y textos legales siguen sin ratificar/aprobar.
 
 **Actualización:** 2026-11-12. Trabajo en `feature/landing-003-hero-fotografico`, basado en `main` `46522503f38c99b136948e7da1adf491207128f7`.

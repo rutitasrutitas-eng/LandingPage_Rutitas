@@ -15,12 +15,12 @@
 - [x] 1440×900, 1366×768, 768×1024, 390×844, 375×667, 320×568 y 844×390: body/document igualan viewport, scroll vertical/horizontal cero y todo el contenido completo dentro de los límites (Playwright).
 - [x] Rueda, scroll programático y gesto táctil dejan `window.scrollY === 0` en Home; navegación móvil superpuesta no aumenta scrollHeight.
 - [x] Navegación por teclado, Escape, foco modal y rutas legales directas/recarga verificados; consentimiento opt-in cubierto por Vitest existente.
-- [ ] lint, typecheck, Vitest, Playwright, build, SDD y npm audit aprobados para la corrección.
-- [ ] Gitleaks y GitHub Actions aprobados para el nuevo SHA.
+- [x] lint, typecheck, Vitest 14/14, Playwright (8/8 por navegador), build, SDD y npm audit aprobados localmente para la corrección.
+- [x] Gitleaks y todos los pasos de GitHub Actions aprobados en run #16 para el commit correctivo `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`.
 
 ## Entrega
 
 - [x] Capturas viewport 1440×900 y 390×844, sin `fullPage`, más métricas JSON de siete resoluciones, guardadas fuera del repo.
 - [x] PR Draft #9 existente actualizado hacia `main`; no se fusiona.
-- [ ] Preview desde sesión ya autorizada; si Dashboard/CLI niega acceso, registrar 403 sin declararla verificada.
-- [ ] Sin merge, deploy de producción, cambios Vercel o aprobación legal automática.
+- [ ] Preview desde sesión autorizada: no verificada; URL redirige a SSO (302) y API Vercel devuelve 403. No se generó enlace temporal.
+- [x] Sin merge, deploy de producción, cambios Vercel o aprobación legal automática.

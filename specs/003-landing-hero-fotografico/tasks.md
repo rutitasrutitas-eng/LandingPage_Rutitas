@@ -10,7 +10,7 @@
 | L3-T-006 | Actualizar pruebas unitarias/Playwright para Home sin scroll | Completada localmente | Vitest verifica ausencia de DEMO/QR; Playwright mide siete viewports, bounds de contenido, wheel, touch, programa y menú flotante |
 | L3-T-007 | Actualizar SDD 003, trazabilidad y memoria para el nuevo criterio | Completada localmente | Spec, plan, tareas, checklist, matriz, reporte y `Memoria.md` registran la corrección solicitada; añadir SHA y run al completar CI |
 | L3-T-008 | Ejecutar validación local solicitada | Completada localmente | `npm ci`, lint, typecheck, Vitest 14/14, Playwright 8/8 por proyecto, build, SDD y audit con 0 vulnerabilidades |
-| L3-T-009 | Actualizar la rama existente y Draft PR #9 | En curso | Commit normal y push solo a `feature/landing-003-hero-fotografico`; no crear otro PR |
+| L3-T-009 | Actualizar la rama existente y Draft PR #9 | Completada | Commit `54e0ecb1f4e0e03165afb794bed94a70d37d74c7` publicado solo en la rama autorizada; run GitHub Actions #16 aprobado; PR sigue Draft y sin fusionar |
 | L3-T-010 | Revisar Preview por sesión preautorizada | No verificada | CLI no instalada y Dashboard no accesible en sesión; no generar enlaces SSO temporales ni afirmar validación de Preview |
 | L3-T-011 | Eliminar scroll de portada y probar siete viewports | Completada localmente | `document`/`body` igualan cada viewport; rectángulos completos; `scrollY=0` tras rueda/programa/touch en Playwright |
 | L3-T-012 | Crear evidencia visual limitada al viewport | Completada localmente | Capturas 1440×900 y 390×844, ambas sin `fullPage`, más JSON de métricas para los siete tamaños |
