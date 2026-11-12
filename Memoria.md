@@ -1,6 +1,6 @@
 # Memoria de Rutitas Landing
 
-**Estado de la iniciativa:** corrección LANDING-003 publicada en PR Draft #9; validaciones locales y CI/Gitleaks aprobados. Preview protegida por SSO y no verificada.
+**Estado de la iniciativa:** corrección LANDING-003 publicada en PR Draft #9; validaciones locales y CI/Gitleaks aprobados. Preview de Vercel verificada en la sesión autorizada: deployment READY para el SHA `9a5bb2b599df696d5e34a87afcecef0557760c74`; portada y rutas legales renderizan. La portada no presenta scroll en escritorio ni en móvil.
 **Última actualización:** 2026-11-12.
 
 ## Hechos confirmados en el repo
@@ -42,6 +42,7 @@
 - Evidencia viewport (no `fullPage`) y JSON de mediciones, hashes y rutas en `docs/REPORTE_LANDING_003.md`. Carpeta externa `C:\Users\rafle\OneDrive\Desktop\anterior\_LANDING_003_Sin_Scroll_Evidencia_2026-11-12`.
 - GitHub Actions run #16 (`43259000683`) para el commit correctivo terminó aprobado: Gitleaks, SDD, lint, typecheck, build, pruebas unitarias/integración, Playwright, auditoría de dependencias y publicación de evidencia, todos `success`. [Run #16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259000683).
 - La actualización documental se publicó en `b4392f1ea36ee1439f8ab1cbab84c961b24430cf`; GitHub Actions run #17 también terminó con todos los pasos `success`, incluido Gitleaks. [Run #17](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259639450).
+- GitHub Actions run #18 (`43260267266`) verificó el SHA funcional actual `9a5bb2b599df696d5e34a87afcecef0557760c74`; el job completo terminó `success`, incluidos Gitleaks, SDD, lint, typecheck, build, pruebas unitarias/integración, Playwright y auditoría de dependencias. [Run #18](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43260267266).
 - Preview de Vercel: check del PR `success`; el bot reportó `Ready` para el deployment `GFjgK5jtrs5QG8Pdrz67ttshdVjE`, pero no se confirmó SHA ni inspeccionó contenido. La URL devuelve HTTP 302 a SSO y la API de despliegues devuelve HTTP 403 para el equipo; CLI no instalada, `.vercel/project.json` ausente. No se generaron enlaces temporales SSO.
 - Se mantiene Google Play sin URL inventada, rutas legales, GA4 con consentimiento, logo original, botones/modales y PR Draft #9 sin fusionar. Constitución y textos legales siguen sin ratificar/aprobar.
 
@@ -63,3 +64,16 @@
 ## Información que no se debe guardar aquí
 
 No registrar secretos, claves, correos privados, tokens, identificadores de usuarios, datos de salud, ubicaciones o datos reales de estudiantes. Las credenciales/valores remotos se configuran fuera del repo por un administrador.
+
+## Verificación de Vercel — 2026-11-12
+
+- La sesión CLI estaba activa como `rutitasrutitas-8977`; el equipo `rutitasrutitas-8977` (`team_DkoPaNhiPIS1xwsaaVJbkMOO`) estaba disponible en el scope.
+- Se vinculó localmente el proyecto existente `landing-page-rutitas` (`prj_VPzi04e6hKw3Vgbfua2KesKGlhDz`). El ID escrito en la solicitud terminaba en `eso`, pero ese ID no corresponde al proyecto; se confirmó y utilizó el ID real del proyecto existente, sin crear uno nuevo. `.vercel/project.json` es local e ignorado por Git. `.env.local` contiene configuración de sesión local, no se leyó ni se publicó.
+- Deployment Preview `dpl_FdcYSUnk7iH7djoQZvGjsaxH9kCk` está `READY`, asociado a `feature/landing-003-hero-fotografico`, PR #9 y SHA exacto `9a5bb2b599df696d5e34a87afcecef0557760c74`. URL: https://landing-page-rutitas-qxzwr4u64-rutitasrutitas-8977.vercel.app/.
+- En Edge con la sesión autorizada, `/`, `/privacidad` y `/eliminar-cuenta` renderizaron contenido de Rutitas, sin pantalla de inicio de sesión. La portada mostró el logo, navegación, eslogan y subtítulo exactos, los dos botones, el footer y los enlaces legales. Las dos rutas legales permitieron su desplazamiento natural.
+- En escritorio (~1050×792) y móvil emulado (390×844), el desplazamiento vertical y horizontal no movió la portada. En móvil se vieron completos lema, subtítulo, CTAs y footer. Se comprobó además el modal del CTA y el menú móvil.
+- Durante una primera lectura CLI, Vercel creó automáticamente una excepción temporal de bypass. Se revocó inmediatamente; después se confirmó que no quedaban entradas de bypass y que la protección SSO global seguía activa (`all_except_custom_domains`) con protección de forks. No se volvió a usar `vercel curl`.
+- El proyecto no recibió despliegues manuales: el deployment observado fue la Preview automática asociada al commit. No se cambió producción, el PR sigue sin fusionar y no se alteraron permisos de seguridad.
+- Capturas de esta revisión se mostraron en la sesión de trabajo, pero no se guardaron como archivos. Las capturas locales de la validación automatizada sin scroll permanecen en la ruta externa listada en `docs/REPORTE_LANDING_003.md`.
+- Pendientes del proyecto: aprobación humana de textos legales, mecanismo real de eliminación de cuentas, ID/validación de GA4 y URL oficial de Google Play. Constitución y textos legales no fueron ratificados ni aprobados.
+- Estado funcional verificado: la sección DEMO, el teléfono y el QR se eliminaron por completo y no se reubicaron. Playwright cubre siete viewports sin scroll; Vitest 14/14 y Playwright 8/8 en Chromium y 8/8 en mobile-chromium. `npm audit` reportó cero vulnerabilidades.
