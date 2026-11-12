@@ -10,5 +10,5 @@
 | L3-T-006 | Ampliar pruebas unitarias y Playwright responsive | Completada | Vitest 14/14; Playwright 10/10 en ambas configuraciones |
 | L3-T-007 | Actualizar SDD 003, trazabilidad y memoria | Completada | Especificación, plan, tareas, checklist, matriz, Memoria y reporte publicados |
 | L3-T-008 | Ejecutar validación local solicitada | Completada | npm ci, lint, typecheck, Vitest, Playwright, build, SDD y npm audit pasan |
-| L3-T-009 | Crear commit, push y Draft PR a main | Completada | Implementación `a930de11b32c3397468c24773ed290055a7364eb`; PR #9 Draft, rama con CI aprobado en `6b1401bd642f0fdc6271076695fb2df19ba37c8f` |
+| L3-T-009 | Crear commit, push y Draft PR a main | Completada | Implementación `a930de11b32c3397468c24773ed290055a7364eb`; PR #9 Draft, CI completo aprobado en `19ac7d1e52f9600d80327141299f14d4e5f04c6a` |
 | L3-T-010 | Revisar Preview y documentar rutas/capturas | Parcial | Vercel Bot reporta Ready tras el último push; el conector sigue respondiendo 403, falta confirmar SHA desplegado y probar portada y rutas legales |
