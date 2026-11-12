@@ -8,9 +8,9 @@
 | LP-REQ-004 Eliminación | `spec.md` | `src/LegalPages.tsx` | UT-LP-004, SEC-LP-005/006; revisión humana | Página informativa verificada; proceso real pendiente |
 | LP-REQ-005 GA4 opt-in | `spec.md` | `src/analytics.ts`, `src/AnalyticsConsent.tsx`, `.env.example` | UT-LP-006, SEC-LP-002 | Implementación local probada; ID/eventos reales no configurados |
 | LP-REQ-006 Play | `spec.md` | `src/config.ts`, `src/App.tsx`, `.env.example` | UT-LP-005, IT-LP-005 | Validación local probada; URL oficial pendiente |
-| LP-REQ-007 A11y/responsive | `spec.md` | `src/styles.css`, `src/App.tsx` | UI-LP-001–003; Playwright teclado y móvil | Verificado localmente |
-| LP-REQ-008 Pruebas | `spec.md` | `package.json`, `src/App.test.tsx`, `e2e/` | Vitest 11/11; Playwright 9 aprobadas/1 omitida por viewport | Verificado localmente |
-| LP-REQ-009 CI/seguridad | `spec.md` | `.github/workflows/quality.yml`, `.github/dependabot.yml` | workflow/JSON validados; `npm audit` | CI configurado localmente; auditoría actual sin vulnerabilidades; ejecución remota pendiente |
+| LP-REQ-007 A11y/responsive | `spec.md` | `src/styles.css`, `src/App.tsx` | Playwright 7 viewports Home sin scroll; menú y CTAs probados | Verificado localmente tras corrección LANDING-003 |
+| LP-REQ-008 Pruebas | `spec.md` | `package.json`, `src/App.test.tsx`, `e2e/` | Recuento actualizado en reporte correctivo; sin prueba omitida por viewport | Verificado localmente tras corrección LANDING-003 |
+| LP-REQ-009 CI/seguridad | `spec.md` | `.github/workflows/quality.yml`, `.github/dependabot.yml` | GitHub Actions run #16: Gitleaks, SDD, lint, typecheck, build, unit/integration, Playwright, audit y evidencia; todo `success` | Verificado en commit correctivo `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`; 0 vulnerabilidades |
 | LP-REQ-010 Docs/evidencias | `spec.md` | `docs/`, `.specify/`, `AGENTS.md`, `Memoria.md` | checklist y `docs/REPORTE_FINAL.md` | Documentado; Constitución pendiente de ratificación |
 
 Actualiza la columna de estado tras la revisión final y cita evidencia ejecutada. No conviertas «por verificar» en «completado» por existir código.
@@ -33,3 +33,16 @@ Actualiza la columna de estado tras la revisión final y cita evidencia ejecutad
 | L002-REQ-012 Publicación y reversión | IMPLEMENTADO LOCALMENTE | `specs/002-landing-release/plan.md`, `docs/REPORTE_LANDING_002.md` | Runbook documentado; no se accionó producción | Aprobación del administrador Vercel | Publicar solo tras PR revisado y Preview aceptado |
 | L002-REQ-013 Verificación producción | PARCIAL | `docs/REPORTE_LANDING_002.md` | Home pública abre; ambas rutas legales devuelven `404 NOT_FOUND` | Publicación aprobada | Resolver PR/Preview, después publicar y comprobar rutas |
 | L002-REQ-014 Evidencias y entrega | PARCIAL | `docs/REPORTE_LANDING_002.md`, `docs/pruebas.md` | Evidencias locales documentadas; sin SHA nuevo, CI ni Preview | Push y permisos Vercel | Adjuntar SHA/check-run/URL Preview/capturas cuando existan |
+
+## Trazabilidad de rediseño fotográfico — LANDING-003
+
+| Requisito | Especificación | Código/documento | Prueba/evidencia | Estado |
+|---|---|---|---|---|
+| L003-REQ-001 Identidad oficial | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `public/assets/rutitas-logo.png` | Logo SHA256 sin cambio; Playwright home; hash anterior y actual coinciden | Verificado localmente y en CI #12 |
+| L003-REQ-002 Hero con foto limpia | `specs/003-landing-hero-fotografico/spec.md` | `public/assets/rutitas-auto-hero*.webp`, `src/App.tsx` | Tres hashes coinciden con manifiesto; Playwright home y capturas escritorio/móvil inspeccionadas | Verificado localmente y en CI #12 |
+| L003-REQ-003 Texto y acciones | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, modales existentes | Vitest CTAs; Playwright CTA | Verificado localmente |
+| L003-REQ-004 Navegación | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `src/styles.css` | Vitest foco; Playwright móvil/teclado y Escape | Verificado localmente |
+| L003-REQ-005 Home sin DEMO y Play condicional | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `src/config.ts`, `package.json` | Demo, teléfono, QR y dependencia QR retirados; Play URL validator conservado; no se promociona Play | Verificado localmente; URL oficial Play sigue pendiente |
+| L003-REQ-006 Una pantalla responsive | `specs/003-landing-hero-fotografico/spec.md` | `src/styles.css`, `e2e/landing.spec.ts` | 7 tamaños; métricas de body/document iguales al viewport, `scrollY=0`, rectángulos completos y rueda/touch/programa sin scroll; capturas viewport | Verificado localmente tras corrección |
+| L003-REQ-007 Conservar legal, GA4 y Vercel | `specs/003-landing-hero-fotografico/spec.md` | `src/LegalPages.tsx`, `src/analytics.ts`, `vercel.json` | Legal directo/recarga continúa con scroll natural; consentimiento, rewrite y configuración no se modifican; Vercel check success, pero preview protegida (HTTP 302 SSO, API HTTP 403), sin inspección de contenido ni SHA confirmado | Local verificado; Preview no verificada por falta de acceso |
+| L003-REQ-008 Evidencia y SDD | `specs/003-landing-hero-fotografico/spec.md` | `Memoria.md`, esta matriz, reporte, capturas, métricas y workflow CI | Commit correctivo `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`; capturas viewport + JSON; run #16 con SDD/CI/Gitleaks aprobado | Evidencia local y remota registrada; ratificación de Constitución sigue pendiente |

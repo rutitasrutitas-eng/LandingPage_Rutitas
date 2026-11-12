@@ -11,11 +11,49 @@ function renderAt(path: string) {
 }
 
 describe('Rutitas landing and legal pages', () => {
-  it('UT-LP-001 renders the existing home page and project mockup', () => {
+  it('UT-LP-001 renders the approved hero without a DEMO or QR section', () => {
     renderAt('/')
     expect(screen.getByRole('heading', { name: /la uni se vive en el camino/i })).toBeInTheDocument()
-    expect(screen.getByText('Conectando caminos')).toBeInTheDocument()
-    expect(screen.getByText(/DEMO/)).toBeInTheDocument()
+    expect(screen.getByText('Compartir el trayecto también es parte de la experiencia.')).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'Rutitas' })).toHaveAttribute('src', '/assets/rutitas-logo.png')
+    expect(screen.getByRole('main').querySelector('picture source')).toHaveAttribute('srcset', '/assets/rutitas-auto-hero-mobile.webp')
+    expect(screen.getByRole('main').querySelector('picture img')).toHaveAttribute('src', '/assets/rutitas-auto-hero.jpg')
+    expect(document.querySelector('.demo-section')).not.toBeInTheDocument()
+    expect(document.querySelector('.phone')).not.toBeInTheDocument()
+    expect(document.querySelector('.qr-card')).not.toBeInTheDocument()
+    expect(screen.queryByText(/Una vista de demostración|EN TU CELULAR|Google Play/i)).not.toBeInTheDocument()
+    expect(screen.getByRole('navigation', { name: 'Navegación principal' })).toBeInTheDocument()
+    expect(screen.getByText('Próximamente')).toBeInTheDocument()
+  })
+
+  it('keeps both hero calls to action connected to their existing dialogs', async () => {
+    const user = userEvent.setup()
+    renderAt('/')
+    await user.click(screen.getByRole('button', { name: /descubre rutitas/i }))
+    expect(screen.getByRole('dialog')).toHaveTextContent('El camino se comparte.')
+    await user.keyboard('{Escape}')
+    await user.click(screen.getByRole('button', { name: /conoce el proyecto/i }))
+    expect(screen.getByRole('dialog')).toHaveTextContent('Más cerca, en comunidad.')
+  })
+
+  it('does not advertise Google Play before an official listing exists', () => {
+    renderAt('/')
+    expect(screen.getByText('Próximamente')).toBeInTheDocument()
+    expect(screen.queryByText(/Google Play|Disponible en/i)).not.toBeInTheDocument()
+  })
+
+  it('opens the compact navigation and keeps its modal actions available', async () => {
+    const user = userEvent.setup()
+    renderAt('/')
+    const toggle = screen.getByRole('button', { name: 'Abrir navegación' })
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    await user.click(screen.getByRole('button', { name: 'Seguridad' }))
+    expect(screen.getByRole('dialog')).toHaveTextContent('Confianza desde el inicio.')
+    const closedToggle = screen.getByRole('button', { name: 'Abrir navegación' })
+    expect(closedToggle).toHaveAttribute('aria-expanded', 'false')
+    await user.keyboard('{Escape}')
+    expect(closedToggle).toHaveFocus()
   })
 
   it('UT-LP-002 exposes legal pages in the shared footer', () => {
