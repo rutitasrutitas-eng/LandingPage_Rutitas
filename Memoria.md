@@ -1,6 +1,6 @@
 # Memoria de Rutitas Landing
 
-**Estado de la iniciativa:** cambios locales implementados; revisión de Preview, datos legales y ratificación humana pendientes.
+**Estado de la iniciativa:** LANDING-003 está implementado en rama publicada y Draft PR; validación local y CI remotos aprobados. Revisión de Preview, datos legales y ratificación humana pendientes.
 **Última actualización:** 2026-11-05.
 
 ## Hechos confirmados en el repo
@@ -25,7 +25,7 @@
 - 2026-11-05: implementación de rutas legales, configuración opcional de Google Play/GA4, consentimiento, pruebas, CI y trazabilidad.
 - 2026-11-05: revalidación LANDING-002, Vitest 11/11, Playwright 9 aprobadas/1 omitida, lint, typecheck, build y SDD pasan localmente.
 - 2026-11-05: advisory GHSA-g3hv-75wg-m249 corregido con override `minimatch ^11.0.1`; lockfile resuelve 11.0.4; `npm audit` devuelve cero vulnerabilidades. `npm ci` limpio en carpeta temporal fuera de OneDrive pasa; el reintento directo en el repo falló por bloqueos Windows `EBUSY` al borrar `node_modules`.
-- Pendiente: PRs separados para LANDING-001/002, ejecución remota de CI/Gitleaks, acceso de equipo Vercel y Preview, aprobación del aviso, proceso real de eliminación, Measurement ID/Realtime, URL Play y ratificación de Constitución.
+- Pendiente: inspección autenticada de Preview y confirmación del SHA desplegado; aprobación del aviso, proceso real de eliminación, Measurement ID/Realtime, URL Play y ratificación de Constitución.
 
 ## LANDING-003 — hero fotográfico
 
@@ -36,9 +36,10 @@
 - `npm ci`, lint, typecheck, Vitest 14/14, Playwright 10/10, build, SDD (22 documentos) y `npm audit` (0 vulnerabilidades) pasan localmente. Viewports E2E: 1440×900, 1366×768, 768×1024, 390×844 y 320×568. Rutas legales con navegación/recarga directa verificadas localmente.
 - Capturas inspeccionadas: `C:\Users\rafle\OneDrive\Desktop\anterior\_LANDING_003_Evidencia_2026-11-12\LANDING_003_desktop.png` y `...\LANDING_003_mobile.png`.
 - Informe: `docs/REPORTE_LANDING_003.md`; especificación, plan, tareas y checklist: `specs/003-landing-hero-fotografico/`.
-- Commit de implementación `a930de11b32c3397468c24773ed290055a7364eb` publicado en `feature/landing-003-hero-fotografico`; Draft PR #9 a `main`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9. No fusionado.
-- GitHub Actions run #11 (`43248682077`) pasó completo, incluido Gitleaks, SDD, lint, typecheck, build, Vitest, Playwright y `npm audit`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43248682077.
-- Comentario de Vercel reporta Preview `Ready`: https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/. No se pudo inspeccionar su contenido ni rutas legales: el conector devuelve 403 para `dxrxxgsos-projects` (`team_y4UzDPbxO9438fV2gd6GolFA`). El enlace oficial de autorización fue generado y el usuario indicó que lo abriría/aprobaría; no se modificaron settings de proyecto ni producción.
+- Commits: implementación `a930de11b32c3397468c24773ed290055a7364eb`; cabeza actual, documentación `b58c3996c800a73bcb6f48985e6662725c796b16`, publicada en `feature/landing-003-hero-fotografico`. Draft PR #9 a `main`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9. No fusionado.
+- GitHub Actions run #11 (`43248682077`) pasó para el commit de implementación, incluido Gitleaks, SDD, lint, typecheck, build, Vitest, Playwright y `npm audit`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43248682077.
+- GitHub Actions run #12 (`43249355774`) pasó para la cabeza actual `b58c3996c800a73bcb6f48985e6662725c796b16`, incluido Gitleaks, SDD, lint, typecheck, build, Vitest, Playwright y `npm audit`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43249355774.
+- Vercel Bot reporta Preview `Ready`: https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/. No se confirmó el SHA exacto del deployment y no se pudo inspeccionar su contenido ni rutas legales: el conector devuelve 403 para `dxrxxgsos-projects` (`team_y4UzDPbxO9438fV2gd6GolFA`). El usuario indicó que abriría y aprobaría el enlace oficial de autorización, pero el acceso aún no se refleja; no se modificaron settings de proyecto ni producción.
 - Se mantiene «Próximamente», sin URL de Google Play; no se añadieron teléfonos al tablero. Analytics, rutas legales, valores de configuración y requisitos LANDING-001/002 permanecen sin cambios funcionales. Constitución continúa `PENDIENTE_RATIFICACION`; textos legales siguen sin aprobación automática.
 
 ## Información que no se debe guardar aquí

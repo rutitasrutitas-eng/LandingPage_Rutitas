@@ -10,7 +10,7 @@
 | LP-REQ-006 Play | `spec.md` | `src/config.ts`, `src/App.tsx`, `.env.example` | UT-LP-005, IT-LP-005 | Validación local probada; URL oficial pendiente |
 | LP-REQ-007 A11y/responsive | `spec.md` | `src/styles.css`, `src/App.tsx` | UI-LP-001–003; Playwright teclado y móvil | Verificado localmente |
 | LP-REQ-008 Pruebas | `spec.md` | `package.json`, `src/App.test.tsx`, `e2e/` | Vitest 11/11; Playwright 9 aprobadas/1 omitida por viewport | Verificado localmente |
-| LP-REQ-009 CI/seguridad | `spec.md` | `.github/workflows/quality.yml`, `.github/dependabot.yml` | workflow/JSON validados; `npm audit` | CI configurado localmente; auditoría actual sin vulnerabilidades; ejecución remota pendiente |
+| LP-REQ-009 CI/seguridad | `spec.md` | `.github/workflows/quality.yml`, `.github/dependabot.yml` | workflow/JSON validados; `npm audit` | CI remoto de LANDING-003 aprobado; auditoría sin vulnerabilidades |
 | LP-REQ-010 Docs/evidencias | `spec.md` | `docs/`, `.specify/`, `AGENTS.md`, `Memoria.md` | checklist y `docs/REPORTE_FINAL.md` | Documentado; Constitución pendiente de ratificación |
 
 Actualiza la columna de estado tras la revisión final y cita evidencia ejecutada. No conviertas «por verificar» en «completado» por existir código.
@@ -38,11 +38,11 @@ Actualiza la columna de estado tras la revisión final y cita evidencia ejecutad
 
 | Requisito | Especificación | Código/documento | Prueba/evidencia | Estado |
 |---|---|---|---|---|
-| L003-REQ-001 Identidad oficial | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `public/assets/rutitas-logo.png` | Logo SHA256 sin cambio; Playwright home; hash anterior y actual coinciden | Verificado localmente; CI pendiente |
-| L003-REQ-002 Hero con foto limpia | `specs/003-landing-hero-fotografico/spec.md` | `public/assets/rutitas-auto-hero*.webp`, `src/App.tsx` | Tres hashes coinciden con manifiesto; Playwright home y capturas escritorio/móvil inspeccionadas | Verificado localmente; CI pendiente |
+| L003-REQ-001 Identidad oficial | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `public/assets/rutitas-logo.png` | Logo SHA256 sin cambio; Playwright home; hash anterior y actual coinciden | Verificado localmente y en CI #12 |
+| L003-REQ-002 Hero con foto limpia | `specs/003-landing-hero-fotografico/spec.md` | `public/assets/rutitas-auto-hero*.webp`, `src/App.tsx` | Tres hashes coinciden con manifiesto; Playwright home y capturas escritorio/móvil inspeccionadas | Verificado localmente y en CI #12 |
 | L003-REQ-003 Texto y acciones | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, modales existentes | Vitest CTAs; Playwright CTA | Verificado localmente |
 | L003-REQ-004 Navegación | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `src/styles.css` | Vitest foco; Playwright móvil/teclado y Escape | Verificado localmente |
 | L003-REQ-005 DEMO y Play condicional | `specs/003-landing-hero-fotografico/spec.md` | `src/App.tsx`, `src/config.ts` | Vitest sin URL Play; Playwright sección DEMO/QR | Verificado localmente; URL Play pendiente |
 | L003-REQ-006 Responsive y accesibilidad | `specs/003-landing-hero-fotografico/spec.md` | `src/styles.css`, `e2e/landing.spec.ts` | 10 E2E, cinco viewports, sin overflow; capturas 1440×900 y 390×844 | Verificado localmente |
-| L003-REQ-007 Conservar legal, GA4 y Vercel | `specs/003-landing-hero-fotografico/spec.md` | `src/LegalPages.tsx`, `src/analytics.ts`, `vercel.json` | 10 E2E navegan y recargan ambas rutas; config legal/GA4/Vercel sin diff; Vercel 403 impide Preview | Local verificado; Preview Ready reportada pero contenido no inspeccionado |
-| L003-REQ-008 Evidencia y SDD | `specs/003-landing-hero-fotografico/spec.md` | `Memoria.md`, esta matriz, reporte y workflow CI | SDD 22 docs, reporte, hashes, capturas; PR #9 y Actions run #11 success | Verificado; pendiente inspección autenticada de Preview |
+| L003-REQ-007 Conservar legal, GA4 y Vercel | `specs/003-landing-hero-fotografico/spec.md` | `src/LegalPages.tsx`, `src/analytics.ts`, `vercel.json` | 10 E2E navegan y recargan ambas rutas; config legal/GA4/Vercel sin diff; Vercel 403 impide Preview | Local y CI verificados; Preview Ready reportada pero contenido no inspeccionado |
+| L003-REQ-008 Evidencia y SDD | `specs/003-landing-hero-fotografico/spec.md` | `Memoria.md`, esta matriz, reporte y workflow CI | SDD 22 docs, reporte, hashes, capturas; PR #9; runs #11 y #12 success; SHA actual `b58c3996c800a73bcb6f48985e6662725c796b16` | Verificado; pendiente inspección autenticada y confirmar SHA exacto de Preview |

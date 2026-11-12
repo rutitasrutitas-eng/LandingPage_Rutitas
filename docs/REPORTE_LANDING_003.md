@@ -1,6 +1,6 @@
 # Reporte de implementación — LANDING-003
 
-**Estado:** implementación publicada en Draft PR; validación local y CI remoto aprobados; inspección del contenido de Preview pendiente por denegación actual de acceso Vercel.
+**Estado:** implementación publicada en Draft PR; validación local y CI remoto aprobados para el SHA actual; Vercel Bot reporta Preview `Ready`, pero contenido y rutas aún no inspeccionados por denegación de acceso.
 **Fecha:** 2026-11-12
 **Rama:** `feature/landing-003-hero-fotografico`
 **Base confirmada:** `main` en `46522503f38c99b136948e7da1adf491207128f7`.
@@ -43,7 +43,7 @@ Ejecutadas el 2026-11-12 en el árbol de trabajo:
 | `npm run build` | Aprobada |
 | `npm run sdd:verify` | Aprobada: 22 documentos, requisitos 001 (10), 002 (14) y 003 (8) trazados |
 | `npm audit` | Aprobada: 0 vulnerabilidades |
-| Gitleaks/GitHub Actions | Pendiente de ejecución remota tras push; no se declara aprobado antes de ver el run |
+| Gitleaks/GitHub Actions | Aprobada en runs #11 y #12; el run #12 corresponde al SHA actual `b58c3996c800a73bcb6f48985e6662725c796b16` |
 
 ## Capturas
 
@@ -57,10 +57,12 @@ Se inspeccionaron visualmente. En ambas aparece el encabezado, el hero fotográf
 ## Publicación, CI y Preview
 
 - Commit de implementación: `a930de11b32c3397468c24773ed290055a7364eb`.
+- Commit documental más reciente y cabeza actual de la rama: `b58c3996c800a73bcb6f48985e6662725c796b16`.
 - Rama publicada: `feature/landing-003-hero-fotografico`.
 - Draft PR #9 hacia `main`: [LANDING-003: hero fotográfico y rediseño responsive](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9). Permanece abierto, Draft y sin conflictos; no se fusionó ni se publicó a producción.
 - GitHub Actions run #11 para el SHA de implementación: [ejecución 43248682077](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43248682077) — `success`. Pasaron Gitleaks, npm ci, SDD, lint, typecheck, build, pruebas unitarias, instalación Chromium, Playwright, audit y publicación de artefactos.
-- Preview indicada por el comentario de Vercel en PR #9, estado de deployment `Ready`: [landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app](https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/). La lectura autenticada del deployment y de `/`, `/privacidad` y `/eliminar-cuenta` sigue bloqueada: Vercel responde 403 por falta de autorización del equipo `team_y4UzDPbxO9438fV2gd6GolFA` (`dxrxxgsos-projects`). Se generó un enlace oficial de autorización, y el usuario indicó que lo abriría/aprobaría; hasta que el conector refleje el acceso no se afirma que las páginas de Preview se hayan validado.
+- GitHub Actions run #12 para la cabeza actual: [ejecución 43249355774](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43249355774) — `success`, SHA `b58c3996c800a73bcb6f48985e6662725c796b16`. Pasaron Gitleaks, npm ci, SDD, lint, typecheck, build, Vitest, Playwright, npm audit y publicación de artefactos.
+- Vercel Bot informa `Ready` para la Preview en PR #9: [landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app](https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/), actualización posterior al push de la cabeza actual. No se pudo confirmar por API el SHA exacto del deployment ni inspeccionar `/`, `/privacidad` y `/eliminar-cuenta`: Vercel responde 403 al conector (`team_y4UzDPbxO9438fV2gd6GolFA`, scope `dxrxxgsos-projects`). El usuario indicó que abriría y aprobaría el enlace de consentimiento, pero la autorización todavía no se refleja. No se declaran probadas las rutas remotas.
 - Producción: intacta; no se hizo deployment ni promoción.
 
 ## Pendientes fuera del alcance de automatización
@@ -69,7 +71,7 @@ Se inspeccionaron visualmente. En ambas aparece el encabezado, el hero fotográf
 - Mecanismo real de eliminación de cuentas.
 - Measurement ID y verificación Realtime de GA4.
 - URL oficial de Google Play; hasta entonces no debe mostrarse disponibilidad.
-- Inspección autenticada de Preview una vez propagado el acceso autorizado. Aprobación legal, ratificación SDD, eliminación real, GA4 real y Play oficial siguen pendientes.
+- Inspección autenticada de Preview y confirmación del SHA exacto una vez propagado el acceso autorizado. Aprobación legal, ratificación SDD, eliminación real, GA4 real y Play oficial siguen pendientes.
 
 ## Estado final de alcance
 
