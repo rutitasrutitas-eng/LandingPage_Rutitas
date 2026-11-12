@@ -4,7 +4,8 @@
 **Fecha:** 2026-11-12
 **Rama:** `feature/landing-003-hero-fotografico`
 **HEAD inicial revisado:** `5728d395ca10ccea552a8e318c64978e0f886595`
-**Commit correctivo (HEAD final):** `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`
+**Commit correctivo funcional:** `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`
+**Último SHA publicado y verificado por Actions:** `b4392f1ea36ee1439f8ab1cbab84c961b24430cf` (run #17).
 **Draft PR:** [#9 hacia `main`](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9); abierto, sin fusionar al iniciar la corrección.
 **Constitución SDD:** `PENDIENTE_RATIFICACION`.
 
@@ -60,6 +61,7 @@ Las rutas `/privacidad` y `/eliminar-cuenta` se comprueban con navegación/recar
 | GitHub Actions | Aprobada en el nuevo HEAD; run [#16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259000683) |
 | Gitleaks | Aprobado en run #16: `Scan Git history for secrets (pinned Gitleaks image)` terminó `success` |
 | SDD, lint, typecheck, build, unit/integration, Playwright y audit remotos | Todos los pasos terminaron `success` en run #16; Playwright y audit no se omitieron |
+| GitHub Actions para el SHA más reciente `b4392f1ea36ee1439f8ab1cbab84c961b24430cf` | Aprobada en [run #17](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259639450); mismo conjunto completo de jobs, todos `success`, incluido Gitleaks |
 
 ## Capturas y archivo de métricas
 
@@ -71,12 +73,13 @@ Capturas de tamaño viewport real (sin `fullPage`) y mediciones JSON, guardadas 
 
 ## Preview de Vercel
 
-No se generaron enlaces temporales de autorización. `vercel` CLI no está instalada y el repositorio no tiene `.vercel/project.json`. GitHub muestra el check Vercel `success` con URL [Preview](https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/), pero la solicitud anónima devuelve HTTP 302 hacia el inicio de sesión SSO y la lectura del listado de deployments desde el conector devuelve HTTP 403 para el equipo `rutitasrutitas-8977`. Por ello no se confirmó que el deployment corresponda al SHA `54e0ecb1f4e0e03165afb794bed94a70d37d74c7` ni se inspeccionaron visualmente portada o rutas en Vercel. El estado de build `success` no sustituye esa verificación. No se cambió Dashboard ni configuración de Vercel.
+No se generaron enlaces temporales de autorización. `vercel` CLI no está instalada y el repositorio no tiene `.vercel/project.json`. GitHub muestra el check Vercel `success` con URL [Preview](https://landing-page-rutitas-git-feature-lan-6c6573-rutitasrutitas-8977.vercel.app/); el bot reportó `Ready` con deployment `GFjgK5jtrs5QG8Pdrz67ttshdVjE`. Sin embargo, la solicitud anónima devuelve HTTP 302 hacia el inicio de sesión SSO y la lectura del listado de deployments desde el conector devuelve HTTP 403 para el equipo `rutitasrutitas-8977`. Por ello no se confirmó que el deployment corresponda al SHA `b4392f1ea36ee1439f8ab1cbab84c961b24430cf` ni se inspeccionaron visualmente portada o rutas en Vercel. El estado de build `Ready` no sustituye esa verificación. No se cambió Dashboard ni configuración de Vercel.
 
 ## Estado de entrega
 
-- Rama `feature/landing-003-hero-fotografico`, HEAD `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`, publicado al PR Draft #9. `main` continúa en `46522503f38c99b136948e7da1adf491207128f7`; el PR permanece abierto, Draft y sin fusionar.
+- Rama `feature/landing-003-hero-fotografico`; commit funcional `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`, seguido por documentación correctiva en SHA `b4392f1ea36ee1439f8ab1cbab84c961b24430cf`. `main` continúa en `46522503f38c99b136948e7da1adf491207128f7`; el PR permanece abierto, Draft y sin fusionar.
 - Run [GitHub Actions #16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259000683): job `Verify landing page` aprobado. Gitleaks, verificación SDD, lint, typecheck, build, Vitest, Playwright, auditoría de dependencias y publicación de evidencia pasaron.
+- Run [GitHub Actions #17](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259639450) verificó el SHA `b4392f1ea36ee1439f8ab1cbab84c961b24430cf`; todos los mismos jobs, incluido Gitleaks, terminaron `success`.
 - Preview: deployment check de Vercel aparece `success`, pero el contenido permanece bloqueado por SSO (302) y la API responde 403. SHA de deployment y contenido visual no verificados; no se generó enlace temporal.
 - Google Play sigue sin URL oficial y no se muestra como disponible. El validador de URL permanece en `src/config.ts`.
 - No se modifican `main`, dominios, credenciales, producción ni aprobaciones legales. El PR no se fusiona.
