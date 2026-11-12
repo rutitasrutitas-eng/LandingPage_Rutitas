@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import App from './App'
 import { enableAnalytics, isValidMeasurementId, revokeAnalyticsConsent, saveAnalyticsConsent } from './analytics'
-import { getGooglePlayUrl, googlePlayUrl } from './config'
+import { getGooglePlayUrl } from './config'
 
 function renderAt(path: string) {
   window.history.replaceState({}, '', path)
@@ -11,16 +11,17 @@ function renderAt(path: string) {
 }
 
 describe('Rutitas landing and legal pages', () => {
-  it('UT-LP-001 renders the existing home page and project mockup', () => {
+  it('UT-LP-001 renders the approved hero without a DEMO or QR section', () => {
     renderAt('/')
     expect(screen.getByRole('heading', { name: /la uni se vive en el camino/i })).toBeInTheDocument()
     expect(screen.getByText('Compartir el trayecto también es parte de la experiencia.')).toBeInTheDocument()
     expect(screen.getByRole('img', { name: 'Rutitas' })).toHaveAttribute('src', '/assets/rutitas-logo.png')
     expect(screen.getByRole('main').querySelector('picture source')).toHaveAttribute('srcset', '/assets/rutitas-auto-hero-mobile.webp')
     expect(screen.getByRole('main').querySelector('picture img')).toHaveAttribute('src', '/assets/rutitas-auto-hero.jpg')
-    expect(screen.getByText('El mockup ilustra una propuesta de interfaz. La aplicación todavía está en desarrollo.')).toBeInTheDocument()
-    expect(screen.getByText(/DEMO/)).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Una vista de demostración' })).toBeInTheDocument()
+    expect(document.querySelector('.demo-section')).not.toBeInTheDocument()
+    expect(document.querySelector('.phone')).not.toBeInTheDocument()
+    expect(document.querySelector('.qr-card')).not.toBeInTheDocument()
+    expect(screen.queryByText(/Una vista de demostración|EN TU CELULAR|Google Play/i)).not.toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: 'Navegación principal' })).toBeInTheDocument()
     expect(screen.getByText('Próximamente')).toBeInTheDocument()
   })
@@ -35,14 +36,10 @@ describe('Rutitas landing and legal pages', () => {
     expect(screen.getByRole('dialog')).toHaveTextContent('Más cerca, en comunidad.')
   })
 
-  it('keeps Google Play inactive without a verified URL', () => {
+  it('does not advertise Google Play before an official listing exists', () => {
     renderAt('/')
-    if (googlePlayUrl) return
-    const card = screen.getByRole('group', { name: /Google Play próximamente/i })
     expect(screen.getByText('Próximamente')).toBeInTheDocument()
-    expect(within(card).getByText('Muy pronto')).toBeInTheDocument()
-    expect(within(card).queryByRole('link')).not.toBeInTheDocument()
-    expect(within(card).getByText('En preparación')).toBeInTheDocument()
+    expect(screen.queryByText(/Google Play|Disponible en/i)).not.toBeInTheDocument()
   })
 
   it('opens the compact navigation and keeps its modal actions available', async () => {
