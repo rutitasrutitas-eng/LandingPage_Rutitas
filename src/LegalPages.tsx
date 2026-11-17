@@ -101,7 +101,7 @@ export function AccountDeletionPage() {
 
         <section aria-labelledby="deletion-request">
           <h2 id="deletion-request">1. Cómo solicitar la eliminación</h2>
-          <p>El repositorio no documenta un proceso operativo ni un canal oficial para recibir solicitudes. El canal y los pasos de atención están <strong>{pending.toLowerCase()}</strong>. No envíes documentos ni información de cuenta a través de esta página.</p>
+          <p>El sitio no tramita solicitudes ni elimina cuentas. Android tiene una función de baja local para los datos del modo DEMO; no elimina datos de un servidor. El Backend revisado no presenta una ruta de eliminación de cuenta. Un canal oficial y los pasos de atención están <strong>{pending.toLowerCase()}</strong>. No envíes documentos ni información de cuenta a través de esta página.</p>
         </section>
         <section aria-labelledby="deletion-verify">
           <h2 id="deletion-verify">2. Verificación de titularidad</h2>
@@ -109,7 +109,7 @@ export function AccountDeletionPage() {
         </section>
         <section aria-labelledby="deletion-data">
           <h2 id="deletion-data">3. Qué ocurre con la información</h2>
-          <p>El inventario real de datos, su eliminación o anonimización, y el tratamiento de respaldos no están confirmados en este repo: <strong>{pending}</strong></p>
+          <p>El código Android DEMO permite borrar registros locales vinculados al perfil y ciertos archivos/fotos del dispositivo. No se acredita eliminación remota, anonimización ni borrado de respaldos. El inventario para un proceso real y su evidencia están <strong>{pending}</strong>.</p>
         </section>
         <section aria-labelledby="deletion-retention">
           <h2 id="deletion-retention">4. Datos que podrían conservarse</h2>

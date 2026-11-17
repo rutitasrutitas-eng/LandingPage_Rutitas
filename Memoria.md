@@ -1,6 +1,6 @@
 # Memoria de Rutitas Landing
 
-**Estado actual (2026-11-16):** LANDING-003 / PR #9 fue fusionado a `main` el **2026-11-12** (18:03:18 UTC); merge commit `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004 está en `fix/landing-004-estabilidad-accesibilidad`; el commit correctivo de código es `2ccb740fd10df5a3258bfaca28ecfdd6f72c89be`. No se ha hecho push ni abierto un PR. La regla de Vercel para suprimir Preview aún no está confirmada ni configurada.
+**Estado actual (2026-11-16):** LANDING-003 / PR #9 fue fusionado a `main` el **2026-11-12** (18:03:18 UTC); merge commit `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004 está en `fix/landing-004-estabilidad-accesibilidad`; su último commit confirmado es `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`. LANDING-006 se desarrolla en `feature/landing-006-aviso-privacidad` basada en ese SHA; la página de privacidad y su documentación se actualizaron y probaron localmente, mientras la aprobación legal y el cotejo Android/Backend siguen pendientes. No se ha hecho push, abierto PR ni desplegado LANDING-006. La regla de Vercel para suprimir Preview aún no está confirmada ni configurada.
 **Última actualización:** 2026-11-16.
 
 ## Hechos confirmados en el repo
@@ -97,3 +97,21 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - Cotejo de solo lectura: Backend `main` `a95e62e2f0f9fbde46af0144c9fb89c858670c94`, Android `feature/integracion-android-ci-cd` `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. El Android revisado tiene `DEMO_MODE=true`; no se confirmó su integración con el Backend ni disponibilidad pública. El detalle está en `docs/REPORTE_LANDING_005.md`.
 - Verificación local LANDING-005: `npm ci`, lint, typecheck, build, SDD, audit y diff whitespace exit 0; Vitest 17/17 y Playwright 16 pasadas con 2 omisiones intencionales sin ID sintético. El test Playwright cubre siete viewports y FAQ por teclado. Zoom nativo, CI, Preview, publicación, Play, Analytics real y aprobación del piloto no se ejecutaron.
 - La revisión legal sigue pendiente; no se incorporan responsables ni contactos inventados. Constitución `PENDIENTE_RATIFICACION` y producción intactas.
+
+## LANDING-006 — aviso de privacidad y Analytics — 2026-11-17
+
+- El diseño de `/privacidad` conserva el paquete integrado. El borrador distingue el sitio estático, datos del Android DEMO en Room y código Backend no desplegado confirmado. `/eliminar-cuenta` distingue baja local en Android de eliminación remota no acreditada; no hay formulario.
+- Se cotejaron solo en lectura Backend `main` `a95e62e2f0f9fbde46af0144c9fb89c858670c94` y Android `feature/integracion-android-ci-cd` `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. `docs/VALIDACIONES_PRIVACIDAD.md` contiene detalles; Android `main` es documentación y no debe confundirse con la rama de implementación.
+- La prueba exploratoria encontró que el control fijo de preferencias Analytics tapaba enlaces legales en viewport 320×568. Se movió el control al footer. Prueba E2E completa con ID sintético `G-SYNTHETIC123`: 18/18 pasadas; el test Analytics bloquea solicitudes externas. Sin ID: 16 pasadas/2 omisiones intencionales. Vitest 16/16; lint/tipos/build/SDD/audit y diff check aprobados.
+- Pendientes: aprobación legal y Constitución `PENDIENTE_RATIFICACION`, responsables/contactos/finalidades/proveedores/retención reales, procedimiento remoto de baja, ficha Play, configuración remota GA4/Vercel y CI/Preview. No se modificó Android/Backend, Vercel remoto ni producción.
+
+## LANDING-006 — primera integración (estado histórico al 2026-11-16)
+
+La verificación técnica de repositorios que faltaba en esta primera pasada se completó el 2026-11-17; el estado actual es la sección “LANDING-006 — aviso de privacidad y Analytics” inmediatamente anterior. Las notas siguientes conservan el contexto inicial y quedan supersedidas donde hay diferencias.
+
+- La rama `feature/landing-006-aviso-privacidad` se creó en un worktree independiente desde el commit confirmado de LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`. Se conservaron intactos los cambios locales y archivos `.diff` del checkout original.
+- El paquete `Rutitas_aviso_privacidad_propuesta.zip` se recibió y extrajo fuera del repositorio en `../insumos`. Se integraron su componente React, estilos, borrador Markdown y checklist de validación; la portada no se modificó y `/eliminar-cuenta` continúa informativa, sin formulario ni mecanismo remoto ficticio.
+- La página presenta una marca de Rutitas azul/blanco/amarillo, aviso de borrador, índice con anclas, skip-link, secciones semánticas, contacto pendiente, enlaces al inicio y eliminación. Analytics no cambió: requiere ID GA válido y consentimiento explícito.
+- En aquella primera integración, los datos Android/Backend solo se describían a partir del paquete y el cotejo de repositorios quedaba pendiente. El cotejo de ramas/SHA se completó el 2026-11-17 y está documentado arriba; los hallazgos de esa revisión reemplazan esta limitación inicial.
+- Validaciones LANDING-006 ejecutadas localmente y reportadas en `docs/pruebas.md` y `docs/REPORTE_LANDING_006.md`. Capturas Playwright escritorio y móvil: `test-results/landing006_privacidad_escritorio.png` y `test-results/landing006_privacidad_movil.png` (salidas ignoradas por Git).
+- Aprobación legal humana pendiente: responsable/domicilio/régimen, contacto atendido, inventario real de datos, finalidades, proveedores/transferencias, retención, controles operativos, eliminación completa y fecha efectiva. También falta ratificar la Constitución SDD. CI remoto y Preview no ejecutados; no hubo push, PR ni despliegue.

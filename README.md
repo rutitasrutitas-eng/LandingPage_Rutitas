@@ -82,6 +82,8 @@ Para pruebas Playwright, instala Chromium una sola vez con `npx playwright insta
 
 Antes de usar o publicar páginas legales como definitivas, completar `docs/requisitos-profesor.md` con el responsable, contacto de privacidad, datos y finalidades reales, proveedores, almacenamiento/medidas verificadas y conservación. Confirmar también el mecanismo de eliminación con backend/soporte, la política de Analytics y la URL de Google Play. Los marcadores de revisión no son texto legal aprobado.
 
+La vista de privacidad actualizada en LANDING-006 usa el diseño recibido, mantiene la etiqueta de borrador y distingue la Landing actual, Android DEMO local y código Backend. Ramas/SHA cotejados y límites: `docs/VALIDACIONES_PRIVACIDAD.md`; decisiones legales pendientes: `docs/PENDIENTES_LEGALES_RUTITAS.md`. El aviso no es definitivo ni está aprobado.
+
 ## Alcance de esta entrega
 
-Se hacen cambios incrementales; no se desarrolla el backend ni la app móvil, no se crea una API de eliminación, no se envían solicitudes a Analytics, no se inventan datos legales ni URL de tienda, y no se hicieron commits, push o despliegues productivos.
+Se hacen cambios incrementales; no se desarrolla ni modifica el backend o app móvil, no se crea una API de eliminación, no se envían solicitudes a Analytics ni se inventan datos legales o URL de tienda. Sin push, PR, despliegue productivo o cambio remoto de Vercel.

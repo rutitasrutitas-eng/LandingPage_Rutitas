@@ -14,9 +14,18 @@
 | T-010 | completado | Añadir lockfile y scripts de calidad mínimos. | `npm ci`, lint, typecheck, build, Vitest, Playwright y auditoría de dependencias. |
 | T-011 | completado | Añadir workflow GitHub Actions de PR, seguridad y evidencias. | YAML/JSON revisados; ejecución remota pendiente de GitHub. |
 | T-012 | completado | Cerrar memoria, trazabilidad, checklist y reporte final. | Revisión documental y del árbol Git sin commit/push. |
-| L5-T-001 | completado | Trazar cambios de presentación antes de editar interfaz. | LP-REQ-011–013 añadidos a `spec.md`/`plan.md` y enlazados en matriz. |
+| L5-T-001 | completado | Trazar cambios de presentación antes de editar interfaz. | LP-REQ-015–017 añadidos a `spec.md`/`plan.md` y enlazados en matriz. |
 | L5-T-002 | completado | Explicar propósito, funcionamiento y seguridad con estados precisos. | Pruebas de contenido; revisión Android/Backend y SHAs en `docs/REPORTE_LANDING_005.md`. |
 | L5-T-003 | completado | Agregar diez preguntas frecuentes accesibles en el diálogo de proyecto. | Vitest y Playwright validan diez preguntas, respuestas, navegación nativa y retorno de foco. |
 | L5-T-004 | completado | Corregir metadatos y comprobar recursos internos sin alterar identidad. | Playwright verifica metadatos, favicon, siete resoluciones y ausencia de overflow. |
+
+| L6-T-001 | completado | Inspeccionar el paquete de privacidad recibido y registrar requisitos/trazabilidad antes de integrar. | Paquete extraído fuera del repo; `LP-REQ-003`, `LP-REQ-011–014`, matriz y checklist LANDING-006. |
+| L6-T-002 | completado | Integrar la nueva vista `/privacidad`, conservando portada, Analytics y `/eliminar-cuenta`. | Componente/estilos recibidos; pruebas locales conservan Home y ambas rutas. |
+| L6-T-003 | completado | Revisar lenguaje para separar el sitio actual, datos locales DEMO y capacidades previstas; registrar aprobación pendiente. | Landing, Android DEMO local y código Backend diferenciados; cotejo con ramas/SHA descrito en `docs/VALIDACIONES_PRIVACIDAD.md`. |
+| L6-T-004 | completado | Ejecutar controles completos y guardar resultados reales. | Resultados locales finales en `docs/pruebas.md`; CI remoto no ejecutado. |
+| L6-T-005 | completado | Actualizar Memoria, checklist, matriz y evidencia LANDING-006. | Reporte y evidencia local actualizados; no se publica ni fusiona. |
+| L6-T-006 | completado | Contrastar afirmaciones de privacidad/eliminación con repositorios Android y Backend accesibles. | SHAs, ramas, configuración DEMO, modelos, endpoints y límites registrados en `docs/VALIDACIONES_PRIVACIDAD.md`. |
+| L6-T-007 | completado | Corregir suite completa con Analytics sintético sin clics forzados ni envío de eventos externos. | E2E completa sintética 18/18; prueba dedicada bloquea GTM y pruebas generales usan rechazo explícito. |
+| L6-T-008 | completado | Preparar decisiones legales y dependencias reales de eliminación. | `docs/PENDIENTES_LEGALES_RUTITAS.md`; no se agregaron contactos o plazos inventados. |
 
 Estados permitidos: `no_iniciado`, `en_progreso`, `bloqueado`, `completado`, `no_ejecutado`. El estado final de cada tarea se actualizará solo con evidencia.

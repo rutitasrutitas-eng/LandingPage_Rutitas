@@ -11,6 +11,14 @@ Ejecución independiente en `feature/landing-005-presentacion`, basada en LANDIN
 - Revisión de contenido: Backend `main` SHA `a95e62e2f0f9fbde46af0144c9fb89c858670c94`, Android `feature/integracion-android-ci-cd` SHA `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. El código revisado no acredita operación para usuarios reales ni integración Android–Backend.
 - Esta corrida no valida Google Play real, Analytics real, CI remoto, Vercel Preview, publicación ni aprobación legal.
 
+## LANDING-006 — contraste técnico, privacidad y Analytics — 2026-11-17
+
+En `feature/landing-006-aviso-privacidad`, después del ajuste de preferencia Analytics al footer: `npm ci` exit 0 (243 paquetes, 0 vulnerabilidades); lint/typecheck exit 0; Vitest 16/16; Playwright sin ID 16 pass/2 skip; Playwright con `VITE_GA_MEASUREMENT_ID=G-SYNTHETIC123` 18/18 pass; build exit 0; SDD exit 0 (30 documentos, requisitos 14/14/8/9); `npm audit --audit-level=high` exit 0 con 0 vulnerabilidades; `git diff --check` exit 0.
+
+El test sintético tuvo un fallo reproducible antes de corregir el control flotante: tras consentir/rechazar, la preferencia fija se superponía al enlace legal en 320×568 y agotaba el click. El control ahora vive dentro del footer; el texto ampliado y los enlaces continúan alcanzables sin overflow. La suite sintética completa pasa y el test dedicado intercepta solicitudes de `googletagmanager.com`; no hubo envío externo de Analytics. No se configuró ID real.
+
+La revisión solo lectura cotejó Android feature `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad` y Backend main `a95e62e2f0f9fbde46af0144c9fb89c858670c94`. No se ejecutaron builds de Android/Backend, pruebas contra base de datos ni llamadas a servicios remotos. La ficha Play, zoom nativo, dispositivo físico, CI, Preview y aprobación legal no fueron verificados.
+
 ## Unitarias
 
 - UT-LP-001: render de la portada.
@@ -71,6 +79,35 @@ Entorno: Windows, Node.js 24.20.0, npm, Chromium de Playwright; Vite 6.4.5 desde
 - No es posible validar visualmente tablets físicas; se capturaron y revisaron screenshots Playwright en escritorio y Pixel 7 emulados, además del test legal a 320 px.
 
 Una comprobación local no acredita eventos reales de GA4 ni la ficha Play, aprobación legal, controles remotos de GitHub o una publicación de Vercel.
+
+## LANDING-006 — vista y borrador de privacidad — 2026-11-16
+
+Entorno: Windows, Node.js v24.20.0, npm 11.19.0, Vite 6.4.5, Playwright Chromium y mobile-Chromium. Sin credenciales ni conexión a Backend/Android.
+
+| Control | Comando | Resultado |
+|---|---|---|
+| Instalación reproducible | `npm ci` | Exit 0; 242 paquetes añadidos, 243 auditados, 0 vulnerabilidades. npm mostró aviso informativo de `esbuild@0.25.12` con postinstall aún no aprobado; no se aprobó ni se modificó el lockfile. |
+| Lint | `npm run lint` | Exit 0, sin warnings. |
+| Tipos | `npm run typecheck` | Exit 0 en ejecución final. La primera ejecución final detectó una opción `exact` no soportada por los tipos locales de Testing Library; se reemplazó por una aserción DOM y luego tipos/build pasaron. |
+| Unitarias e integración React | `npm run test` | 16/16 en 2 archivos en la última ejecución. |
+| Navegador | `npm run test:e2e` | 14 pasaron, 2 omitidas intencionalmente por falta de `VITE_GA_MEASUREMENT_ID` (prueba de Analytics activo se ejecutó por separado). Dos proyectos: Chromium y mobile-Chromium. |
+| Analytics activo con ID sintético | `$env:VITE_GA_MEASUREMENT_ID='G-ABC1234567'; npx playwright test e2e/modal-analytics-isolation.spec.ts --project=chromium --project=mobile-chromium` | 6/6 pasaron; no se envían eventos ni solicitudes a Google Tag Manager. |
+| Build | `npm run build` | Exit 0; TypeScript y Vite 6.4.5 generaron `dist/`. |
+| Especificación y trazabilidad | `npm run sdd:verify` | Exit 0; 30 documentos, 11 requisitos 001, 14 requisitos 002, 8 requisitos 003 y 9 requisitos 004 con trazabilidad. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0; 0 vulnerabilidades. |
+| Responsive del aviso | E2E `privacy page remains readable across the accepted viewport sizes` | Siete tamaños: 1440×900, 1366×768, 768×1024, 390×844, 375×667, 320×568 y 844×390; anclas y targets válidos, sin overflow horizontal, en Chromium y mobile-Chromium. |
+| Teclado y foco | E2E `legal links navigate...` | Skip-link alcanzable con Tab y lleva foco al `main`; indicador visible con contorno navy y halo amarillo; enlaces del índice, Inicio y eliminación funcionan. |
+| Rutas | E2E `legal links navigate...` | `/privacidad` desde footer, acceso directo/recarga y `/eliminar-cuenta` con recarga; no se agregó formulario. |
+| Evidencia visual | Capturas Playwright locales | `test-results/landing006_privacidad_escritorio.png` y `test-results/landing006_privacidad_movil.png`, full page, carpetas ignoradas por Git. |
+
+En una ejecución exploratoria de la suite E2E completa con el ID sintético, la barra de consentimiento bloqueó clics de casos que no la descartan y dos casos expiraron. No se considera esa ejecución evidencia aprobada; la suite obligatoria sin ID pasó y los casos específicos de Analytics activo pasaron con el ID sintético. No se activó GA real.
+
+## No ejecutado / pendiente en LANDING-006
+
+- Zoom nativo real del navegador, dispositivos físicos, Preview Vercel y CI remoto.
+- Verificación independiente de los repositorios Android y Backend, sus SHA actuales y tratamientos reales. Los detalles funcionales incluidos provienen del paquete suministrado y permanecen pendientes de cotejo.
+- Consentimiento/eventos de una propiedad GA4 real, contratación o transmisiones de proveedores, despliegue de Backend/Android, eliminación de cuenta remota y revisión/aprobación legal.
+- No se modificaron dependencias, `vercel.json`, configuración remota ni producción. No se hizo push ni PR.
 
 ## LANDING-004 — línea base y primera revalidación (histórica) — 2026-11-16
 

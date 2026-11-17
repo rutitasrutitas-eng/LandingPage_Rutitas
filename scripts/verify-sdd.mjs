@@ -24,8 +24,11 @@ const requiredFiles = [
   'docs/matriz-trazabilidad.md',
   'docs/pruebas.md',
   'docs/APROBACION_LEGAL_PENDIENTE.md',
+  'docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md',
+  'docs/VALIDACIONES_PRIVACIDAD.md',
   'docs/REPORTE_LANDING_002.md',
   'docs/REPORTE_LANDING_004.md',
+  'docs/REPORTE_LANDING_006.md',
   'AGENTS.md',
   'Memoria.md',
 ]

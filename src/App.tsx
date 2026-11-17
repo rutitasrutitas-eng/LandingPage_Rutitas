@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
-import AnalyticsConsent from './AnalyticsConsent'
-import { AccountDeletionPage, NotFoundPage, PrivacyPage } from './LegalPages'
+import { AccountDeletionPage, NotFoundPage } from './LegalPages'
+import PrivacyRutitas from './PrivacyRutitas'
 import SiteFooter from './SiteFooter'
 
 type ModalId = 'funciona' | 'proyecto' | 'seguridad' | null
@@ -164,7 +164,6 @@ function HomePage() {
       </section>
     </main>
     <SiteFooter />
-    <AnalyticsConsent />
     </div>
     {modal && <Modal view={modal} onClose={closeModal} />}
   </>
@@ -186,10 +185,10 @@ export default function App() {
   const page = path === '/'
     ? <HomePage />
     : path === '/privacidad'
-      ? <PrivacyPage />
+      ? <PrivacyRutitas />
       : path === '/eliminar-cuenta'
         ? <AccountDeletionPage />
         : <NotFoundPage />
 
-  return <>{page}{path !== '/' && <AnalyticsConsent />}</>
+  return page
 }

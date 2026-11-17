@@ -14,7 +14,7 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 |---|---|---|---|
 | LP-REQ-001 | Conservar la landing actual | La portada, logotipos, mockup, modales y paleta siguen disponibles. | MUST |
 | LP-REQ-002 | Rutas legales | `/privacidad` y `/eliminar-cuenta` cargan por navegación y acceso directo/recarga; el footer enlaza a ambas. | MUST |
-| LP-REQ-003 | Aviso de privacidad | La página contiene todas las secciones solicitadas y marca de forma visible estado de borrador; los hechos no confirmados son marcadores, no afirmaciones. | MUST |
+| LP-REQ-003 | Aviso de privacidad | La página `/privacidad` presenta un diseño responsive y accesible, contiene las secciones solicitadas y distingue los tratamientos actuales del sitio, datos locales DEMO y funciones previstas. Mantiene visible el estado de borrador; los hechos no confirmados aparecen como pendientes y nunca como hechos operativos. | MUST |
 | LP-REQ-004 | Eliminación de cuenta | Explica solicitud, validación, consecuencias y retención como pendientes; no afirma que exista un proceso ni permite enviar datos. | MUST |
 | LP-REQ-005 | GA4 configurable | Solo se carga con un Measurement ID de formato válido y consentimiento explícito; no manda datos personales ni pageviews duplicadas. | MUST |
 | LP-REQ-006 | Google Play | URL configurable, verificada sintácticamente como enlace HTTPS de Play; botón/QR no aparecen activos si falta la URL. | MUST |
@@ -22,9 +22,13 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 | LP-REQ-008 | Calidad automatizada | Scripts reproducibles de typecheck, build, unit/integration; pruebas de navegador para rutas si el runtime permite instalar navegadores. | MUST |
 | LP-REQ-009 | CI y seguridad | Pull Requests ejecutan lockfile install, tipos, build, tests, verificador SDD, escaneo de secretos y auditoría de dependencias; evidencias publicadas como artefacto. | MUST |
 | LP-REQ-010 | Evidencia y operación | Docs SDD, matriz de trazabilidad y memoria distinguen lo implementado, verificado, pendiente y no ejecutado. | MUST |
-| LP-REQ-011 | Presentación precisa | La portada conserva foto, marca y composición; los modales explican el propósito universitario y separan claramente lo previsto de lo disponible. Reservas y viajes reales no se anuncian como activos. | MUST |
-| LP-REQ-012 | Preguntas frecuentes | El modal de proyecto contiene respuestas breves para las diez preguntas acordadas; las respuestas distinguen código de pruebas, modo DEMO y disponibilidad para usuarios. | MUST |
-| LP-REQ-013 | Metadatos veraces | Los metadatos de la página no prometen QR, acceso o descarga no disponibles; favicon y recursos referenciados existen. | MUST |
+| LP-REQ-011 | Navegación del aviso | El índice enlaza a encabezados semánticos, ofrece salto al contenido y conserva navegación de retorno al inicio y a eliminación de cuenta sin alterar la portada. | MUST |
+| LP-REQ-012 | Base técnica del borrador | La página legal distingue el sitio actual, Android DEMO local y capacidades observadas en el código del Backend con ramas/SHA de referencia; ninguna se presenta como servicio productivo. | MUST |
+| LP-REQ-013 | Prueba Analytics con ID sintético | La suite de navegador con ID sintético no hace solicitudes reales a Google; las pruebas generales parten de consentimiento rechazado y la prueba dedicada verifica consentimiento nuevo, aislamiento y retorno del diálogo. | MUST |
+| LP-REQ-014 | Eliminación local frente a remota | La información pública explica que Android DEMO solo elimina datos locales y que no hay endpoint/mecanismo remoto de borrado confirmado. | MUST |
+| LP-REQ-015 | Presentación precisa | La portada conserva foto, marca y composición; los modales explican el propósito universitario y separan claramente lo previsto de lo disponible. Reservas y viajes reales no se anuncian como activos. | MUST |
+| LP-REQ-016 | Preguntas frecuentes | El modal de proyecto contiene respuestas breves para las diez preguntas acordadas; las respuestas distinguen código de pruebas, modo DEMO y disponibilidad para usuarios. | MUST |
+| LP-REQ-017 | Metadatos veraces | Los metadatos de la página no prometen QR, acceso o descarga no disponibles; favicon y recursos referenciados existen. | MUST |
 
 ## Requisitos no funcionales
 

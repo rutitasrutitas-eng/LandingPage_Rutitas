@@ -11,7 +11,9 @@
 | 5. Accesibilidad / visual | LP-REQ-001, 007 | Hacer scroll legal, foco de diálogo y teclado; conservar estilos existentes. | Playwright responsive/teclado si navegador disponible; revisión manual de capturas. |
 | 6. Calidad / CI | LP-REQ-008–009 | Lockfile, scripts de pruebas y workflow PR con mínimo privilegio. | Salidas reales de build/tests/auditoría/secret scan; artefacto de resultados. |
 | 7. Documentar / revisar | LP-REQ-010 | Actualizar arquitectura, requisitos, tests, matriz y memoria; checklist final; verificar git diff. | Lista de requisitos con estado y límites; árbol de trabajo sin commit/push. |
-| 8. LANDING-005 — presentación | LP-REQ-011–013 | Precisar textos de los modales sin alterar el hero aprobado; agregar FAQ accesible compacta en el modal de proyecto; corregir metadatos que prometen disponibilidad no confirmada. | Pruebas de contenido, navegación por teclado/FAQ, metadatos y todas las siete resoluciones; revisión de evidencia Android/Backend. |
+| 8. LANDING-006 privacidad | LP-REQ-003, LP-REQ-004, LP-REQ-007, LP-REQ-008, LP-REQ-010–014 | Integrar el diseño recibido únicamente en `/privacidad`; validar el contenido por categorías (Landing actual, Android DEMO local, Backend/capacidades en desarrollo y funciones previstas), preservar eliminación informativa y actualizar evidencia SDD. | Paquete de origen inspeccionado; unitarias, Playwright responsive/teclado/Analytics y controles de calidad; pendientes legales documentados. |
+| 9. LANDING-005 presentación | LP-REQ-015–017 | Precisar textos de los modales sin alterar la identidad del hero; agregar FAQ accesible compacta en el modal de proyecto; corregir metadatos que prometen disponibilidad no confirmada. | Pruebas de contenido, navegación por teclado/FAQ, metadatos y siete resoluciones; fuentes Android/Backend cotejadas. |
+| 10. Integración local | LP-REQ-010, LP-REQ-015–017 | Crear rama desde LANDING-004 y fusionar localmente LANDING-005 y LANDING-006 con sus commits; resolver conflictos y actualizar evidencia combinada. | Historial Git preservado, pruebas completas y entrega reproducible; sin push/PR/despliegue. |
 
 ## Riesgos y respuesta
 

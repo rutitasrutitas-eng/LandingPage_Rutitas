@@ -76,18 +76,33 @@ describe('Rutitas landing and legal pages', () => {
 
   it('UT-LP-003 renders every privacy topic and marks the text as a draft', () => {
     renderAt('/privacidad')
-    expect(screen.getByRole('heading', { name: 'Aviso de privacidad' })).toBeInTheDocument()
-    for (const title of ['Responsable del tratamiento', 'Datos personales', 'Finalidades', 'Ubicación', 'Documentos de conductores', 'Almacenamiento y protección', 'Conservación y eliminación', 'Derechos de las personas titulares', 'Contacto de privacidad', 'Servicios de terceros', 'Analítica y tecnologías similares']) {
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Tu camino.Tu información.')
+    for (const title of ['Quién protege tus datos', 'Qué información tratamos', 'Para qué usamos tu información', 'Ubicación, cámara y documentos', 'Con quién podría compartirse', 'Almacenamiento y seguridad', 'Conservación y eliminación', 'Tus derechos sobre tus datos', 'Contacto de privacidad', 'Analítica y almacenamiento del navegador', 'Cambios al aviso']) {
       expect(screen.getByRole('heading', { name: title })).toBeInTheDocument()
     }
-    expect(screen.getByText(/NO ES UN AVISO DEFINITIVO/)).toBeInTheDocument()
-    expect(screen.getAllByText(/PENDIENTE DE VALIDACIÓN DEL EQUIPO/i).length).toBeGreaterThan(5)
+    expect(screen.getByText(/Borrador de revisión interna/i)).toBeInTheDocument()
+    expect(screen.getByText(/no tiene formulario de registro/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/DEMO_MODE=true/i)).toHaveLength(2)
+    expect(screen.getByText(/no acredita transmisión a un servidor/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/PENDIENTE DE VALIDACIÓN DEL EQUIPO/i).length).toBeGreaterThan(1)
+    expect(screen.getByRole('navigation', { name: 'Secciones del aviso de privacidad' })).toBeInTheDocument()
+    expect(document.querySelector('.pr-back')).toHaveAttribute('href', '/')
+    expect(screen.getAllByRole('link', { name: /eliminación de cuenta/i })).toHaveLength(2)
+    const toc = screen.getByRole('navigation', { name: 'Secciones del aviso de privacidad' })
+    const topicLinks = within(toc).getAllByRole('link')
+    expect(topicLinks).toHaveLength(11)
+    for (const link of topicLinks) {
+      const targetId = link.getAttribute('href')?.slice(1)
+      expect(targetId).toBeTruthy()
+      expect(document.getElementById(targetId ?? '')).toBeInTheDocument()
+    }
   })
 
   it('UT-LP-004 explains that account deletion is not operational and collects no data', () => {
     renderAt('/eliminar-cuenta')
     expect(screen.getByRole('heading', { name: 'Eliminación de cuenta' })).toBeInTheDocument()
-    expect(screen.getByText(/no tramita solicitudes ni elimina cuentas/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/no tramita solicitudes ni elimina cuentas/i).length).toBeGreaterThan(0)
+    expect(screen.getByText(/baja local para los datos del modo DEMO/i)).toBeInTheDocument()
     expect(screen.queryByRole('form')).not.toBeInTheDocument()
     expect(screen.queryByRole('textbox')).not.toBeInTheDocument()
   })
@@ -130,7 +145,7 @@ describe('Rutitas landing and legal pages', () => {
     expect(trigger).toHaveFocus()
   })
 
-  it('LP-REQ-012 presents all ten accurate questions in the project dialog', async () => {
+  it('LP-REQ-016 presents all ten accurate questions in the project dialog', async () => {
     const user = userEvent.setup()
     renderAt('/')
     await user.click(screen.getByRole('button', { name: /conoce el proyecto/i }))
