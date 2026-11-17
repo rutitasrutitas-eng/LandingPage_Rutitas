@@ -15,6 +15,14 @@
 
 Actualiza la columna de estado tras la revisión final y cita evidencia ejecutada. No conviertas «por verificar» en «completado» por existir código.
 
+## Trazabilidad de presentación — LANDING-005
+
+| Requisito | Especificación | Código/documento | Prueba/evidencia | Estado |
+|---|---|---|---|---|
+| LP-REQ-011 Presentación precisa | `specs/001-landing-compliance/spec.md` | `src/App.tsx`, `src/styles.css`, `docs/REPORTE_LANDING_005.md` | Contraste con Backend `a95e62e2f0f9fbde46af0144c9fb89c858670c94` y Android `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`; Vitest 17/17 y E2E de contenido | Implementado y probado localmente; pilotaje/servicio real pendiente |
+| LP-REQ-012 Preguntas frecuentes | misma | `src/App.tsx`, `src/styles.css`, `e2e/landing.spec.ts` | 10 preguntas verificadas en Vitest y Playwright; teclado, Tab/Shift+Tab/Escape y mobile Chromium | Verificado localmente |
+| LP-REQ-013 Metadatos veraces | misma | `index.html`, `public/favicon.svg`, `e2e/landing.spec.ts` | Playwright comprueba descripción sin promesa de QR/app, favicon disponible, 7 viewports sin overflow | Verificado localmente; SEO remoto no validado |
+
 ## Trazabilidad de validación y liberación — LANDING-002
 
 | Requisito | Estado | Código/documento | Prueba y evidencia actual | Dependencia externa | Acción restante |

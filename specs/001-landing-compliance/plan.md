@@ -1,6 +1,6 @@
 # Plan — LANDING-001
 
-**Estado:** EJECUTADO LOCALMENTE; revisión externa y ratificación humana pendientes. Los cambios se trazan a `spec.md` y los resultados están en `docs/pruebas.md` y `docs/REPORTE_FINAL.md`.
+**Estado:** EJECUTADO LOCALMENTE; revisión externa y ratificación humana pendientes. Los cambios se trazan a `spec.md` y los resultados están en `docs/pruebas.md` y los reportes por entrega. Se autoriza integración local para revisión; no se autoriza push ni publicación.
 
 | Fase | Requisito(s) | Trabajo | Evidencia requerida |
 |---|---|---|---|
@@ -11,6 +11,7 @@
 | 5. Accesibilidad / visual | LP-REQ-001, 007 | Hacer scroll legal, foco de diálogo y teclado; conservar estilos existentes. | Playwright responsive/teclado si navegador disponible; revisión manual de capturas. |
 | 6. Calidad / CI | LP-REQ-008–009 | Lockfile, scripts de pruebas y workflow PR con mínimo privilegio. | Salidas reales de build/tests/auditoría/secret scan; artefacto de resultados. |
 | 7. Documentar / revisar | LP-REQ-010 | Actualizar arquitectura, requisitos, tests, matriz y memoria; checklist final; verificar git diff. | Lista de requisitos con estado y límites; árbol de trabajo sin commit/push. |
+| 8. LANDING-005 — presentación | LP-REQ-011–013 | Precisar textos de los modales sin alterar el hero aprobado; agregar FAQ accesible compacta en el modal de proyecto; corregir metadatos que prometen disponibilidad no confirmada. | Pruebas de contenido, navegación por teclado/FAQ, metadatos y todas las siete resoluciones; revisión de evidencia Android/Backend. |
 
 ## Riesgos y respuesta
 
@@ -23,6 +24,7 @@
 | Rutas directas en hosting | Revisar estrategia SPA de Vercel y agregar fallback versionado solo si hace falta; no modificar el dashboard. |
 | Dependencias sin lockfile | Crear lockfile revisado e instalar dependencias sin cambiar framework; ejecutar `npm audit`. |
 | Capturas del diseño | Comparar a 390px y escritorio; no cambiar la portada salvo defecto comprobado. |
+| Afirmaciones del proyecto | Contrastar contra ramas y SHA examinados; describir integración prevista, sin atribuir operación real a funciones de código o DEMO. |
 
 ## Restricciones de ejecución
 

@@ -129,6 +129,18 @@ describe('Rutitas landing and legal pages', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     expect(trigger).toHaveFocus()
   })
+
+  it('LP-REQ-012 presents all ten accurate questions in the project dialog', async () => {
+    const user = userEvent.setup()
+    renderAt('/')
+    await user.click(screen.getByRole('button', { name: /conoce el proyecto/i }))
+    const dialog = screen.getByRole('dialog')
+    for (const question of ['¿Qué es Rutitas?', '¿Para quién está pensado?', '¿La aplicación ya está disponible?', '¿Cómo funcionará?', '¿Puedo consultar rutas?', '¿Puedo reservar un asiento?', '¿Cómo se protegerán mis datos?', '¿Dónde puedo consultar el aviso de privacidad?', '¿Cómo podré eliminar mi cuenta?', '¿Dónde podré descargar Rutitas?']) {
+      expect(within(dialog).getByText(question, { exact: true })).toBeInTheDocument()
+    }
+    expect(within(dialog).getByText(/no existe integración operativa confirmada/i)).toBeInTheDocument()
+    expect(within(dialog).getByText(/no hay evidencia de eliminación remota operativa/i)).toBeInTheDocument()
+  })
 })
 
 describe('privacy-first GA4 setup', () => {

@@ -137,6 +137,13 @@ button:focus-visible, a:focus-visible { outline: 3px solid #082655; outline-offs
 .modal-point>div { display: flex; flex-direction: column; gap: 3px; }
 .modal-point strong { font-size: 13px; }
 .modal-point>div>span { color: #5d718d; font-size: 12px; line-height: 1.4; }
+.faq-section { margin-top: 26px; }
+.faq-section h3 { margin: 0 0 10px; color: #09295a; font-size: 18px; }
+.faq-item { border-top: 1px solid #e4ebf5; color: #09295a; }
+.faq-item:last-child { border-bottom: 1px solid #e4ebf5; }
+.faq-item summary { min-height: 48px; padding: 14px 4px; color: #123a6c; font-size: 14px; font-weight: 800; line-height: 1.4; cursor: pointer; }
+.faq-item summary:focus-visible { outline: 3px solid #082655; outline-offset: 2px; box-shadow: 0 0 0 2px #ffca28; border-radius: 4px; }
+.faq-item p { margin: 0 0 15px; padding: 0 4px; color: #526983; font-size: 14px; line-height: 1.6; }
 .modal-done { width: 100%; display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 25px; padding: 14px; border: 0; border-radius: 15px; background: #09295a; color: #fff; font-weight: 850; }
 
 @media (max-width: 900px) {

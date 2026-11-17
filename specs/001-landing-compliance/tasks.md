@@ -14,5 +14,9 @@
 | T-010 | completado | Añadir lockfile y scripts de calidad mínimos. | `npm ci`, lint, typecheck, build, Vitest, Playwright y auditoría de dependencias. |
 | T-011 | completado | Añadir workflow GitHub Actions de PR, seguridad y evidencias. | YAML/JSON revisados; ejecución remota pendiente de GitHub. |
 | T-012 | completado | Cerrar memoria, trazabilidad, checklist y reporte final. | Revisión documental y del árbol Git sin commit/push. |
+| L5-T-001 | completado | Trazar cambios de presentación antes de editar interfaz. | LP-REQ-011–013 añadidos a `spec.md`/`plan.md` y enlazados en matriz. |
+| L5-T-002 | completado | Explicar propósito, funcionamiento y seguridad con estados precisos. | Pruebas de contenido; revisión Android/Backend y SHAs en `docs/REPORTE_LANDING_005.md`. |
+| L5-T-003 | completado | Agregar diez preguntas frecuentes accesibles en el diálogo de proyecto. | Vitest y Playwright validan diez preguntas, respuestas, navegación nativa y retorno de foco. |
+| L5-T-004 | completado | Corregir metadatos y comprobar recursos internos sin alterar identidad. | Playwright verifica metadatos, favicon, siete resoluciones y ausencia de overflow. |
 
 Estados permitidos: `no_iniciado`, `en_progreso`, `bloqueado`, `completado`, `no_ejecutado`. El estado final de cada tarea se actualizará solo con evidencia.
