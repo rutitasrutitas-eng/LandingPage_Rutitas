@@ -105,6 +105,14 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - La prueba exploratoria encontró que el control fijo de preferencias Analytics tapaba enlaces legales en viewport 320×568. Se movió el control al footer. Prueba E2E completa con ID sintético `G-SYNTHETIC123`: 18/18 pasadas; el test Analytics bloquea solicitudes externas. Sin ID: 16 pasadas/2 omisiones intencionales. Vitest 16/16; lint/tipos/build/SDD/audit y diff check aprobados.
 - Pendientes: aprobación legal y Constitución `PENDIENTE_RATIFICACION`, responsables/contactos/finalidades/proveedores/retención reales, procedimiento remoto de baja, ficha Play, configuración remota GA4/Vercel y CI/Preview. No se modificó Android/Backend, Vercel remoto ni producción.
 
+## Integración local final LANDING-004/005/006 — 2026-11-17
+
+- Rama local `feature/landing-integracion-final-local`, basada en LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`; conserva los commits de LANDING-005 y LANDING-006 con merges. Merge más reciente `5ef79c6a17b551dbf6edb7af933a8a313b2276ba`.
+- Integración revalidada: lint, typecheck, build, SDD, npm audit y diff check aprobados; Vitest 17/17; Playwright 22 pasaron y 2 omitidas intencionalmente sin ID sintético, 24/24 con ID `G-SYNTHETIC123`. Reporte consolidado: `docs/REPORTE_INTEGRACION_FINAL.md`.
+- Se revisaron visualmente capturas de Home y privacidad en escritorio/móvil. La evidencia automatizada cubre siete viewports, modales, FAQ, foco/teclado y Analytics aislado. Zoom nativo, lector de pantalla y dispositivos físicos no se probaron; detalle: `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md`.
+- `main` permanece en `0481387180eab973b7c0416b073099638a3f7328`; no se hizo push, PR, despliegue ni cambio remoto de Vercel. El primer push puede disparar Preview; la configuración de exclusión no ha sido verificada en remoto. Ver `docs/PLAN_REVISION_PUBLICACION.md`.
+- Aviso de privacidad, piloto y publicación pendientes de aprobación humana; sin contacto o responsable inventado. No se declara CI validado.
+
 ## LANDING-006 — primera integración (estado histórico al 2026-11-16)
 
 La verificación técnica de repositorios que faltaba en esta primera pasada se completó el 2026-11-17; el estado actual es la sección “LANDING-006 — aviso de privacidad y Analytics” inmediatamente anterior. Las notas siguientes conservan el contexto inicial y quedan supersedidas donde hay diferencias.

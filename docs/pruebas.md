@@ -1,5 +1,9 @@
 # Estrategia y casos de prueba — LANDING-001
 
+## Revalidación integrada LANDING-004/005/006 — 2026-11-17
+
+En `feature/landing-integracion-final-local`, después de integrar los commits `6dcb89df1f4d8bb73818b6d678818956d785afc0` y `fc43246bb401a9991114376ca78665cc922a6ebb`: `npm run lint`, `npm run typecheck`, `npm run build`, `npm run sdd:verify` y `npm audit --audit-level=high` terminaron con exit 0; Vitest 17/17. `npm run test:e2e` sin ID ejecutó 24 casos (22 pasaron y 2 se omitieron intencionalmente por faltar un ID); con `VITE_GA_MEASUREMENT_ID=G-SYNTHETIC123`, 24/24 pasaron. El test dedicado intercepta Google Tag Manager; no se utilizó ID ni propiedad reales. Build Vite 6.4.5: JS 255.68 kB (79.25 kB gzip), CSS 20.88 kB (5.35 kB gzip). `npm audit` informó 0 vulnerabilidades. SDD: 30 documentos y trazabilidad de 17/14/8/9 requisitos. No hubo CI remoto, Preview, push ni despliegue. Ver `docs/REPORTE_INTEGRACION_FINAL.md` y `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md`.
+
 ## LANDING-005 — presentación y preguntas frecuentes — 2026-11-17
 
 Ejecución independiente en `feature/landing-005-presentacion`, basada en LANDING-004. `npm ci` instaló el lockfile sin cambios (243 paquetes auditados, cero vulnerabilidades reportadas). `npm run lint`, `npm run typecheck`, `npm run build`, `npm run sdd:verify`, `npm audit --audit-level=high` y `git diff --check` terminaron con exit 0. Build Vite 6.4.5: JS 245.76 kB (76.41 kB gzip), CSS 15.28 kB (4.02 kB gzip).

@@ -11,7 +11,7 @@
 | LP-REQ-007 A11y/responsive | `spec.md` | `src/styles.css`, `src/App.tsx` | Playwright 7 viewports Home sin scroll; menú y CTAs probados | Verificado localmente tras corrección LANDING-003 |
 | LP-REQ-008 Pruebas | `spec.md` | `package.json`, `src/App.test.tsx`, `e2e/` | Recuento actualizado en reporte correctivo; sin prueba omitida por viewport | Verificado localmente tras corrección LANDING-003 |
 | LP-REQ-009 CI/seguridad | `spec.md` | `.github/workflows/quality.yml`, `.github/dependabot.yml` | GitHub Actions run #16: Gitleaks, SDD, lint, typecheck, build, unit/integration, Playwright, audit y evidencia; todo `success` | Verificado en commit correctivo `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`; 0 vulnerabilidades |
-| LP-REQ-010 Docs/evidencias | `spec.md` | `docs/`, `.specify/`, `AGENTS.md`, `Memoria.md` | checklist y `docs/REPORTE_FINAL.md` | Documentado; Constitución pendiente de ratificación |
+| LP-REQ-010 Docs/evidencias | `spec.md`, `L6-T-005` | `docs/`, `.specify/`, `Memoria.md` | `docs/REPORTE_INTEGRACION_FINAL.md`, `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md`, SDD 30 documentos; HEAD local `5ef79c6a17b551dbf6edb7af933a8a313b2276ba` | Integrado y probado localmente; CI, publicación y ratificación pendientes |
 | LP-REQ-011 Navegación del aviso | `spec.md` + `L6-T-002` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css` | Vitest UT-LP-003; E2E valida índice y destinos, skip-link por teclado, Inicio y `/eliminar-cuenta`; siete viewports sin overflow | Implementado y probado localmente; portada preservada |
 | LP-REQ-012 Base técnica del borrador | `spec.md` + `L6-T-006` | `src/PrivacyRutitas.tsx`, `docs/VALIDACIONES_PRIVACIDAD.md` | Android `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`; Backend `a95e62e2f0f9fbde46af0144c9fb89c858670c94`; Vitest/E2E validan etiquetas DEMO y límites del servicio | Borrador técnico contrastado; no acredita despliegue/tratamiento real |
 | LP-REQ-013 Analytics sintético | `spec.md` + `L6-T-007` | `e2e/landing.spec.ts`, `e2e/modal-analytics-isolation.spec.ts`, `src/SiteFooter.tsx` | Suite Playwright completa con ID sintético 18/18; prueba dedicada bloquea GTM; pruebas generales optan por rechazo para evitar superposición | Verificado localmente, sin solicitudes externas |
@@ -24,10 +24,10 @@
 
 | Requisito | Especificación/tarea | Código/documento | Evidencia | Estado |
 |---|---|---|---|---|
-| LP-REQ-003 Aviso en borrador y responsive | `specs/001-landing-compliance/spec.md`, `L6-T-001..006` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css`, `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md`, `docs/VALIDACIONES_PRIVACIDAD.md` | Vitest 16/16; E2E siete viewports, Chromium y mobile-Chromium; fuentes Android/Backend cotejadas en SHA indicado | Implementado y probado localmente; servicio productivo y aprobación legal pendientes |
-| LP-REQ-004 Eliminación no operativa | misma, `L6-T-002` | `src/LegalPages.tsx`, footer, enlace desde privacidad | E2E directa/recarga; conserva página informativa y no añade formulario | Verificado localmente; mecanismo y canal reales pendientes |
-| LP-REQ-007 Accesibilidad/responsive | misma, `L6-T-002,004` | componente, CSS y E2E | Teclado prueba skip-link/foco al main; siete viewports, índice y anclas; Analytics sintético en ambos proyectos | Verificado localmente; zoom nativo no ejecutado |
-| LP-REQ-008 Calidad automatizada | misma, `L6-T-004` | `package.json`, pruebas Vitest/Playwright | Resultados en `docs/pruebas.md` y `docs/REPORTE_LANDING_006.md` | Validado localmente; CI remoto no ejecutado |
+| LP-REQ-003 Aviso en borrador y responsive | `specs/001-landing-compliance/spec.md`, `L6-T-001..006` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css`, `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md`, `docs/VALIDACIONES_PRIVACIDAD.md` | Vitest final 17/17; E2E final siete viewports en Chromium y mobile-Chromium; fuentes Android/Backend cotejadas en SHA indicado | Implementado y probado localmente; servicio productivo y aprobación legal pendientes |
+| LP-REQ-004 Eliminación no operativa | misma, `L6-T-002` | `src/LegalPages.tsx`, footer, enlace desde privacidad | E2E final navega y recarga; conserva página informativa y no añade formulario | Verificado localmente; mecanismo y canal reales pendientes |
+| LP-REQ-007 Accesibilidad/responsive | misma, `L6-T-002,004` | componente, CSS y E2E | Teclado, skip-link/foco, siete viewports, índice/anclas y Analytics sintético en ambos proyectos | Verificado localmente; zoom nativo no ejecutado |
+| LP-REQ-008 Calidad automatizada | misma, `L6-T-004` | `package.json`, pruebas Vitest/Playwright | Corrida final combinada: Vitest 17/17, E2E 22 pass/2 skip sin ID, 24/24 con ID sintético; detalle en `docs/REPORTE_INTEGRACION_FINAL.md` | Validado localmente; CI remoto no ejecutado |
 | LP-REQ-010 Trazabilidad/evidencia | misma, `L6-T-005` | `Memoria.md`, `docs/pruebas.md`, checklist, reporte y matriz | Evidencia final LANDING-006 registrada en esta rama | Documentado localmente; no publicado |
 
 Actualiza la columna de estado tras la revisión final y cita evidencia ejecutada. No conviertas «por verificar» en «completado» por existir código.
@@ -36,9 +36,9 @@ Actualiza la columna de estado tras la revisión final y cita evidencia ejecutad
 
 | Requisito | Especificación | Código/documento | Prueba/evidencia | Estado |
 |---|---|---|---|---|
-| LP-REQ-011 Presentación precisa | `specs/001-landing-compliance/spec.md` | `src/App.tsx`, `src/styles.css`, `docs/REPORTE_LANDING_005.md` | Contraste con Backend `a95e62e2f0f9fbde46af0144c9fb89c858670c94` y Android `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`; Vitest 17/17 y E2E de contenido | Implementado y probado localmente; pilotaje/servicio real pendiente |
-| LP-REQ-012 Preguntas frecuentes | misma | `src/App.tsx`, `src/styles.css`, `e2e/landing.spec.ts` | 10 preguntas verificadas en Vitest y Playwright; teclado, Tab/Shift+Tab/Escape y mobile Chromium | Verificado localmente |
-| LP-REQ-013 Metadatos veraces | misma | `index.html`, `public/favicon.svg`, `e2e/landing.spec.ts` | Playwright comprueba descripción sin promesa de QR/app, favicon disponible, 7 viewports sin overflow | Verificado localmente; SEO remoto no validado |
+| LP-REQ-015 Presentación precisa | `specs/001-landing-compliance/spec.md`, `L5-T-001..002` | `src/App.tsx`, `src/styles.css`, `docs/REPORTE_LANDING_005.md` | Contraste con Backend `a95e62e2f0f9fbde46af0144c9fb89c858670c94` y Android `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`; Vitest final 17/17 y E2E de contenido | Implementado y probado localmente; pilotaje/servicio real pendiente |
+| LP-REQ-016 Preguntas frecuentes | misma, `L5-T-003` | `src/App.tsx`, `src/styles.css`, `e2e/landing.spec.ts` | 10 preguntas verificadas en Vitest y Playwright; teclado, Tab/Shift+Tab/Escape y mobile Chromium | Verificado localmente |
+| LP-REQ-017 Metadatos veraces | misma, `L5-T-004` | `index.html`, `public/favicon.svg`, `e2e/landing.spec.ts` | Playwright comprueba descripción sin promesa de QR/app, favicon disponible, 7 viewports sin overflow | Verificado localmente; SEO remoto no validado |
 
 ## Trazabilidad de validación y liberación — LANDING-002
 

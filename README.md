@@ -71,6 +71,7 @@ Para pruebas Playwright, instala Chromium una sola vez con `npx playwright insta
 - Corrección de estabilidad y accesibilidad de portada: `specs/004-landing-estabilidad-accesibilidad/` y `docs/REPORTE_LANDING_004.md`.
 - Presentación universitaria y FAQ LANDING-005: `docs/REPORTE_LANDING_005.md`.
 - Verificación de fuentes Android/Backend y decisiones legales pendientes: `docs/VALIDACIONES_PRIVACIDAD.md` y `docs/PENDIENTES_LEGALES_RUTITAS.md`.
+- Reporte integrado de LANDING-004/005/006, accesibilidad y pasos de revisión/publicación: `docs/REPORTE_INTEGRACION_FINAL.md`, `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md` y `docs/PLAN_REVISION_PUBLICACION.md`.
 - Auditoría, arquitectura, requisitos docentes, pruebas y trazabilidad: `docs/`.
 - `Memoria.md` guarda decisiones no confidenciales.
 - `.github/workflows/quality.yml` ejecuta calidad y seguridad en Pull Requests; no publica a producción.
