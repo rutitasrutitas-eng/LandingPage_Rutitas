@@ -1,8 +1,8 @@
 # Reporte LANDING-005 — presentación del proyecto
 
-**Fecha:** 2026-11-17  
-**Rama:** `feature/landing-005-presentacion`  
-**Base:** `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6` (LANDING-004 confirmado)  
+**Fecha:** 2026-11-17
+**Rama:** `feature/landing-005-presentacion`
+**Base:** `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6` (LANDING-004 confirmado)
 **Estado:** cambios locales probados; integración/publicación externas pendientes.
 
 ## Diagnóstico y cambios

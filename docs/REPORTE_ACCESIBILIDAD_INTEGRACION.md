@@ -1,6 +1,6 @@
 # Verificación de accesibilidad — integración LANDING-004/005/006
 
-**Alcance:** portada, modales/FAQ, pie de página, preferencia de Analytics y páginas legales.  
+**Alcance:** portada, modales/FAQ, pie de página, preferencia de Analytics y páginas legales.
 **Método:** pruebas Playwright en Chromium escritorio y emulación móvil; revisión visual de capturas.
 
 ## Comprobado

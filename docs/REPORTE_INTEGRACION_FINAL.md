@@ -1,7 +1,7 @@
 # Reporte de integración local — Rutitas Landing
 
-**Fecha:** 2026-11-17  
-**Rama:** `feature/landing-integracion-final-local`  
+**Fecha:** 2026-11-17
+**Rama:** `feature/landing-integracion-final-local`
 **Estado:** integración local completada; no publicada.
 
 ## Historial integrado
