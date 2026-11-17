@@ -1,6 +1,7 @@
 # Reporte LANDING-002 — Validación final y preparación de publicación
 
 **Fecha de revisión:** 2026-11-05
+> Este reporte es una instantánea del 2026-11-05; sus referencias al estado de las ramas/PRs no describen el estado actual. Para el estado actual de LANDING-003/004, consulta `Memoria.md` y `docs/REPORTE_LANDING_004.md`.
 **Estado global:** **PARCIAL**. Las dos ramas separadas se publicaron; la integración no permitió crear los Draft PRs, por lo que no arrancaron Actions. La Preview no pudo confirmarse con el acceso Vercel disponible. La auditoría local, la corrección de dependencias y la preparación documental están completas.
 **Evaluación académica:** 2026-12-02.
 **Proyecto local:** `C:\Users\rafle\OneDrive\Desktop\anterior\Rutitas_Landing\Rutitas_Landing_React`.

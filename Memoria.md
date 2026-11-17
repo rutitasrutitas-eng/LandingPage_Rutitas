@@ -1,6 +1,6 @@
 # Memoria de Rutitas Landing
 
-**Estado actual (2026-11-16):** LANDING-003 / PR #9 fue fusionado a `main`; commit de integración `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004 se corrige localmente en `fix/landing-004-estabilidad-accesibilidad` desde ese commit. No se ha hecho push ni abierto un PR LANDING-004.
+**Estado actual (2026-11-16):** LANDING-003 / PR #9 fue fusionado a `main` el **2026-11-12** (18:03:18 UTC); merge commit `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004 está en `fix/landing-004-estabilidad-accesibilidad`; el commit correctivo de código es `2ccb740fd10df5a3258bfaca28ecfdd6f72c89be`. No se ha hecho push ni abierto un PR. La regla de Vercel para suprimir Preview aún no está confirmada ni configurada.
 **Última actualización:** 2026-11-16.
 
 ## Hechos confirmados en el repo
@@ -44,7 +44,7 @@
 - La actualización documental se publicó en `b4392f1ea36ee1439f8ab1cbab84c961b24430cf`; GitHub Actions run #17 también terminó con todos los pasos `success`, incluido Gitleaks. [Run #17](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259639450).
 - GitHub Actions run #18 (`43260267266`) verificó el SHA funcional actual `9a5bb2b599df696d5e34a87afcecef0557760c74`; el job completo terminó `success`, incluidos Gitleaks, SDD, lint, typecheck, build, pruebas unitarias/integración, Playwright y auditoría de dependencias. [Run #18](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43260267266).
 - Preview de Vercel: check del PR `success`; el bot reportó `Ready` para el deployment `GFjgK5jtrs5QG8Pdrz67ttshdVjE`, pero no se confirmó SHA ni inspeccionó contenido. La URL devuelve HTTP 302 a SSO y la API de despliegues devuelve HTTP 403 para el equipo; CLI no instalada, `.vercel/project.json` ausente. No se generaron enlaces temporales SSO.
-- Se mantiene Google Play sin URL inventada, rutas legales, GA4 con consentimiento, logo original, botones/modales y PR Draft #9 sin fusionar. Constitución y textos legales siguen sin ratificar/aprobar.
+- Estado al cierre de la actualización del 2026-11-12: se mantenían Google Play sin URL inventada, rutas legales, GA4 con consentimiento, logo original, botones/modales y PR #9 en Draft. Más tarde ese día el PR se fusionó a `main` (18:03:18 UTC, `0481387180eab973b7c0416b073099638a3f7328`). Constitución y textos legales siguen sin ratificar/aprobar.
 
 **Actualización:** 2026-11-12. Trabajo en `feature/landing-003-hero-fotografico`, basado en `main` `46522503f38c99b136948e7da1adf491207128f7`.
 
@@ -53,7 +53,7 @@
 - `npm ci`, lint, typecheck, Vitest 14/14, Playwright 10/10, build, SDD (22 documentos) y `npm audit` (0 vulnerabilidades) pasan localmente. Viewports E2E: 1440×900, 1366×768, 768×1024, 390×844 y 320×568. Rutas legales con navegación/recarga directa verificadas localmente.
 - Capturas inspeccionadas: `C:\Users\rafle\OneDrive\Desktop\anterior\_LANDING_003_Evidencia_2026-11-12\LANDING_003_desktop.png` y `...\LANDING_003_mobile.png`.
 - Informe: `docs/REPORTE_LANDING_003.md`; especificación, plan, tareas y checklist: `specs/003-landing-hero-fotografico/`.
-- Estado histórico al 2026-11-12: commit de implementación `a930de11b32c3397468c24773ed290055a7364eb`; rama `feature/landing-003-hero-fotografico`; PR #9 era Draft y aún no se había fusionado. Estado actual: PR #9 fusionado a `main` el 2026-11-16, commit de integración `0481387180eab973b7c0416b073099638a3f7328`.
+- Estado histórico al inicio del 2026-11-12: commit de implementación `a930de11b32c3397468c24773ed290055a7364eb`; rama `feature/landing-003-hero-fotografico`; PR #9 era Draft y aún no se había fusionado. Estado actual: PR #9 fusionado a `main` el 2026-11-12 a las 18:03:18 UTC, commit de integración `0481387180eab973b7c0416b073099638a3f7328`.
 - GitHub Actions run #11 (`43248682077`) pasó para el commit de implementación, incluido Gitleaks, SDD, lint, typecheck, build, Vitest, Playwright y `npm audit`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43248682077.
 - GitHub Actions run #12 (`43249355774`) pasó para la cabeza actual `b58c3996c800a73bcb6f48985e6662725c796b16`, incluido Gitleaks, SDD, lint, typecheck, build, Vitest, Playwright y `npm audit`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43249355774.
 - GitHub Actions run #13 (`43249974422`) pasó para `6b1401bd642f0fdc6271076695fb2df19ba37c8f`, incluido Gitleaks, SDD, lint, typecheck, build, Vitest, Playwright y `npm audit`: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43249974422.

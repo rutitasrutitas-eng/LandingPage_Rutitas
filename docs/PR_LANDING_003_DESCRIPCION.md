@@ -1,5 +1,7 @@
 # LANDING-003 — Hero fotográfico de una sola pantalla
 
+> Descripción histórica preparada para el PR #9 antes de su fusión el 2026-11-12. No representa el estado actual del PR; merge commit: `0481387180eab973b7c0416b073099638a3f7328`.
+
 ## Implementación
 
 - Encabezado blanco con el logo oficial de Rutitas, navegación y estado «Próximamente».
@@ -23,4 +25,4 @@
 - Implementar y verificar el mecanismo real de eliminación de cuentas.
 - Configurar y validar GA4 cuando se proporcione un Measurement ID aprobado.
 - Publicar Google Play solo cuando exista URL oficial válida.
-- El PR sigue en Draft y no se ha fusionado. No se hizo despliegue manual ni se modificó producción.
+- Estado al redactar esta descripción: PR en Draft y sin fusionar. El PR #9 fue fusionado posteriormente el 2026-11-12; no se hizo despliegue manual ni se modificó producción en esta entrega.

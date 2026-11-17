@@ -5,6 +5,8 @@
 **Rama de trabajo:** `fix/landing-004-estabilidad-accesibilidad`.
 **Estado:** corrección final y revalidación local completadas. Se conserva todo localmente en la rama indicada; no se hizo push, PR, CI remoto ni despliegue, conforme a la instrucción de esta revisión.
 
+> Cierre documental actualizado el 2026-11-16. LANDING-003 / PR #9 se fusionó el 2026-11-12 mediante `0481387180eab973b7c0416b073099638a3f7328`; los estados previos de Draft descritos en registros históricos no son actuales.
+
 ## Diagnóstico reproducible
 
 La línea base local pasó los scripts existentes (Vitest 14/14, Playwright 8/8, cero vulnerabilidades). La inspección y medición de CSS mostró textos de 7–10 CSS px en footer, confianza, estado y CTA en resoluciones pequeñas o ventana corta. Al elevarlos a 12 px, una primera iteración hizo desbordar 320×568 el texto no ajustable del pie; se corrigió permitiendo que el tagline se envuelva. La medición final y Playwright verifican los siete tamaños de aceptación sin scroll ni recorte, además de 720×450 como viewport CSS equivalente aproximado al zoom 200% de 1440×900.
@@ -48,4 +50,39 @@ Validación final local: lint, typecheck, Vitest **16/16**, build, SDD (27 docum
 - Commit correctivo local en la rama indicada; su SHA se comunica en la entrega. Push/PR/CI remoto no ejecutados por instrucción; Vercel y producción no se tocaron.
 - Zoom nativo de navegador no ejecutado; viewports reducidos y aumento CSS de texto sí probados.
 - Ratificación de la Constitución SDD y aprobación legal permanecen pendientes.
+
+## Control propuesto para Previews GitHub–Vercel
+
+### Evidencia disponible
+
+- El merge de PR #9 generó una Preview automáticamente al revisar la rama; la documentación conserva el deployment y SHA inspeccionados el 2026-11-12. Esto confirma que evitar abrir un PR no basta para evitar la Preview: el push de un commit a una rama conectada también puede dispararla.
+- El `vercel.json` actual solo declara el rewrite SPA; no contiene una regla que desactive deployments de rama.
+- La lectura del proyecto Vercel por la integración devolvió HTTP 403. Por ello, no se pudo confirmar la configuración Git activa del proyecto ni el estado de una regla por rama.
+
+### Opción recomendada, aún no aplicada
+
+Antes de cualquier push, una persona administradora de Vercel debe desactivar deployments solo para esta rama exacta mediante `git.deploymentEnabled`, manteniendo habilitadas las demás ramas:
+
+```json
+{
+  "git": {
+    "deploymentEnabled": {
+      "fix/landing-004-estabilidad-accesibilidad": false
+    }
+  }
+}
+```
+
+La documentación de Vercel especifica que esta propiedad evita deployments para commits de las ramas que coinciden; las ramas no listadas quedan habilitadas y, si una rama coincide con más de una regla y alguna es `true`, sí se despliega. Aplicarla por adelantado en la configuración del proyecto evita depender de que el primer push ya incluya y aplique la regla. No se modificó `vercel.json` ni el proyecto porque esta revisión no autorizó cambios Vercel y la integración devuelve 403. Fuentes: [Git Configuration](https://vercel.com/docs/project-configuration/git-configuration) y [Project Settings](https://vercel.com/docs/project-configuration/project-settings).
+
+No se recomienda como primera opción “Ignored Build Step”: Vercel lo describe como omitir el build; no es tan fuerte como impedir que la rama dispare un deployment.
+
+### Cómo verificarlo cuando se autorice
+
+1. Antes del push, el administrador confirma en la configuración de Git del proyecto que la regla exacta de la rama está activa y que no existe una regla solapada que la vuelva a habilitar.
+2. Se publica la rama y se compara el SHA remoto con el commit local.
+3. Se comprueba en Deployments que ese SHA no haya creado Preview/deployment y en GitHub que no haya URL de Preview; se revisa también el check/comment de Vercel.
+4. Solo si no aparece deployment se abre el PR; se repite la comprobación después de abrirlo. Si aparece una Preview o un estado ambiguo, se detiene la publicación y no se continúa.
+
+Esta verificación no se ejecutó: el usuario pidió no hacer push ni abrir PR. No hay evidencia de que la regla esté actualmente configurada.
 - La prueba de zoom usa un viewport CSS equivalente; no controla el zoom del navegador del sistema.

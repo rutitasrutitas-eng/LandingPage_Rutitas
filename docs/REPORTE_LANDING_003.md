@@ -1,12 +1,12 @@
 # Reporte de corrección — LANDING-003 sin scroll
 
-**Estado:** corrección publicada en el PR Draft #9; validaciones locales y GitHub Actions/Gitleaks aprobadas. Preview de Vercel inspeccionada desde Edge con sesión autorizada; el SHA exacto y las tres rutas solicitadas quedaron verificados.
+**Registro histórico (2026-11-12, antes del merge):** corrección publicada en el PR Draft #9; validaciones locales y GitHub Actions/Gitleaks aprobadas. Preview de Vercel inspeccionada desde Edge con sesión autorizada; el SHA exacto y las tres rutas solicitadas quedaron verificados. El PR #9 se fusionó más tarde ese mismo día a `main`, merge commit `0481387180eab973b7c0416b073099638a3f7328` (18:03:18 UTC). Los estados del PR y de `main` descritos abajo son una instantánea anterior a la fusión.
 **Fecha:** 2026-11-12
 **Rama:** `feature/landing-003-hero-fotografico`
 **HEAD inicial revisado:** `5728d395ca10ccea552a8e318c64978e0f886595`
 **Commit correctivo funcional:** `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`
 **SHA funcional validado por Actions:** `9a5bb2b599df696d5e34a87afcecef0557760c74` (run #18).
-**Draft PR:** [#9 hacia `main`](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9); abierto, sin fusionar al iniciar la corrección.
+**Draft PR al inicio del trabajo:** [#9 hacia `main`](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/9); estaba abierto y sin fusionar al iniciar la corrección. Estado actual: fusionado el 2026-11-12.
 **Constitución SDD:** `PENDIENTE_RATIFICACION`.
 
 ## Corrección solicitada
@@ -85,7 +85,7 @@ Capturas de tamaño viewport real (sin `fullPage`) y mediciones JSON, guardadas 
 - Las páginas legales son extensas y mantienen scroll normal.
 - Nota de seguridad: `vercel curl` generó automáticamente un bypass de protección durante la primera consulta. Se revocó de inmediato; `protectionBypass` quedó sin entradas y la protección SSO siguió configurada como `all_except_custom_domains`. No se realizaron más llamadas `vercel curl` ni cambios globales de protección.
 - La CLI creó configuración local ignorada (`.vercel/project.json` y `.env.local`). No se leyó ni se publicó el valor de sesión de `.env.local`; ninguno de estos archivos se agregó a Git.
-- La Preview fue generada automáticamente por la integración GitHub/Vercel; no se inició despliegue. Producción y seguridad permanecieron sin cambios. PR #9 sigue abierto, Draft y sin merge.
+- Al momento de esta revisión, la Preview se había generado automáticamente por la integración GitHub/Vercel; no se inició despliegue manual. El PR #9 se fusionó más tarde el 2026-11-12; producción y seguridad permanecieron sin cambios.
 - Capturas de esta inspección visual se presentaron en la sesión, pero no se guardaron en archivos. Las capturas automatizadas de no-scroll, con hashes y rutas, siguen disponibles fuera del repositorio según la sección «Capturas y archivo de métricas».
 
 ### Registro histórico anterior a la autorización
@@ -94,10 +94,10 @@ Este bloque conserva el estado observado antes de que el usuario autorizara la s
 
 ## Estado de entrega
 
-- Rama `feature/landing-003-hero-fotografico`; SHA funcional actual `9a5bb2b599df696d5e34a87afcecef0557760c74`. `main` continúa en `46522503f38c99b136948e7da1adf491207128f7`; el PR permanece abierto, Draft y sin fusionar.
+- En el corte previo al merge: rama `feature/landing-003-hero-fotografico`; SHA funcional `9a5bb2b599df696d5e34a87afcecef0557760c74`; `main` base `46522503f38c99b136948e7da1adf491207128f7`; PR #9 abierto en Draft. Estado posterior: fusionado el 2026-11-12 a `main` mediante `0481387180eab973b7c0416b073099638a3f7328`.
 - Run [GitHub Actions #16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259000683): job `Verify landing page` aprobado. Gitleaks, verificación SDD, lint, typecheck, build, Vitest, Playwright, auditoría de dependencias y publicación de evidencia pasaron.
 - Run [GitHub Actions #17](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/43259639450) verificó el SHA `b4392f1ea36ee1439f8ab1cbab84c961b24430cf`; todos los mismos jobs, incluido Gitleaks, terminaron `success`.
 - Preview actual: el deployment, SHA y las rutas se verificaron desde Edge con sesión autorizada (ver sección «Verificación autorizada»). La nota histórica de bloqueo SSO que sigue a continuación ya no describe el estado actual.
 - La actualización de la descripción del PR mediante la integración de GitHub recibió HTTP 403 (`Resource not accessible by integration`). `gh` no está instalado en el equipo, por lo que se conserva la descripción completa propuesta en `docs/PR_LANDING_003_DESCRIPCION.md` para copiarla manualmente; la descripción remota del PR podría seguir mostrando el texto anterior.
 - Google Play sigue sin URL oficial y no se muestra como disponible. El validador de URL permanece en `src/config.ts`.
-- No se modifican `main`, dominios, credenciales, producción ni aprobaciones legales. El PR no se fusiona.
+- Restricción registrada para la implementación antes de la revisión humana: no modificar `main`, dominios, credenciales, producción ni aprobaciones legales; no fusionar automáticamente. La fusión humana ocurrió después el 2026-11-12.
