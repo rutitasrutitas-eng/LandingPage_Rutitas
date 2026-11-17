@@ -111,6 +111,7 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - Integración revalidada: lint, typecheck, build, SDD, npm audit y diff check aprobados; Vitest 17/17; Playwright 22 pasaron y 2 omitidas intencionalmente sin ID sintético, 24/24 con ID `G-SYNTHETIC123`. Reporte consolidado: `docs/REPORTE_INTEGRACION_FINAL.md`.
 - Se revisaron visualmente capturas de Home y privacidad en escritorio/móvil. La evidencia automatizada cubre siete viewports, modales, FAQ, foco/teclado y Analytics aislado. Zoom nativo, lector de pantalla y dispositivos físicos no se probaron; detalle: `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md`.
 - `main` permanece en `0481387180eab973b7c0416b073099638a3f7328`; no se hizo push, PR, despliegue ni cambio remoto de Vercel. El primer push puede disparar Preview; la configuración de exclusión no ha sido verificada en remoto. Ver `docs/PLAN_REVISION_PUBLICACION.md`.
+- La matriz y el checklist de condiciones de release están en `docs/MATRIZ_PENDIENTES_RELEASE.md` y `docs/CHECKLIST_RELEASE_FUTURO.md`; son preparación documental y no autorización de publicación.
 - Aviso de privacidad, piloto y publicación pendientes de aprobación humana; sin contacto o responsable inventado. No se declara CI validado.
 
 ## LANDING-006 — primera integración (estado histórico al 2026-11-16)
