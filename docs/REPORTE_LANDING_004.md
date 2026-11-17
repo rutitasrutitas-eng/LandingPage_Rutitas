@@ -3,19 +3,20 @@
 **Fecha:** 2026-11-16
 **Base revisada:** `main` en `0481387180eab973b7c0416b073099638a3f7328`.
 **Rama de trabajo:** `fix/landing-004-estabilidad-accesibilidad`.
-**Estado:** cambios y revalidación local completados. El commit queda local en la rama indicada. PR, push y CI remoto no ejecutados para evitar que la integración `Vercel Preview Comments` observada en los PR existentes inicie un Preview, acción que podría incumplir la restricción de no desplegar en Vercel.
+**Estado:** corrección final y revalidación local completadas. Se conserva todo localmente en la rama indicada; no se hizo push, PR, CI remoto ni despliegue, conforme a la instrucción de esta revisión.
 
 ## Diagnóstico reproducible
 
 La línea base local pasó los scripts existentes (Vitest 14/14, Playwright 8/8, cero vulnerabilidades). La inspección y medición de CSS mostró textos de 7–10 CSS px en footer, confianza, estado y CTA en resoluciones pequeñas o ventana corta. Al elevarlos a 12 px, una primera iteración hizo desbordar 320×568 el texto no ajustable del pie; se corrigió permitiendo que el tagline se envuelva. La medición final y Playwright verifican los siete tamaños de aceptación sin scroll ni recorte, además de 720×450 como viewport CSS equivalente aproximado al zoom 200% de 1440×900.
 
-El menú compacto no respondía a Escape. Los modales mantenían un bucle de Tab, pero el contenido de fondo seguía disponible a través de foco externo. El diálogo ahora vive como hermano del fondo y usa `inert` en el contenido de página; su foco inicial, el ciclo Tab/Shift+Tab, Escape y retorno al disparador se verifican en navegador.
+El menú compacto no respondía a Escape. El primer arreglo modal dejaba Analytics como hermano de `.site-shell`, con controles z-index 79/80 sobre un backdrop z-index 50. La corrección final coloca `AnalyticsConsent` dentro del shell que se marca `inert`, sube el backdrop/dialog a z-index 1000 y redirige foco externo al diálogo; los controles de Analytics quedan visualmente debajo y sin interacción. El shell usa `min-height` para permitir desplazamiento cuando un aumento de texto supera el viewport.
 
 ## Cambios
 
 - `src/styles.css`: mínimo de 12 CSS px para texto de navegación, hero, CTA, footer, diálogo y controles de Analytics; contraste de pie/estado y foco más visible. Se permite wrap del texto del footer en 320 px.
-- `src/App.tsx`: menú móvil cierra con Escape y restaura el foco; los disparadores declaran que abren diálogo; el fondo de página se vuelve inerte mientras el modal está abierto y el diálogo queda fuera de ese fondo.
-- `src/App.test.tsx`, `src/AnalyticsConsent.test.tsx`, `e2e/landing.spec.ts`: regresiones para Escape, aislamiento y retorno de foco, consentimiento de Analytics, legibilidad calculada, las siete resoluciones, zoom representado, rutas directas y modal.
+- `src/App.tsx`: Analytics se anida en el shell inerte de Home; el diálogo intercepta foco externo, mantiene Tab/Shift+Tab y restaura foco en Escape; el menú móvil mantiene su Escape y retorno.
+- `src/styles.css`: backdrop superior y shell con alto mínimo para que textos ampliados puedan producir scroll en vez de quedar ocultos.
+- `src/App.test.tsx`, `src/AnalyticsConsent.test.tsx`, `e2e/landing.spec.ts`, `e2e/modal-analytics-isolation.spec.ts`: regresiones de rutas, consentimiento, siete viewports, ID sintético, interacción/foco, contraste de `:focus-visible` y prueba de estrés con texto al doble.
 - `specs/004-landing-estabilidad-accesibilidad/`, `docs/matriz-trazabilidad.md`, `docs/pruebas.md`, `Memoria.md`, README y verificador SDD agregan trazabilidad. No se cambiaron dependencias ni lockfile.
 
 ## Funcionalidad cubierta
@@ -40,12 +41,11 @@ Estas actualizaciones siguen separadas de LANDING-004. No se actualizaron paquet
 
 ## Revalidación local final
 
-`npm ci`, `npm run lint`, `npm run typecheck`, `npm run test` (**16/16**), `npm run test:e2e` (**8/8**, 4 tests por proyecto Chromium/mobile-chromium), `npm run build`, `npm run sdd:verify` (27 documentos; 10, 14, 8 y 6 requisitos con trazabilidad) y `npm audit --audit-level=high` (**0 vulnerabilidades**) terminaron con exit 0. Detalle de línea base y final en `docs/pruebas.md`. No hubo cambios de dependencias ni lockfile.
+Validación final local: lint, typecheck, Vitest **16/16**, build, SDD (27 documentos; 10/14/8/9 requisitos trazados) y audit (0 vulnerabilidades reportadas) exit 0. `npm run test:e2e`: **12 pasaron, 2 omitidas** intencionalmente por falta de ID en el entorno normal. Con `VITE_GA_MEASUREMENT_ID=G-ABC1234567`, la suite dirigida de aislamiento/contraste/texto pasó **6/6** en Chromium y mobile-chromium; se bloqueó la solicitud de Analytics y no se transmitieron datos. Evidencia de los intentos fallidos del test y su corrección en `docs/pruebas.md`. Sin cambios de dependencias ni lockfile.
 
 ## Pendiente externo
 
-- PR, push y CI remoto pendientes: el PR dispararía la integración automática de Preview de Vercel, incompatible con el límite de no desplegar en esta tarea. El commit local está disponible para revisión y subida posterior si el equipo decide que la Preview es aceptable.
-- Revisión humana hacia `main` después de acordar la ruta de revisión anterior.
-- Preview no verificada; no se tocó Vercel.
+- Commit correctivo local en la rama indicada; su SHA se comunica en la entrega. Push/PR/CI remoto no ejecutados por instrucción; Vercel y producción no se tocaron.
+- Zoom nativo de navegador no ejecutado; viewports reducidos y aumento CSS de texto sí probados.
 - Ratificación de la Constitución SDD y aprobación legal permanecen pendientes.
 - La prueba de zoom usa un viewport CSS equivalente; no controla el zoom del navegador del sistema.

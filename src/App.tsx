@@ -22,6 +22,7 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
   const dialogRef = useRef<HTMLElement>(null)
   useEffect(() => {
     closeRef.current?.focus()
+    const focusableElements = () => dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])')
     const handleKeys = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
@@ -29,7 +30,7 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
         return
       }
       if (event.key !== 'Tab') return
-      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+      const focusable = focusableElements()
       if (!focusable?.length) return
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
@@ -44,8 +45,17 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
         first.focus()
       }
     }
+    const keepFocusInDialog = (event: FocusEvent) => {
+      if (dialogRef.current?.contains(event.target as Node)) return
+      const first = focusableElements()?.[0] ?? dialogRef.current
+      first?.focus()
+    }
     document.addEventListener('keydown', handleKeys)
-    return () => document.removeEventListener('keydown', handleKeys)
+    document.addEventListener('focusin', keepFocusInDialog, true)
+    return () => {
+      document.removeEventListener('keydown', handleKeys)
+      document.removeEventListener('focusin', keepFocusInDialog, true)
+    }
   }, [onClose])
   const content = {
     funciona: {
@@ -62,7 +72,7 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
     }
   }[view]
   return <div className="modal-backdrop" onMouseDown={event => { if(event.target === event.currentTarget) onClose() }}>
-    <section ref={dialogRef} className="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+    <section ref={dialogRef} className="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" tabIndex={-1}>
       <button ref={closeRef} className="modal-close" aria-label="Cerrar información" onClick={onClose}><Icon name="close" size={20}/></button>
       <div className="modal-eyebrow">{content.eyebrow}</div><h2 id="modal-title">{content.title}</h2><p id="modal-description">{content.description}</p>
       <div className="modal-points">{content.points.map(([n, t, d]) => <div className="modal-point" key={t}><span className="point-num">{n}</span><div><strong>{t}</strong><span>{d}</span></div></div>)}</div>
@@ -137,6 +147,7 @@ function HomePage() {
       </section>
     </main>
     <SiteFooter />
+    <AnalyticsConsent />
     </div>
     {modal && <Modal view={modal} onClose={closeModal} />}
   </>
@@ -163,5 +174,5 @@ export default function App() {
         ? <AccountDeletionPage />
         : <NotFoundPage />
 
-  return <>{page}<AnalyticsConsent /></>
+  return <>{page}{path !== '/' && <AnalyticsConsent />}</>
 }

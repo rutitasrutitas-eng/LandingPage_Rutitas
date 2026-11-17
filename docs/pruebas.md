@@ -61,7 +61,7 @@ Entorno: Windows, Node.js 24.20.0, npm, Chromium de Playwright; Vite 6.4.5 desde
 
 Una comprobación local no acredita eventos reales de GA4 ni la ficha Play, aprobación legal, controles remotos de GitHub o una publicación de Vercel.
 
-## LANDING-004 — línea base y revalidación local — 2026-11-16
+## LANDING-004 — línea base y primera revalidación (histórica) — 2026-11-16
 
 **Base limpia:** `main` y `origin/main` en `0481387180eab973b7c0416b073099638a3f7328`; working tree limpio antes de editar. Node `v24.20.0`, npm `11.19.0`. La rama de corrección se creó desde esa base.
 
@@ -77,6 +77,28 @@ Una comprobación local no acredita eventos reales de GA4 ni la ficha Play, apro
 | Revalidación tras cambios | `npm run test:e2e` | 8/8 pasadas (4 por Chromium y mobile-chromium). Home comprobada en 7 viewports de aceptación más 720×450 (equivalencia CSS aproximada de zoom 200% en 1440×900). Sin scroll/recorte horizontal, texto inspeccionado >=12 CSS px, teclado/menú/modal, rutas legales y recarga verificados. |
 
 Capturas E2E desktop 1440×900 y móvil 390×844 se generan en `test-results/` (ignoradas por Git). 320×568 conserva una sola pantalla después de permitir wrap en el tagline. El zoom se representó ajustando el viewport CSS; no se controló el zoom global del navegador. No se corrieron pruebas en dispositivo físico, Preview Vercel, Play real ni eventos GA4 reales.
+
+## LANDING-004 — corrección final de aislamiento y accesibilidad — 2026-11-16
+
+La revisión final detectó que `AnalyticsConsent` era hermano de `.site-shell` y, por tanto, seguía fuera de `inert`; además, su z-index superaba el backdrop. Se colocó Analytics dentro del shell, se elevó el backdrop y se reforzó la restitución de foco. El shell ahora usa alto mínimo y puede desplazarse cuando el texto ampliado excede el viewport.
+
+| Control | Ejecución | Resultado |
+|---|---|---|
+| Analytics con entorno sintético | `$env:VITE_GA_MEASUREMENT_ID='G-ABC1234567'; npx playwright test e2e/modal-analytics-isolation.spec.ts --project=chromium --project=mobile-chromium` | 6/6 E2E pasadas: aislamiento, foco, restauración, contraste y texto ampliado en Chromium y mobile-chromium. La prueba bloquea toda solicitud a Google Tag Manager; no envía eventos. |
+| CI local sin ID GA | `npm run test:e2e` | Exit 0: 12/12 pasaron, 2 omitidas intencionalmente (una por proyecto) porque no hay `VITE_GA_MEASUREMENT_ID`; la integración se ejecuta aparte con un ID sintético. |
+| Zoom / texto ampliado | E2E `home content remains reachable when text is enlarged` | Estilo de prueba duplica el tamaño computado de los textos a 320×568; permite scroll vertical y verifica CTA/modal/enlace legal alcanzables y sin overflow horizontal. Zoom real del navegador no se ejecutó. |
+| Contraste foco | E2E `visible focus ring contrasts with light and dark surfaces` | `:focus-visible` se activa mediante Tab; comprueba navy de contorno, halo amarillo y razón de contraste calculada >=3:1 sobre fondo claro/oscuro. |
+
+| Lint | `npm run lint` | Exit 0, ESLint sin warnings. |
+| Tipos | `npm run typecheck` | Exit 0. |
+| Unitarias | `npm run test` | Exit 0, 16/16 en 2 archivos. |
+| Build | `npm run build` | Exit 0, Vite 6.4.5; TypeScript y bundle completados. |
+| SDD | `npm run sdd:verify` | Exit 0; 27 documentos, 10/14/8/9 requisitos 001–004 trazados. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0; 0 vulnerabilidades reportadas. |
+
+Dos ejecuciones iniciales de E2E fallaron por detalles del test de indicador de foco: foco programático en vez de modalidad teclado y transición CSS aún activa. Se cambió la prueba a Tab/Shift+Tab y se desactivó la transición solo en ese test. En la prueba de aislamiento, la expectativa de retorno se ajustó al botón del menú (el disparador de navegación desaparece al cerrar el menú móvil); la ampliación de texto activa el CTA por Enter para no depender de un click bajo el banner de consentimiento. Tras esos ajustes, la prueba dirigida y la suite normal pasan con los recuentos arriba. Estos fallos fueron de aserciones/automatización; no se detectó una regresión funcional adicional.
+
+El zoom nativo del navegador no se ejecutó; el entorno de Playwright headless no expuso un control fiable de esa preferencia. Se verificaron viewports CSS reducidos y una prueba de estrés con el tamaño calculado de texto duplicado. No se ejecutaron CI remoto, Preview, dispositivo físico, Play real ni eventos GA4 reales.
 
 ## Revalidación de liberación — LANDING-002 — 2026-11-05
 

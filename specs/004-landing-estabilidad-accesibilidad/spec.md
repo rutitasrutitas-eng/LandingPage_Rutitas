@@ -18,6 +18,9 @@ Corregir defectos de lectura y teclado en la portada y sus diálogos sin cambiar
 | L004-REQ-004 | Ampliación y ventana estrecha | A 200% de zoom representado con viewports CSS reducidos, no hay recorte horizontal de texto/controles. Si el contenido no cabe verticalmente, se puede desplazar para alcanzarlo. |
 | L004-REQ-005 | Comportamiento y rutas preservados | Inicio, tres diálogos, rutas legales directas/recarga y consentimiento opcional conservan su comportamiento; no se agregan flujos ficticios. |
 | L004-REQ-006 | Evidencia trazable | Vitest, Playwright, linters, compilación, auditoría y SDD reflejan resultados reales; la matriz y memoria enlazan requisito, código y prueba. |
+| L004-REQ-007 | Aislamiento completo con Analytics configurado | El consentimiento y sus controles pertenecen al fondo inerte mientras el diálogo está abierto; el foco no puede escapar, backdrop/dialog quedan sobre los controles y Escape restaura el foco. Tras cerrar, Analytics y Home vuelven a responder. |
+| L004-REQ-008 | Indicador de foco perceptible | El indicador visible conserva contraste no menor a 3:1 en superficies claras y oscuras y se verifica en navegador. |
+| L004-REQ-009 | Ampliación de texto accesible | Texto aumentado no queda recortado; si deja de caber, Home permite desplazamiento para alcanzar CTAs, diálogo y enlaces legales sin overflow horizontal. |
 
 ## Límites
 

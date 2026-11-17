@@ -20,9 +20,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #082655; outline-offs
   --navy-light: #082557;
   --yellow: #ffca28;
   --teal: #16a997;
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -55,7 +55,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #082655; outline-offs
 .hero-layout {
   isolation: isolate;
   position: relative;
-  flex: 1 1 auto;
+  flex: 1 0 auto;
   min-height: 0;
   width: 100%;
   display: flex;
@@ -124,7 +124,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #082655; outline-offs
 .consent-reject { border: 1px solid #d9e3f0; background: #fff; color: #294567; }
 .consent-accept { border: 1px solid #09295a; background: #09295a; color: #fff; }
 
-.modal-backdrop { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(2,19,45,.58); backdrop-filter: blur(8px); }
+.modal-backdrop { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(2,19,45,.58); backdrop-filter: blur(8px); }
 .info-modal { position: relative; width: min(470px,100%); max-height: min(680px,calc(100dvh - 32px)); overflow: auto; padding: 39px; border-radius: 29px; background: #fff; box-shadow: 0 30px 90px #020d2370; animation: modal-in .18s ease-out; }
 @keyframes modal-in { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 .modal-close { position: absolute; top: 20px; right: 20px; width: 37px; height: 37px; display: grid; place-items: center; border: 0; border-radius: 12px; background: #f0f5fa; color: #39516e; }
@@ -176,14 +176,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #082655; outline-offs
   .hero-intro { gap: 8px; margin-bottom: 8px; font-size: 12px; letter-spacing: .08em; }
   .intro-rule { width: 26px; height: 3px; }
   .hero-copy h1 { font-size: clamp(31px, 8.7vw, 48px); letter-spacing: -.06em; line-height: .99; }
-  .hero-copy h1 > span { white-space: nowrap; }
+  .hero-copy h1 > span { white-space: normal; }
   .hero-subtitle { max-width: 450px; margin: 10px 0 12px; font-size: clamp(14px, 3.7vw, 15px); line-height: 1.3; }
   .hero-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .primary-cta, .secondary-cta { min-width: 0; min-height: 44px; gap: 6px; padding: 5px 7px; border-radius: 13px; font-size: 12px; }
   .primary-cta svg { width: 15px; height: 15px; flex: 0 0 auto; }
   .hero-trust { gap: 7px; margin-top: 9px; font-size: 12px; letter-spacing: .06em; }
   .site-footer { min-height: 48px; display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'pilot tagline' 'links links'; gap: 2px 8px; padding: 4px 10px; font-size: 12px; }
-  .site-footer>span:first-child { grid-area: pilot; gap: 5px; white-space: nowrap; }
+  .site-footer>span:first-child { grid-area: pilot; min-width: 0; gap: 5px; white-space: normal; }
   .footer-dot { width: 6px; height: 6px; }
   .footer-tagline { grid-area: tagline; font-size: 12px; white-space: normal; text-align: right; }
   .footer-star { margin-left: 2px; font-size: 11px; }
@@ -195,9 +195,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #082655; outline-offs
 }
 
 @media (max-width: 340px) {
-  .topbar { padding: 0 8px; gap: 5px; }
+  .topbar { height: auto; min-height: 58px; flex-basis: auto; padding: 0 8px; gap: 5px; }
   .brand img { width: 112px; }
-  .top-status { padding: 0 7px; font-size: 12px; }
+  .top-status { max-width: 90px; padding: 0 7px; font-size: 12px; line-height: 1.15; white-space: normal; }
   .mobile-menu-toggle { width: 34px; height: 34px; }
   .hero-copy { padding-right: 12px; padding-left: 12px; }
   .hero-copy h1 { font-size: 31px; }
