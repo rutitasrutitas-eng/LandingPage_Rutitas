@@ -24,6 +24,7 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
     closeRef.current?.focus()
     const handleKeys = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        event.preventDefault()
         onClose()
         return
       }
@@ -32,7 +33,10 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
       if (!focusable?.length) return
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
-      if (event.shiftKey && document.activeElement === first) {
+      if (!dialogRef.current?.contains(document.activeElement)) {
+        event.preventDefault()
+        ;(event.shiftKey ? last : first).focus()
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault()
         last.focus()
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -72,6 +76,17 @@ function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
   const menuToggleRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (!menuOpen) return
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      event.preventDefault()
+      setMenuOpen(false)
+      menuToggleRef.current?.focus()
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
   const openModal = (event: MouseEvent<HTMLButtonElement>, view: Exclude<ModalId, null>) => {
     triggerRef.current = menuOpen ? menuToggleRef.current : event.currentTarget
     setMenuOpen(false)
@@ -81,13 +96,14 @@ function HomePage() {
   useEffect(() => {
     if (modal === null) triggerRef.current?.focus()
   }, [modal])
-  return <div className="site-shell">
+  return <>
+    <div className="site-shell" inert={modal !== null}>
     <header className="topbar">
       <a className="brand" href="#inicio" aria-label="Rutitas — inicio"><img src="/assets/rutitas-logo.png" alt="Rutitas"/></a>
       <nav id="primary-navigation" className={`desktop-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navegación principal">
-        <button onClick={event => openModal(event, 'funciona')}>Cómo funciona</button>
-        <button onClick={event => openModal(event, 'seguridad')}>Seguridad</button>
-        <button onClick={event => openModal(event, 'proyecto')}>El proyecto</button>
+        <button aria-haspopup="dialog" onClick={event => openModal(event, 'funciona')}>Cómo funciona</button>
+        <button aria-haspopup="dialog" onClick={event => openModal(event, 'seguridad')}>Seguridad</button>
+        <button aria-haspopup="dialog" onClick={event => openModal(event, 'proyecto')}>El proyecto</button>
       </nav>
       <div className="top-status"><span className="status-dot"/> Próximamente</div>
       <button
@@ -114,15 +130,16 @@ function HomePage() {
         <h1 id="hero-title" aria-label="La uni se vive en el camino."><span>La uni se vive</span><span>en el camino<span className="hero-period">.</span></span></h1>
         <p className="hero-subtitle">Compartir el trayecto también es parte de la experiencia.</p>
         <div className="hero-actions">
-          <button className="primary-cta" onClick={event => openModal(event, 'funciona')}>Descubre Rutitas <Icon name="arrow" size={19}/></button>
-          <button className="secondary-cta" onClick={event => openModal(event, 'proyecto')}>Conoce el proyecto</button>
+          <button className="primary-cta" aria-haspopup="dialog" onClick={event => openModal(event, 'funciona')}>Descubre Rutitas <Icon name="arrow" size={19}/></button>
+          <button className="secondary-cta" aria-haspopup="dialog" onClick={event => openModal(event, 'proyecto')}>Conoce el proyecto</button>
         </div>
         <div className="hero-trust"><span className="trust-mark"><Icon name="shield" size={15}/></span><span>PILOTO UNIVERSITARIO · UTTT</span></div>
       </section>
     </main>
     <SiteFooter />
+    </div>
     {modal && <Modal view={modal} onClose={closeModal} />}
-  </div>
+  </>
 }
 
 export default function App() {

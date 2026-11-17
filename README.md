@@ -68,6 +68,7 @@ Para pruebas Playwright, instala Chromium una sola vez con `npx playwright insta
 
 - Constitución propuesta: `.specify/memory/constitution.md` (**PENDIENTE_RATIFICACION**).
 - Especificación, plan, tareas y checklist: `specs/001-landing-compliance/`.
+- Corrección de estabilidad y accesibilidad de portada: `specs/004-landing-estabilidad-accesibilidad/` y `docs/REPORTE_LANDING_004.md`.
 - Auditoría, arquitectura, requisitos docentes, pruebas y trazabilidad: `docs/`.
 - `Memoria.md` guarda decisiones no confidenciales.
 - `.github/workflows/quality.yml` ejecuta calidad y seguridad en Pull Requests; no publica a producción.

@@ -46,3 +46,14 @@ Actualiza la columna de estado tras la revisión final y cita evidencia ejecutad
 | L003-REQ-006 Una pantalla responsive | `specs/003-landing-hero-fotografico/spec.md` | `src/styles.css`, `e2e/landing.spec.ts` | 7 tamaños; métricas de body/document iguales al viewport, `scrollY=0`, rectángulos completos y rueda/touch/programa sin scroll; capturas viewport | Verificado localmente tras corrección |
 | L003-REQ-007 Conservar legal, GA4 y Vercel | `specs/003-landing-hero-fotografico/spec.md` | `src/LegalPages.tsx`, `src/analytics.ts`, `vercel.json` | Legal directo/recarga continúa con scroll natural; consentimiento, rewrite y configuración no se modifican; Vercel check success, pero preview protegida (HTTP 302 SSO, API HTTP 403), sin inspección de contenido ni SHA confirmado | Local verificado; Preview no verificada por falta de acceso |
 | L003-REQ-008 Evidencia y SDD | `specs/003-landing-hero-fotografico/spec.md` | `Memoria.md`, esta matriz, reporte, capturas, métricas y workflow CI | Commit correctivo `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`; capturas viewport + JSON; run #16 con SDD/CI/Gitleaks aprobado | Evidencia local y remota registrada; ratificación de Constitución sigue pendiente |
+
+## Trazabilidad de estabilidad y accesibilidad — LANDING-004
+
+| Requisito | Especificación | Código/documento | Prueba/evidencia | Estado |
+|---|---|---|---|---|
+| L004-REQ-001 Texto responsive | `specs/004-landing-estabilidad-accesibilidad/spec.md` | `src/styles.css` | Playwright verifica >=12 CSS px y siete viewports más zoom representado | Verificado localmente; 320×568 sin scroll |
+| L004-REQ-002 Escape en menú | misma | `src/App.tsx`, `src/App.test.tsx`, `e2e/landing.spec.ts` | Vitest y Playwright validan Escape, aria-expanded y foco de toggle | Verificado localmente |
+| L004-REQ-003 Fondo del diálogo inerte | misma | `src/App.tsx`, `src/App.test.tsx`, `e2e/landing.spec.ts` | Tab/Shift+Tab, foco externo rechazado, Escape y retorno | Verificado localmente |
+| L004-REQ-004 Zoom/viewport corto | misma | `src/styles.css`, `e2e/landing.spec.ts` | 720×450 equivale aproximadamente a 200% en 1440×900; layout sin recorte | Verificado localmente; no se controló el zoom global del navegador |
+| L004-REQ-005 Rutas y consentimiento preservados | misma | `src/LegalPages.tsx`, `src/AnalyticsConsent.tsx`, pruebas | Playwright navega/recarga; Vitest consentimiento UI opt-in | Verificado localmente; sin eventos GA4 externos |
+| L004-REQ-006 Validación trazable | misma | checklist, `docs/pruebas.md`, `Memoria.md`, reporte | Instalación, lint, tipos, 16 unitarias, 8 E2E, build, SDD y audit | Validado localmente; PR/CI remoto no ejecutados por prohibición de disparar Preview Vercel |

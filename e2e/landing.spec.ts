@@ -9,6 +9,7 @@ const screens = [
   { width: 375, height: 667 },
   { width: 320, height: 568 },
   { width: 844, height: 390 },
+  { width: 720, height: 450 }, // equivalent CSS viewport when a 1440×900 display is zoomed to 200%
 ]
 
 async function getHomeMetrics(page: Page) {
@@ -36,11 +37,12 @@ async function getHomeMetrics(page: Page) {
       secondary: rect('.secondary-cta'),
       trust: rect('.hero-trust'),
       footer: rect('.site-footer'),
+      textSizes: Object.fromEntries(['.top-status', '.hero-intro', '.hero-subtitle', '.primary-cta', '.secondary-cta', '.hero-trust', '.site-footer', '.footer-tagline', '.footer-links a'].map(selector => [selector, Number.parseFloat(getComputedStyle(document.querySelector(selector)!).fontSize)])),
     }
   })
 }
 
-test('LANDING-003: home has zero scroll and all approved content fits every viewport', async ({ page }, testInfo) => {
+test('LANDING-003/004: home keeps approved content visible across acceptance and zoom-sized viewports', async ({ page }, testInfo) => {
   const measurements: Array<Record<string, unknown>> = []
   for (const screen of screens) {
     await page.setViewportSize(screen)
@@ -64,6 +66,9 @@ test('LANDING-003: home has zero scroll and all approved content fits every view
     expect(metrics.bodyHeight, `body vertical scroll at ${id}`).toBeLessThanOrEqual(metrics.viewportHeight + 2)
     expect(metrics.documentWidth, `document horizontal scroll at ${id}`).toBeLessThanOrEqual(metrics.viewportWidth + 2)
     expect(metrics.bodyWidth, `body horizontal scroll at ${id}`).toBeLessThanOrEqual(metrics.viewportWidth + 2)
+    for (const [selector, fontSize] of Object.entries(metrics.textSizes)) {
+      expect(fontSize, `${selector} text is too small at ${id}`).toBeGreaterThanOrEqual(12)
+    }
 
     for (const field of ['header', 'intro', 'title', 'subtitle', 'primary', 'secondary', 'trust', 'footer'] as const) {
       const box = metrics[field]
@@ -111,15 +116,29 @@ test('mobile navigation overlays the page without adding scroll and still opens 
     await page.setViewportSize(viewport)
     await page.goto('/')
     const heightBefore = await page.evaluate(() => document.documentElement.scrollHeight)
-    const toggle = page.getByRole('button', { name: 'Abrir navegación' })
+    const toggle = page.locator('.mobile-menu-toggle')
+    await expect(toggle).toHaveAccessibleName('Abrir navegación')
     await toggle.click()
     const nav = page.getByRole('navigation', { name: 'Navegación principal' })
     await expect(nav.getByRole('button', { name: 'Seguridad' })).toBeVisible()
     expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(heightBefore)
     await nav.getByRole('button', { name: 'Seguridad' }).click()
     await expect(page.getByRole('dialog')).toContainText('Confianza desde el inicio.')
+    await expect(page.locator('.site-shell')).toHaveAttribute('inert', '')
+    const close = page.getByRole('button', { name: 'Cerrar información' })
+    await page.locator('.brand').focus()
+    await expect(close).toBeFocused()
     await page.keyboard.press('Escape')
     await expect(page.getByRole('dialog')).toHaveCount(0)
+    await expect(page.locator('.site-shell')).not.toHaveAttribute('inert', '')
+    await expect(toggle).toBeFocused()
+
+    await toggle.click()
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    await expect(toggle).toHaveAccessibleName('Cerrar navegación')
+    await page.keyboard.press('Escape')
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await expect(toggle).toHaveAccessibleName('Abrir navegación')
     await expect(toggle).toBeFocused()
   }
 })
@@ -146,6 +165,10 @@ test('both hero calls to action preserve their informational dialogs', async ({ 
   const discover = page.getByRole('button', { name: /descubre rutitas/i })
   await discover.click()
   await expect(page.getByRole('dialog')).toContainText('El camino se comparte.')
+  await expect(page.locator('.site-shell')).toHaveAttribute('inert', '')
+  const close = page.getByRole('button', { name: 'Cerrar información' })
+  await page.locator('.brand').focus()
+  await expect(close).toBeFocused()
   await page.keyboard.press('Escape')
   await expect(page.getByRole('dialog')).toHaveCount(0)
   await expect(discover).toBeFocused()

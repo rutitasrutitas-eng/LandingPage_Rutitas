@@ -61,6 +61,23 @@ Entorno: Windows, Node.js 24.20.0, npm, Chromium de Playwright; Vite 6.4.5 desde
 
 Una comprobación local no acredita eventos reales de GA4 ni la ficha Play, aprobación legal, controles remotos de GitHub o una publicación de Vercel.
 
+## LANDING-004 — línea base y revalidación local — 2026-11-16
+
+**Base limpia:** `main` y `origin/main` en `0481387180eab973b7c0416b073099638a3f7328`; working tree limpio antes de editar. Node `v24.20.0`, npm `11.19.0`. La rama de corrección se creó desde esa base.
+
+| Fase | Comando | Resultado |
+|---|---|---|
+| Línea base | `npm ci` | Exit 0, 243 paquetes auditados, 0 vulnerabilidades. npm avisó que `esbuild` tiene un install script no aprobado; la instalación, tests y build completaron sin aprobarlo manualmente. |
+| Línea base | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run sdd:verify`; `npm audit --audit-level=high` | Todos exit 0. |
+| Línea base | `npm run test` | 14/14 pasadas. |
+| Línea base | `npm run test:e2e` | 8/8 pasadas: 4 pruebas por proyecto Chromium y mobile-chromium. |
+| Revalidación tras cambios | `npm ci` | Exit 0; mismo lockfile; 0 vulnerabilidades; mismo aviso informativo de install script de esbuild. |
+| Revalidación tras cambios | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run sdd:verify`; `npm audit --audit-level=high` | Todos exit 0; build Vite 6.4.5; SDD 27 documentos, 10/14/8/6 requisitos 001–004; audit 0 vulnerabilidades. |
+| Revalidación tras cambios | `npm run test` | 16/16 pasadas en 2 archivos. Incluye consentimiento UI de Analytics: inicialmente no inserta script, rechazar se conserva y no carga GA, permite abrir preferencias y aceptar. La prueba usa un ID sintético en entorno de test y no transmite eventos. |
+| Revalidación tras cambios | `npm run test:e2e` | 8/8 pasadas (4 por Chromium y mobile-chromium). Home comprobada en 7 viewports de aceptación más 720×450 (equivalencia CSS aproximada de zoom 200% en 1440×900). Sin scroll/recorte horizontal, texto inspeccionado >=12 CSS px, teclado/menú/modal, rutas legales y recarga verificados. |
+
+Capturas E2E desktop 1440×900 y móvil 390×844 se generan en `test-results/` (ignoradas por Git). 320×568 conserva una sola pantalla después de permitir wrap en el tagline. El zoom se representó ajustando el viewport CSS; no se controló el zoom global del navegador. No se corrieron pruebas en dispositivo físico, Preview Vercel, Play real ni eventos GA4 reales.
+
 ## Revalidación de liberación — LANDING-002 — 2026-11-05
 
 | Control | Resultado real | Nota |

@@ -1,7 +1,7 @@
 # Memoria de Rutitas Landing
 
-**Estado de la iniciativa:** corrección LANDING-003 publicada en PR Draft #9; validaciones locales y CI/Gitleaks aprobados. Preview de Vercel verificada en la sesión autorizada: deployment READY para el SHA `9a5bb2b599df696d5e34a87afcecef0557760c74`; portada y rutas legales renderizan. La portada no presenta scroll en escritorio ni en móvil.
-**Última actualización:** 2026-11-12.
+**Estado de la iniciativa:** LANDING-003 permanece en PR Draft #9. LANDING-004 se trabaja en `fix/landing-004-estabilidad-accesibilidad` desde `main` `0481387180eab973b7c0416b073099638a3f7328`; revalidación local aprobada, PR y CI remotos pendientes.
+**Última actualización:** 2026-11-16.
 
 ## Hechos confirmados en el repo
 
@@ -77,3 +77,12 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - Capturas de esta revisión se mostraron en la sesión de trabajo, pero no se guardaron como archivos. Las capturas locales de la validación automatizada sin scroll permanecen en la ruta externa listada en `docs/REPORTE_LANDING_003.md`.
 - Pendientes del proyecto: aprobación humana de textos legales, mecanismo real de eliminación de cuentas, ID/validación de GA4 y URL oficial de Google Play. Constitución y textos legales no fueron ratificados ni aprobados.
 - Estado funcional verificado: la sección DEMO, el teléfono y el QR se eliminaron por completo y no se reubicaron. Playwright cubre siete viewports sin scroll; Vitest 14/14 y Playwright 8/8 en Chromium y 8/8 en mobile-chromium. `npm audit` reportó cero vulnerabilidades.
+
+## LANDING-004 — estabilidad y accesibilidad
+
+- La línea base de `main` no tenía cambios locales y `origin/main` coincidía en `0481387180eab973b7c0416b073099638a3f7328`. Los textos operativos medían 7–10 CSS px en algunos breakpoints, el menú móvil no cerraba con Escape y los elementos de fondo no estaban inertes mientras el modal figuraba como abierto.
+- Se elevaron esos textos a mínimo 12 CSS px, el tagline del footer puede envolver en pantallas angostas, el menú cierra con Escape y devuelve foco; modales aíslan el fondo con `inert` y permanecen como elementos hermanos.
+- Revalidación `npm ci`, lint, typecheck, build, SDD y audit aprobados; Vitest 16/16 y Playwright 8/8. Playwright probó 7 resoluciones LANDING-003 y viewport adicional 720×450 como equivalencia aproximada de zoom 200%; todas caben sin scroll ni recorte. Consentimiento de Analytics probado con ID sintético, sin eventos de red. Detalle: `docs/REPORTE_LANDING_004.md` y `docs/pruebas.md`.
+- Dependabot PR #5 falla `npm ci` porque plugin React 6 exige Vite 8; PR #6 por peer TS `<6.1` de typescript-eslint; PR #7 porque plugin React 4 no acepta Vite 8. PR #3 (acción de artefactos) y #4 (jsdom) muestran check de landing exitoso; no se mezclaron ni fusionaron actualizaciones.
+- Validación local aprobada: `npm ci`, lint, typecheck, build, SDD y audit; Vitest 16/16; Playwright 8/8; audit 0 vulnerabilidades. No cambiaron dependencias.
+- No se hizo push ni PR: PR existentes muestran `Vercel Preview Comments`, integración que podría iniciar un Preview y entraría en conflicto con la instrucción de no desplegar en Vercel. No se tocó Preview/producción ni configuración Vercel. CI remoto y revisión humana quedan pendientes.
