@@ -1,6 +1,14 @@
 import { expect, test, type Page } from '@playwright/test'
 import { writeFile } from 'node:fs/promises'
 
+test.beforeEach(async ({ page }) => {
+  if (process.env.VITE_GA_MEASUREMENT_ID) {
+    // General landing flows start with an explicit opt-out. A dedicated test
+    // retains a clean context for the undecided/consent prompt path.
+    await page.addInitScript(() => localStorage.setItem('rutitas.analytics-consent', 'denied'))
+  }
+})
+
 const screens = [
   { width: 1440, height: 900 },
   { width: 1366, height: 768 },
@@ -199,6 +207,18 @@ test('privacy page remains readable across the accepted viewport sizes', async (
     await expect(page).toHaveURL(/\/privacidad#contacto$/)
     await expect(page.locator('#contacto')).toBeInViewport()
   }
+})
+
+test('privacy and account deletion distinguish local DEMO code from remote service', async ({ page }) => {
+  await page.goto('/privacidad')
+  await expect(page.locator('#datos')).toContainText('DEMO_MODE=true')
+  await expect(page.locator('#datos')).toContainText('no acredita transmisión a un servidor')
+  await expect(page.locator('#finalidades')).toContainText('No se confirmó despliegue ni uso por personas usuarias')
+  await page.goto('/eliminar-cuenta')
+  const deletionDetails = page.locator('section[aria-labelledby="deletion-request"]')
+  await expect(deletionDetails).toContainText('baja local para los datos del modo DEMO')
+  await expect(deletionDetails).toContainText('no elimina datos de un servidor')
+  await expect(page.getByRole('form')).toHaveCount(0)
 })
 
 test('both hero calls to action preserve their informational dialogs', async ({ page }) => {

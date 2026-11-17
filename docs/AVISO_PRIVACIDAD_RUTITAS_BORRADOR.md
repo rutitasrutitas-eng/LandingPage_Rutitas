@@ -2,10 +2,10 @@
 
 **ESTADO: BORRADOR PARA REVISIÓN INTERNA. NO APROBADO PARA PUBLICACIÓN COMO AVISO DEFINITIVO.**
 
-**Versión de trabajo:** 16 de noviembre de 2026.
+**Versión de trabajo:** 17 de noviembre de 2026.
 **Entrada en vigor:** Pendiente de aprobación.
 
-Este documento de trabajo acompaña el diseño de `/privacidad`. El contenido recibido se adaptó para dejar claro qué no fue verificado en los repositorios Android/Backend ni en un despliegue. No constituye asesoría legal ni aviso definitivo.
+Este documento de trabajo acompaña el diseño de `/privacidad`. Coteja las ramas/SHA de Android y Backend anotadas en `docs/VALIDACIONES_PRIVACIDAD.md`, sin afirmar que sus servicios estén desplegados o traten actualmente datos de personas usuarias. No constituye asesoría legal ni aviso definitivo.
 
 ## 1. Responsable del tratamiento
 
@@ -17,21 +17,21 @@ Rutitas es un proyecto en desarrollo que busca facilitar la movilidad compartida
 
 Este aviso está pensado para el sitio web de presentación de Rutitas y la aplicación Android. La Landing Page actual no permite crear cuentas ni dispone de un formulario de registro.
 
-El paquete de integración describe para el Backend campos de correo electrónico, nombre visible, teléfono opcional, identificador, rol, estado, fecha de registro y otros datos de actividad, además de hash de contraseñas. En esta tarea no se verificó el repositorio Backend ni un despliegue. Este inventario es una referencia pendiente de cotejo con la versión vigente, no una afirmación de tratamiento productivo.
+En el código Backend revisado aparecen correo, nombre visible, teléfono opcional, identificador, rol, estado y fechas de actividad, además de hash de contraseña. Este inventario describe campos en código, no tratamiento productivo ni despliegue.
 
-El paquete de integración describe para el modo DEMO de Android datos locales de perfil, preferencias de zona y horarios, información de viajes, fotografías y documentos relacionados con la identidad y el vehículo de conductores, además de permisos de cámara y ubicación aproximada y precisa. Esta descripción no se verificó contra el repositorio Android en esta tarea. No demuestra que esos datos se envíen a un servidor.
+La rama Android revisada usa `DEMO_MODE=true`, mantiene perfil y datos de demostración localmente con Room, y declara permisos de cámara y ubicación aproximada y precisa. Contiene funciones para guardar fotografías/documentos localmente. No demuestra que estos datos se envíen a un servidor ni que se usen con cuentas reales.
 
 **Pendiente:** confirmar el inventario final de datos, incluyendo datos técnicos, posibles identificadores de dispositivo, registros de actividad y documentos, así como determinar si existen datos sensibles y cuáles son obligatorios u opcionales.
 
 ## 3. Finalidades de uso
 
-El Backend contiene funciones de registro, inicio y cierre de sesión, consulta y actualización del perfil y consulta de rutas. Estas funciones todavía están en etapa de integración con Android.
+El Backend revisado declara registro, inicio/cierre de sesión, lectura/edición del perfil propio y consulta de catálogo/detalle de rutas. Android revisado evita llamar al Backend mientras está en DEMO. No se confirmó despliegue ni uso para personas usuarias.
 
 El proyecto contempla funciones futuras para coordinar viajes compartidos, gestionar conductores, solicitudes y reservas, pero esas funcionalidades aún no deben anunciarse como servicios operativos. Las finalidades adicionales o secundarias que se implementen se informarán y, cuando corresponda, se solicitará consentimiento.
 
 ## 4. Cámara, ubicación y archivos
 
-Android contempla el uso de cámara y ubicación para funciones que deben describirse según su implementación real. En el modo DEMO, determinadas fotografías y documentos de conductor pueden almacenarse de forma local. La existencia de estos permisos no implica necesariamente monitoreo continuo ni transmisión de datos al servidor.
+El manifiesto Android revisado declara cámara y ubicación aproximada/precisa. El código del modo DEMO contempla uso local de fotos/documentos. La existencia de estos permisos no prueba monitoreo continuo ni transmisión al servidor.
 
 **Pendiente:** confirmar momento de acceso, finalidad específica, necesidad, almacenamiento, acceso autorizado, conservación y opciones cuando un permiso se rechaza.
 
@@ -39,13 +39,13 @@ Android contempla el uso de cámara y ubicación para funciones que deben descri
 
 La coordinación de viajes podría requerir mostrar datos limitados del trayecto o del perfil a integrantes de la comunidad. El equipo debe aprobar qué se muestra, a quién y durante cuánto tiempo antes de activar estas funciones.
 
-La infraestructura en desarrollo contempla MongoDB, almacenamiento local de Android y alojamiento de la web en Vercel. El sitio contiene integración opcional de Google Analytics con consentimiento; Android dispone de configuración de Google Maps. Esto no equivale a confirmar contrataciones, transferencias internacionales ni tratamientos productivos de cada proveedor.
+El Backend contiene repositorios MongoDB, Android DEMO almacena datos localmente y la Landing tiene integración opcional de Google Analytics con consentimiento. Esto no confirma contratos, activación, transferencias, ubicación de datos o tratamientos productivos. Configuración remota Vercel/Analytics y Google Maps no fue verificada.
 
 **Pendiente:** identificar proveedores efectivos, funciones, ubicaciones, destinatarios, posibles transferencias y medidas contractuales de protección.
 
 ## 6. Seguridad
 
-El código revisado del Backend usa hash de contraseñas y autenticación con tokens. Android implementa almacenamiento privado para determinados archivos locales. Estas características no constituyen, por sí solas, certificación ni auditoría de un servicio publicado.
+El código Backend revisado contiene hash de contraseñas y autenticación JWT; Android usa almacenamiento local para archivos DEMO. Estas características no son auditoría ni prueban servicio publicado.
 
 **Pendiente:** verificar transporte seguro, infraestructura, accesos, cifrado aplicable, gestión de incidentes, copias de seguridad y controles operativos.
 
@@ -53,7 +53,7 @@ El código revisado del Backend usa hash de contraseñas y autenticación con to
 
 Rutitas deberá limitar la conservación de datos a los periodos necesarios para las finalidades autorizadas y, en su caso, para las obligaciones legales aplicables. Los plazos concretos deben documentarse por categoría.
 
-La aplicación Android posee una función de borrado de datos locales de demostración. **No se ha acreditado un mecanismo completo de eliminación de la cuenta y sus datos en el servidor.** La página `/eliminar-cuenta` informa actualmente esa limitación; cuando se habilite el trámite real, detallará los pasos, verificación de titularidad, tratamiento de datos y excepciones de conservación.
+Android DEMO posee una función que borra datos locales vinculados al perfil y archivos/fotos del dispositivo. Su comentario indica que no elimina datos del servidor. Entre las siete rutas del Backend revisado no se encontró DELETE de cuenta. **No se ha acreditado un mecanismo completo de eliminación remota.** La página `/eliminar-cuenta` informa esta limitación; el trámite, verificación y excepciones de conservación siguen pendientes.
 
 ## 8. Derechos de las personas titulares
 

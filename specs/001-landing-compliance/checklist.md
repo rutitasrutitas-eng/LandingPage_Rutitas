@@ -17,6 +17,11 @@
 - [x] Constitución permanece `PENDIENTE_RATIFICACION`.
 - [x] No se hicieron commits, push, cambios remotos de Vercel ni despliegue productivo.
 - [x] LANDING-006: integrar diseño de privacidad recibido sin alterar Home ni la función de eliminación informativa.
-- [x] LANDING-006: distinguir tratamientos del sitio, descripciones locales de DEMO y capacidades previstas; la validación cruzada Android/Backend queda pendiente.
+- [x] LANDING-006: distinguir el sitio, DEMO local y capacidades previstas; cotejar ramas/SHA Android/Backend sin afirmar tratamiento productivo.
 - [x] LANDING-006: pruebas de secciones/anclas, navegación por teclado, enlaces y siete viewports; consentimiento Analytics probado aparte con ID sintético.
 - [x] LANDING-006: actualizar Memoria, matriz, pruebas y documentación de validación legal; aprobación legal sigue pendiente.
+- [x] LANDING-006: cotejar Backend `main` y Android feature branch con SHA; separar código observado, DEMO local y operación no confirmada.
+- [x] LANDING-006: explicar categorías y capacidades con distinción local/remota y dependencia de integración Android–Backend.
+- [x] LANDING-006: diferenciar baja DEMO local de eliminación remota, conservar ruta informativa y no agregar formulario.
+- [x] LANDING-006: suite E2E Playwright sintética completa 18/18; solicitudes a Google interceptadas en la prueba dedicada.
+- [ ] LANDING-006: aprobación legal, canal de privacidad, datos/plazos/proveedores reales y borrado remoto siguen pendientes.

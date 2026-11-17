@@ -89,6 +89,13 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - Evidencia final local: lint/typecheck/build/SDD/audit exit 0; Vitest 16/16; `npm run test:e2e` 12/12 pasadas con 2 omisiones intencionales por falta del ID sintético, más prueba dirigida con `VITE_GA_MEASUREMENT_ID=G-ABC1234567` 6/6 pasadas en Chromium y mobile-chromium. Contraste, retorno de foco, Analytics inerte y texto ampliado probados. Detalle en `docs/pruebas.md` y `docs/REPORTE_LANDING_004.md`.
 - No se probó el zoom nativo del navegador; se probaron viewports reducidos y texto CSS al doble de su tamaño computado. CI remoto no ejecutado. No se hizo push ni PR según la instrucción; Vercel y producción no se alteraron.
 
+## LANDING-006 — aviso de privacidad y Analytics — 2026-11-17
+
+- El diseño de `/privacidad` conserva el paquete integrado. El borrador distingue el sitio estático, datos del Android DEMO en Room y código Backend no desplegado confirmado. `/eliminar-cuenta` distingue baja local en Android de eliminación remota no acreditada; no hay formulario.
+- Se cotejaron solo en lectura Backend `main` `a95e62e2f0f9fbde46af0144c9fb89c858670c94` y Android `feature/integracion-android-ci-cd` `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. `docs/VALIDACIONES_PRIVACIDAD.md` contiene detalles; Android `main` es documentación y no debe confundirse con la rama de implementación.
+- La prueba exploratoria encontró que el control fijo de preferencias Analytics tapaba enlaces legales en viewport 320×568. Se movió el control al footer. Prueba E2E completa con ID sintético `G-SYNTHETIC123`: 18/18 pasadas; el test Analytics bloquea solicitudes externas. Sin ID: 16 pasadas/2 omisiones intencionales. Vitest 16/16; lint/tipos/build/SDD/audit y diff check aprobados.
+- Pendientes: aprobación legal y Constitución `PENDIENTE_RATIFICACION`, responsables/contactos/finalidades/proveedores/retención reales, procedimiento remoto de baja, ficha Play, configuración remota GA4/Vercel y CI/Preview. No se modificó Android/Backend, Vercel remoto ni producción.
+
 ## LANDING-006 — aviso de privacidad
 
 - La rama `feature/landing-006-aviso-privacidad` se creó en un worktree independiente desde el commit confirmado de LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`. Se conservaron intactos los cambios locales y archivos `.diff` del checkout original.

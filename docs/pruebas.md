@@ -1,5 +1,13 @@
 # Estrategia y casos de prueba — LANDING-001
 
+## LANDING-006 — contraste técnico, privacidad y Analytics — 2026-11-17
+
+En `feature/landing-006-aviso-privacidad`, después del ajuste de preferencia Analytics al footer: `npm ci` exit 0 (243 paquetes, 0 vulnerabilidades); lint/typecheck exit 0; Vitest 16/16; Playwright sin ID 16 pass/2 skip; Playwright con `VITE_GA_MEASUREMENT_ID=G-SYNTHETIC123` 18/18 pass; build exit 0; SDD exit 0 (30 documentos, requisitos 14/14/8/9); `npm audit --audit-level=high` exit 0 con 0 vulnerabilidades; `git diff --check` exit 0.
+
+El test sintético tuvo un fallo reproducible antes de corregir el control flotante: tras consentir/rechazar, la preferencia fija se superponía al enlace legal en 320×568 y agotaba el click. El control ahora vive dentro del footer; el texto ampliado y los enlaces continúan alcanzables sin overflow. La suite sintética completa pasa y el test dedicado intercepta solicitudes de `googletagmanager.com`; no hubo envío externo de Analytics. No se configuró ID real.
+
+La revisión solo lectura cotejó Android feature `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad` y Backend main `a95e62e2f0f9fbde46af0144c9fb89c858670c94`. No se ejecutaron builds de Android/Backend, pruebas contra base de datos ni llamadas a servicios remotos. La ficha Play, zoom nativo, dispositivo físico, CI, Preview y aprobación legal no fueron verificados.
+
 ## Unitarias
 
 - UT-LP-001: render de la portada.

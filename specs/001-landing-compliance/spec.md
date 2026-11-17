@@ -23,6 +23,9 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 | LP-REQ-009 | CI y seguridad | Pull Requests ejecutan lockfile install, tipos, build, tests, verificador SDD, escaneo de secretos y auditoría de dependencias; evidencias publicadas como artefacto. | MUST |
 | LP-REQ-010 | Evidencia y operación | Docs SDD, matriz de trazabilidad y memoria distinguen lo implementado, verificado, pendiente y no ejecutado. | MUST |
 | LP-REQ-011 | Navegación del aviso | El índice enlaza a encabezados semánticos, ofrece salto al contenido y conserva navegación de retorno al inicio y a eliminación de cuenta sin alterar la portada. | MUST |
+| LP-REQ-012 | Base técnica del borrador | La página legal distingue el sitio actual, Android DEMO local y capacidades observadas en el código del Backend con ramas/SHA de referencia; ninguna se presenta como servicio productivo. | MUST |
+| LP-REQ-013 | Prueba Analytics con ID sintético | La suite de navegador con ID sintético no hace solicitudes reales a Google; las pruebas generales parten de consentimiento rechazado y la prueba dedicada verifica consentimiento nuevo, aislamiento y retorno del diálogo. | MUST |
+| LP-REQ-014 | Eliminación local frente a remota | La información pública explica que Android DEMO solo elimina datos locales y que no hay endpoint/mecanismo remoto de borrado confirmado. | MUST |
 
 ## Requisitos no funcionales
 

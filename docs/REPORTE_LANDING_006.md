@@ -1,36 +1,39 @@
 # Reporte LANDING-006 — aviso de privacidad
 
-**Fecha:** 2026-11-16
-
-**Rama local:** `feature/landing-006-aviso-privacidad`
-
+**Fecha de revisión:** 2026-11-17
+**Rama:** `feature/landing-006-aviso-privacidad`
 **Base:** LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`
-**Estado:** implementación y pruebas locales; borrador legal no ratificado. Sin push, PR, merge ni despliegue.
+**Estado:** diseño integrado y pruebas locales aprobadas; borrador legal sin ratificar. Sin push, PR, merge remoto ni despliegue.
 
-## Cambios
+## Implementación y revisión
 
-- Se integró el diseño del paquete recibido en `src/PrivacyRutitas.tsx` y `src/privacy-rutitas.css`; solo la ruta `/privacidad` cambia de vista. La portada fotográfica, navegación y `/eliminar-cuenta` se conservan.
-- El aviso incluye índice semántico y anclas, skip-link con foco al contenido, contacto explícitamente pendiente, paleta azul/blanco/amarillo, scroll natural y estilos responsive. Se reforzó el indicador de teclado con contorno navy y halo amarillo.
-- El documento Markdown fuente quedó en `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md`; la lista de aprobación y las limitaciones se mantienen en `docs/VALIDACIONES_PRIVACIDAD.md`.
-- Los hechos de la Landing se describen a partir de este código local: no hay formulario de registro y Google Analytics requiere ID válido y consentimiento afirmativo. Las descripciones Android/Backend del paquete se etiquetan como referencias no cotejadas en esta tarea. No se afirma despliegue, transferencia de datos ni borrado remoto operativo.
-- Se actualizó la especificación activa 001, tareas, checklist, verificador SDD, matriz, README y Memoria.
+- Se conserva el componente de privacidad de la entrega recibida en `src/PrivacyRutitas.tsx`/`src/privacy-rutitas.css`; `/privacidad` mantiene índice, skip-link, retorno al inicio y diseño responsive azul/blanco/amarillo.
+- La página especifica que el sitio no tiene formulario de registro ni Analytics real verificado. Se aclara que Android revisado usa `DEMO_MODE=true`, sus datos de perfil/viaje/fotos permanecen localmente, los permisos declarados no prueban transmisión, y que Backend solo es código sin despliegue verificado.
+- Cotejo solo lectura: Backend `main` SHA `a95e62e2f0f9fbde46af0144c9fb89c858670c94`; Android `feature/integracion-android-ci-cd` SHA `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. El detalle y limitaciones están en `docs/VALIDACIONES_PRIVACIDAD.md`.
+- La página `/eliminar-cuenta` conserva su propósito informativo y dice que la baja Android DEMO solo actúa en Room/archivos locales. No se encontró DELETE de cuenta en los siete endpoints Backend revisados. No hay formulario.
+- `docs/PENDIENTES_LEGALES_RUTITAS.md` registra responsable, contacto, régimen, finalidades, proveedores, retención, controles, borrado, edad y aprobaciones que faltan. La Constitución sigue pendiente de ratificación.
+- La corrección de Analytics mueve el control de preferencias al footer para que no cubra enlaces legales en vistas móviles cortas. Cuando hay diálogo, el footer está bajo el shell `inert`. En pruebas con ID sintético, los flujos generales preparan rechazo explícito; la prueba dedicada usa estado virgen y bloquea cualquier solicitud GTM.
 
-## Validación
+## Evidencia de pruebas
 
-Resultados finales: `npm ci`, lint, typecheck, Vitest, Playwright, build, SDD y audit se registran en `docs/pruebas.md`. Vitest: 16/16; E2E requerida: 14 pasaron y 2 omitidas intencionalmente por no tener GA ID; prueba dirigida con ID sintético para Analytics: 6/6. Build, typecheck, lint, SDD y audit pasan; npm audit encuentra 0 vulnerabilidades.
+| Comando | Resultado |
+|---|---|
+| `npm ci` | Exit 0; 243 paquetes; cero vulnerabilidades. Advertencia de esbuild install script informativa, sin aprobación manual. |
+| `npm run lint` | Exit 0 |
+| `npm run typecheck` | Exit 0 |
+| `npm run test` | 16/16 pasaron |
+| `npm run test:e2e` sin ID | 16 pasaron y 2 omitidas intencionalmente (Analytics dedicado, una por proyecto). |
+| `npm run test:e2e` con `G-SYNTHETIC123` | 18/18 pasaron; flujo completo en Chromium y mobile-chromium. Las peticiones GTM fueron interceptadas por la prueba dedicada. |
+| `npm run build` | Exit 0; Vite 6.4.5; JS 252.68 kB (78.36 kB gzip), CSS 20.35 kB (5.24 kB gzip). |
+| `npm run sdd:verify` | Exit 0; 30 documentos, 14 requisitos 001, 14 requisitos 002, 8 requisitos 003, 9 requisitos 004. |
+| `npm audit --audit-level=high` | Exit 0; 0 vulnerabilidades reportadas. |
+| `git diff --check` | Exit 0; avisos de conversión LF/CRLF de Windows sin whitespace erróneo. |
 
-La suite E2E completa en una ejecución exploratoria con ID sintético expiró en dos casos porque el banner opt-in interceptó clics de pruebas no preparadas para responder al banner. La suite obligatoria sin ID y las pruebas dirigidas que necesitan el ID sintético se ejecutaron por separado y pasaron; el detalle está en `docs/pruebas.md`.
+Los tests E2E validan siete viewports, navegación directa/recarga, índice/anclas, foco, retorno al inicio, la página de baja y ausencia de overflow horizontal. Vista 720×450 y tipografía CSS duplicada aproximan zoom; zoom nativo y dispositivo físico no se probaron. No se validó CI, Preview, Vercel, GA4 real, Google Play, operación de API o aprobación legal.
 
-Las pruebas E2E incluyen los viewports 1440×900, 1366×768, 768×1024, 390×844, 375×667, 320×568 y 844×390, navegación por anclas, foco por teclado, Home y eliminación. Capturas completas (salidas locales ignoradas por Git):
+## Pendientes
 
-- `test-results/landing006_privacidad_escritorio.png`
-- `test-results/landing006_privacidad_movil.png`
-
-## Pendientes humanos / externos
-
-- Validar el borrador con la persona responsable y asesoría legal; completar identidad, domicilio, contacto atendido, régimen aplicable, finalidades, proveedores/transferencias, retención, medidas, versión y fecha de vigencia.
-- Cotejar Android y Backend contra sus ramas/SHA vigentes; confirmar datos DEMO locales, permisos, endpoints implementados y estado real de integración. No se inspeccionaron esos repositorios como parte de LANDING-006.
-- Definir un canal y un mecanismo real de eliminación de cuentas; la página `/eliminar-cuenta` no tramita solicitudes y no se agregó formulario.
-- Ratificación humana de la Constitución SDD, CI remoto y Preview siguen pendientes.
-
-No se añaden funcionalidades de negocio ni dependencias. No se modificó `vercel.json`, configuración remota, secretos, producción, Android o Backend.
+- Validación y aprobación humana/legal del aviso; completar datos oficiales sin placeholders.
+- Confirmar proveedores y configuración operativa; definir procedimiento remoto de eliminación, verificación de identidad y retención.
+- Reconfirmar SHAs de Android/Backend antes de basar una política legal en sus datos.
+- CI/Preview/producción están fuera de esta revisión local.

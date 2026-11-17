@@ -82,7 +82,8 @@ describe('Rutitas landing and legal pages', () => {
     }
     expect(screen.getByText(/Borrador de revisión interna/i)).toBeInTheDocument()
     expect(screen.getByText(/no tiene formulario de registro/i)).toBeInTheDocument()
-    expect(screen.getByText(/no demuestra que esos datos se envíen o almacenen remotamente/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/DEMO_MODE=true/i)).toHaveLength(2)
+    expect(screen.getByText(/no acredita transmisión a un servidor/i)).toBeInTheDocument()
     expect(screen.getAllByText(/PENDIENTE DE VALIDACIÓN DEL EQUIPO/i).length).toBeGreaterThan(1)
     expect(screen.getByRole('navigation', { name: 'Secciones del aviso de privacidad' })).toBeInTheDocument()
     expect(document.querySelector('.pr-back')).toHaveAttribute('href', '/')
@@ -100,7 +101,8 @@ describe('Rutitas landing and legal pages', () => {
   it('UT-LP-004 explains that account deletion is not operational and collects no data', () => {
     renderAt('/eliminar-cuenta')
     expect(screen.getByRole('heading', { name: 'Eliminación de cuenta' })).toBeInTheDocument()
-    expect(screen.getByText(/no tramita solicitudes ni elimina cuentas/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/no tramita solicitudes ni elimina cuentas/i).length).toBeGreaterThan(0)
+    expect(screen.getByText(/baja local para los datos del modo DEMO/i)).toBeInTheDocument()
     expect(screen.queryByRole('form')).not.toBeInTheDocument()
     expect(screen.queryByRole('textbox')).not.toBeInTheDocument()
   })

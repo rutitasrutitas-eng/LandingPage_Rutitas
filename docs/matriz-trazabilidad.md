@@ -4,7 +4,7 @@
 |---|---|---|---|---|
 | LP-REQ-001 Preservación | `spec.md` | `src/App.tsx`, `src/styles.css` | UT-LP-001, UI-LP-004; build y revisión de capturas | Verificado localmente |
 | LP-REQ-002 Rutas legales | `spec.md` | `src/App.tsx`, `vercel.json` | IT-LP-001–003; Playwright de navegación/recarga | Verificado localmente; Preview pendiente |
-| LP-REQ-003 Privacidad | `spec.md`, `L6-T-001..005` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css`, `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md` | Vitest 16/16; E2E siete viewports; Android/Backend no se verificaron en esta tarea | Implementado y probado localmente; datos y aprobación legal pendientes |
+| LP-REQ-003 Privacidad | `spec.md`, `L6-T-001..006` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css`, `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md` | Vitest 16/16; E2E siete viewports; ramas/SHA Android/Backend cotejados en fuente | Implementado y probado localmente; despliegue, tratamientos productivos y aprobación legal pendientes |
 | LP-REQ-004 Eliminación | `spec.md` | `src/LegalPages.tsx` | UT-LP-004, SEC-LP-005/006; revisión humana | Página informativa verificada; proceso real pendiente |
 | LP-REQ-005 GA4 opt-in | `spec.md` | `src/analytics.ts`, `src/AnalyticsConsent.tsx`, `.env.example` | UT-LP-006, SEC-LP-002 | Implementación local probada; ID/eventos reales no configurados |
 | LP-REQ-006 Play | `spec.md` | `src/config.ts`, `src/App.tsx`, `.env.example` | UT-LP-005, IT-LP-005 | Validación local probada; URL oficial pendiente |
@@ -13,12 +13,15 @@
 | LP-REQ-009 CI/seguridad | `spec.md` | `.github/workflows/quality.yml`, `.github/dependabot.yml` | GitHub Actions run #16: Gitleaks, SDD, lint, typecheck, build, unit/integration, Playwright, audit y evidencia; todo `success` | Verificado en commit correctivo `54e0ecb1f4e0e03165afb794bed94a70d37d74c7`; 0 vulnerabilidades |
 | LP-REQ-010 Docs/evidencias | `spec.md` | `docs/`, `.specify/`, `AGENTS.md`, `Memoria.md` | checklist y `docs/REPORTE_FINAL.md` | Documentado; Constitución pendiente de ratificación |
 | LP-REQ-011 Navegación del aviso | `spec.md` + `L6-T-002` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css` | Vitest UT-LP-003; E2E valida índice y destinos, skip-link por teclado, Inicio y `/eliminar-cuenta`; siete viewports sin overflow | Implementado y probado localmente; portada preservada |
+| LP-REQ-012 Base técnica del borrador | `spec.md` + `L6-T-006` | `src/PrivacyRutitas.tsx`, `docs/VALIDACIONES_PRIVACIDAD.md` | Android `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`; Backend `a95e62e2f0f9fbde46af0144c9fb89c858670c94`; Vitest/E2E validan etiquetas DEMO y límites del servicio | Borrador técnico contrastado; no acredita despliegue/tratamiento real |
+| LP-REQ-013 Analytics sintético | `spec.md` + `L6-T-007` | `e2e/landing.spec.ts`, `e2e/modal-analytics-isolation.spec.ts`, `src/SiteFooter.tsx` | Suite Playwright completa con ID sintético 18/18; prueba dedicada bloquea GTM; pruebas generales optan por rechazo para evitar superposición | Verificado localmente, sin solicitudes externas |
+| LP-REQ-014 Eliminación local/remota | `spec.md` + `L6-T-006/008` | `src/LegalPages.tsx`, `docs/PENDIENTES_LEGALES_RUTITAS.md` | Android `AuthRepository.deleteAccount()` borra Room/fotos DEMO localmente; no se encontró DELETE en controladores Backend; prueba de regresión | Verificado y documentado; proceso remoto pendiente |
 
 ## Trazabilidad de aviso de privacidad — LANDING-006
 
 | Requisito | Especificación/tarea | Código/documento | Evidencia | Estado |
 |---|---|---|---|---|
-| LP-REQ-003 Aviso en borrador y responsive | `specs/001-landing-compliance/spec.md`, `L6-T-001..004` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css`, `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md`, `docs/VALIDACIONES_PRIVACIDAD.md` | Vitest 16/16; E2E siete viewports, Chromium y mobile-Chromium; Android/Backend no se verificaron | Implementado y probado localmente; aprobación legal pendiente |
+| LP-REQ-003 Aviso en borrador y responsive | `specs/001-landing-compliance/spec.md`, `L6-T-001..006` | `src/PrivacyRutitas.tsx`, `src/privacy-rutitas.css`, `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md`, `docs/VALIDACIONES_PRIVACIDAD.md` | Vitest 16/16; E2E siete viewports, Chromium y mobile-Chromium; fuentes Android/Backend cotejadas en SHA indicado | Implementado y probado localmente; servicio productivo y aprobación legal pendientes |
 | LP-REQ-004 Eliminación no operativa | misma, `L6-T-002` | `src/LegalPages.tsx`, footer, enlace desde privacidad | E2E directa/recarga; conserva página informativa y no añade formulario | Verificado localmente; mecanismo y canal reales pendientes |
 | LP-REQ-007 Accesibilidad/responsive | misma, `L6-T-002,004` | componente, CSS y E2E | Teclado prueba skip-link/foco al main; siete viewports, índice y anclas; Analytics sintético en ambos proyectos | Verificado localmente; zoom nativo no ejecutado |
 | LP-REQ-008 Calidad automatizada | misma, `L6-T-004` | `package.json`, pruebas Vitest/Playwright | Resultados en `docs/pruebas.md` y `docs/REPORTE_LANDING_006.md` | Validado localmente; CI remoto no ejecutado |

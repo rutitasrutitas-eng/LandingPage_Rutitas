@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
-import AnalyticsConsent from './AnalyticsConsent'
 import { AccountDeletionPage, NotFoundPage } from './LegalPages'
 import PrivacyRutitas from './PrivacyRutitas'
 import SiteFooter from './SiteFooter'
@@ -148,7 +147,6 @@ function HomePage() {
       </section>
     </main>
     <SiteFooter />
-    <AnalyticsConsent />
     </div>
     {modal && <Modal view={modal} onClose={closeModal} />}
   </>
@@ -175,5 +173,5 @@ export default function App() {
         ? <AccountDeletionPage />
         : <NotFoundPage />
 
-  return <>{page}{path !== '/' && <AnalyticsConsent />}</>
+  return page
 }
