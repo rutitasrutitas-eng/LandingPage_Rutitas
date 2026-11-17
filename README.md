@@ -1,6 +1,6 @@
 # Rutitas — Landing page
 
-Landing estática de Rutitas, construida con React 19, TypeScript 5.7 y Vite 6. Conserva la identidad visual existente y presenta el proyecto como piloto universitario en desarrollo.
+Landing estática de Rutitas, construida con React 19, TypeScript 5.7 y Vite 6. Presenta Rutitas como propuesta universitaria de movilidad compartida, dirigida inicialmente a la comunidad UTTT. El piloto está previsto, sujeto a validación y coordinación; no se anuncia como servicio activo.
 
 ## Requisitos y ejecución local
 
@@ -17,7 +17,7 @@ En PowerShell, copia `.env.example` a `.env` con `Copy-Item .env.example .env`. 
 
 ## Rutas
 
-- `/`: presentación existente y modales informativos.
+- `/`: presentación fotográfica existente y modales informativos con preguntas frecuentes accesibles; reservas y viajes reales aún están en desarrollo.
 - `/privacidad`: borrador visible pendiente de información confirmada y revisión humana; no es aviso definitivo.
 - `/eliminar-cuenta`: explica que el repositorio no confirma un proceso real; no recibe solicitudes ni datos.
 
@@ -69,6 +69,8 @@ Para pruebas Playwright, instala Chromium una sola vez con `npx playwright insta
 - Constitución propuesta: `.specify/memory/constitution.md` (**PENDIENTE_RATIFICACION**).
 - Especificación, plan, tareas y checklist: `specs/001-landing-compliance/`.
 - Corrección de estabilidad y accesibilidad de portada: `specs/004-landing-estabilidad-accesibilidad/` y `docs/REPORTE_LANDING_004.md`.
+- Presentación universitaria y FAQ LANDING-005: `docs/REPORTE_LANDING_005.md`.
+- Verificación de fuentes Android/Backend y decisiones legales pendientes: `docs/VALIDACIONES_PRIVACIDAD.md` y `docs/PENDIENTES_LEGALES_RUTITAS.md`.
 - Auditoría, arquitectura, requisitos docentes, pruebas y trazabilidad: `docs/`.
 - `Memoria.md` guarda decisiones no confidenciales.
 - `.github/workflows/quality.yml` ejecuta calidad y seguridad en Pull Requests; no publica a producción.

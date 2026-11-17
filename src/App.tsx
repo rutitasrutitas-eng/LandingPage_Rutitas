@@ -22,7 +22,7 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
   const dialogRef = useRef<HTMLElement>(null)
   useEffect(() => {
     closeRef.current?.focus()
-    const focusableElements = () => dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    const focusableElements = () => dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])')
     const handleKeys = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
@@ -58,17 +58,17 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
     }
   }, [onClose])
   const content = {
-    funciona: {
-      eyebrow: 'UNA IDEA SIMPLE', title: 'El camino se comparte.', description: 'Rutitas busca conectar a personas de una misma comunidad universitaria para organizar trayectos.',
-      points: [ ['01', 'Conecta', 'Forma parte de tu comunidad.'], ['02', 'Encuentra', 'Explora trayectos disponibles.'], ['03', 'Comparte', 'Organiza tu próxima salida.'] ]
+      funciona: {
+      eyebrow: 'UNA IDEA SIMPLE', title: 'El camino se comparte.', description: 'Rutitas es una propuesta universitaria de movilidad compartida. Busca facilitar la organización de trayectos y fomentar la colaboración dentro de una comunidad educativa.',
+      points: [ ['01', 'Conecta con tu comunidad', 'La propuesta está pensada para integrantes de una misma comunidad universitaria.'], ['02', 'Encuentra trayectos', 'La consulta de rutas y la búsqueda de opciones para compartir viajes están en desarrollo.'], ['03', 'Comparte el camino', 'La coordinación de viajes y las reservas reales todavía no están disponibles.'] ]
     },
     proyecto: {
-      eyebrow: 'CONOCE RUTITAS', title: 'Más cerca, en comunidad.', description: 'Un proyecto de movilidad compartida pensado para estudiantes, con piloto inicial en la UTTT. La aplicación todavía está en desarrollo.',
-      points: [ ['✦', 'Universitario', 'Pensado para comunidades educativas.'], ['✦', 'Colaborativo', 'Para organizar trayectos compartidos.'], ['✦', 'En desarrollo', 'Las funciones aún no están disponibles al público.'] ]
+      eyebrow: 'CONOCE RUTITAS', title: 'Más cerca, en comunidad.', description: 'Rutitas es un proyecto universitario que busca facilitar la organización de trayectos y la colaboración entre integrantes de una comunidad educativa. Su diseño se dirige inicialmente a la comunidad UTTT; un piloto está previsto, sujeto a validación y coordinación. La UTTT no se presenta aquí como responsable legal ni como entidad que haya autorizado u opere el servicio.',
+      points: [ ['✦', 'El reto', 'Explorar una forma colaborativa de organizar desplazamientos cotidianos.'], ['✦', 'En desarrollo', 'La aplicación móvil y su integración con servicios remotos requieren pruebas.'], ['✦', 'Aún no disponible', 'No hay reservas ni viajes reales ofrecidos desde esta landing.'] ]
     },
     seguridad: {
-      eyebrow: 'DISEÑADO CON CUIDADO', title: 'Confianza desde el inicio.', description: 'La verificación de comunidad y la privacidad forman parte de los requisitos previstos para Rutitas. Aún no son servicios activos.',
-      points: [ ['✓', 'Comunidad', 'Verificación institucional prevista.'], ['✓', 'Privacidad', 'Protección de información personal.'], ['✓', 'Encuentros', 'Preferencia por puntos públicos.'] ]
+      eyebrow: 'DISEÑADO CON CUIDADO', title: 'Confianza desde el inicio.', description: 'La autenticación y la gestión de cuentas están en el código del Backend, pero todavía no están integradas con la aplicación Android ni ofrecidas como servicio operativo. La política de datos y las medidas de seguridad requieren validación antes de cualquier uso real.',
+      points: [ ['✓', 'Autenticación', 'Código de API sujeto a integración, despliegue y pruebas operativas.'], ['✓', 'Comunidad', 'La verificación institucional es una función prevista, no confirmada como activa.'], ['✓', 'Viajes', 'Verificación de conductores y medidas de seguridad para viajes siguen en desarrollo.'] ]
     }
   }[view]
   return <div className="modal-backdrop" onMouseDown={event => { if(event.target === event.currentTarget) onClose() }}>
@@ -76,6 +76,23 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
       <button ref={closeRef} className="modal-close" aria-label="Cerrar información" onClick={onClose}><Icon name="close" size={20}/></button>
       <div className="modal-eyebrow">{content.eyebrow}</div><h2 id="modal-title">{content.title}</h2><p id="modal-description">{content.description}</p>
       <div className="modal-points">{content.points.map(([n, t, d]) => <div className="modal-point" key={t}><span className="point-num">{n}</span><div><strong>{t}</strong><span>{d}</span></div></div>)}</div>
+      {view === 'proyecto' && <section className="faq-section" aria-labelledby="faq-title">
+        <h3 id="faq-title">Preguntas frecuentes</h3>
+        {[
+          ['¿Qué es Rutitas?', 'Es un proyecto universitario de movilidad compartida que busca facilitar la organización de trayectos y la colaboración entre integrantes de una comunidad educativa.'],
+          ['¿Para quién está pensado?', 'Inicialmente está pensado para la comunidad UTTT. Un piloto está previsto, sujeto a validación y coordinación; no se anuncia como servicio activo.'],
+          ['¿La aplicación ya está disponible?', 'No. La aplicación está en desarrollo y todavía no se ofrece para uso público.'],
+          ['¿Cómo funcionará?', 'La propuesta busca ayudar a consultar trayectos y, más adelante, coordinar opciones para compartir viajes. Reservas y viajes reales aún no están disponibles.'],
+          ['¿Puedo consultar rutas?', 'El Backend incluye código para consultar un catálogo de rutas, y Android muestra datos locales en modo DEMO. No existe integración operativa confirmada para usuarios.'],
+          ['¿Puedo reservar un asiento?', 'No desde Rutitas actualmente. La reserva real depende de integración y pruebas que todavía están pendientes.'],
+          ['¿Cómo se protegerán mis datos?', 'El aviso de privacidad sigue como borrador. Las prácticas, responsables, proveedores y medidas aplicables deben confirmarse antes de operar.'],
+          ['¿Dónde puedo consultar el aviso de privacidad?', 'En esta landing, mediante el enlace “Privacidad” del pie de página. El texto está pendiente de aprobación legal.'],
+          ['¿Cómo podré eliminar mi cuenta?', 'La ruta “Eliminar cuenta” explica el estado actual. Android permite una baja local de datos DEMO; no hay evidencia de eliminación remota operativa.'],
+          ['¿Dónde podré descargar Rutitas?', 'La descarga se anunciará cuando exista una ficha oficial de Google Play. Por ahora la landing indica “Próximamente”.'],
+        ].map(([question, answer]) => <details className="faq-item" key={question}>
+          <summary>{question}</summary><p>{answer}</p>
+        </details>)}
+      </section>}
       <button className="modal-done" onClick={onClose}>Entendido <Icon name="check" size={16}/></button>
     </section>
   </div>
@@ -143,7 +160,7 @@ function HomePage() {
           <button className="primary-cta" aria-haspopup="dialog" onClick={event => openModal(event, 'funciona')}>Descubre Rutitas <Icon name="arrow" size={19}/></button>
           <button className="secondary-cta" aria-haspopup="dialog" onClick={event => openModal(event, 'proyecto')}>Conoce el proyecto</button>
         </div>
-        <div className="hero-trust"><span className="trust-mark"><Icon name="shield" size={15}/></span><span>PILOTO UNIVERSITARIO · UTTT</span></div>
+        <div className="hero-trust"><span className="trust-mark"><Icon name="shield" size={15}/></span><span>PROPUESTA UNIVERSITARIA · UTTT</span></div>
       </section>
     </main>
     <SiteFooter />

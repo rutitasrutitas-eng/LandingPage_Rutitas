@@ -16,3 +16,12 @@
 - [x] Auditoría npm ejecutada; el escaneo Gitleaks local no se pudo ejecutar y está configurado en CI.
 - [x] Constitución permanece `PENDIENTE_RATIFICACION`.
 - [x] No se hicieron commits, push, cambios remotos de Vercel ni despliegue productivo.
+
+## LANDING-005 — presentación (verificado localmente)
+
+- [x] El copy presenta una propuesta universitaria y un piloto previsto, no un servicio operativo confirmado.
+- [x] Los modales explican los tres pasos, el proyecto y límites actuales de seguridad/funciones.
+- [x] Diez preguntas frecuentes usan `details/summary` y se verificaron con teclado en Chromium desktop/móvil.
+- [x] Metadatos OG/description no prometen QR ni descarga no disponibles; Playwright confirma el favicon y las siete resoluciones.
+- [x] `npm ci`, lint, typecheck, Vitest 17/17, Playwright 16 pass/2 skip, build, SDD, audit y diff whitespace: exit 0. Detalle en `docs/REPORTE_LANDING_005.md`.
+- [ ] Autorización del piloto UTTT, disponibilidad pública de la app y cualquier promesa de seguridad siguen sujetas a decisión humana.

@@ -88,3 +88,12 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - La revisión detectó que Analytics permanecía fuera del contenedor inerte y sus z-index superaban al backdrop. La corrección coloca Analytics dentro de `.site-shell`, eleva el backdrop a z-index 1000, mantiene foco dentro del diálogo y permite scroll vertical si aumenta el contenido.
 - Evidencia final local: lint/typecheck/build/SDD/audit exit 0; Vitest 16/16; `npm run test:e2e` 12/12 pasadas con 2 omisiones intencionales por falta del ID sintético, más prueba dirigida con `VITE_GA_MEASUREMENT_ID=G-ABC1234567` 6/6 pasadas en Chromium y mobile-chromium. Contraste, retorno de foco, Analytics inerte y texto ampliado probados. Detalle en `docs/pruebas.md` y `docs/REPORTE_LANDING_004.md`.
 - No se probó el zoom nativo del navegador; se probaron viewports reducidos y texto CSS al doble de su tamaño computado. CI remoto no ejecutado. No se hizo push ni PR según la instrucción; Vercel y producción no se alteraron.
+
+## LANDING-005 — presentación del proyecto — 2026-11-17
+
+- Trabajo separado en `feature/landing-005-presentacion`, basada en LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`; se mantuvo `main` intacta.
+- La portada mantiene su fotografía, logotipo, paleta, composición y CTA. El contenido presenta una propuesta de movilidad compartida dirigida inicialmente a la comunidad UTTT. El piloto está previsto sujeto a validación; no se afirma afiliación, autorización ni operación de la Universidad.
+- Se incorporaron tres etapas previstas, límites de disponibilidad/seguridad y diez FAQ accesibles dentro del diálogo existente. Metadatos corregidos para no prometer QR ni descarga.
+- Cotejo de solo lectura: Backend `main` `a95e62e2f0f9fbde46af0144c9fb89c858670c94`, Android `feature/integracion-android-ci-cd` `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. El Android revisado tiene `DEMO_MODE=true`; no se confirmó su integración con el Backend ni disponibilidad pública. El detalle está en `docs/REPORTE_LANDING_005.md`.
+- Verificación local LANDING-005: `npm ci`, lint, typecheck, build, SDD, audit y diff whitespace exit 0; Vitest 17/17 y Playwright 16 pasadas con 2 omisiones intencionales sin ID sintético. El test Playwright cubre siete viewports y FAQ por teclado. Zoom nativo, CI, Preview, publicación, Play, Analytics real y aprobación del piloto no se ejecutaron.
+- La revisión legal sigue pendiente; no se incorporan responsables ni contactos inventados. Constitución `PENDIENTE_RATIFICACION` y producción intactas.

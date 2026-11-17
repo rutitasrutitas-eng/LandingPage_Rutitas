@@ -1,5 +1,16 @@
 # Estrategia y casos de prueba — LANDING-001
 
+## LANDING-005 — presentación y preguntas frecuentes — 2026-11-17
+
+Ejecución independiente en `feature/landing-005-presentacion`, basada en LANDING-004. `npm ci` instaló el lockfile sin cambios (243 paquetes auditados, cero vulnerabilidades reportadas). `npm run lint`, `npm run typecheck`, `npm run build`, `npm run sdd:verify`, `npm audit --audit-level=high` y `git diff --check` terminaron con exit 0. Build Vite 6.4.5: JS 245.76 kB (76.41 kB gzip), CSS 15.28 kB (4.02 kB gzip).
+
+- Vitest: 17/17 pruebas pasadas.
+- Playwright sin ID de Analytics: 16 pasadas y 2 omitidas intencionalmente (un caso dedicado por proyecto porque no había Measurement ID sintético configurado).
+- Playwright cubre siete resoluciones, CTA/modales, menú móvil, privacidad/eliminación y recarga. FAQ: diez preguntas, `summary` alcanzable con Tab, apertura con Enter, Tab/Shift+Tab cíclico del diálogo, Escape y foco restaurado.
+- `720×450` representa aproximadamente 200% de zoom CSS en una ventana 1440×900; no se modificó el zoom nativo ni se probaron dispositivos físicos.
+- Revisión de contenido: Backend `main` SHA `a95e62e2f0f9fbde46af0144c9fb89c858670c94`, Android `feature/integracion-android-ci-cd` SHA `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. El código revisado no acredita operación para usuarios reales ni integración Android–Backend.
+- Esta corrida no valida Google Play real, Analytics real, CI remoto, Vercel Preview, publicación ni aprobación legal.
+
 ## Unitarias
 
 - UT-LP-001: render de la portada.

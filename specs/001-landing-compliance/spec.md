@@ -22,6 +22,9 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 | LP-REQ-008 | Calidad automatizada | Scripts reproducibles de typecheck, build, unit/integration; pruebas de navegador para rutas si el runtime permite instalar navegadores. | MUST |
 | LP-REQ-009 | CI y seguridad | Pull Requests ejecutan lockfile install, tipos, build, tests, verificador SDD, escaneo de secretos y auditoría de dependencias; evidencias publicadas como artefacto. | MUST |
 | LP-REQ-010 | Evidencia y operación | Docs SDD, matriz de trazabilidad y memoria distinguen lo implementado, verificado, pendiente y no ejecutado. | MUST |
+| LP-REQ-011 | Presentación precisa | La portada conserva foto, marca y composición; los modales explican el propósito universitario y separan claramente lo previsto de lo disponible. Reservas y viajes reales no se anuncian como activos. | MUST |
+| LP-REQ-012 | Preguntas frecuentes | El modal de proyecto contiene respuestas breves para las diez preguntas acordadas; las respuestas distinguen código de pruebas, modo DEMO y disponibilidad para usuarios. | MUST |
+| LP-REQ-013 | Metadatos veraces | Los metadatos de la página no prometen QR, acceso o descarga no disponibles; favicon y recursos referenciados existen. | MUST |
 
 ## Requisitos no funcionales
 

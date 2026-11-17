@@ -1,6 +1,12 @@
 import { expect, test, type Page } from '@playwright/test'
 import { writeFile } from 'node:fs/promises'
 
+test.beforeEach(async ({ page }) => {
+  if (process.env.VITE_GA_MEASUREMENT_ID) {
+    await page.addInitScript(() => localStorage.setItem('rutitas.analytics-consent', 'denied'))
+  }
+})
+
 const screens = [
   { width: 1440, height: 900 },
   { width: 1366, height: 768 },
@@ -175,4 +181,49 @@ test('both hero calls to action preserve their informational dialogs', async ({ 
 
   await page.getByRole('button', { name: /conoce el proyecto/i }).click()
   await expect(page.getByRole('dialog')).toContainText('Más cerca, en comunidad.')
+})
+
+test('LANDING-005: project information and FAQ stay accurate and keyboard accessible', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  const trigger = page.getByRole('button', { name: /conoce el proyecto/i })
+  await trigger.click()
+  const dialog = page.getByRole('dialog')
+  await expect(dialog).toContainText('piloto está previsto')
+  await expect(dialog).toContainText('reservas ni viajes reales')
+
+  const questions = [
+    '¿Qué es Rutitas?', '¿Para quién está pensado?', '¿La aplicación ya está disponible?', '¿Cómo funcionará?',
+    '¿Puedo consultar rutas?', '¿Puedo reservar un asiento?', '¿Cómo se protegerán mis datos?',
+    '¿Dónde puedo consultar el aviso de privacidad?', '¿Cómo podré eliminar mi cuenta?', '¿Dónde podré descargar Rutitas?',
+  ]
+  for (const question of questions) await expect(dialog.getByText(question, { exact: true })).toBeVisible()
+
+  const close = dialog.getByRole('button', { name: 'Cerrar información' })
+  const firstFaq = dialog.locator('.faq-item summary').first()
+  const done = dialog.getByRole('button', { name: /entendido/i })
+  await expect(close).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(firstFaq).toBeFocused()
+  await firstFaq.press('Enter')
+  await expect(dialog.getByText(/proyecto universitario de movilidad compartida/i)).toBeVisible()
+  await done.focus()
+  await page.keyboard.press('Tab')
+  await expect(close).toBeFocused()
+  await page.keyboard.press('Shift+Tab')
+  await expect(done).toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(dialog).toHaveCount(0)
+  await expect(trigger).toBeFocused()
+})
+
+test('metadata describes the project without promising an unavailable download', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /en desarrollo/)
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /en desarrollo/)
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/favicon.svg')
+  const favicon = await page.request.get('/favicon.svg')
+  expect(favicon.ok()).toBe(true)
+  const description = await page.locator('meta[name="description"]').getAttribute('content')
+  expect(description).not.toMatch(/QR|descarga|accede a la app/i)
 })
