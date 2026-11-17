@@ -1,6 +1,6 @@
 # Memoria de Rutitas Landing
 
-**Estado actual (2026-11-16):** LANDING-003 / PR #9 fue fusionado a `main` el **2026-11-12** (18:03:18 UTC); merge commit `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004 está en `fix/landing-004-estabilidad-accesibilidad`; el commit correctivo de código es `2ccb740fd10df5a3258bfaca28ecfdd6f72c89be`. No se ha hecho push ni abierto un PR. La regla de Vercel para suprimir Preview aún no está confirmada ni configurada.
+**Estado actual (2026-11-16):** LANDING-003 / PR #9 fue fusionado a `main` el **2026-11-12** (18:03:18 UTC); merge commit `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004 está en `fix/landing-004-estabilidad-accesibilidad`; su último commit confirmado es `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`. LANDING-006 se desarrolla en `feature/landing-006-aviso-privacidad` basada en ese SHA; la página de privacidad y su documentación se actualizaron y probaron localmente, mientras la aprobación legal y el cotejo Android/Backend siguen pendientes. No se ha hecho push, abierto PR ni desplegado LANDING-006. La regla de Vercel para suprimir Preview aún no está confirmada ni configurada.
 **Última actualización:** 2026-11-16.
 
 ## Hechos confirmados en el repo
@@ -88,3 +88,12 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - La revisión detectó que Analytics permanecía fuera del contenedor inerte y sus z-index superaban al backdrop. La corrección coloca Analytics dentro de `.site-shell`, eleva el backdrop a z-index 1000, mantiene foco dentro del diálogo y permite scroll vertical si aumenta el contenido.
 - Evidencia final local: lint/typecheck/build/SDD/audit exit 0; Vitest 16/16; `npm run test:e2e` 12/12 pasadas con 2 omisiones intencionales por falta del ID sintético, más prueba dirigida con `VITE_GA_MEASUREMENT_ID=G-ABC1234567` 6/6 pasadas en Chromium y mobile-chromium. Contraste, retorno de foco, Analytics inerte y texto ampliado probados. Detalle en `docs/pruebas.md` y `docs/REPORTE_LANDING_004.md`.
 - No se probó el zoom nativo del navegador; se probaron viewports reducidos y texto CSS al doble de su tamaño computado. CI remoto no ejecutado. No se hizo push ni PR según la instrucción; Vercel y producción no se alteraron.
+
+## LANDING-006 — aviso de privacidad
+
+- La rama `feature/landing-006-aviso-privacidad` se creó en un worktree independiente desde el commit confirmado de LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`. Se conservaron intactos los cambios locales y archivos `.diff` del checkout original.
+- El paquete `Rutitas_aviso_privacidad_propuesta.zip` se recibió y extrajo fuera del repositorio en `../insumos`. Se integraron su componente React, estilos, borrador Markdown y checklist de validación; la portada no se modificó y `/eliminar-cuenta` continúa informativa, sin formulario ni mecanismo remoto ficticio.
+- La página presenta una marca de Rutitas azul/blanco/amarillo, aviso de borrador, índice con anclas, skip-link, secciones semánticas, contacto pendiente, enlaces al inicio y eliminación. Analytics no cambió: requiere ID GA válido y consentimiento explícito.
+- El texto distingue la Landing actual sin registro, datos DEMO locales descritos por el paquete y funciones/campos del Backend que requieren integración. Los repositorios Android/Backend no se inspeccionaron en esta tarea; sus afirmaciones siguen pendientes de cotejo con SHA/versiones actuales. No se afirma que datos DEMO se transmitan remotamente.
+- Validaciones LANDING-006 ejecutadas localmente y reportadas en `docs/pruebas.md` y `docs/REPORTE_LANDING_006.md`. Capturas Playwright escritorio y móvil: `test-results/landing006_privacidad_escritorio.png` y `test-results/landing006_privacidad_movil.png` (salidas ignoradas por Git).
+- Aprobación legal humana pendiente: responsable/domicilio/régimen, contacto atendido, inventario real de datos, finalidades, proveedores/transferencias, retención, controles operativos, eliminación completa y fecha efectiva. También falta ratificar la Constitución SDD. CI remoto y Preview no ejecutados; no hubo push, PR ni despliegue.

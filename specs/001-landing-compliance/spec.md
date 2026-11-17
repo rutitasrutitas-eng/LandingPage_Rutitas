@@ -14,7 +14,7 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 |---|---|---|---|
 | LP-REQ-001 | Conservar la landing actual | La portada, logotipos, mockup, modales y paleta siguen disponibles. | MUST |
 | LP-REQ-002 | Rutas legales | `/privacidad` y `/eliminar-cuenta` cargan por navegación y acceso directo/recarga; el footer enlaza a ambas. | MUST |
-| LP-REQ-003 | Aviso de privacidad | La página contiene todas las secciones solicitadas y marca de forma visible estado de borrador; los hechos no confirmados son marcadores, no afirmaciones. | MUST |
+| LP-REQ-003 | Aviso de privacidad | La página `/privacidad` presenta un diseño responsive y accesible, contiene las secciones solicitadas y distingue los tratamientos actuales del sitio, datos locales DEMO y funciones previstas. Mantiene visible el estado de borrador; los hechos no confirmados aparecen como pendientes y nunca como hechos operativos. | MUST |
 | LP-REQ-004 | Eliminación de cuenta | Explica solicitud, validación, consecuencias y retención como pendientes; no afirma que exista un proceso ni permite enviar datos. | MUST |
 | LP-REQ-005 | GA4 configurable | Solo se carga con un Measurement ID de formato válido y consentimiento explícito; no manda datos personales ni pageviews duplicadas. | MUST |
 | LP-REQ-006 | Google Play | URL configurable, verificada sintácticamente como enlace HTTPS de Play; botón/QR no aparecen activos si falta la URL. | MUST |
@@ -22,6 +22,7 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 | LP-REQ-008 | Calidad automatizada | Scripts reproducibles de typecheck, build, unit/integration; pruebas de navegador para rutas si el runtime permite instalar navegadores. | MUST |
 | LP-REQ-009 | CI y seguridad | Pull Requests ejecutan lockfile install, tipos, build, tests, verificador SDD, escaneo de secretos y auditoría de dependencias; evidencias publicadas como artefacto. | MUST |
 | LP-REQ-010 | Evidencia y operación | Docs SDD, matriz de trazabilidad y memoria distinguen lo implementado, verificado, pendiente y no ejecutado. | MUST |
+| LP-REQ-011 | Navegación del aviso | El índice enlaza a encabezados semánticos, ofrece salto al contenido y conserva navegación de retorno al inicio y a eliminación de cuenta sin alterar la portada. | MUST |
 
 ## Requisitos no funcionales
 

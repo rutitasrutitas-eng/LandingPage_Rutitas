@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
 import AnalyticsConsent from './AnalyticsConsent'
-import { AccountDeletionPage, NotFoundPage, PrivacyPage } from './LegalPages'
+import { AccountDeletionPage, NotFoundPage } from './LegalPages'
+import PrivacyRutitas from './PrivacyRutitas'
 import SiteFooter from './SiteFooter'
 
 type ModalId = 'funciona' | 'proyecto' | 'seguridad' | null
@@ -169,7 +170,7 @@ export default function App() {
   const page = path === '/'
     ? <HomePage />
     : path === '/privacidad'
-      ? <PrivacyPage />
+      ? <PrivacyRutitas />
       : path === '/eliminar-cuenta'
         ? <AccountDeletionPage />
         : <NotFoundPage />

@@ -14,5 +14,10 @@
 | T-010 | completado | Añadir lockfile y scripts de calidad mínimos. | `npm ci`, lint, typecheck, build, Vitest, Playwright y auditoría de dependencias. |
 | T-011 | completado | Añadir workflow GitHub Actions de PR, seguridad y evidencias. | YAML/JSON revisados; ejecución remota pendiente de GitHub. |
 | T-012 | completado | Cerrar memoria, trazabilidad, checklist y reporte final. | Revisión documental y del árbol Git sin commit/push. |
+| L6-T-001 | completado | Inspeccionar el paquete de privacidad recibido y registrar requisitos/trazabilidad antes de integrar. | Paquete extraído fuera del repo; `LP-REQ-003`, `LP-REQ-011`, matriz y checklist LANDING-006. |
+| L6-T-002 | completado | Integrar la nueva vista `/privacidad`, conservando portada, Analytics y `/eliminar-cuenta`. | Componente/estilos recibidos; pruebas locales conservan Home y ambas rutas. |
+| L6-T-003 | completado | Revisar lenguaje para separar el sitio actual, datos locales DEMO y capacidades previstas; registrar aprobación pendiente. | Landing actual distinguida; afirmaciones Android/Backend etiquetadas como paquete no verificado; pendientes en `docs/VALIDACIONES_PRIVACIDAD.md`. |
+| L6-T-004 | completado | Ejecutar controles completos y guardar resultados reales. | Resultados locales finales en `docs/pruebas.md`; CI remoto no ejecutado. |
+| L6-T-005 | completado | Actualizar Memoria, checklist, matriz y evidencia LANDING-006. | Reporte y evidencia local actualizados; no se publica ni fusiona. |
 
 Estados permitidos: `no_iniciado`, `en_progreso`, `bloqueado`, `completado`, `no_ejecutado`. El estado final de cada tarea se actualizará solo con evidencia.

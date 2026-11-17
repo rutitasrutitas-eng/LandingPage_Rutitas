@@ -11,6 +11,7 @@
 | 5. Accesibilidad / visual | LP-REQ-001, 007 | Hacer scroll legal, foco de diálogo y teclado; conservar estilos existentes. | Playwright responsive/teclado si navegador disponible; revisión manual de capturas. |
 | 6. Calidad / CI | LP-REQ-008–009 | Lockfile, scripts de pruebas y workflow PR con mínimo privilegio. | Salidas reales de build/tests/auditoría/secret scan; artefacto de resultados. |
 | 7. Documentar / revisar | LP-REQ-010 | Actualizar arquitectura, requisitos, tests, matriz y memoria; checklist final; verificar git diff. | Lista de requisitos con estado y límites; árbol de trabajo sin commit/push. |
+| 8. LANDING-006 privacidad | LP-REQ-003, LP-REQ-004, LP-REQ-007, LP-REQ-008, LP-REQ-010–011 | Integrar el diseño recibido únicamente en `/privacidad`; validar el contenido por categorías (Landing actual, Android DEMO local, Backend/capacidades en desarrollo y funciones previstas), preservar eliminación informativa y actualizar evidencia SDD. | Paquete de origen inspeccionado; unitarias, Playwright responsive/teclado y controles de calidad; pendientes legales documentados. |
 
 ## Riesgos y respuesta
 

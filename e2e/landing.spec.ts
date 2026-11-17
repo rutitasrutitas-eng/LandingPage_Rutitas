@@ -148,15 +148,57 @@ test('legal links navigate and direct reload works while legal text retains natu
   await page.goto('/')
   await page.getByRole('link', { name: 'Privacidad' }).click()
   await expect(page).toHaveURL(/\/privacidad$/)
-  await expect(page.getByRole('heading', { name: 'Aviso de privacidad' })).toBeVisible()
+  await expect(page.locator('h1')).toHaveText(/Tu camino\.Tu información\./)
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollHeight)).toBeGreaterThan(568)
   await page.reload()
-  await expect(page.getByRole('heading', { name: 'Aviso de privacidad' })).toBeVisible()
+  await expect(page.locator('h1')).toHaveText(/Tu camino\.Tu información\./)
+
+  await page.setViewportSize({ width: 320, height: 568 })
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)
+  expect(overflow).toBe(false)
+  await page.getByRole('link', { name: /Contacto de privacidad/i }).first().click()
+  await expect(page).toHaveURL(/\/privacidad#contacto$/)
+  await expect(page.getByRole('heading', { name: 'Contacto de privacidad' })).toBeInViewport()
+  await page.goto('/privacidad')
+  await page.keyboard.press('Tab')
+  const skipLink = page.getByRole('link', { name: 'Saltar al aviso' })
+  await expect(skipLink).toBeFocused()
+  const focusStyle = await skipLink.evaluate(element => {
+    const style = getComputedStyle(element)
+    return { outline: style.outlineStyle, outlineColor: style.outlineColor, shadow: style.boxShadow }
+  })
+  expect(focusStyle.outline).toBe('solid')
+  expect(focusStyle.outlineColor).toBe('rgb(11, 36, 80)')
+  expect(focusStyle.shadow).toContain('rgb(255, 202, 40)')
+  await page.keyboard.press('Enter')
+  await expect(page.locator('#aviso-contenido')).toBeFocused()
 
   await page.goto('/eliminar-cuenta')
   await expect(page.getByRole('heading', { name: 'Eliminación de cuenta' })).toBeVisible()
   await page.reload()
   await expect(page.getByRole('heading', { name: 'Eliminación de cuenta' })).toBeVisible()
+})
+
+test('privacy page remains readable across the accepted viewport sizes', async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 1366, height: 768 },
+    { width: 768, height: 1024 },
+    { width: 390, height: 844 },
+    { width: 375, height: 667 },
+    { width: 320, height: 568 },
+    { width: 844, height: 390 },
+  ]) {
+    await page.setViewportSize(viewport)
+    await page.goto('/privacidad')
+    await expect(page.locator('h1')).toBeVisible()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+    const toc = page.getByRole('navigation', { name: 'Secciones del aviso de privacidad' })
+    await expect(toc.getByRole('link')).toHaveCount(11)
+    await toc.getByRole('link', { name: /Contacto de privacidad/ }).click()
+    await expect(page).toHaveURL(/\/privacidad#contacto$/)
+    await expect(page.locator('#contacto')).toBeInViewport()
+  }
 })
 
 test('both hero calls to action preserve their informational dialogs', async ({ page }) => {

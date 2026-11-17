@@ -16,3 +16,7 @@
 - [x] Auditoría npm ejecutada; el escaneo Gitleaks local no se pudo ejecutar y está configurado en CI.
 - [x] Constitución permanece `PENDIENTE_RATIFICACION`.
 - [x] No se hicieron commits, push, cambios remotos de Vercel ni despliegue productivo.
+- [x] LANDING-006: integrar diseño de privacidad recibido sin alterar Home ni la función de eliminación informativa.
+- [x] LANDING-006: distinguir tratamientos del sitio, descripciones locales de DEMO y capacidades previstas; la validación cruzada Android/Backend queda pendiente.
+- [x] LANDING-006: pruebas de secciones/anclas, navegación por teclado, enlaces y siete viewports; consentimiento Analytics probado aparte con ID sintético.
+- [x] LANDING-006: actualizar Memoria, matriz, pruebas y documentación de validación legal; aprobación legal sigue pendiente.
