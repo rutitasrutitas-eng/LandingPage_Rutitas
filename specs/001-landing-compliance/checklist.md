@@ -38,3 +38,6 @@
 - [x] LANDING-007: carga directa y reload del hero esperan `complete`, `naturalWidth > 0`, `decode()` y dimensión visible; se revisó la nueva captura desktop.
 - [x] LANDING-007: se cotejaron PR Android #9/#10 abiertos y Backend PR #6 fusionado; se separaron tests simulados de las pruebas reales contra servidor, que siguen pendientes.
 - [ ] LANDING-007: `npm audit --audit-level=high` informa 11 hallazgos high por `picomatch@4.0.7`; no hay parche publicado según advisory al corte ni se aplicó downgrade major. Resolver o aprobar formalmente el riesgo antes del release.
+- [x] LANDING-008 preparación: ejecutados `npm audit --json`, `npm audit --omit=dev --audit-level=high`, `npm ls picomatch --all` y búsqueda del bundle de producción.
+- [x] LANDING-008 preparación: GHSA y npm registry vigentes revisados; latest sigue en 4.0.7, advisory sin versión patched; no se modificaron dependencias ni se ocultó el resultado.
+- [ ] LANDING-008 pendiente: mitigar la dependencia de desarrollo cuando se publique un fix compatible o documentar aceptación humana del riesgo residual antes de release.

@@ -15,6 +15,7 @@
 | 9. LANDING-005 presentación | LP-REQ-015–017 | Precisar textos de los modales sin alterar la identidad del hero; agregar FAQ accesible compacta en el modal de proyecto; corregir metadatos que prometen disponibilidad no confirmada. | Pruebas de contenido, navegación por teclado/FAQ, metadatos y siete resoluciones; fuentes Android/Backend cotejadas. |
 | 10. Integración local | LP-REQ-010, LP-REQ-015–017 | Crear rama desde LANDING-004 y fusionar localmente LANDING-005 y LANDING-006 con sus commits; resolver conflictos y actualizar evidencia combinada. | Historial Git preservado, pruebas completas y entrega reproducible; sin push/PR/despliegue. |
 | 11. Corrección final de evidencia | LP-REQ-001, LP-REQ-008, LP-REQ-010, LP-REQ-012; L7-T-001/002 | Hacer determinista la espera de carga/decodificación de la foto del hero para captura directa y recarga; cotejar ramas y PR vigentes de Android/Backend sin asumir que los tests usan un servidor real. | Playwright comprueba `complete`, `naturalWidth`, `decode()` y visibilidad; captura desktop nueva; SHAs/estados de PR, DEMO y límites de pruebas registrados en matriz y reporte. |
+| 12. Evaluación de GHSA | LP-REQ-009, LP-REQ-010; L8-T-001 | Auditar el árbol de dependencias y el bundle, validar disponibilidad de parche y documentar condiciones de explotación/mitigaciones sin ocultar avisos. | Salida audit JSON y omit-dev, `npm ls`, registro oficial de advisory, búsqueda del bundle y reporte reproducible; cambios solo si existe versión corregida compatible. |
 
 ## Riesgos y respuesta
 

@@ -29,5 +29,6 @@
 | L6-T-008 | completado | Preparar decisiones legales y dependencias reales de eliminación. | `docs/PENDIENTES_LEGALES_RUTITAS.md`; no se agregaron contactos o plazos inventados. |
 | L7-T-001 | completado | Comprobar carga/decodificación de la imagen del hero en escritorio y recarga, y hacer determinista la captura. | Playwright espera `complete`, `naturalWidth > 0`, `decode()` y geometría visible en navegación directa/reload; nueva captura revisada. |
 | L7-T-002 | completado | Cotejar privacidad con las versiones vigentes de Android PR #9/#10 y Backend `main` posterior a PR #6. | Estados/SHA, `DEMO_MODE=true`, pruebas HTTP simuladas, check-runs y falta de servidor real documentados en `docs/VALIDACIONES_PRIVACIDAD.md`. |
+| L8-T-001 | completado | Evaluar GHSA-fc5q-39xc-vjpf, exposición del árbol npm y posible corrección compatible sin ocultar hallazgos. | `npm audit --json`, auditoría omit-dev, árboles npm, bundle de producción y advisory actual documentados en `docs/REPORTE_SEGURIDAD_DEPENDENCIAS.md`; sin versión corregida compatible disponible. |
 
 Estados permitidos: `no_iniciado`, `en_progreso`, `bloqueado`, `completado`, `no_ejecutado`. El estado final de cada tarea se actualizará solo con evidencia.

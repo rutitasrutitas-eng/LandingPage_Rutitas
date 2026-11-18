@@ -73,6 +73,7 @@ Para pruebas Playwright, instala Chromium una sola vez con `npx playwright insta
 - Verificación de fuentes Android/Backend y decisiones legales pendientes: `docs/VALIDACIONES_PRIVACIDAD.md` y `docs/PENDIENTES_LEGALES_RUTITAS.md`.
 - Reporte integrado de LANDING-004/005/006, accesibilidad y pasos de revisión/publicación: `docs/REPORTE_INTEGRACION_FINAL.md`, `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md` y `docs/PLAN_REVISION_PUBLICACION.md`.
 - Pendientes de release y checklist previo a publicar: `docs/MATRIZ_PENDIENTES_RELEASE.md` y `docs/CHECKLIST_RELEASE_FUTURO.md`.
+- Auditoría vigente de la dependencia transitiva `picomatch` y riesgo residual: `docs/REPORTE_SEGURIDAD_DEPENDENCIAS.md`.
 - Auditoría, arquitectura, requisitos docentes, pruebas y trazabilidad: `docs/`.
 - `Memoria.md` guarda decisiones no confidenciales.
 - `.github/workflows/quality.yml` ejecuta calidad y seguridad en Pull Requests; no publica a producción.

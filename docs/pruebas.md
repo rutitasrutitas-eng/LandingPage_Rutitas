@@ -2,6 +2,15 @@
 
 Las secciones de corridas individuales LANDING-005/006 y la primera integración preservan resultados históricos de su ejecución. Para la rama integrada, la verificación más reciente LANDING-007 que aparece a continuación prevalece, especialmente para el resultado vigente de `npm audit`.
 
+## Revisión de dependencias LANDING-008 — 2026-11-17
+
+- `npm audit --json`: comando exit 1; 11 high, 0 critical/moderate/low. El único advisory raíz es GHSA-fc5q-39xc-vjpf sobre `picomatch@4.0.7`, propagado a los paquetes consumidores del toolchain dev/build.
+- `npm audit --omit=dev --audit-level=high`: exit 0, 0 vulnerabilidades.
+- `npm ls picomatch --all`: exit 0; rutas bajo Vite/Vitest. Árbol ampliado confirma ruta por `typescript-eslint`.
+- `npm view picomatch version dist-tags --json`: `latest=4.0.7`. GHSA declara `<=4.0.7` afectado y ninguna versión patched; no existe fix compatible que aplicar.
+- `npm run build`: exit 0. `rg -n -i "picomatch|fdir|tinyglobby" dist`: sin coincidencias. No se corrieron Vitest/E2E porque el árbol no cambió; la auditoría y build sí se ejecutaron.
+- No se usó `npm audit fix --force`, no se cambió lockfile y no se añadieron excepciones de CI. Detalle de exposición, mitigación y decisión pendiente en `docs/REPORTE_SEGURIDAD_DEPENDENCIAS.md`.
+
 ## Verificación correctiva LANDING-007 — foto del hero y cotejo remoto — 2026-11-17
 
 La captura previa de escritorio se hacía inmediatamente tras `page.goto('/')`, mientras el `<img>` del hero declara `decoding="async"`; no esperaba carga ni decodificación. Se añadió una regresión Playwright para abrir `/` directamente, exigir `complete`, `naturalWidth > 0`, `decode()` resuelto y caja visible, recargar y repetir las aserciones. Las capturas de Home ahora esperan ese estado.
