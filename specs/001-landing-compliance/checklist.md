@@ -41,3 +41,35 @@
 - [x] LANDING-008 preparación: ejecutados `npm audit --json`, `npm audit --omit=dev --audit-level=high`, `npm ls picomatch --all` y búsqueda del bundle de producción.
 - [x] LANDING-008 preparación: GHSA y npm registry vigentes revisados; latest sigue en 4.0.7, advisory sin versión patched; no se modificaron dependencias ni se ocultó el resultado.
 - [ ] LANDING-008 pendiente: mitigar la dependencia de desarrollo cuando se publique un fix compatible o documentar aceptación humana del riesgo residual antes de release.
+
+## LANDING-008 — preparación local para revisión GitHub
+
+- [x] Borrador de PR preparado con base `main` y head `feature/landing-integracion-final-local`; no publicado.
+- [x] Historial LANDING-004/005/006 preservado y el diff de revisión compara contra `main`.
+- [x] Reporte de seguridad y resultado fallido de `npm audit` incluidos íntegros; el riesgo residual requiere aceptación humana antes de cualquier release.
+- [x] Checklist Vercel identifica verificaciones administrativas y el posible efecto del primer push; ninguna configuración remota fue modificada.
+- [x] ZIP incluye reporte, capturas, diff, borrador PR, checklist, resultados, SHA y bloqueos.
+- [x] CI, push, PR, merge, Preview y despliegue permanecen sin ejecutar por instrucción.
+- [ ] Aceptación formal del riesgo residual high y su uso previo a cualquier release.
+- [x] Auditoría de costo cero Vercel documenta observaciones, precios públicos y límites de evidencia; no hizo llamadas, instalaciones, cambios, despliegues ni commits.
+- [x] Diagnóstico del conector oficial registra `list_teams=[]`, errores 403 de equipo/proyecto y 404 al solicitar consentimiento; no se intentó una vía alternativa.
+- [ ] Completar las secciones de cuenta no verificadas con capturas manuales de Billing, Usage, AI Gateway budgets/credits y Project Git/Protection sin datos sensibles.
+
+## Actualización de privacidad por coordinación — 2026-11-17
+
+- [x] `/privacidad` mantiene la etiqueta de borrador no ratificado e incorpora Equipo de Rutitas como responsable operativo y `rutitas.rutitas@gmail.com` como contacto proporcionado.
+- [x] El objetivo de conservación de hasta 2 meses se presenta como previsto, sujeto a revisión técnica/legal y sin afirmar implementación.
+- [x] Se separa Vercel (hosting observado) del código/servicios cuya operación no fue confirmada y de los proveedores contemplados; política de costo adicional autorizado: $0 MXN, sin afirmar que los servicios sean gratuitos.
+- [x] `/eliminar-cuenta` explica el plan futuro Android + Backend y la dependencia de implementación y validación por Mark y Ame; no hay formulario ni eliminación remota operativa.
+- [x] Lint, typecheck, unitarias 17/17, Playwright 19 passed/1 skip, build y SDD ejecutados localmente; detalle en `docs/pruebas.md`.
+- [ ] Confirmar identidad legal completa/domicilio, tratamientos y proveedores efectivos, atención/procedimiento del correo, validar retención con revisión técnica/legal y completar revisión legal final.
+- [ ] Mark y Ame implementan y validan la eliminación remota antes de ofrecerla como funcional.
+
+## LANDING-010 — consolidación local
+
+- [x] Se inspeccionaron rama, HEAD, diffs y archivos sin seguimiento; solo se incluyeron cambios LANDING-008/009 identificados.
+- [x] Validaciones locales, auditoría de dependencias y SDD registran resultados reales; no se instalaron paquetes.
+- [x] Búsqueda local de patrones de secretos sin exponer valores; Gitleaks no está disponible y no se instaló.
+- [x] Commits locales dentro del alcance de autorización, sin push ni otra acción remota.
+- [x] Reporte `LANDING_010_RELEASE_READINESS.md` contiene hashes de commits, riesgos, bloqueos y estado de Vercel.
+- [x] La política `$0 MXN` se conserva: sin AI Gateway, créditos, cambios de Vercel ni despliegues.

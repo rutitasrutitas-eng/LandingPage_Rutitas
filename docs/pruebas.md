@@ -1,6 +1,45 @@
 # Estrategia y casos de prueba — LANDING-001
 
+## LANDING-010 — revalidación antes de consolidación local — 2026-11-18
+
+| Control | Comando | Resultado |
+|---|---|---|
+| Unitarias | `npm run test -- --reporter=dot` | Exit 0; 17/17 pasaron en 2 archivos. |
+| E2E | `npm run test:e2e` | Exit 0; 23 pasaron, 3 omitidas intencionalmente en 26 casos: pruebas que requieren el ID sintético de Analytics (dos proyectos) y la comprobación desktop-only de la foto hero en móvil. No se configuró ID ni se envió telemetría. |
+| Lint / tipos | `npm run lint`; `npm run typecheck` | Ambos exit 0; ESLint sin warnings y TypeScript sin errores. |
+| Build | `npm run build` | Exit 0; `tsc -b`, Vite 6.4.5 y bundle completados. |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 21 requisitos 001, 14 requisitos 002, 8 requisitos 003 y 9 requisitos 004 con trazabilidad. |
+| Dependencias | `npm audit --audit-level=high` | **Exit 1; 11 hallazgos high** de GHSA-fc5q-39xc-vjpf (`picomatch`) en rutas de herramientas de desarrollo/build. `npm audit fix --force` propone downgrade breaking a Vitest 3.1.4; no se aplicó. Aceptación humana continúa pendiente. |
+| Dependencias de producción | `npm audit --omit=dev --audit-level=high` | Exit 0; 0 vulnerabilidades. |
+| Diff | `git diff --check` | Exit 0; Git emitió avisos de normalización LF/CRLF en Markdown. |
+| Búsqueda local de secretos | Gitleaks | No ejecutado: binario ausente. Revisión por patrones de formatos de credenciales sobre 20 archivos modificados/sin seguimiento: cero coincidencias. No sustituye Gitleaks. |
+
+No se ejecutó `npm ci` ni se instalaron paquetes. CI, push, PR, merge, Preview, despliegue, llamadas AI Gateway, créditos y consumo de servicios externos no se ejecutaron.
+
+## Actualización coordinada del aviso — 2026-11-17
+
+Ejecución local para los cambios de copy de `/privacidad`, `/eliminar-cuenta`, pruebas y trazabilidad. No se instalaron paquetes ni se ejecutaron llamadas externas, CI o despliegues.
+
+| Control | Comando | Resultado |
+|---|---|---|
+| Unitarias | `npm run test -- --reporter=dot` | Exit 0; 17/17 pruebas en 2 archivos. UT-LP-003/004 verifican contacto, responsable operativo, proveedores/estado, retención prevista, costo autorizado y baja remota no operativa. |
+| E2E Chromium desktop/móvil | `npm run test:e2e -- e2e/landing.spec.ts` | Exit 0; 19 pasaron, 1 omitida por ser la comprobación de foto hero exclusiva de escritorio en mobile-chromium. Incluye lectura responsive de `/privacidad`, navegación legal, recarga, FAQ, Analytics y fotografías en las rutas correspondientes. |
+| Lint | `npm run lint` | Exit 0; ESLint sin warnings. |
+| Tipos | `npm run typecheck` | Exit 0. |
+| Build | `npm run build` | Exit 0; `tsc -b` y Vite 6.4.5 completaron. |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 20 requisitos 001, 14 requisitos 002, 8 requisitos 003 y 9 requisitos 004 con trazabilidad. |
+| Espacios en diff | `git diff --check` | Exit 0 tras retirar líneas en blanco finales en dos documentos editados. |
+| Auditoría npm | No ejecutada en esta tarea | No se modificaron dependencias; el hallazgo LANDING-008 permanece sin alteración y su aceptación formal sigue pendiente antes de release. |
+
+La primera reejecución unitaria después de añadir el contacto a `/eliminar-cuenta` detectó que el correo aparecía en dos enlaces accesibles (explicación y sección de contacto), por lo que `getByRole` era ambiguo. La aserción se ajustó para comprobar ambos enlaces `mailto:`; la ejecución final se reporta abajo.
+
+CI, lectura de servidor real, activación de GA, publicación legal y eliminación remota no se probaron. El test E2E usa la configuración local de pruebas; no transmite datos a un proveedor.
+
 Las secciones de corridas individuales LANDING-005/006 y la primera integración preservan resultados históricos de su ejecución. Para la rama integrada, la verificación más reciente LANDING-007 que aparece a continuación prevalece, especialmente para el resultado vigente de `npm audit`.
+
+## LANDING-008 — revalidación para paquete local — 2026-11-17
+
+Tras el punto de entrada aceptado `8544401a6ab4713aded5e3024ee9fcdc58793472`, se ejecutó nuevamente: lint exit 0; typecheck exit 0; Vitest 17/17; Playwright sin ID 23 pasaron/3 skip; Playwright con `G-SYNTHETIC123` 25 pasaron/1 skip; build exit 0 (Vite 6.4.5); SDD exit 0 (30 documentos; requisitos 18/14/8/9); `git diff --check` exit 0. Playwright regeneró las capturas desktop/móvil de Home, FAQ y privacidad. `npm audit --audit-level=high` **falló con exit 1 y 11 high**; se conserva deliberadamente el hallazgo documentado en `docs/REPORTE_SEGURIDAD_DEPENDENCIAS.md`. No hubo ejecución de GitHub Actions ni despliegue.
 
 ## Revisión de dependencias LANDING-008 — 2026-11-17
 

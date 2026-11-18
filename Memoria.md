@@ -117,6 +117,14 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - Revisión LANDING-008: `npm audit --omit=dev --audit-level=high` exit 0, `npm ls --omit=dev picomatch --all` vacío; el build estático no contiene coincidencias `picomatch/fdir/tinyglobby`. El hallazgo queda limitado al toolchain dev/build con riesgo ReDoS condicionado a procesar patrones controlados por atacante. No se cambió ninguna dependencia; informe reproducible en `docs/REPORTE_SEGURIDAD_DEPENDENCIAS.md`.
 - Aviso de privacidad, piloto y publicación pendientes de aprobación humana; sin contacto o responsable inventado. No se declara CI validado.
 
+## LANDING-008 — preparación local para revisión — 2026-11-17
+
+- Punto de inicio aceptado: rama `feature/landing-integracion-final-local`, SHA `8544401a6ab4713aded5e3024ee9fcdc58793472`. Se consultó GitHub en modo lectura: `origin/main` estaba en `0481387180eab973b7c0416b073099638a3f7328`; los commits de referencia LANDING-004 (`d96103c…`), LANDING-005 (`6dcb89d…`) y LANDING-006 (`fc43246…`) son ancestros. La comparación propuesta es `main...feature/landing-integracion-final-local`.
+- LANDING-008 preparó documentación, diff y capturas para revisión; no repitió la investigación ya cerrada de la foto, Android/Backend o `picomatch`. El reporte de seguridad existente se conserva sin alteración.
+- Validaciones locales: lint/typecheck, Vitest 17/17, Playwright 23 pass/3 skip sin ID y 25 pass/1 skip con ID sintético, build, SDD y `git diff --check`; resultados detallados en `docs/REPORTE_LANDING_008.md` y `docs/pruebas.md`. `npm audit --audit-level=high` mantiene exit 1 con 11 high dev-only; no se cambió ni suprimió.
+- El borrador PR apunta a `main`; PR, push, merge, CI para este SHA, Preview y despliegue no se ejecutaron. `vercel.json` y la configuración remota de Vercel quedaron intactos. El checklist pide confirmación administrativa antes del primer push, que podría generar una Preview.
+- La aceptación formal del riesgo residual es pendiente obligatoria antes de cualquier release. También siguen pendientes la ratificación de la Constitución SDD, aprobación legal y verificaciones externas detalladas en `docs/REPORTE_LANDING_008.md`.
+
 ## LANDING-006 — primera integración (estado histórico al 2026-11-16)
 
 La verificación técnica de repositorios que faltaba en esta primera pasada se completó el 2026-11-17; el estado actual es la sección “LANDING-006 — aviso de privacidad y Analytics” inmediatamente anterior. Las notas siguientes conservan el contexto inicial y quedan supersedidas donde hay diferencias.
@@ -127,3 +135,20 @@ La verificación técnica de repositorios que faltaba en esta primera pasada se 
 - En aquella primera integración, los datos Android/Backend solo se describían a partir del paquete y el cotejo de repositorios quedaba pendiente. El cotejo de ramas/SHA se completó el 2026-11-17 y está documentado arriba; los hallazgos de esa revisión reemplazan esta limitación inicial.
 - Validaciones LANDING-006 ejecutadas localmente y reportadas en `docs/pruebas.md` y `docs/REPORTE_LANDING_006.md`. Capturas Playwright escritorio y móvil: `test-results/landing006_privacidad_escritorio.png` y `test-results/landing006_privacidad_movil.png` (salidas ignoradas por Git).
 - Aprobación legal humana pendiente: responsable/domicilio/régimen, contacto atendido, inventario real de datos, finalidades, proveedores/transferencias, retención, controles operativos, eliminación completa y fecha efectiva. También falta ratificar la Constitución SDD. CI remoto y Preview no ejecutados; no hubo push, PR ni despliegue.
+
+## Actualización coordinada del borrador de privacidad — 2026-11-17
+
+- Se actualizaron `/privacidad` y `/eliminar-cuenta` según las decisiones comunicadas por coordinación: Equipo de Rutitas como responsable operativo, correo proporcionado, conservación prevista de hasta dos meses y costo adicional autorizado de $0 MXN.
+- Vercel se identifica solo como hosting observado de la Landing. El uso efectivo de Microsoft Azure, MongoDB Atlas, Google Maps Platform, Google Analytics y Google Play no se presume; el código existente de Analytics/Backend no demuestra activación ni tratamiento remoto.
+- La eliminación remota sigue pendiente: Android y Backend requieren implementación y validación de Mark y Ame. El aviso permanece como borrador, con identidad legal/domicilio, tratamientos/proveedores efectivos, procedimiento del contacto, validación técnica/legal del plazo y revisión legal final pendientes.
+- Evidencia local: unitarias 17/17; Playwright 19 pasadas y 1 omitida intencionalmente para la comprobación de imagen en proyecto móvil; lint, typecheck, build y SDD aprobados. `git diff --check` se repitió tras retirar líneas en blanco finales y aprobó. No se ejecutaron audit de nuevo, CI, servidor real, push, PR ni despliegues; el hallazgo npm previamente reportado permanece pendiente de aceptación humana antes de release.
+- Se conservaron los cambios locales preexistentes; no se creó commit y no se alteró `main`, Vercel remoto, Android ni Backend.
+
+## LANDING-010 — consolidación y preparación local — 2026-11-18
+
+- Punto de entrada confirmado en la rama local `feature/landing-integracion-final-local`, SHA `8544401a6ab4713aded5e3024ee9fcdc58793472`. El árbol previo contenía solo documentación/evidencia LANDING-008 y privacidad/pruebas LANDING-009 reconocibles; no había cambios staged. Se conservaron todos.
+- Los documentos LANDING-008 y la privacidad LANDING-009 se revisaron como cambios complementarios; su trazabilidad compartida se registra en `LANDING_010_RELEASE_READINESS.md` y `docs/matriz-trazabilidad.md`.
+- Revalidación al 2026-11-18: Vitest 17/17; Playwright 23 passed/3 skip; lint, typecheck, build, SDD y diff check exit 0. El audit vuelve a fallar con 11 high de `picomatch`; no se aplicó el downgrade mayor. Gitleaks no está instalado; revisión local por formatos de secretos sin coincidencias no equivale a Gitleaks. Detalle en `docs/pruebas.md`.
+- Riesgos/bloqueos conservados: aceptación humana del riesgo npm previo a release; aviso legal borrador y no ratificado; identidad/domicilio, tratamientos, proveedores, retención, contacto atendido y revisión legal pendientes; eliminación remota requiere implementación/validación de Mark y Ame.
+- Vercel: no se tocaron ajustes. Con la configuración conocida por el equipo, Preview admite ramas no asignadas y `Only build previews for pull requests` no está activado; un push podría generar Preview. No se puede garantizar costo estrictamente cero y no se hizo push ni deployment.
+- Los commits locales de esta tarea están autorizados por LANDING-010. No se hizo push, PR, merge, cambio remoto de GitHub/Vercel ni despliegue. La aceptación de la Constitución SDD sigue `PENDIENTE_RATIFICACION`.

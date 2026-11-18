@@ -74,6 +74,7 @@ Para pruebas Playwright, instala Chromium una sola vez con `npx playwright insta
 - Reporte integrado de LANDING-004/005/006, accesibilidad y pasos de revisión/publicación: `docs/REPORTE_INTEGRACION_FINAL.md`, `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md` y `docs/PLAN_REVISION_PUBLICACION.md`.
 - Pendientes de release y checklist previo a publicar: `docs/MATRIZ_PENDIENTES_RELEASE.md` y `docs/CHECKLIST_RELEASE_FUTURO.md`.
 - Auditoría vigente de la dependencia transitiva `picomatch` y riesgo residual: `docs/REPORTE_SEGURIDAD_DEPENDENCIAS.md`.
+- Preparación LANDING-008 para revisión (borrador PR a `main`, checklist Vercel y resultados locales; no publicada): `docs/REPORTE_LANDING_008.md`, `docs/BORRADOR_PR_LANDING_008.md` y `docs/CHECKLIST_VERCEL_LANDING_008.md`.
 - Auditoría, arquitectura, requisitos docentes, pruebas y trazabilidad: `docs/`.
 - `Memoria.md` guarda decisiones no confidenciales.
 - `.github/workflows/quality.yml` ejecuta calidad y seguridad en Pull Requests; no publica a producción.
@@ -83,9 +84,9 @@ Para pruebas Playwright, instala Chromium una sola vez con `npx playwright insta
 
 ## Revisión pendiente del equipo
 
-Antes de usar o publicar páginas legales como definitivas, completar `docs/requisitos-profesor.md` con el responsable, contacto de privacidad, datos y finalidades reales, proveedores, almacenamiento/medidas verificadas y conservación. Confirmar también el mecanismo de eliminación con backend/soporte, la política de Analytics y la URL de Google Play. Los marcadores de revisión no son texto legal aprobado.
+Antes de presentar páginas legales como definitivas, completar `docs/requisitos-profesor.md` y `docs/PENDIENTES_LEGALES_RUTITAS.md`: el Equipo de Rutitas se indicó como responsable operativo y `rutitas.rutitas@gmail.com` como contacto, pero la identidad legal completa, domicilio, atención del buzón, datos/finalidades reales, proveedores efectivos, almacenamiento/medidas y validación de la previsión de hasta 2 meses siguen pendientes. La eliminación Android/Backend requiere implementación y validación por Mark y Ame. Confirmar además Analytics y la URL de Google Play. El aviso continúa como borrador no ratificado.
 
-La vista de privacidad actualizada en LANDING-006 usa el diseño recibido, mantiene la etiqueta de borrador y distingue la Landing actual, Android DEMO local y código Backend. Ramas/SHA cotejados y límites: `docs/VALIDACIONES_PRIVACIDAD.md`; decisiones legales pendientes: `docs/PENDIENTES_LEGALES_RUTITAS.md`. El aviso no es definitivo ni está aprobado.
+La vista de privacidad actualizada en LANDING-006 conserva su diseño y mantiene la etiqueta de borrador. La actualización del 17-11-2026 registra al Equipo de Rutitas como responsable operativo, el contacto indicado, la retención prevista de hasta 2 meses y la clasificación de proveedores por estado; no presenta la eliminación remota como operativa ni el aviso como definitivo. Ramas/SHA cotejados y límites: `docs/VALIDACIONES_PRIVACIDAD.md`; decisiones y validaciones pendientes: `docs/PENDIENTES_LEGALES_RUTITAS.md`.
 
 ## Alcance de esta entrega
 

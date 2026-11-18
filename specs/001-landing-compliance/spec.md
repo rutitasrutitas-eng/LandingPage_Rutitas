@@ -29,6 +29,10 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 | LP-REQ-015 | Presentación precisa | La portada conserva foto, marca y composición; los modales explican el propósito universitario y separan claramente lo previsto de lo disponible. Reservas y viajes reales no se anuncian como activos. | MUST |
 | LP-REQ-016 | Preguntas frecuentes | El modal de proyecto contiene respuestas breves para las diez preguntas acordadas; las respuestas distinguen código de pruebas, modo DEMO y disponibilidad para usuarios. | MUST |
 | LP-REQ-017 | Metadatos veraces | Los metadatos de la página no prometen QR, acceso o descarga no disponibles; favicon y recursos referenciados existen. | MUST |
+| LP-REQ-018 | Paquete local de revisión | La rama puede prepararse para revisión formal con destino explícito `main`, conservando LANDING-004/005/006 y adjuntando reporte, capturas, diff, resultados y bloqueos. No ejecuta push, PR, merge, Preview, despliegue ni cambio remoto de Vercel. El fallo de `npm audit` permanece visible y la aceptación humana del riesgo residual es requisito previo a cualquier release. | MUST |
+| LP-REQ-019 | Auditoría de costo cero | La revisión de Vercel es de solo lectura; distingue lo observado de lo no verificado, no activa servicios, no genera requests ni consume créditos. Los datos de cuenta y la política de costo se documentan con evidencia, los precios públicos se separan de condiciones de cuenta y cualquier elemento inaccesible queda pendiente de captura humana. | MUST |
+| LP-REQ-020 | Actualización coordinada del borrador de privacidad | `/privacidad` identifica al Equipo de Rutitas como responsable operativo, muestra el contacto aprobado, expresa la conservación de hasta 2 meses como previsión sujeta a revisión técnica/legal y separa proveedores en uso comprobado de los contemplados/no confirmados. Describe la eliminación Android/Backend como planeada y no operativa hasta implementación y validación por Mark y Ame. Mantiene pendientes la identidad legal y domicilio, confirmación de tratamientos/proveedores y revisión legal final; no afirma gratuidad de proveedores ni excede la política de costo adicional autorizado de $0 MXN. | MUST |
+| LP-REQ-021 | Consolidación local LANDING-010 | Consolidar únicamente cambios identificados de LANDING-008/009; ejecutar validaciones locales sin instalar dependencias, consumir créditos ni desplegar; registrar resultados reales, bloqueos y commits locales expresamente autorizados. No hacer operaciones remotas. | MUST |
 
 ## Requisitos no funcionales
 
@@ -36,7 +40,7 @@ La landing existente debe conservar su identidad. Esta especificación habilita 
 - No mostrar información confidencial en memoria o ejemplos.
 - No crear formulario de privacidad/eliminación sin proceso de atención real.
 - No configurar Vercel, variables remotas, dominio, facturación o producción en esta tarea.
-- No crear commits ni push.
+- No hacer push. Los commits locales requieren autorización explícita; la solicitud LANDING-010 autoriza solo commits locales de los cambios identificados de LANDING-008/009.
 - No ratificar textos legales.
 
 ## Escenarios
