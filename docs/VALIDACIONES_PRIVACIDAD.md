@@ -2,14 +2,52 @@
 
 **Estado:** Borrador técnico, no ratificado. Fecha de revisión de repositorios: 17 de noviembre de 2026.
 
-## Verificación técnica de repositorios (solo lectura)
+## Verificación técnica vigente en GitHub (solo lectura)
 
-Los clones usados para cotejo están fuera de este repositorio y no son cambios de Android/Backend. Sus ramas pueden cambiar después de esta revisión. El cotejo no prueba despliegue, acceso, telemetría o tratamiento productivo.
+**Corte consultado:** 2026-11-17. Se consultaron PR metadata, diff/archivos en sus SHA de cabecera, rama `main` y check-runs públicos. Las referencias describen código disponible, no una integración operativa ni tratamiento de datos en producción.
 
-- Backend público, rama `main`, SHA `a95e62e2f0f9fbde46af0144c9fb89c858670c94`: controladores declaran siete rutas (register/login/logout, GET/PATCH users/me, GET routes, GET routes/{id}); entidad User incluye datos de perfil/estado y hash de contraseña. Las rutas requieren autorización JWT. El catálogo tiene estados y visibilidad; no se encontró endpoint de reservas, viajes ni DELETE de cuenta en los controladores revisados. No prueba despliegue, MongoDB remoto o tratamiento actual.
-- Android, rama `feature/integracion-android-ci-cd`, SHA `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`: `DEMO_MODE=true`, URL de ejemplo `https://example.invalid/api/`; `RouteRepository` evita el Backend en DEMO. El proyecto declara permisos INTERNET, red, cámara y ubicación aproximada/precisa. `AuthRepository` conserva la sesión DEMO en Room; `deleteAccount()` borra datos locales y archivos/fotos, y su comentario dice explícitamente que no elimina datos del servidor. Esto no acredita app publicada ni transmisión.
-- Android `main` consultada en GitHub se describe como documentación de arquitectura; el código de app citado corresponde a la rama feature indicada, no a `main`.
-- Landing local: no contiene formulario de registro; Analytics requiere ID válido y consentimiento afirmativo. No se verificó Measurement ID real, propiedad GA4 ni envío a servicio externo.
+### Android
+
+- `main` está en `df87c74b3baea7cc8779019a01a50fd1091d0f4d`.
+- [PR #9 — autenticación Backend, Fase A](https://github.com/rutitasrutitas-eng/Rutitas_App/pull/9) sigue **abierto, no fusionado**. Base `main` (`df87c74…`), head `feature/android-backend-phase-a` (`75eb7ca58886fea3f0de13597b6e88b676556849`). El código añade Retrofit/auth, almacenamiento del token, manejo inicial de sesión y pantallas de Backend.
+- [PR #10 — perfil, rutas y errores](https://github.com/rutitasrutitas-eng/Rutitas_App/pull/10) sigue **abierto, no fusionado** y depende del PR #9. Base `feature/android-backend-phase-a` (`75eb7ca…`), head `feature/android-backend-phase-b` (`36422554f6880f1a18545d8b1ce83aaed2af9303`). El código añade operaciones de perfil/rutas, pantallas, recuperación de sesión y manejo 401/409/429/503 y Retry-After.
+- `android/app/build.gradle.kts` en ambos heads conserva `DEMO_MODE=true`; la URL por defecto para la capa Backend es `https://example.invalid/api/v1/`. La existencia de Retrofit y pantallas conectadas en ramas de PR no implica que las use el flujo predeterminado de la app.
+- Los bodies de PR reportan 48 pruebas instrumentadas para #9 y 58 para #10. Check-runs publicados: [Actions #44005616215](https://github.com/rutitasrutitas-eng/Rutitas_App/actions/runs/44005616215) con tres jobs exitosos en PR #9, y [Actions #44020645292](https://github.com/rutitasrutitas-eng/Rutitas_App/actions/runs/44020645292) con tres jobs exitosos en PR #10. La consulta de estado combinado de ambos SHA devolvió `pending`; por ello no se afirma que el estado global requerido de cada PR esté aprobado.
+- Las pruebas Android revisadas construyen respuestas HTTP mediante interceptores `OkHttp` y usan `https://example.invalid/api/v1/`; por ejemplo, [BackendRoutesRateLimitTest](https://github.com/rutitasrutitas-eng/Rutitas_App/blob/36422554f6880f1a18545d8b1ce83aaed2af9303/android/app/src/androidTest/java/mx/edu/uttt/rutitas/BackendRoutesRateLimitTest.kt) y [BackendErrorHandlerTest](https://github.com/rutitasrutitas-eng/Rutitas_App/blob/36422554f6880f1a18545d8b1ce83aaed2af9303/android/app/src/androidTest/java/mx/edu/uttt/rutitas/BackendErrorHandlerTest.kt) de PR #10. Sirven para probar lógica del cliente y errores simulados, **no** hacen solicitudes al Backend Rutitas. `DEMO_MODE` se verifica en el [build.gradle.kts del head #10](https://github.com/rutitasrutitas-eng/Rutitas_App/blob/36422554f6880f1a18545d8b1ce83aaed2af9303/android/app/build.gradle.kts).
+- El texto del PR #10 deja pendientes las pruebas de los siete endpoints contra un entorno HTTPS autorizado. No encontramos evidencia de llamadas Android–Backend reales ni las ejecutamos.
+
+### Backend
+
+- `main` está en `a95e62e2f0f9fbde46af0144c9fb89c858670c94`; [PR #6 de contrato](https://github.com/rutitasrutitas-eng/Rutitas_BackEnd/pull/6) está **fusionado** en ese commit.
+- El Backend mantiene código para los siete endpoints de registro/login/logout, perfil propio GET/PATCH y rutas GET/listado/detalle. La fusión de PR #6 actualizó documentación/contrato; por sí sola no conecta ni valida el cliente Android.
+- Los tres check-runs de [Actions #44020116632](https://github.com/rutitasrutitas-eng/Rutitas_BackEnd/actions/runs/44020116632) aparecen exitosos para el SHA de `main`. Son verificaciones de CI del Backend, no pruebas de comunicación Android–servidor.
+- El README de esa versión declara que todavía no hay un entorno HTTPS y MongoDB de pruebas autorizado y desplegado. No se localizaron resultados que acrediten los siete endpoints consumidos desde Android contra un servidor real. No se hicieron llamadas a un servicio remoto durante esta revisión.
+- La revisión previa de controladores en el mismo SHA no encontró operaciones de viajes/reservas ni `DELETE` de cuenta. La baja DEMO local no demuestra borrado en Backend.
+
+### Qué está y qué no está verificado
+
+| Estado | Evidencia |
+| --- | --- |
+| Código disponible para revisión | Cambios de Android en PR #9/#10; Backend y contrato en `main` tras PR #6. |
+| Integrado en `main` de Android | No: ambos PR Android siguen abiertos. |
+| `DEMO_MODE` | `true` en los heads Android #9 y #10. |
+| Pruebas simuladas del cliente | Bodies de PR reportan 48 y 58 pruebas instrumentadas; test sources usan interceptores/respuestas fabricadas. CI publica jobs exitosos, pero el estado combinado de cada SHA fue `pending`. |
+| Pruebas funcionales contra servidor real | No confirmadas en evidencia consultada; PR #10 las lista como pendientes. No se ejecutaron aquí. |
+| Servicio Android–Backend operativo en producción | No demostrado. |
+| Aviso legal | Continúa como borrador pendiente de validación humana; no se cambia a definitivo. |
+
+La captura anterior de Android `feature/integracion-android-ci-cd` (`4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`) queda como **cotejo histórico**, no como referencia vigente de la integración en PR.
+
+### Landing y analítica
+
+- Landing local: no contiene formulario de registro. Analytics requiere ID válido y consentimiento afirmativo.
+- No se verificó Measurement ID real, propiedad GA4 ni envío a servicio externo. Las pruebas con ID sintético interceptan las solicitudes externas.
+
+## Auditoría de dependencias — actualización del 2026-11-17
+
+`npm audit --audit-level=high` consultado el 2026-11-17 terminó con **exit 1 y 11 entradas de severidad alta** en el árbol transitivo, agrupadas alrededor de `picomatch@4.0.7`, `fdir`, `tinyglobby`, Vite/Vitest y las herramientas TypeScript-ESLint. El advisory [GHSA-fc5q-39xc-vjpf](https://github.com/advisories/GHSA-fc5q-39xc-vjpf) identifica ReDoS por patrones extglob repetidos, afecta `picomatch <=4.0.7` y a la hora de consultar aún no lista versión corregida.
+
+El árbol está en dependencias de desarrollo/build; no se encontró `picomatch` en dependencias runtime directas de la Landing. Esto no convierte el hallazgo en resuelto: un proceso local/CI que procese patrones no confiables puede ser relevante. `npm audit fix --force` propone degradar Vitest a `3.1.4` como cambio major; no se ejecutó ni se aplicó override/downgrade por la ausencia de versión corregida declarada y el riesgo de incompatibilidad. Se requiere una actualización compatible cuando el advisory publique un fix y volver a correr `npm ci`, pruebas, build y audit.
 
 ## Falta aprobación documentada
 

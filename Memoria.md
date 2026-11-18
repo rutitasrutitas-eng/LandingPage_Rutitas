@@ -1,7 +1,7 @@
 # Memoria de Rutitas Landing
 
-**Estado actual (2026-11-16):** LANDING-003 / PR #9 fue fusionado a `main` el **2026-11-12** (18:03:18 UTC); merge commit `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004 está en `fix/landing-004-estabilidad-accesibilidad`; su último commit confirmado es `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`. LANDING-006 se desarrolla en `feature/landing-006-aviso-privacidad` basada en ese SHA; la página de privacidad y su documentación se actualizaron y probaron localmente, mientras la aprobación legal y el cotejo Android/Backend siguen pendientes. No se ha hecho push, abierto PR ni desplegado LANDING-006. La regla de Vercel para suprimir Preview aún no está confirmada ni configurada.
-**Última actualización:** 2026-11-16.
+**Estado actual (2026-11-17):** LANDING-003 / PR #9 fue fusionado a `main` el **2026-11-12**; merge commit `0481387180eab973b7c0416b073099638a3f7328`. LANDING-004/005/006 están integrados en la rama local `feature/landing-integracion-final-local`; `main` no se modificó. Android PR #9 (`75eb7ca…`) y PR #10 (`3642255…`) están abiertos y mantienen `DEMO_MODE=true`; Backend PR #6 está fusionado en `main` (`a95e62e…`). Ninguna evidencia consultada confirma pruebas Android contra un servidor real. El aviso legal continúa como borrador. No se ha hecho push, PR, Preview ni despliegue de la integración; la configuración remota de Vercel no está verificada.
+**Última actualización:** 2026-11-17.
 
 ## Hechos confirmados en el repo
 
@@ -94,14 +94,14 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - Trabajo separado en `feature/landing-005-presentacion`, basada en LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`; se mantuvo `main` intacta.
 - La portada mantiene su fotografía, logotipo, paleta, composición y CTA. El contenido presenta una propuesta de movilidad compartida dirigida inicialmente a la comunidad UTTT. El piloto está previsto sujeto a validación; no se afirma afiliación, autorización ni operación de la Universidad.
 - Se incorporaron tres etapas previstas, límites de disponibilidad/seguridad y diez FAQ accesibles dentro del diálogo existente. Metadatos corregidos para no prometer QR ni descarga.
-- Cotejo de solo lectura: Backend `main` `a95e62e2f0f9fbde46af0144c9fb89c858670c94`, Android `feature/integracion-android-ci-cd` `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. El Android revisado tiene `DEMO_MODE=true`; no se confirmó su integración con el Backend ni disponibilidad pública. El detalle está en `docs/REPORTE_LANDING_005.md`.
+- Cotejo que acompañó la rama individual LANDING-005 (snapshot previo): Backend `main` `a95e62e2f0f9fbde46af0144c9fb89c858670c94`, Android `feature/integracion-android-ci-cd` `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. Para estados vigentes de los PR Android, consultar `docs/VALIDACIONES_PRIVACIDAD.md`.
 - Verificación local LANDING-005: `npm ci`, lint, typecheck, build, SDD, audit y diff whitespace exit 0; Vitest 17/17 y Playwright 16 pasadas con 2 omisiones intencionales sin ID sintético. El test Playwright cubre siete viewports y FAQ por teclado. Zoom nativo, CI, Preview, publicación, Play, Analytics real y aprobación del piloto no se ejecutaron.
 - La revisión legal sigue pendiente; no se incorporan responsables ni contactos inventados. Constitución `PENDIENTE_RATIFICACION` y producción intactas.
 
 ## LANDING-006 — aviso de privacidad y Analytics — 2026-11-17
 
 - El diseño de `/privacidad` conserva el paquete integrado. El borrador distingue el sitio estático, datos del Android DEMO en Room y código Backend no desplegado confirmado. `/eliminar-cuenta` distingue baja local en Android de eliminación remota no acreditada; no hay formulario.
-- Se cotejaron solo en lectura Backend `main` `a95e62e2f0f9fbde46af0144c9fb89c858670c94` y Android `feature/integracion-android-ci-cd` `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`. `docs/VALIDACIONES_PRIVACIDAD.md` contiene detalles; Android `main` es documentación y no debe confundirse con la rama de implementación.
+- El cotejo inicial LANDING-006 de Android (`4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`) es histórico y ha sido actualizado con los PR vigentes #9/#10 en `docs/VALIDACIONES_PRIVACIDAD.md`; no se debe tratar la preparación de esos PR como integración operativa.
 - La prueba exploratoria encontró que el control fijo de preferencias Analytics tapaba enlaces legales en viewport 320×568. Se movió el control al footer. Prueba E2E completa con ID sintético `G-SYNTHETIC123`: 18/18 pasadas; el test Analytics bloquea solicitudes externas. Sin ID: 16 pasadas/2 omisiones intencionales. Vitest 16/16; lint/tipos/build/SDD/audit y diff check aprobados.
 - Pendientes: aprobación legal y Constitución `PENDIENTE_RATIFICACION`, responsables/contactos/finalidades/proveedores/retención reales, procedimiento remoto de baja, ficha Play, configuración remota GA4/Vercel y CI/Preview. No se modificó Android/Backend, Vercel remoto ni producción.
 
@@ -112,6 +112,8 @@ No registrar secretos, claves, correos privados, tokens, identificadores de usua
 - Se revisaron visualmente capturas de Home y privacidad en escritorio/móvil. La evidencia automatizada cubre siete viewports, modales, FAQ, foco/teclado y Analytics aislado. Zoom nativo, lector de pantalla y dispositivos físicos no se probaron; detalle: `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md`.
 - `main` permanece en `0481387180eab973b7c0416b073099638a3f7328`; no se hizo push, PR, despliegue ni cambio remoto de Vercel. El primer push puede disparar Preview; la configuración de exclusión no ha sido verificada en remoto. Ver `docs/PLAN_REVISION_PUBLICACION.md`.
 - La matriz y el checklist de condiciones de release están en `docs/MATRIZ_PENDIENTES_RELEASE.md` y `docs/CHECKLIST_RELEASE_FUTURO.md`; son preparación documental y no autorización de publicación.
+- La revalidación de LANDING-007 confirmó que la captura de escritorio previa era prematura: `decoding="async"` no se esperaba antes de capturar. La nueva E2E espera `complete`, `naturalWidth > 0` y `decode()` tanto tras navegación directa como tras reload.
+- `npm audit --audit-level=high` el 2026-11-17 terminó con exit 1: 11 avisos de severidad alta derivados de `picomatch@4.0.7` en herramientas de desarrollo. GHSA-fc5q-39xc-vjpf declara afectadas versiones `<=4.0.7` y todavía no lista versión corregida. `npm audit fix --force` propone bajar Vitest a 3.1.4 (cambio mayor); no se aplicó downgrade ni override sin una ruta corregida compatible. Ver `docs/VALIDACIONES_PRIVACIDAD.md` y `docs/MATRIZ_PENDIENTES_RELEASE.md`.
 - Aviso de privacidad, piloto y publicación pendientes de aprobación humana; sin contacto o responsable inventado. No se declara CI validado.
 
 ## LANDING-006 — primera integración (estado histórico al 2026-11-16)

@@ -12,6 +12,7 @@
 | Analytics | Código condicional; pruebas con ID sintético sin solicitudes a Google; no se configuró propiedad real | Confirmar propiedad, consentimiento, eventos, proveedores y texto legal | Administrador GA y responsable legal |
 | SDD | Constitución `PENDIENTE_RATIFICACION`; verificador local pasa | Revisión y ratificación humana explícita | Equipo del proyecto/docente según corresponda |
 | Accesibilidad | Teclado, foco, siete viewports y texto aumentado probados localmente | Zoom nativo, lectores de pantalla y dispositivos físicos no ejecutados | Revisión QA/accesibilidad |
+| Dependencias npm | `npm audit --audit-level=high` ejecutado; reportó 11 entradas high por `picomatch@4.0.7` transitivo | Advisory consultado no declara versión corregida; mantener bloqueado release hasta actualizar con fix compatible o documentar aceptación explícita del riesgo. El `--force` sugerido implica downgrade major de Vitest | Responsables frontend/seguridad |
 | Producción | Sin despliegues ni cambios productivos | Aprobación explícita separada y plan de reversión | Responsable de publicación |
 
 Los estados reflejan únicamente evidencia reunida para esta integración; «pendiente» no equivale a aprobado ni a rechazado.

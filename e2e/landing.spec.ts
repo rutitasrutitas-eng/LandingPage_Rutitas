@@ -50,6 +50,42 @@ async function getHomeMetrics(page: Page) {
   })
 }
 
+async function waitForDecodedHeroImage(page: Page) {
+  const image = page.locator('.hero-image img')
+  await expect(image).toBeVisible()
+  await expect.poll(() => image.evaluate((element) => {
+    const heroImage = element as HTMLImageElement
+    return heroImage.complete && heroImage.naturalWidth > 0
+  }), { message: 'hero photo should finish loading with intrinsic dimensions' }).toBe(true)
+  await image.evaluate(async (element) => {
+    await (element as HTMLImageElement).decode()
+  })
+
+  const state = await image.evaluate((element) => {
+    const heroImage = element as HTMLImageElement
+    const rect = heroImage.getBoundingClientRect()
+    const style = getComputedStyle(heroImage)
+    return {
+      source: heroImage.currentSrc,
+      naturalWidth: heroImage.naturalWidth,
+      complete: heroImage.complete,
+      width: rect.width,
+      height: rect.height,
+      display: style.display,
+      visibility: style.visibility,
+      opacity: Number.parseFloat(style.opacity),
+    }
+  })
+  expect(state.complete).toBe(true)
+  expect(state.naturalWidth).toBeGreaterThan(0)
+  expect(state.source).toMatch(/\/assets\/rutitas-auto-hero(?:-mobile)?\.(?:webp|jpg)/)
+  expect(state.width).toBeGreaterThan(0)
+  expect(state.height).toBeGreaterThan(0)
+  expect(state.display).not.toBe('none')
+  expect(state.visibility).toBe('visible')
+  expect(state.opacity).toBeGreaterThan(0)
+}
+
 test('LANDING-003/004: home keeps approved content visible across acceptance and zoom-sized viewports', async ({ page }, testInfo) => {
   const measurements: Array<Record<string, unknown>> = []
   for (const screen of screens) {
@@ -284,10 +320,24 @@ test('metadata describes the project without promising an unavailable download',
   expect(description).not.toMatch(/QR|descarga|accede a la app/i)
 })
 
+test('LANDING-007: hero photo is decoded on direct load and after reload', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'chromium', 'desktop capture and reload regression')
+  await page.setViewportSize({ width: 1440, height: 900 })
+
+  const response = await page.goto('/')
+  expect(response?.ok()).toBe(true)
+  await waitForDecodedHeroImage(page)
+
+  await page.reload()
+  await waitForDecodedHeroImage(page)
+  await page.screenshot({ path: testInfo.outputPath('landing-home-desktop-decoded.png') })
+})
+
 test('captures desktop and mobile views of home, FAQ and the privacy draft', async ({ page }, testInfo) => {
   const mobile = testInfo.project.name === 'mobile-chromium'
   await page.setViewportSize(mobile ? { width: 390, height: 844 } : { width: 1440, height: 900 })
   await page.goto('/')
+  await waitForDecodedHeroImage(page)
   await page.screenshot({ path: testInfo.outputPath(mobile ? 'landing-home-mobile.png' : 'landing-home-desktop.png') })
 
   await page.getByRole('button', { name: /conoce el proyecto/i }).click()

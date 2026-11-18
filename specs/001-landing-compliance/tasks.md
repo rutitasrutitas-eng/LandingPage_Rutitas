@@ -27,5 +27,7 @@
 | L6-T-006 | completado | Contrastar afirmaciones de privacidad/eliminación con repositorios Android y Backend accesibles. | SHAs, ramas, configuración DEMO, modelos, endpoints y límites registrados en `docs/VALIDACIONES_PRIVACIDAD.md`. |
 | L6-T-007 | completado | Corregir suite completa con Analytics sintético sin clics forzados ni envío de eventos externos. | E2E completa sintética 18/18; prueba dedicada bloquea GTM y pruebas generales usan rechazo explícito. |
 | L6-T-008 | completado | Preparar decisiones legales y dependencias reales de eliminación. | `docs/PENDIENTES_LEGALES_RUTITAS.md`; no se agregaron contactos o plazos inventados. |
+| L7-T-001 | completado | Comprobar carga/decodificación de la imagen del hero en escritorio y recarga, y hacer determinista la captura. | Playwright espera `complete`, `naturalWidth > 0`, `decode()` y geometría visible en navegación directa/reload; nueva captura revisada. |
+| L7-T-002 | completado | Cotejar privacidad con las versiones vigentes de Android PR #9/#10 y Backend `main` posterior a PR #6. | Estados/SHA, `DEMO_MODE=true`, pruebas HTTP simuladas, check-runs y falta de servidor real documentados en `docs/VALIDACIONES_PRIVACIDAD.md`. |
 
 Estados permitidos: `no_iniciado`, `en_progreso`, `bloqueado`, `completado`, `no_ejecutado`. El estado final de cada tarea se actualizará solo con evidencia.

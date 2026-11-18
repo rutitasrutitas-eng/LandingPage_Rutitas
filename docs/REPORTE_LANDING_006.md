@@ -1,5 +1,7 @@
 # Reporte LANDING-006 — aviso de privacidad
 
+> Este informe conserva la evidencia de la rama individual LANDING-006. El cotejo Android descrito abajo es histórico; el estado vigente de los PR #9/#10 se registra en `docs/VALIDACIONES_PRIVACIDAD.md`.
+
 **Fecha de revisión:** 2026-11-17
 **Rama:** `feature/landing-006-aviso-privacidad`
 **Base:** LANDING-004 `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6`

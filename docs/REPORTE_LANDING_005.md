@@ -1,5 +1,7 @@
 # Reporte LANDING-005 — presentación del proyecto
 
+> Este informe registra la revisión de la rama LANDING-005 en su fecha de ejecución. El cotejo Android de esa rama es un snapshot histórico; para los PR vigentes #9/#10 y su estado, consulta `docs/VALIDACIONES_PRIVACIDAD.md`.
+
 **Fecha:** 2026-11-17
 **Rama:** `feature/landing-005-presentacion`
 **Base:** `d96103cb4a3c477c4e3e2cffd2ccec0a8b75b5e6` (LANDING-004 confirmado)

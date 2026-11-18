@@ -17,8 +17,8 @@
 ## Eliminar cuentas y datos
 
 - La página `/eliminar-cuenta` no recibe solicitudes. No publicar un email, formulario o plazo hasta que exista un canal atendido y autorizado.
-- Android revisado en `feature/integracion-android-ci-cd` (SHA `4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`) tiene `DEMO_MODE=true`. `AuthRepository.deleteAccount()` borra registros locales asociados en Room, cancela localmente rutas creadas y elimina archivos/fotos DEMO; su comentario dice que no afecta datos del servidor.
-- Backend revisado en `main` (SHA `a95e62e2f0f9fbde46af0144c9fb89c858670c94`) tiene siete rutas de auth/perfil/catálogo. No se encontró `DELETE` de cuenta entre sus controladores. La integración Android–Backend no se confirmó.
+- Android `main` y los heads de PR #9/#10 consultados el 2026-11-17 mantienen `DEMO_MODE=true`; PR #9 y #10 siguen abiertos. El código y las pruebas simuladas disponibles en esas ramas no demuestran que se eliminen cuentas del servidor. Referencias vigentes y SHAs: `docs/VALIDACIONES_PRIVACIDAD.md`.
+- Backend `main` (SHA `a95e62e2f0f9fbde46af0144c9fb89c858670c94`, PR #6 fusionado) documenta el contrato de siete rutas de auth/perfil/catálogo. No se encontró `DELETE` de cuenta entre los controladores revisados. No se confirmaron pruebas Android contra un servidor autorizado ni servicio remoto operativo.
 - Antes de ofrecer eliminación real: definir endpoint/servicio autorizado, autenticación reforzada, verificación de titularidad, idempotencia, impacto en viajes de otras personas, datos/documentos, supresión o anonimización, copias, registros, retenciones legales y comprobante sin exponer secretos.
 - Implementar pruebas de borrado local y remoto en entornos de prueba; validar revocación de tokens/sesiones, fallos parciales y comunicación del estado. No afirmar que una solicitud quedó completada si el Backend no confirma el resultado.
 

@@ -48,6 +48,13 @@ La salida de E2E cambia al combinar LANDING-005 y LANDING-006: la corrida sinté
 - Android y Backend se inspeccionaron en modo solo lectura en los SHA indicados en `docs/VALIDACIONES_PRIVACIDAD.md`; no se compilaron ni probaron contra servicios.
 - Constitución SDD, piloto, texto legal, contacto, conservación, proveedores, tratamiento real, mecanismo remoto de eliminación, propiedad GA y ficha Play requieren validación humana o evidencia externa.
 
+## Addendum de revisión LANDING-007 — 2026-11-17
+
+- La captura inicial de escritorio se tomaba inmediatamente después de `goto()` y antes de esperar `decoding="async"`. La regresión ahora comprueba carga directa y reload, espera `complete`, `naturalWidth > 0` y `HTMLImageElement.decode()`, y comprueba dimensiones/visibilidad CSS. La foto fue visible en ambas capturas revisadas; no se cambió el diseño del hero.
+- Playwright final con la regresión: 23 pasadas/3 omisiones sin ID de Analytics; 25 pasadas/1 omisión con ID sintético. El test omitido en mobile es intencional porque la regresión genera una captura desktop; pruebas dirigidas desktop 1/1.
+- Actualización de Android/Backend y estados de PR documentada en `docs/VALIDACIONES_PRIVACIDAD.md`: Android PR #9/#10 continúan abiertos, `DEMO_MODE=true`; Backend PR #6 está fusionado en `main`. Las pruebas de Android descritas usan interceptores/respuestas simuladas; no hay evidencia de verificación funcional contra servidor real.
+- El audit actual ya no es cero: `npm audit --audit-level=high` exit 1 con 11 entradas high asociadas a `picomatch@4.0.7` en herramientas transitivas de desarrollo. El advisory consultado indica que aún no publica versión corregida; el fix forzado propone degradar Vitest mayor. No se tocó el lockfile y el release queda pendiente de resolución o aceptación formal del riesgo.
+
 ## Pendientes de revisión
 
 Consultar `docs/PENDIENTES_LEGALES_RUTITAS.md` y `docs/PLAN_REVISION_PUBLICACION.md`. No retirar la marca de borrador ni publicar hasta que las personas responsables confirmen los datos y autoricen explícitamente la publicación.

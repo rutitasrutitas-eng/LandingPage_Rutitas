@@ -1,5 +1,13 @@
 # Estrategia y casos de prueba — LANDING-001
 
+## Verificación correctiva LANDING-007 — foto del hero y cotejo remoto — 2026-11-17
+
+La captura previa de escritorio se hacía inmediatamente tras `page.goto('/')`, mientras el `<img>` del hero declara `decoding="async"`; no esperaba carga ni decodificación. Se añadió una regresión Playwright para abrir `/` directamente, exigir `complete`, `naturalWidth > 0`, `decode()` resuelto y caja visible, recargar y repetir las aserciones. Las capturas de Home ahora esperan ese estado.
+
+El cotejo remoto actualizado de Android/Backend, incluidos estado y SHA de PR, CI publicado, uso de `DEMO_MODE=true`, pruebas con interceptores HTTP y falta de evidencia de servidor real, está en `docs/VALIDACIONES_PRIVACIDAD.md`. No se ejecutó ningún test contra servicio remoto.
+
+Resultados de la revalidación después de LANDING-007: lint/typecheck/build y SDD exit 0; Vitest 17/17; Playwright sin ID: 23 pasaron y 3 omitidas (2 casos de Analytics sin ID, más el caso exclusivo de captura desktop omitido en mobile); Playwright con `G-SYNTHETIC123`: 25 pasaron y 1 omitida (solo el test desktop omitido en mobile). La prueba dirigida de carga/reload en Chromium desktop pasó 1/1 y produjo `landing-home-desktop-decoded.png`. `npm audit --audit-level=high` terminó exit 1: 11 hallazgos high agrupados por la transitiva `picomatch@4.0.7`; advisory sin versión corregida declarada. No se alteraron dependencias. `npm ci` no se repitió porque esta corrección no modifica manifiesto ni lockfile; la integración previa lo había completado con exit 0.
+
 ## Revalidación integrada LANDING-004/005/006 — 2026-11-17
 
 En `feature/landing-integracion-final-local`, después de integrar los commits `6dcb89df1f4d8bb73818b6d678818956d785afc0` y `fc43246bb401a9991114376ca78665cc922a6ebb`: `npm run lint`, `npm run typecheck`, `npm run build`, `npm run sdd:verify` y `npm audit --audit-level=high` terminaron con exit 0; Vitest 17/17. `npm run test:e2e` sin ID ejecutó 24 casos (22 pasaron y 2 se omitieron intencionalmente por faltar un ID); con `VITE_GA_MEASUREMENT_ID=G-SYNTHETIC123`, 24/24 pasaron. El test dedicado intercepta Google Tag Manager; no se utilizó ID ni propiedad reales. Build Vite 6.4.5: JS 255.68 kB (79.25 kB gzip), CSS 20.88 kB (5.35 kB gzip). `npm audit` informó 0 vulnerabilidades. SDD: 30 documentos y trazabilidad de 17/14/8/9 requisitos. No hubo CI remoto, Preview, push ni despliegue. Ver `docs/REPORTE_INTEGRACION_FINAL.md` y `docs/REPORTE_ACCESIBILIDAD_INTEGRACION.md`.

@@ -9,6 +9,7 @@
 - [ ] Definir y probar eliminación de cuentas/datos antes de cualquier distribución que lo requiera, incluida verificación de identidad y política de respaldo/retención.
 - [ ] Confirmar URL HTTPS oficial de Google Play; sin ella, mantener «Próximamente» y sin QR.
 - [ ] Confirmar GA4 y consentimiento con los responsables; no desplegar el ID sin actualizar la documentación legal correspondiente.
+- [ ] Repetir `npm audit --audit-level=high` después de una actualización compatible que resuelva GHSA-fc5q-39xc-vjpf, o documentar aceptación explícita del riesgo antes del release. El estado actual reporta 11 hallazgos high por una dependencia transitiva.
 - [ ] Obtener autorización humana explícita para producción y registrar plan de reversión.
 
 Este checklist no ejecuta ni autoriza push, PR, Preview, merge o despliegue. La configuración actual de Vercel no fue confirmada en remoto.
