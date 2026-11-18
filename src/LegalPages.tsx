@@ -93,7 +93,7 @@ export function AccountDeletionPage() {
     <LegalLayout>
       <main className="legal-content">
         <div className="draft-notice" role="status">
-          INFORMACIÓN PRELIMINAR · EL MECANISMO AÚN NO ESTÁ CONFIRMADO
+          INFORMACIÓN PRELIMINAR · EL MECANISMO REMOTO AÚN NO ESTÁ OPERATIVO
         </div>
         <p className="legal-eyebrow">CONTROL DE TU CUENTA</p>
         <h1>Eliminación de cuenta</h1>
@@ -101,7 +101,7 @@ export function AccountDeletionPage() {
 
         <section aria-labelledby="deletion-request">
           <h2 id="deletion-request">1. Cómo solicitar la eliminación</h2>
-          <p>El sitio no tramita solicitudes ni elimina cuentas. Android tiene una función de baja local para los datos del modo DEMO; no elimina datos de un servidor. El Backend revisado no presenta una ruta de eliminación de cuenta. Un canal oficial y los pasos de atención están <strong>{pending.toLowerCase()}</strong>. No envíes documentos ni información de cuenta a través de esta página.</p>
+          <p>El sitio no tramita solicitudes ni elimina cuentas. Android tiene una función de baja local para los datos del modo DEMO; no elimina datos de un servidor. La coordinación prevé desarrollar un botón en Android y un mecanismo seguro en Backend. Mark y Ame deben implementarlos y validarlos; por ahora no hay eliminación remota operativa. El contacto indicado para privacidad es <a href="mailto:rutitas.rutitas@gmail.com">rutitas.rutitas@gmail.com</a>, pero la identidad legal del responsable y el procedimiento de atención están <strong>{pending.toLowerCase()}</strong>. Esta página no envía ni almacena solicitudes.</p>
         </section>
         <section aria-labelledby="deletion-verify">
           <h2 id="deletion-verify">2. Verificación de titularidad</h2>
@@ -113,11 +113,11 @@ export function AccountDeletionPage() {
         </section>
         <section aria-labelledby="deletion-retention">
           <h2 id="deletion-retention">4. Datos que podrían conservarse</h2>
-          <p>Cualquier excepción debe contar con motivo válido, categoría de datos, fundamento y plazo documentados y revisados por el responsable. No se confirma aquí ninguna retención concreta: <strong>{pending}</strong></p>
+          <p>La coordinación indicó una conservación prevista de datos personales de hasta 2 meses, sujeta a revisión técnica y legal. Esta previsión aún no está implementada ni validada por categoría; el punto inicial, respaldos y excepciones siguen pendientes. Cualquier excepción deberá documentarse y revisarse por el responsable.</p>
         </section>
         <section aria-labelledby="deletion-contact">
           <h2 id="deletion-contact">5. Contacto</h2>
-          <p>Responsable y canal oficial para recibir solicitudes: <strong>{pending}</strong>. Hasta que exista un proceso verificable, no hay formulario ni confirmación de eliminación en este sitio.</p>
+          <p>El contacto indicado por la coordinación es <a href="mailto:rutitas.rutitas@gmail.com">rutitas.rutitas@gmail.com</a>. La identidad legal completa del responsable, la atención del buzón y el procedimiento para recibir solicitudes siguen pendientes. Hasta que exista un proceso verificable, no hay formulario ni confirmación de eliminación en este sitio.</p>
         </section>
       </main>
       <SiteFooter />

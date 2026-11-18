@@ -43,6 +43,31 @@ La captura anterior de Android `feature/integracion-android-ci-cd` (`4b2ea8d10f4
 - Landing local: no contiene formulario de registro. Analytics requiere ID válido y consentimiento afirmativo.
 - No se verificó Measurement ID real, propiedad GA4 ni envío a servicio externo. Las pruebas con ID sintético interceptan las solicitudes externas.
 
+## Decisiones de coordinación para el borrador — 2026-11-17
+
+Estas decisiones actualizan el contenido, pero no sustituyen la validación del tratamiento real ni la aprobación legal.
+
+| Tema | Información indicada por coordinación | Estado y límite |
+|---|---|---|
+| Responsable operativo | Equipo de Rutitas | Indicado para operación del proyecto; no identifica al responsable legal completo ni a la entidad jurídica. |
+| Contacto | `rutitas.rutitas@gmail.com` | Mostrado como enlace `mailto:`; no se verificó administración del buzón ni procedimiento de atención. La Landing no recibe ni almacena solicitudes. |
+| Conservación prevista | Hasta 2 meses | Propuesta sujeta a revisión técnica y legal; punto inicial, categorías, respaldos y excepciones por validar. No se afirma que esté implementada. |
+| Eliminación | Se desarrollará un botón Android y mecanismo seguro en Backend | Futuro, no operativo. Mark y Ame deben implementar y validar; el borrado DEMO actual es local y no acredita eliminación remota. |
+| Política económica | Costo adicional autorizado de $0 MXN | Restricción de Rutitas, no garantía de gratuidad de terceros. No activar servicios con costo potencial sin resolver compatibilidad con esta política. |
+
+### Proveedores: uso comprobado y posibilidades
+
+| Proveedor | Clasificación para este borrador | Evidencia/límite |
+|---|---|---|
+| Vercel | En uso para alojar la Landing | El sitio y proyecto Vercel existen. Esto no acredita que aloje el Backend ni datos de cuenta. |
+| Google Analytics | Código opcional integrado; uso real no confirmado | No se verificó ID GA4 real, propiedad ni recolección activa. La prueba sintética intercepta solicitudes. |
+| MongoDB Atlas | Contemplado / pendiente | Hay repositorios MongoDB en el Backend revisado; no se confirmó clúster, cuenta ni conexión Atlas operativa. |
+| Microsoft Azure | Contemplado / pendiente | No se presenta como proveedor activo del servicio; confirmar recursos y configuración antes de describir uso. |
+| Google Maps Platform | Contemplado / pendiente | No se confirmó uso/transmisión en la app operativa; permisos Android no prueban uso del proveedor. |
+| Google Play | Previsto para distribución / pendiente | No se confirmó ficha pública ni distribución activa de la aplicación. |
+
+La matriz anterior separa código/configuración de servicios activados, tratamiento de datos y contratos. Esos hechos requieren confirmación del equipo antes de retirar la condición de borrador.
+
 ## Auditoría de dependencias — actualización del 2026-11-17
 
 `npm audit --audit-level=high` consultado el 2026-11-17 terminó con **exit 1 y 11 entradas de severidad alta** en el árbol transitivo, agrupadas alrededor de `picomatch@4.0.7`, `fdir`, `tinyglobby`, Vite/Vitest y las herramientas TypeScript-ESLint. El advisory [GHSA-fc5q-39xc-vjpf](https://github.com/advisories/GHSA-fc5q-39xc-vjpf) identifica ReDoS por patrones extglob repetidos, afecta `picomatch <=4.0.7` y a la hora de consultar aún no lista versión corregida.
@@ -51,15 +76,15 @@ El árbol está en dependencias de desarrollo/build; no se encontró `picomatch`
 
 ## Falta aprobación documentada
 
-- [ ] Determinar responsable legal (equipo, entidad privada o institución pública), domicilio y régimen jurídico aplicable.
-- [ ] Correo/canal oficial de privacidad y procedimiento ARCO realmente atendido.
+- [ ] Identificación legal completa y domicilio del responsable; el Equipo de Rutitas está indicado solo como responsable operativo, y el régimen aplicable sigue por definir.
+- [ ] Confirmar atención del correo `rutitas.rutitas@gmail.com`, quién responderá y el procedimiento ARCO/privacidad; la Landing no recibe solicitudes.
 - [ ] Inventario de datos exacto de Android y Backend: obligatorios, opcionales y sensibles.
 - [ ] Cotejar de nuevo ramas/SHA de Android y Backend al preparar una versión legal para aprobación.
 - [ ] Determinar uso verdadero de permisos de ubicación y cámara, fotos, documentos y datos de viajes.
 - [ ] Finalidades primarias y secundarias con consentimiento aplicable.
-- [ ] Nombre y ubicación de proveedores concretos, transferencias y subencargados: MongoDB, Vercel, GA4, Maps, etc.
-- [ ] Plazos específicos de retención, respaldos y supresión.
-- [ ] Proceso funcional de solicitud de eliminación externo e interno; protocolo de identidad y respuesta.
+- [ ] Confirmar en uso efectivo y por sistema los proveedores, funciones, ubicación, transferencias y subencargados. Vercel aloja la Landing; GA está integrado pero sin uso real verificado. Azure, Atlas, Maps, medición GA y Play siguen contemplados o pendientes.
+- [ ] Validar técnicamente/legalmente la previsión de hasta 2 meses, inicio, categorías, respaldos y excepciones.
+- [ ] Mark y Ame deben implementar y validar el botón de Android y el mecanismo seguro en Backend; definir protocolo de identidad/respuesta y probar el borrado remoto antes de presentarlo como disponible.
 - [ ] Medidas de seguridad efectivamente implementadas; no declarar certificaciones inexistentes.
 - [ ] Fecha de entrada en vigor, control de cambios y aprobación humana del responsable.
 - [ ] Concordancia con etiquetas Data safety de Google Play y aviso resumido dentro de la app (funciones futuras; alcance Android por confirmar).

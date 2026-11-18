@@ -11,7 +11,9 @@ Este documento de trabajo acompaña el diseño de `/privacidad`. Coteja las rama
 
 Rutitas es un proyecto en desarrollo que busca facilitar la movilidad compartida dentro de comunidades universitarias, con un piloto previsto inicialmente en la Universidad Tecnológica de Tula-Tepeji (UTTT). La institución piloto no se identifica automáticamente como responsable del tratamiento de datos personales.
 
-**Pendiente indispensable:** identificación y domicilio del responsable legal del tratamiento, datos de contacto para privacidad y definición del régimen legal que resulte aplicable.
+La coordinación identifica al **Equipo de Rutitas** como responsable operativo del proyecto. Se proporcionó como contacto de privacidad **rutitas.rutitas@gmail.com**. Estas decisiones no identifican por sí solas a la persona o entidad responsable legal.
+
+**Pendiente indispensable:** identificación legal completa, domicilio, régimen aplicable y validación de que el canal de contacto está atendido y cuenta con un procedimiento aprobado.
 
 ## 2. Ámbito y datos personales
 
@@ -39,7 +41,13 @@ El manifiesto Android revisado declara cámara y ubicación aproximada/precisa. 
 
 La coordinación de viajes podría requerir mostrar datos limitados del trayecto o del perfil a integrantes de la comunidad. El equipo debe aprobar qué se muestra, a quién y durante cuánto tiempo antes de activar estas funciones.
 
-El Backend contiene repositorios MongoDB, Android DEMO almacena datos localmente y la Landing tiene integración opcional de Google Analytics con consentimiento. Esto no confirma contratos, activación, transferencias, ubicación de datos o tratamientos productivos. Configuración remota Vercel/Analytics y Google Maps no fue verificada.
+**Proveedor actualmente usado:** Vercel aloja la Landing. Esto no acredita que el Backend esté desplegado allí ni que se use para almacenar perfiles o rutas.
+
+**Código disponible, sin operación confirmada:** el Backend contiene repositorios MongoDB, pero no se confirmó una conexión a MongoDB Atlas. La Landing incluye una integración opcional de Google Analytics, pero no se verificó un ID real ni recolección activa.
+
+**Contemplados o pendientes de confirmación:** Microsoft Azure, MongoDB Atlas, Google Maps Platform, Google Analytics como servicio de medición y Google Play como canal futuro de distribución Android. Esta lista no confirma contratos, configuración, activación, envío de datos, ubicación, transferencias ni tratamiento productivo. La configuración de servicios externos debe verificarse antes de habilitarlos.
+
+La política del proyecto autoriza **$0 MXN de costo adicional**. No significa que los proveedores sean gratuitos ni que exista una garantía del proveedor; no se habilitarán servicios que puedan superar el límite aprobado.
 
 **Pendiente:** identificar proveedores efectivos, funciones, ubicaciones, destinatarios, posibles transferencias y medidas contractuales de protección.
 
@@ -51,15 +59,15 @@ El código Backend revisado contiene hash de contraseñas y autenticación JWT; 
 
 ## 7. Conservación y eliminación
 
-Rutitas deberá limitar la conservación de datos a los periodos necesarios para las finalidades autorizadas y, en su caso, para las obligaciones legales aplicables. Los plazos concretos deben documentarse por categoría.
+La coordinación indicó una conservación prevista de datos personales de **hasta 2 meses**, sujeta a revisión técnica y legal. Es una previsión, no una política implementada o verificada. Deben confirmarse el inicio del plazo, las categorías cubiertas, respaldos y excepciones antes de adoptarla.
 
-Android DEMO posee una función que borra datos locales vinculados al perfil y archivos/fotos del dispositivo. Su comentario indica que no elimina datos del servidor. Entre las siete rutas del Backend revisado no se encontró DELETE de cuenta. **No se ha acreditado un mecanismo completo de eliminación remota.** La página `/eliminar-cuenta` informa esta limitación; el trámite, verificación y excepciones de conservación siguen pendientes.
+Android DEMO posee una función que borra datos locales vinculados al perfil y archivos/fotos del dispositivo. No elimina datos del servidor. La coordinación prevé desarrollar un botón en Android y un mecanismo seguro en Backend. Mark y Ame deben implementarlos y validarlos antes de ofrecer eliminación remota. **Actualmente no se acredita un mecanismo remoto operativo ni el borrado de cuentas o respaldos.** La página `/eliminar-cuenta` informa esta limitación; verificación de titularidad, impacto en viajes y excepciones siguen pendientes.
 
 ## 8. Derechos de las personas titulares
 
 De acuerdo con la legislación aplicable y con la identidad del responsable legal que se determine, las personas podrán ejercer los derechos de acceso, rectificación, cancelación y oposición (ARCO), además de otros mecanismos que correspondan conforme al marco jurídico. El ejercicio de estos derechos no debe supeditarse a una cuenta en la Landing.
 
-**Pendiente:** habilitar un canal oficial atendido, un procedimiento de solicitud y verificación, sus plazos y el medio de respuesta. No se deben enviar contraseñas ni tokens a contactos no confirmados.
+El contacto proporcionado por coordinación es `rutitas.rutitas@gmail.com`; la Landing solo enlaza a ese correo y no recibe ni almacena solicitudes. **Pendiente:** confirmar que el buzón está atendido, quién dará respuesta, el procedimiento de solicitud/verificación, los plazos y el régimen legal aplicable. No se deben enviar contraseñas ni tokens por correo.
 
 ## 9. Analítica y tecnologías del navegador
 
@@ -69,4 +77,4 @@ La Landing Page almacena localmente la preferencia sobre analítica. Su código 
 
 La versión aprobada del aviso, su fecha de entrada en vigor y los cambios relevantes se comunicarán mediante la misma dirección `/privacidad` y por otros medios que el responsable establezca cuando sea necesario.
 
-**Pendiente de cierre:** validar el responsable, los datos y finalidades reales, el contacto, los terceros y transferencias, los plazos, la eliminación de cuentas y la revisión legal correspondiente. Hasta entonces este texto es una propuesta técnica de contenido.
+**Pendiente de cierre:** identidad legal completa y domicilio, datos y finalidades reales, proveedores/transferencias efectivos, periodo previsto de hasta 2 meses, implementación y validación de eliminación por Mark y Ame, atención del contacto y revisión legal final. El aviso se mantiene como borrador no ratificado.

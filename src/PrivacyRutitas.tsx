@@ -17,8 +17,8 @@ const topics = [
 
 /**
  * Aviso de privacidad de trabajo de Rutitas.
- * No retirar la advertencia de borrador hasta validar responsable,
- * inventario de datos, proveedores, contacto, retenciones y flujo de borrado.
+ * No retirar la advertencia de borrador hasta validar identidad legal,
+ * inventario de datos, proveedores, retenciones y flujo de borrado.
  */
 export default function PrivacyRutitas() {
   return (
@@ -40,7 +40,7 @@ export default function PrivacyRutitas() {
             <p className="pr-lead">Queremos que sepas qué información utiliza Rutitas, para qué la necesita y cómo puedes ejercer tus derechos.</p>
             <div className="pr-notice" role="status">
               <span className="pr-notice-dot" aria-hidden="true" />
-              <p><strong>Borrador de revisión interna.</strong> Este aviso aún no es definitivo. Los datos del responsable, el contacto oficial, los plazos y las prácticas reales de Android y Backend deben confirmarse antes de publicarlo como política vigente.</p>
+              <p><strong>Borrador de revisión interna.</strong> Este aviso aún no es definitivo. La identificación legal y domicilio del responsable, los tratamientos y proveedores efectivos, la aplicación de los plazos y las prácticas reales de Android y Backend requieren confirmación y revisión legal antes de publicarlo como aviso vigente.</p>
             </div>
             <p className="pr-version">Versión de trabajo: 17 de noviembre de 2026 · Entrada en vigor: pendiente de aprobación</p>
           </div>
@@ -63,7 +63,8 @@ export default function PrivacyRutitas() {
               <span className="pr-section-num">01 / RESPONSABLE</span>
               <h2 id="h-responsable">Quién protege tus datos</h2>
               <p>Rutitas es un proyecto de movilidad compartida orientado inicialmente a la comunidad universitaria de la Universidad Tecnológica de Tula-Tepeji (UTTT). La universidad piloto no debe confundirse automáticamente con el responsable legal del tratamiento.</p>
-              <div className="pr-pending"><strong>Información obligatoria por completar:</strong> nombre o razón social, domicilio oficial y canal de privacidad atendido: [PENDIENTE DE VALIDACIÓN DEL EQUIPO]. La relación jurídica del proyecto con la UTTT también requiere confirmación.</div>
+              <p>El responsable operativo indicado por la coordinación es el <strong>Equipo de Rutitas</strong>. Esto no define por sí solo a la persona o entidad que será responsable legal del tratamiento.</p>
+              <div className="pr-pending"><strong>Pendiente de validación:</strong> identificación legal completa y domicilio del responsable, régimen aplicable y relación jurídica del proyecto con la UTTT.</div>
             </section>
 
             <section id="datos" aria-labelledby="h-datos" className="pr-section">
@@ -93,8 +94,9 @@ export default function PrivacyRutitas() {
               <span className="pr-section-num">05 / TERCEROS</span>
               <h2 id="h-compartir">Con quién podría compartirse</h2>
               <p>Para coordinar viajes compartidos, Rutitas podría necesitar mostrar a otros participantes ciertos datos del recorrido o del perfil, pero la información exacta y sus controles de visibilidad requieren aprobación antes de activarse.</p>
-              <p>El código del Backend usa repositorios MongoDB; Android DEMO guarda datos localmente. La Landing contiene una integración opcional de Google Analytics que solo se inicia con ID válido y consentimiento afirmativo. La existencia del código no confirma cuentas contratadas, servicios desplegados, transmisiones, ubicación de datos ni transferencias en producción. La configuración remota de Vercel y de Google Analytics no se verificó.</p>
-              <div className="pr-pending"><strong>Proveedores y destinatarios efectivos:</strong> [PENDIENTE DE VALIDACIÓN DEL EQUIPO], incluida su función, ubicación, acceso y las transferencias que correspondan.</div>
+              <p><strong>Uso observado:</strong> Vercel aloja esta Landing. El código de Analytics está integrado de forma opcional, pero no se verificó un ID GA4 real ni recolección activa. El Backend revisado contiene repositorios MongoDB, pero no se confirmó una conexión operativa a MongoDB Atlas.</p>
+              <p><strong>Contemplados o pendientes de confirmación:</strong> Microsoft Azure, MongoDB Atlas para el Backend, Google Maps Platform, Google Analytics como servicio de medición y Google Play para distribuir Android. La inclusión en esta lista expresa una posibilidad del proyecto; no confirma contratación, configuración, activación, envío de datos, ubicación de almacenamiento, transferencias ni uso actual. Los viajes y solicitudes aún no se ofrecen como funciones operativas.</p>
+              <div className="pr-pending"><strong>Por confirmar antes de operar:</strong> proveedores efectivamente usados por cada sistema, función, ubicación, acceso, condiciones contractuales, subencargados y transferencias aplicables. La política de Rutitas autoriza <strong>$0 MXN de costo adicional</strong>; esto no significa que los proveedores sean gratuitos ni confirma que sus servicios estén habilitados. No se debe activar un servicio que pueda exceder esa política.</div>
             </section>
 
             <section id="seguridad" aria-labelledby="h-seguridad" className="pr-section">
@@ -107,8 +109,8 @@ export default function PrivacyRutitas() {
             <section id="retencion" aria-labelledby="h-retencion" className="pr-section">
               <span className="pr-section-num">07 / CONTROL</span>
               <h2 id="h-retencion">Conservación y eliminación</h2>
-              <p>Los datos deben conservarse solo durante el tiempo necesario para las finalidades autorizadas y, cuando proceda, las obligaciones legales aplicables. El equipo debe definir plazos concretos para cuentas, registros de viajes, fotografías, solicitudes y respaldos.</p>
-              <p>En Android DEMO existe una función que elimina datos asociados en Room y archivos locales del dispositivo, y cancela localmente las rutas creadas por ese perfil. El propio código indica que no borra datos del servidor. El Backend revisado no incluye un endpoint DELETE de cuenta entre sus siete rutas. <strong>No se acredita la eliminación remota de cuentas o respaldos.</strong> El procedimiento real, la verificación de titularidad y el canal externo siguen pendientes.</p>
+              <p>La coordinación ha indicado como objetivo una conservación prevista de datos personales de <strong>hasta 2 meses</strong>, sujeta a revisión técnica y legal. Es una previsión, no una política implementada o verificada. Deben validarse el punto inicial del plazo, las categorías, respaldos y cualquier excepción antes de adoptar el periodo.</p>
+              <p>Android DEMO permite borrar datos y archivos locales; esto no elimina información en un servidor. La coordinación prevé desarrollar un botón de eliminación en Android y un mecanismo seguro en Backend. Mark y Ame deben implementarlos y validarlos antes de ofrecer la eliminación remota. <strong>Actualmente no se acredita un mecanismo remoto operativo ni el borrado de cuentas o respaldos.</strong> También deben definirse la verificación de titularidad, los efectos en viajes y los casos de retención.</p>
               <a className="pr-inline-link" href="/eliminar-cuenta">Consultar el estado de eliminación de cuenta <span aria-hidden="true">↗</span></a>
             </section>
 
@@ -122,8 +124,8 @@ export default function PrivacyRutitas() {
             <section id="contacto" aria-labelledby="h-contacto" className="pr-section">
               <span className="pr-section-num">09 / CONTACTO</span>
               <h2 id="h-contacto">Contacto de privacidad</h2>
-              <p>Canal oficial atendido por la persona responsable para consultas o solicitudes sobre datos personales: <strong>[PENDIENTE DE VALIDACIÓN DEL EQUIPO]</strong>.</p>
-              <p>Esta Landing no recibe solicitudes de privacidad ni documentos. No compartas contraseñas, tokens ni datos personales mediante canales no confirmados.</p>
+              <p>Contacto indicado por la coordinación de Rutitas: <a href="mailto:rutitas.rutitas@gmail.com">rutitas.rutitas@gmail.com</a>.</p>
+              <p>La identidad legal completa y domicilio del responsable, así como la confirmación de que el buzón está atendido y el procedimiento aplicable a las solicitudes, siguen pendientes. Esta Landing no recibe ni almacena solicitudes o documentos. No compartas contraseñas ni tokens por correo.</p>
             </section>
 
             <section id="analitica" aria-labelledby="h-analitica" className="pr-section">
@@ -137,7 +139,7 @@ export default function PrivacyRutitas() {
               <span className="pr-section-num">11 / ACTUALIZACIONES</span>
               <h2 id="h-cambios">Cambios al aviso</h2>
               <p>Las actualizaciones al aviso deberán comunicarse mediante esta misma dirección y, cuando el cambio lo requiera, por los medios adicionales definidos por el responsable. La fecha de entrada en vigor y la versión aprobada aparecerán en la parte superior.</p>
-              <div className="pr-pending"><strong>Pendiente:</strong> aprobación del responsable del tratamiento y revisión legal de los textos antes de retirar la etiqueta de borrador.</div>
+              <div className="pr-pending"><strong>Pendiente:</strong> confirmar tratamientos y proveedores, completar la identidad legal y domicilio del responsable y obtener la revisión legal final. El Equipo de Rutitas aún no ha ratificado este texto como aviso definitivo.</div>
             </section>
           </div>
         </div>
