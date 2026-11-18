@@ -1,5 +1,7 @@
 # Estrategia y casos de prueba — LANDING-001
 
+Las secciones de corridas individuales LANDING-005/006 y la primera integración preservan resultados históricos de su ejecución. Para la rama integrada, la verificación más reciente LANDING-007 que aparece a continuación prevalece, especialmente para el resultado vigente de `npm audit`.
+
 ## Verificación correctiva LANDING-007 — foto del hero y cotejo remoto — 2026-11-17
 
 La captura previa de escritorio se hacía inmediatamente tras `page.goto('/')`, mientras el `<img>` del hero declara `decoding="async"`; no esperaba carga ni decodificación. Se añadió una regresión Playwright para abrir `/` directamente, exigir `complete`, `naturalWidth > 0`, `decode()` resuelto y caja visible, recargar y repetir las aserciones. Las capturas de Home ahora esperan ese estado.

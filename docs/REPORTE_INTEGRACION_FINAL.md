@@ -36,7 +36,7 @@ Los commits de ambas ramas se conservaron mediante merges locales. Los conflicto
 | `VITE_GA_MEASUREMENT_ID=G-SYNTHETIC123 npm run test:e2e` | 24/24 pasaron; el escenario dedicado interceptó GTM |
 | `npm run build` | exit 0; Vite 6.4.5; JS 255.68 kB (79.25 kB gzip), CSS 20.88 kB (5.35 kB gzip) |
 | `npm run sdd:verify` | exit 0; 30 documentos, trazabilidad de requisitos 001–004 |
-| `npm audit --audit-level=high` | exit 0; 0 vulnerabilidades reportadas |
+| `npm audit --audit-level=high` | Corrida inicial de integración: exit 0; la revalidación correctiva más reciente exit 1 con 11 hallazgos high; prevalece el addendum |
 | `git diff --check` | exit 0 antes del commit de integración |
 
 La salida de E2E cambia al combinar LANDING-005 y LANDING-006: la corrida sintética independiente de LANDING-006 registró 18/18 y LANDING-005 16 pasadas más 2 omisiones; la suite combinada registró 24/24 con ID sintético. No se usó credencial ni Measurement ID real.
