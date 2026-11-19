@@ -1,5 +1,7 @@
 # Estrategia y casos de prueba — LANDING-001
 
+> **Conciliación de seguridad LANDING-017 (2026-11-19):** las corridas fechadas abajo que registraron 11 avisos High de `GHSA-fc5q-39xc-vjpf` son evidencia histórica del estado de la base de advisories en esas fechas. GitHub retiró el advisory el 2026-11-18; la auditoría local posterior (`npm audit --json`) terminó exit 0 con 0 vulnerabilidades. El paquete `picomatch` sigue transitivamente instalado, pero no se presenta aquel GHSA como hallazgo activo. Ejecutar y registrar de nuevo el audit de CI para este PR.
+
 ## LANDING-010 — revalidación antes de consolidación local — 2026-11-18
 
 | Control | Comando | Resultado |

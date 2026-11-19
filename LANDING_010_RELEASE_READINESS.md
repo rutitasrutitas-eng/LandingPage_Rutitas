@@ -1,5 +1,7 @@
 # LANDING-010 — consolidación local y preparación de release
 
+> **Conciliación posterior LANDING-017 (2026-11-19):** los resultados High y el bloqueo por `picomatch` que aparecen en esta evidencia corresponden a la evaluación previa. GitHub retiró `GHSA-fc5q-39xc-vjpf` el 2026-11-18; el audit local posterior informó cero vulnerabilidades. El histórico se conserva, pero este advisory no es un bloqueo de seguridad vigente. La validación CI sigue pendiente.
+
 - **Fecha:** 2026-11-18
 - **Rama:** `feature/landing-integracion-final-local`
 - **SHA inicial:** `8544401a6ab4713aded5e3024ee9fcdc58793472`

@@ -70,6 +70,8 @@ La matriz anterior separa código/configuración de servicios activados, tratami
 
 ## Auditoría de dependencias — actualización del 2026-11-17
 
+> **Nota posterior (LANDING-017, 2026-11-19):** las cifras y el estado del advisory descritos en esta sección corresponden exclusivamente a la consulta del 2026-11-17. GitHub retiró `GHSA-fc5q-39xc-vjpf` el 2026-11-18 como no problema de seguridad; `npm audit --json` local del 2026-11-19 reportó 0 vulnerabilidades. Se conserva la evidencia histórica sin mantener este advisory como riesgo activo. El árbol de herramientas aún contiene `picomatch@4.0.7`; revisar el audit de CI por otros avisos.
+
 `npm audit --audit-level=high` consultado el 2026-11-17 terminó con **exit 1 y 11 entradas de severidad alta** en el árbol transitivo, agrupadas alrededor de `picomatch@4.0.7`, `fdir`, `tinyglobby`, Vite/Vitest y las herramientas TypeScript-ESLint. El advisory [GHSA-fc5q-39xc-vjpf](https://github.com/advisories/GHSA-fc5q-39xc-vjpf) identifica ReDoS por patrones extglob repetidos, afecta `picomatch <=4.0.7` y a la hora de consultar aún no lista versión corregida.
 
 El árbol está en dependencias de desarrollo/build; no se encontró `picomatch` en dependencias runtime directas de la Landing. Esto no convierte el hallazgo en resuelto: un proceso local/CI que procese patrones no confiables puede ser relevante. `npm audit fix --force` propone degradar Vitest a `3.1.4` como cambio major; no se ejecutó ni se aplicó override/downgrade por la ausencia de versión corregida declarada y el riesgo de incompatibilidad. Se requiere una actualización compatible cuando el advisory publique un fix y volver a correr `npm ci`, pruebas, build y audit.

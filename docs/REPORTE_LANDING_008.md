@@ -1,5 +1,7 @@
 # LANDING-008 — preparación local para revisión GitHub
 
+> **Actualización posterior LANDING-017 (2026-11-19):** las cifras de auditoría y conclusión de este informe son evidencia histórica de la ejecución del 2026-11-17. GitHub retiró `GHSA-fc5q-39xc-vjpf` el 2026-11-18; `npm audit --json` local posterior reportó cero vulnerabilidades. No se presenta el GHSA como activo ni se modificaron dependencias. El audit de CI del PR verificará el estado actual y otros avisos.
+
 **Corte:** 2026-11-17
 
 **Rama:** `feature/landing-integracion-final-local`
