@@ -222,3 +222,94 @@ El zoom nativo del navegador no se ejecutó; el entorno de Playwright headless n
 | Git diff | `git diff --check` | Exit 0. |
 
 Gitleaks no se ejecutó localmente porque Docker no está instalado; no hay workflow LANDING-001 en la rama remota, por tanto el control no se pudo lanzar en Actions sin publicar la rama. El workflow local de LANDING-002 quedó configurado para escanear el historial completo con `--redact`, antes de instalar dependencias.
+
+## LANDING-011 — seguridad y control de publicación — 2026-11-18
+
+No se cambió código de producto ni dependencias. No se ejecutó instalación, no se consumieron créditos y no se hicieron solicitudes a AI Gateway. La lectura de Vercel fue desde Edge en modo de solo lectura.
+
+| Control | Comando/medio | Resultado real |
+|---|---|---|
+| Auditoría completa | `npm audit --json` | Exit 1; 11 High, 0 Critical/Moderate/Low; el mismo advisory aparece por distintas rutas del árbol. |
+| Árbol de producción | `npm audit --omit=dev --audit-level=high --json` | Exit 0; 0 vulnerabilidades. |
+| Árbol de `picomatch` | `npm ls picomatch --all` | Exit 0; `picomatch@4.0.7` transitivo bajo Vite/fdir/tinyglobby y Vitest. |
+| Build/bundle | `npm run build`; `rg -n -i "picomatch|fdir|tinyglobby" dist` | Build exit 0 (Vite 6.4.5, 36 módulos; JS 257.49 kB; CSS 20.88 kB). Sin coincidencias textuales en dist recién generado. |
+| Fuente y configs | `rg` en `src`, `scripts`, `vite.config.ts`, `vitest.config.ts` | Sin usos explícitos de globs de visitante; no prueba todos los caminos internos del toolchain. |
+| Dashboard | Edge: Git, Production/Preview environments, Build and Deployment, Deployment Protection | Repo Git esperado, producción `main`, Ignored Build Step `Automatic`, PR-only disponible/no elegido, Require Log In activo/Standard Protection, excepciones sin dominios listados. `All unassigned branches` visible; estado del checkbox Branch Tracking Preview no concluyente. Sin cambios. |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 22 requisitos 001 y trazabilidad para 14/8/9 requisitos 002/003/004. |
+| Formato de diff | `git diff --check` | Exit 0. Git mostró avisos CRLF próximos en dos archivos; sin errores de whitespace. |
+
+El advisory GitHub sigue indicando versiones corregidas `None` al 2026-11-18. No se aplicó downgrade, override ni supresión. Se recomienda mantener bloqueado el release hasta corregir o aceptar formalmente el riesgo High. Con `Automatic`, el primer push puede iniciar Preview; la protección de acceso no evita creación/uso de recursos. No hay push, PR, merge, Preview, despliegue o CI remoto para esta entrega. Ver `LANDING_011_SEGURIDAD_Y_RELEASE.md`.
+
+## LANDING-012 — configuración controlada de Vercel — 2026-11-18
+
+| Control | Medio/comando | Resultado real |
+|---|---|---|
+| Vercel proyecto/equipo | Edge, modo de lectura salvo el único ajuste autorizado | Proyecto `landing-page-rutitas`, equipo `rutitasrutitas-8977`; plan Hobby visible. |
+| Ignored Build Step | Settings → Build and Deployment | `Automatic` cambió a `Only build production`; confirmación de actualización y valor persistido tras recarga. No se inició deployment. |
+| Git / producción | Settings → Git y Environment → Production | Repo `rutitasrutitas-eng/LandingPage_Rutitas`; rama de producción `main`. |
+| Protección | Settings → Deployment Protection | `Require Log In` activo; `Standard Protection` seleccionado. |
+| Workflow | Lectura local de `.github/workflows/quality.yml` | PR hacia `main`/`feature/landing-001-compliance` y `workflow_dispatch`; sin evento `push`; `npm audit` presente. Ninguna ejecución CI nueva. |
+| Pruebas de producto | No repetidas | No hubo cambios de código; no son necesarias para el único cambio remoto de configuración. No se probó con push/PR/deployment por restricción. |
+| SDD / diff | `npm run sdd:verify`; `git diff --check` | SDD exit 0: 30 documentos, 23 requisitos 001 y trazabilidad 14/8/9 para 002/003/004. Diff-check exit 0; solo avisos Git de conversión LF/CRLF. |
+
+Vercel documenta que builds omitidos por Ignored Build Step quedan cancelados y que tales deployments cuentan para cuotas. No se midió consumo. La configuración no garantiza costo cero ni prueba el efecto real de un push. Persisten el riesgo High `picomatch`, la ratificación pendiente de la Constitución SDD y pendientes de revisión legal. Detalle: `LANDING_012_CONTROL_PUBLICACION.md`.
+
+## LANDING-013 — eliminación programada de cuentas — 2026-11-18
+
+| Control | Resultado real |
+|---|---|
+| Vitest (`npm run test -- --reporter=dot`) | Exit 0; 2 archivos de prueba, 17/17 tests. Incluye texto de privacidad y eliminación, 7 días, Backend confirma, excepciones, email no operativo y ausencia de formulario. |
+| Playwright (`npm run test:e2e -- e2e/landing.spec.ts`) | Exit 0; 19 passed, 1 skipped intencionalmente en mobile-chromium para el caso desktop-only de fotografía. Las rutas legales se probaron en chromium y mobile-chromium; lectura de privacidad conserva siete viewports. |
+| Lint (`npm run lint`) | Exit 0; sin warnings de ESLint. |
+| Typecheck (`npm run typecheck`) | Exit 0. |
+| Build (`npm run build`) | Exit 0; Vite 6.4.5, 36 módulos. JS 260.75 kB, CSS 20.88 kB. |
+| SDD (`npm run sdd:verify`) | Exit 0; 30 documentos, 24 requisitos 001 y trazabilidad para 14/8/9 requisitos 002/003/004. |
+| Diff (`git diff --check`) | Exit 0; Git informó avisos de conversión LF/CRLF en archivos documentales preexistentes; sin errores de whitespace. |
+| Seguridad / red | No se instalaron/actualizaron dependencias, no se ejecutó AI Gateway ni se consumieron créditos; no se hizo auditoría npm nueva. El riesgo High de `picomatch` permanece abierto conforme al reporte previo. |
+
+Sin CI remoto, push, PR, merge, commit, Preview, despliegue, cambio Vercel, backend/app ni solicitudes reales. Los tests prueban copy/rutas locales, no la implementación del Backend ni la política de Google Play en una publicación.
+
+### LANDING-013 — addendum de responsabilidad y privacidad pública
+
+Las pruebas unitarias UT-LP-003/004 comprueban que las páginas públicas usan solo «Equipo de Rutitas» y el correo oficial, sin nombres individuales. Coordinación confirmó la atención compartida internamente; sigue no habilitado el canal para eliminación hasta aprobar verificación y seguimiento. No se hizo prueba de correo real.
+
+## LANDING-014 — Analytics, redes, SEO y Search Console — 2026-11-19
+
+Entorno local Windows, Node/npm ya instalados, Vite 6.4.5, Chromium y mobile-Chromium de Playwright. No se instalaron ni actualizaron paquetes.
+
+| Control | Comando/medio | Resultado real |
+|---|---|---|
+| Lint | `npm run lint` | Exit 0, sin warnings. |
+| Tipos | `npm run typecheck` | Exit 0. Una primera corrida detectó una llamada incorrecta a `querySelectorAll` en la aserción de pruebas; se corrigió y typecheck pasó. |
+| Unitarias | `npm run test -- --reporter=dot` | 19/19 en 2 archivos. Una primera corrida encontró la misma aserción mal usada (`within(...).querySelectorAll`); se cambió a consultar el elemento DOM y pasó. |
+| Playwright | `npm run test:e2e` | 27 passed, 5 skipped intencionales, 0 failed; 32 tests en Chromium y mobile-Chromium. Omisiones: prueba sintética GA separada (2 proyectos), aislamiento de Analytics sin variable (2 proyectos) y fotografía desktop-only en mobile-Chromium. |
+| GA4 sintético | `$env:LANDING_E2E_GA_SYNTHETIC='1'; npx playwright test e2e/analytics-synthetic.spec.ts --project=chromium` | 1/1 passed con `G-SYNTHETIC123`; petición a gtag interceptada y atendida localmente con respuesta mock, consentimiento otorgado/revocado, un `page_view`, señales de publicidad deshabilitadas y sin GTM. No llegó solicitud a Google. |
+| Diseño responsive/fotografía | E2E `home keeps approved content...`; captura de landing | Viewports de aceptación existentes: 7 resoluciones y viewport adicional de zoom CSS. Home mantiene su criterio de una pantalla. Hero decodificado y capturas `evidence/landing-014/landing-home-{desktop,mobile}.png`; revisión visual manual detectó y corrigió SVG negros en footer por SVG blancos, verificación repetida por test y captura. |
+| Rutas, sociales y SEO | E2E LANDING-014 y ajuste de canal | Cinco enlaces HTTPS exactos (Facebook, Instagram, YouTube, X, TikTok), navegables por teclado; cinco SVG locales. Página del canal YouTube respondió HTTP 200, título público «Rutitas UTTT», mismo ID que la URL; avatar no verificado visualmente. Privacidad/eliminación noindex en metadata SPA y canónicos propios. Robots/sitemap revisados; sitemap solo incluye portada. |
+| Search Console local | Build y preview local | El archivo de `public/` se copió a `dist/` con SHA-256 idéntico al origen (`E2A8335CC2E0C53494BA450C479DE8176EEED44F20016A855758BFE7EEB10057`); `http://127.0.0.1:4174/googlee72a4fcd7bd338a1.html` respondió HTTP 200 con cuerpo exacto. No se consultó/verificó propiedad remota. |
+| Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos, JS 263.67 kB y CSS 21.48 kB tras habilitar YouTube. |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 25 requisitos 001 y trazabilidad 14/8/9 para 002/003/004. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0, 0 vulnerabilidades según el audit local ejecutado el 2026-11-19. No se cambiaron dependencias. El estado formal pendiente heredado de `GHSA-fc5q-39xc-vjpf` no se da por aceptado/cerrado por este resultado; requiere revisión humana del reporte actualizado. |
+| Formato | `git diff --check` | Exit 0; sin errores. |
+
+Las páginas `/privacidad` y `/eliminar-cuenta` actualizan `noindex,follow` mediante JavaScript. El HTML SPA inicial contiene los metadatos estáticos de la portada; no se garantiza que crawlers sin JavaScript interpreten el `noindex` dinámico. Google no ha verificado el archivo y el sitemap no se ha publicado. No se configuró el ID real `G-MKN6YXXZ8Y`, no se activó GTM ni se cambió Vercel. No hubo CI remoto, push, PR, merge, commit o despliegue.
+
+### Addendum de YouTube — 2026-11-19
+
+La URL suministrada por coordinación (https://www.youtube.com/channel/UCNam3EUfsyTzmWEb5AViW2A) se consultó en modo público: HTTP 200 y metadatos de canal `Rutitas UTTT`, con el ID indicado en la ruta. Se activó como el quinto enlace HTTPS. No se hizo verificación visual independiente del avatar. Después del cambio se repitieron las validaciones: Vitest 19/19; Playwright 27 passed/5 skipped intencionales; prueba GA sintética 1/1; lint, typecheck, build, SDD y diff-check exit 0. Build: Vite 6.4.5, 37 módulos, JS 263.67 kB, CSS 21.48 kB. `npm audit` no se repitió porque no cambiaron dependencias; su último resultado de LANDING-014 base fue exit 0/0 vulnerabilidades. Sin operaciones de publicación.
+
+## LANDING-015 — consolidación local y headers de indexación — 2026-11-19
+
+| Control | Ejecución | Resultado real |
+|---|---|---|
+| Unitarias | `npm run test -- --reporter=dot` | Exit 0; 2 archivos, 19/19 pruebas aprobadas. |
+| E2E | `npm run test:e2e` | Exit 0; 27 aprobadas, 5 omitidas intencionalmente, 0 fallidas (32 en Chromium y mobile-Chromium). Las omisiones corresponden a IDs GA sintéticos/aislamiento que se ejecuta en prueba separada y a la regresión de fotografía solo escritorio. |
+| Prueba GA sintética dirigida | `$env:LANDING_E2E_GA_SYNTHETIC='1'; npx playwright test e2e/analytics-synthetic.spec.ts --project=chromium` | 1/1 aprobada en la validación de LANDING-014; no se envió solicitud a Google. |
+| Configuración Vercel declarativa | `npm run test:vercel-headers` | Exit 0; cuatro patrones legales, valor `noindex, follow`, Home sin regla y rewrite intacto. No prueba respuesta HTTP del host. |
+| Lint / Typecheck | `npm run lint`; `npm run typecheck` | Ambos exit 0. |
+| Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos; JS 263.67 kB, CSS 21.48 kB. |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 26 requisitos 001 y trazabilidad de 14/8/9 requisitos 002/003/004. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0; el audit reportó 0 vulnerabilidades el 2026-11-19. Se conserva el registro anterior de 11 entradas High del advisory `GHSA-fc5q-39xc-vjpf`; sin cambios a dependencias ni aceptación formal. |
+| Formato | `git diff --check` | Exit 0, sin errores; Git mostró avisos de normalización LF/CRLF en dos documentos preexistentes. |
+
+No hubo CI remoto ni respuesta HTTP de Vercel. Los headers están declarados en el repositorio y la prueba solo inspecciona configuración local; comportamiento tras rewrite, respuesta desplegada y resultado en crawlers quedan sin verificar. Cinco commits locales trazables; no se hizo push, PR, merge, Preview o despliegue.
