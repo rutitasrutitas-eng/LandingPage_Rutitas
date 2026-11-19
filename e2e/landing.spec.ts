@@ -219,8 +219,11 @@ test('legal links navigate and direct reload works while legal text retains natu
 
   await page.goto('/eliminar-cuenta')
   await expect(page.getByRole('heading', { name: 'Eliminación de cuenta' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Periodo de recuperación de 7 días' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Cómo podrá cancelarse' })).toBeVisible()
   await page.reload()
   await expect(page.getByRole('heading', { name: 'Eliminación de cuenta' })).toBeVisible()
+  await expect(page.locator('section[aria-labelledby="deletion-recovery"]')).toContainText('El plazo empezará únicamente cuando el Backend confirme')
 })
 
 test('privacy page remains readable across the accepted viewport sizes', async ({ page }) => {
@@ -252,9 +255,18 @@ test('privacy and account deletion distinguish local DEMO code from remote servi
   await expect(page.locator('#finalidades')).toContainText('No se confirmó despliegue ni uso por personas usuarias')
   await page.goto('/eliminar-cuenta')
   const deletionDetails = page.locator('section[aria-labelledby="deletion-request"]')
-  await expect(deletionDetails).toContainText('baja local para los datos del modo DEMO')
-  await expect(deletionDetails).toContainText('no elimina datos de un servidor')
+  await expect(deletionDetails).toContainText('baja disponible en Android DEMO solo borra datos locales')
+  await expect(deletionDetails).toContainText('Esta página prepara una guía pública del estado y del procedimiento propuesto')
+  await expect(deletionDetails).toContainText('Procedimiento web propuesto · todavía no habilitado')
+  await expect(deletionDetails.getByRole('listitem')).toHaveCount(3)
+  await expect(deletionDetails).toContainText('El correo por sí solo no acredita identidad')
+  await expect(page.locator('section[aria-labelledby="deletion-recovery"]')).toContainText('7 días')
+  await expect(page.locator('section[aria-labelledby="deletion-recovery"]')).toContainText('Backend confirme')
+  await expect(page.locator('section[aria-labelledby="deletion-cancel"]')).toContainText('no hay una opción operativa')
+  await expect(page.locator('section[aria-labelledby="deletion-exceptions"]')).toContainText('excepción legal aplicable y documentada')
+  await expect(page.locator('section[aria-labelledby="deletion-exceptions"]')).toContainText('hasta 2 meses es distinta de los siete días')
   await expect(page.getByRole('form')).toHaveCount(0)
+  await expect(page.getByRole('textbox')).toHaveCount(0)
 })
 
 test('both hero calls to action preserve their informational dialogs', async ({ page }) => {

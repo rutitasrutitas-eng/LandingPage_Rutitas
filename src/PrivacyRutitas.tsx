@@ -42,7 +42,7 @@ export default function PrivacyRutitas() {
               <span className="pr-notice-dot" aria-hidden="true" />
               <p><strong>Borrador de revisión interna.</strong> Este aviso aún no es definitivo. La identificación legal y domicilio del responsable, los tratamientos y proveedores efectivos, la aplicación de los plazos y las prácticas reales de Android y Backend requieren confirmación y revisión legal antes de publicarlo como aviso vigente.</p>
             </div>
-            <p className="pr-version">Versión de trabajo: 17 de noviembre de 2026 · Entrada en vigor: pendiente de aprobación</p>
+            <p className="pr-version">Versión de trabajo: 18 de noviembre de 2026 · Entrada en vigor: pendiente de aprobación</p>
           </div>
         </div>
 
@@ -109,8 +109,9 @@ export default function PrivacyRutitas() {
             <section id="retencion" aria-labelledby="h-retencion" className="pr-section">
               <span className="pr-section-num">07 / CONTROL</span>
               <h2 id="h-retencion">Conservación y eliminación</h2>
-              <p>La coordinación ha indicado como objetivo una conservación prevista de datos personales de <strong>hasta 2 meses</strong>, sujeta a revisión técnica y legal. Es una previsión, no una política implementada o verificada. Deben validarse el punto inicial del plazo, las categorías, respaldos y cualquier excepción antes de adoptar el periodo.</p>
-              <p>Android DEMO permite borrar datos y archivos locales; esto no elimina información en un servidor. La coordinación prevé desarrollar un botón de eliminación en Android y un mecanismo seguro en Backend. Mark y Ame deben implementarlos y validarlos antes de ofrecer la eliminación remota. <strong>Actualmente no se acredita un mecanismo remoto operativo ni el borrado de cuentas o respaldos.</strong> También deben definirse la verificación de titularidad, los efectos en viajes y los casos de retención.</p>
+              <p>La coordinación ha indicado como objetivo una conservación general prevista de datos personales de <strong>hasta 2 meses</strong>, sujeta a revisión técnica y legal. Este periodo general no es la ventana de recuperación de una cuenta cuya eliminación se solicite. El punto inicial, las categorías, los respaldos y las excepciones de conservación siguen por validar.</p>
+              <p>La política aprobada para el mecanismo futuro contempla una eliminación programada con <strong>7 días de recuperación</strong>. El plazo comenzará solo cuando el Backend confirme la solicitud después de verificarla; pulsar un botón o enviar un correo no iniciará la cuenta regresiva. Durante esos siete días se bloqueará el acceso normal a la cuenta. Se prevé permitir cancelar la solicitud mediante un mecanismo que aún debe definir y validar el equipo.</p>
+              <p>Al terminar los siete días, el Backend deberá ejecutar la eliminación definitiva de la cuenta y sus datos personales asociados, según un inventario técnico validado. Los datos exactos, incluidos perfil, rutas, fotografías/documentos y registros, así como la eliminación o expiración de respaldos, todavía deben confirmarse. Podrían conservarse únicamente los datos que correspondan a una excepción legal documentada, con alcance y plazo mínimos por validar. <strong>El Equipo de Rutitas aún debe implementar y validar el flujo de Android y Backend; no existe evidencia de que este mecanismo remoto esté operativo.</strong> Android DEMO solo permite borrar datos locales y eso no acredita el borrado en un servidor.</p>
               <a className="pr-inline-link" href="/eliminar-cuenta">Consultar el estado de eliminación de cuenta <span aria-hidden="true">↗</span></a>
             </section>
 
@@ -118,14 +119,14 @@ export default function PrivacyRutitas() {
               <span className="pr-section-num">08 / DERECHOS</span>
               <h2 id="h-derechos">Tus derechos sobre tus datos</h2>
               <p>De acuerdo con el régimen legal que resulte aplicable, las personas titulares pueden ejercer derechos de acceso, rectificación, cancelación y oposición (ARCO), así como solicitar información sobre el uso de sus datos y revocar consentimientos cuando corresponda.</p>
-              <div className="pr-pending"><strong>Falta habilitar:</strong> un contacto oficial supervisado, procedimiento de verificación de identidad, información necesaria para presentar solicitudes, tiempos de respuesta y vía para comunicar decisiones: [PENDIENTE DE VALIDACIÓN DEL EQUIPO]. No envíes contraseñas, tokens ni documentos a canales no confirmados.</div>
+              <div className="pr-pending"><strong>Falta definir:</strong> procedimiento para recibir y canalizar solicitudes, verificación de identidad, información mínima necesaria, tiempos de respuesta y vía para comunicar decisiones: [PENDIENTE DE VALIDACIÓN DEL EQUIPO]. No envíes contraseñas, tokens ni documentos a canales no confirmados.</div>
             </section>
 
             <section id="contacto" aria-labelledby="h-contacto" className="pr-section">
               <span className="pr-section-num">09 / CONTACTO</span>
               <h2 id="h-contacto">Contacto de privacidad</h2>
-              <p>Contacto indicado por la coordinación de Rutitas: <a href="mailto:rutitas.rutitas@gmail.com">rutitas.rutitas@gmail.com</a>.</p>
-              <p>La identidad legal completa y domicilio del responsable, así como la confirmación de que el buzón está atendido y el procedimiento aplicable a las solicitudes, siguen pendientes. Esta Landing no recibe ni almacena solicitudes o documentos. No compartas contraseñas ni tokens por correo.</p>
+              <p>Contacto oficial de privacidad: <a href="mailto:rutitas.rutitas@gmail.com">rutitas.rutitas@gmail.com</a>. La coordinación confirmó que el Equipo de Rutitas atenderá conjuntamente los mensajes recibidos.</p>
+              <p>Esta confirmación no habilita solicitudes de eliminación por correo: el procedimiento de verificación de identidad y seguimiento sigue pendiente. La identidad legal completa y domicilio del responsable también requieren validación. Esta Landing no recibe ni almacena solicitudes o documentos. No compartas contraseñas ni tokens por correo.</p>
             </section>
 
             <section id="analitica" aria-labelledby="h-analitica" className="pr-section">
