@@ -74,6 +74,36 @@ describe('Rutitas landing and legal pages', () => {
     expect(within(footer).getByRole('link', { name: 'Eliminar cuenta' })).toHaveAttribute('href', '/eliminar-cuenta')
   })
 
+  it('LP-REQ-025 renders five local social marks with five confirmed HTTPS links', () => {
+    renderAt('/')
+    const socials = screen.getByRole('navigation', { name: 'Síguenos en nuestras redes' })
+    const links = within(socials).getAllByRole('link')
+    expect(links).toHaveLength(5)
+    expect(links.map(link => link.getAttribute('href'))).toEqual([
+      'https://www.facebook.com/profile.php?id=61596370576231',
+      'https://www.instagram.com/rutitasuniversitarias/',
+      'https://www.youtube.com/channel/UCNam3EUfsyTzmWEb5AViW2A',
+      'https://x.com/UniRutitas',
+      'https://www.tiktok.com/@rutitas4?lang=es',
+    ])
+    links.forEach(link => {
+      expect(link).toHaveAttribute('target', '_blank')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+      expect(link.querySelector('img')).toHaveAttribute('alt', '')
+    })
+    expect(within(socials).getByRole('link', { name: 'YouTube' })).toHaveAttribute('href', 'https://www.youtube.com/channel/UCNam3EUfsyTzmWEb5AViW2A')
+    expect(within(socials).queryByLabelText('YouTube, próximamente')).not.toBeInTheDocument()
+    expect(socials.querySelectorAll('img')).toHaveLength(5)
+  })
+
+  it('LP-REQ-025 updates canonical and robot metadata on direct legal SPA routes', () => {
+    renderAt('/privacidad')
+    expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://landing-page-rutitas.vercel.app/privacidad')
+    expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'noindex,follow')
+    expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute('content', 'https://landing-page-rutitas.vercel.app/privacidad')
+    expect(document.querySelector('meta[name="twitter:title"]')).toHaveAttribute('content', 'Aviso de privacidad — Rutitas')
+  })
+
   it('UT-LP-003 renders every privacy topic and marks the text as a draft', () => {
     renderAt('/privacidad')
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Tu camino.Tu información.')
@@ -194,7 +224,6 @@ describe('Rutitas landing and legal pages', () => {
     expect(within(dialog).getByText(/no hay evidencia de eliminación remota operativa/i)).toBeInTheDocument()
   })
 })
-
 describe('privacy-first GA4 setup', () => {
   it('UT-LP-006 accepts only a plausible GA4 Measurement ID', () => {
     expect(isValidMeasurementId('G-ABC1234567')).toBe(true)

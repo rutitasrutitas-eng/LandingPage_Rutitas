@@ -15,6 +15,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run dev -- --host 127.0.0.1 --port 4173',
     url: 'http://127.0.0.1:4173',
+    env: process.env.LANDING_E2E_GA_SYNTHETIC === '1' ? { VITE_GA_MEASUREMENT_ID: 'G-SYNTHETIC123' } : undefined,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },

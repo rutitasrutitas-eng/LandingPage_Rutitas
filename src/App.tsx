@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react
 import { AccountDeletionPage, NotFoundPage } from './LegalPages'
 import PrivacyRutitas from './PrivacyRutitas'
 import SiteFooter from './SiteFooter'
+import { updatePageMetadata } from './seo'
 
 type ModalId = 'funciona' | 'proyecto' | 'seguridad' | null
 
@@ -173,13 +174,7 @@ export default function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
 
   useEffect(() => {
-    document.title = path === '/privacidad'
-      ? 'Aviso de privacidad — Rutitas'
-      : path === '/eliminar-cuenta'
-        ? 'Eliminación de cuenta — Rutitas'
-        : path === '/'
-          ? 'Rutitas — Tu comunidad, tu ruta'
-          : 'Página no encontrada — Rutitas'
+    updatePageMetadata(path)
   }, [path])
 
   const page = path === '/'

@@ -1,4 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
+import { mkdir } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { writeFile } from 'node:fs/promises'
 
 test.beforeEach(async ({ page }) => {
@@ -332,6 +334,63 @@ test('metadata describes the project without promising an unavailable download',
   expect(description).not.toMatch(/QR|descarga|accede a la app/i)
 })
 
+test('LANDING-014: social links and route metadata are accessible and drafts stay out of the index', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  const socialNav = page.getByRole('navigation', { name: 'Síguenos en nuestras redes' })
+  const socialLinks = socialNav.getByRole('link')
+  await expect(socialLinks).toHaveCount(5)
+  expect(await socialLinks.evaluateAll(links => links.map(link => (link as HTMLAnchorElement).href))).toEqual([
+    'https://www.facebook.com/profile.php?id=61596370576231',
+    'https://www.instagram.com/rutitasuniversitarias/',
+    'https://www.youtube.com/channel/UCNam3EUfsyTzmWEb5AViW2A',
+    'https://x.com/UniRutitas',
+    'https://www.tiktok.com/@rutitas4?lang=es',
+  ])
+  await expect(socialNav.locator('img')).toHaveCount(5)
+  for (const icon of await socialNav.locator('img').all()) {
+    const source = await icon.getAttribute('src')
+    const response = await page.request.get(source!)
+    expect(response.ok()).toBe(true)
+    expect(await response.text()).toMatch(/(?:fill|stroke)="#ffffff"/)
+  }
+  for (const link of await socialLinks.all()) {
+    await expect(link).toHaveAttribute('href', /^https:\/\//)
+    await expect(link).toHaveAttribute('target', '_blank')
+    await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    await link.focus()
+    await expect(link).toBeFocused()
+  }
+  await expect(socialNav.getByRole('link', { name: 'YouTube' })).toHaveAttribute('href', 'https://www.youtube.com/channel/UCNam3EUfsyTzmWEb5AViW2A')
+  await expect(socialNav.getByLabel('YouTube, próximamente')).toHaveCount(0)
+
+  for (const [path, title] of [['/privacidad', 'Aviso de privacidad — Rutitas'], ['/eliminar-cuenta', 'Eliminación de cuenta — Rutitas']] as const) {
+    await page.goto(path)
+    await expect(page).toHaveTitle(title)
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://landing-page-rutitas.vercel.app${path}`)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex,follow')
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', `https://landing-page-rutitas.vercel.app${path}`)
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', title)
+  }
+})
+
+test('LANDING-014: local search files are present and sitemap lists only the public home page', async ({ request }) => {
+  const robots = await request.get('/robots.txt')
+  expect(robots.ok()).toBe(true)
+  expect(await robots.text()).toContain('Sitemap: https://landing-page-rutitas.vercel.app/sitemap.xml')
+
+  const sitemap = await request.get('/sitemap.xml')
+  expect(sitemap.ok()).toBe(true)
+  const sitemapText = await sitemap.text()
+  expect(sitemapText).toContain('<loc>https://landing-page-rutitas.vercel.app/</loc>')
+  expect(sitemapText).not.toContain('/privacidad')
+  expect(sitemapText).not.toContain('/eliminar-cuenta')
+
+  const verification = await request.get('/googlee72a4fcd7bd338a1.html')
+  expect(verification.ok()).toBe(true)
+  expect(await verification.text()).toBe('google-site-verification: googlee72a4fcd7bd338a1.html')
+})
+
 test('LANDING-007: hero photo is decoded on direct load and after reload', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium', 'desktop capture and reload regression')
   await page.setViewportSize({ width: 1440, height: 900 })
@@ -347,18 +406,20 @@ test('LANDING-007: hero photo is decoded on direct load and after reload', async
 
 test('captures desktop and mobile views of home, FAQ and the privacy draft', async ({ page }, testInfo) => {
   const mobile = testInfo.project.name === 'mobile-chromium'
+  const evidenceDirectory = resolve('evidence/landing-014')
+  await mkdir(evidenceDirectory, { recursive: true })
   await page.setViewportSize(mobile ? { width: 390, height: 844 } : { width: 1440, height: 900 })
   await page.goto('/')
   await waitForDecodedHeroImage(page)
-  await page.screenshot({ path: testInfo.outputPath(mobile ? 'landing-home-mobile.png' : 'landing-home-desktop.png') })
+  await page.screenshot({ path: resolve(evidenceDirectory, mobile ? 'landing-home-mobile.png' : 'landing-home-desktop.png') })
 
   await page.getByRole('button', { name: /conoce el proyecto/i }).click()
   const dialog = page.getByRole('dialog')
   await expect(dialog.getByRole('heading', { name: 'Preguntas frecuentes' })).toBeVisible()
   await dialog.locator('.faq-section').scrollIntoViewIfNeeded()
-  await page.screenshot({ path: testInfo.outputPath(mobile ? 'landing-faq-mobile.png' : 'landing-faq-desktop.png') })
+  await page.screenshot({ path: resolve(evidenceDirectory, mobile ? 'landing-faq-mobile.png' : 'landing-faq-desktop.png') })
 
   await page.goto('/privacidad')
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-  await page.screenshot({ path: testInfo.outputPath(mobile ? 'landing-privacy-mobile.png' : 'landing-privacy-desktop.png'), fullPage: true })
+  await page.screenshot({ path: resolve(evidenceDirectory, mobile ? 'landing-privacy-mobile.png' : 'landing-privacy-desktop.png'), fullPage: true })
 })
