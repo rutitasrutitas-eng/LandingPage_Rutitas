@@ -10,8 +10,9 @@
 - [ ] Definir y probar eliminación de cuentas/datos antes de cualquier distribución que lo requiera, incluida verificación de identidad y política de respaldo/retención.
 - [ ] Confirmar URL HTTPS oficial de Google Play; sin ella, mantener «Próximamente» y sin QR.
 - [ ] Confirmar GA4 y consentimiento con los responsables; no desplegar el ID sin actualizar la documentación legal correspondiente.
-- [ ] Repetir `npm audit --audit-level=high` después de una actualización compatible que resuelva GHSA-fc5q-39xc-vjpf, o documentar aceptación explícita del riesgo antes del release. El estado actual reporta 11 entradas high del mismo advisory transitivo.
+- [x] Conciliación LANDING-017: GitHub retiró `GHSA-fc5q-39xc-vjpf` el 2026-11-18 como no-seguridad; `npm audit --json` actual reportó 0. El paquete sigue en dev/build, sin hallazgo activo de ese advisory.
+- [ ] Repetir el audit completo en GitHub Actions del PR y revisar cualquier advisory nuevo. La corrida local no acredita CI.
 - [ ] Antes de liberar, verificar por HTTP autorizado `X-Robots-Tag: noindex, follow` en `/privacidad`, `/privacidad/`, `/eliminar-cuenta` y `/eliminar-cuenta/`; la prueba actual valida únicamente `vercel.json`, no el comportamiento desplegado.
 - [ ] Obtener autorización humana explícita para producción y registrar plan de reversión.
 
-Este checklist no ejecuta ni autoriza push, PR, Preview, merge o despliegue. Los ajustes del proyecto fueron observados en Edge el 2026-11-18; facturación, consumo y garantía de costo cero no se verificaron en esta actividad. El riesgo de dependencias requiere aceptación humana antes del release.
+Este checklist no ejecuta ni autoriza por sí solo push, PR, Preview, merge o despliegue. La verificación Vercel de LANDING-017 quedó bloqueada: conector 403 y Edge no accesible mediante Computer Use por incertidumbre de URL. Plan, cuotas, créditos, costo y ajuste actual `Only build production` no se pudieron confirmar; no publicar hasta resolver este gate. El advisory retirado no es un bloqueo vigente; revisión legal, ratificación SDD y otros gates siguen pendientes.

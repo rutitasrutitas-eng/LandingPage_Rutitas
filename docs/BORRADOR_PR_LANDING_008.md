@@ -58,3 +58,9 @@
 - [ ] Existe aceptación humana formal del riesgo residual o un fix compatible antes de release.
 - [ ] Privacidad/legal y ratificación SDD aprobadas por responsables humanos.
 - [ ] Administrador confirmó comportamiento de Vercel antes del primer push.
+
+## Actualización LANDING-017 — estado de seguridad/publicación al 2026-11-19
+
+La referencia de 11 entradas High por `GHSA-fc5q-39xc-vjpf` en este borrador corresponde a una ejecución histórica. GitHub retiró el advisory el 2026-11-18 porque no era un problema de seguridad; `npm audit --json` actual terminó exit 0 con 0 vulnerabilidades. El paquete `picomatch@4.0.7` permanece en el grafo dev/build y no se modificó.
+
+Este borrador no se publicó. `origin/main` está en `80ef7b1388aa709dbef692154c66b0c5a9966715`, pero el preflight Vercel/costo no pudo completarse: API 403 y Edge no accesible mediante Computer Use por incertidumbre de URL. No se hizo push/PR porque no se pudo confirmar plan, uso/cuotas/créditos ni el ajuste actual de Preview. Ver `LANDING_017_PUBLICACION_OFICIAL.md`; no declarar listo/publicado hasta pasar ese gate.

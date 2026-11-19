@@ -309,7 +309,20 @@ La URL suministrada por coordinación (https://www.youtube.com/channel/UCNam3EUf
 | Lint / Typecheck | `npm run lint`; `npm run typecheck` | Ambos exit 0. |
 | Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos; JS 263.67 kB, CSS 21.48 kB. |
 | SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 26 requisitos 001 y trazabilidad de 14/8/9 requisitos 002/003/004. |
-| Dependencias | `npm audit --audit-level=high` | Exit 0; el audit reportó 0 vulnerabilidades el 2026-11-19. Se conserva el registro anterior de 11 entradas High del advisory `GHSA-fc5q-39xc-vjpf`; sin cambios a dependencias ni aceptación formal. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0; el audit reportó 0 vulnerabilidades el 2026-11-19. Las 11 entradas High anteriores se explican por la retirada oficial del advisory el 2026-11-18; sin cambios a dependencias. |
 | Formato | `git diff --check` | Exit 0, sin errores; Git mostró avisos de normalización LF/CRLF en dos documentos preexistentes. |
 
 No hubo CI remoto ni respuesta HTTP de Vercel. Los headers están declarados en el repositorio y la prueba solo inspecciona configuración local; comportamiento tras rewrite, respuesta desplegada y resultado en crawlers quedan sin verificar. Cinco commits locales trazables; no se hizo push, PR, merge, Preview o despliegue.
+
+## LANDING-017 — preflight de publicación — 2026-11-19
+
+| Control | Comando/medio | Resultado real |
+|---|---|---|
+| Git y `main` | `git status`, `git rev-parse`, `git fetch origin main` | Rama `feature/landing-integracion-final-local`; HEAD `f1cefb4a28e3a700e234720c799949ce0615d8a3`; `origin/main` sigue `80ef7b1388aa709dbef692154c66b0c5a9966715`. Sin cambios tracked; se conservaron sin seguimiento `evidence/` y `LANDING_013.diff`. |
+| Advisory | Página oficial GitHub Advisory Database | `GHSA-fc5q-39xc-vjpf` aparece **Withdrawn**, retirado el 2026-11-18 porque no es un problema de seguridad. Se conservan los registros anteriores como históricos, no como hallazgo activo. |
+| Auditoría actual | `npm audit --json` | Exit 0; 0 info/low/moderate/high/critical, 283 dependencias contabilizadas. |
+| Árbol de paquete | `npm ls picomatch --all` | Exit 0; `picomatch@4.0.7` sigue como dependencia transitiva de Vite/fdir/tinyglobby/Vitest. Sin cambios al manifiesto o lockfile. |
+| Vercel | Conector oficial + Microsoft Edge, solo lectura | El conector devolvió HTTP 403 por falta de autorización al scope del equipo. Computer Use se detuvo porque no pudo determinar con confianza la URL activa de Edge. No se evadió el bloqueo; plan, cargos/uso/cuotas/créditos, conexión Git, rama productiva, `Only build production`, protección y previews actuales **NO VERIFICADOS**. |
+| Publicación | GitHub/Vercel | No hubo push, PR, CI, Preview, merge, deployment ni cargos conocidos. El gate económico impidió la publicación. |
+
+La publicación está **BLOQUEADA por falta de verificación actual de Vercel/costo cero**. No está bloqueada por el advisory retirado. Aviso legal, eliminación de cuenta, ratificación SDD, Analytics/Search Console y headers HTTP siguen sujetos a sus gates separados.

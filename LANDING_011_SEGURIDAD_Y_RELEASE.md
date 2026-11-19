@@ -4,14 +4,14 @@
 **Rama:** `feature/landing-integracion-final-local`
 **SHA de entrada revisado:** `ced61fff15c31001af03621bbd276c7e7e82cdb7`
 **Política:** costo adicional autorizado = **$0 MXN**.
-**Estado:** evidencia local en preparación; **primer push/release detenido**.
+**Estado histórico (2026-11-18):** evidencia local en preparación; primer push/release detenido. La actualización al 2026-11-19 está al final de este informe.
 
 ## Resumen
 
-- La auditoría completa vuelve a reportar 11 entradas High del mismo advisory transitivo `GHSA-fc5q-39xc-vjpf` asociado a `picomatch@4.0.7`; el árbol de producción auditado no reporta vulnerabilidades.
-- El advisory sigue sin listar una versión corregida. No se cambió el lockfile, no se ejecutó fix ni instalación, y no se degradó Vitest.
+- **Resultado histórico al 2026-11-18:** la auditoría completa reportó 11 entradas High del mismo advisory transitivo `GHSA-fc5q-39xc-vjpf` asociado a `picomatch@4.0.7`; el árbol de producción auditado no reportó vulnerabilidades.
+- **Estado actual al 2026-11-19:** GitHub retiró el advisory el 2026-11-18 indicando que no constituye un problema de seguridad; la auditoría actual `npm audit --json` reporta cero vulnerabilidades. `picomatch@4.0.7` aún existe en el árbol de desarrollo/build, pero la presencia del paquete no equivale a una vulnerabilidad confirmada. No se cambiaron dependencias.
 - Build estático regenerado sin coincidencias textuales de picomatch/fdir/tinyglobby; no se encontró procesamiento explícito de globs del visitante en la fuente/configuración de esta Landing.
-- Vercel Edge, en modo lectura, mostró Ignored Build Step `Automatic`; opción `Only build previews for pull requests` disponible y no seleccionada. El push puede producir una Preview antes de abrir PR.
+- **Observación histórica de Vercel (2026-11-18):** Edge mostró Ignored Build Step `Automatic`; posteriormente LANDING-012 lo cambió a `Only build production`. Para LANDING-017 no fue posible revalidar el estado actual: el conector recibió 403 y Computer Use detuvo la interacción al no poder identificar con confianza la URL de Edge.
 - Recomendación bajo la regla estricta de $0 MXN: mantener detenido el push hasta que el administrador establezca y confirme una política adecuada. La protección de acceso no bloquea builds ni acredita costo cero.
 
 ## 1. Git e historial
@@ -20,7 +20,7 @@ Al inicio `git status --short` estaba vacío y HEAD era el SHA esperado. El hist
 
 Este trabajo modifica documentos de seguridad/trazabilidad solamente. No toca código de producto, dependencias, lockfile, workflow, `vercel.json`, `main` ni configuración remota. No se creó commit; el SHA revisado sigue siendo el HEAD de entrada.
 
-## 2. Hallazgo de dependencias
+## 2. Hallazgo de dependencias — evidencia histórica al 2026-11-18
 
 El [advisory oficial de GitHub](https://github.com/advisories/GHSA-fc5q-39xc-vjpf), consultado el 2026-11-18, clasifica el problema como High / CVSS 8.7, afecta `picomatch <=4.0.7` y muestra `Patched versions: None`. Describe ReDoS mediante extglobs repetidos de una rama, capaces de provocar backtracking exponencial y bloquear el event loop de procesos Node si reciben patrones/cadenas preparados para activar ese caso.
 
@@ -35,7 +35,7 @@ El [advisory oficial de GitHub](https://github.com/advisories/GHSA-fc5q-39xc-vjp
 
 La evidencia apunta a exposición en herramientas de desarrollo/build/CI, no en el bundle estático runtime. La explotación necesitaría alcanzar el procesamiento de un patrón y una cadena preparados; no se identificó un flujo de visitantes de la Landing que entregue globs a ese toolchain. La revisión textual no es una prueba formal de todos los caminos internos de las dependencias.
 
-No hay una actualización corregida listada por el advisory al corte. El fix forzado reportado previamente por npm implicaba una degradación major de Vitest. No se ejecutó `npm audit fix`, no se hizo downgrade ni se agregó una excepción. El fallo completo de audit permanece visible y podría bloquear CI. Antes de cualquier release se requiere una corrección compatible o aceptación formal humana del riesgo residual High.
+Al corte de este informe original no había una actualización corregida listada por el advisory. El fix forzado reportado previamente por npm implicaba una degradación major de Vitest. No se ejecutó `npm audit fix`, no se hizo downgrade ni se agregó una excepción. Este párrafo documenta la situación del 2026-11-18 y queda supersedido por el addendum LANDING-017, que registra la retirada posterior del aviso.
 
 ## 3. Configuración observada de Vercel
 
@@ -76,7 +76,7 @@ El preset `Only build production` puede omitir builds Preview según el entorno,
 
 Pendientes antes del release:
 
-- Resolver o aceptar formalmente el riesgo residual High de `picomatch`.
+- **Histórico/supersedido:** resolver o aceptar formalmente el riesgo High de `picomatch`; el advisory fue retirado y el audit actual reporta 0. Revisar otros hallazgos en CI.
 - Confirmar el estado de Preview Branch Tracking y política de deployment con administrador.
 - Confirmar que el esquema elegido impide cargos/consumo no autorizado; el plan Hobby y las protecciones no lo demuestran.
 - Refrescar `origin/main` mediante operación remota autorizada antes de una comparación final.
@@ -87,3 +87,13 @@ Pendientes antes del release:
 ## 6. Validaciones documentales
 
 Como no cambió el producto, no se repitieron Lint/Vitest/Playwright. Se ejecutaron auditorías, árbol de dependencias, build para revisar el bundle, SDD y diff check. La evidencia final está en `docs/pruebas.md`.
+
+## Addendum LANDING-017 — estado vigente al 2026-11-19
+
+El [registro oficial de GitHub](https://github.com/advisories/GHSA-fc5q-39xc-vjpf) ahora muestra el advisory como **Withdrawn**, retirado el 2026-11-18 porque no es un problema de seguridad. El rango y la evaluación High reflejaban la publicación original; se conservan arriba como contexto histórico, no como riesgo vigente.
+
+En la rama integrada a LANDING-016, `npm audit --json` terminó exit 0 el 2026-11-19 y reportó 0 vulnerabilidades en 283 dependencias. `npm ls picomatch --all` terminó exit 0 y confirma que `picomatch@4.0.7` sigue como dependencia transitiva de desarrollo/build bajo Vite, fdir, tinyglobby y Vitest. No se cambiaron dependencias. La existencia de ese paquete no contradice que el advisory haya sido retirado. La comprobación de CI deberá confirmar que el audit completo sigue limpio y detectar cualquier aviso distinto.
+
+En la misma actividad se verificó que `origin/main` sigue en `80ef7b1388aa709dbef692154c66b0c5a9966715` y HEAD local es `f1cefb4a28e3a700e234720c799949ce0615d8a3`. Vercel no pudo revalidarse: el conector oficial devolvió 403 por falta de acceso al scope y Computer Use detuvo la lectura de Edge porque no logró determinar la URL activa con suficiente confianza. No se intentó evadir el bloqueo, autorizar scopes, ni cambiar configuración.
+
+Por el gate de costo cero, **no se hizo push ni se abrió PR**: faltan confirmar actualmente el plan/uso/cuotas, los créditos y la configuración `Only build production`/Preview. Estado de publicación: **BLOQUEADA hasta confirmar económicamente Vercel**. La revisión legal, eliminación de cuentas y otros gates siguen como se describen en `LANDING_017_PUBLICACION_OFICIAL.md`.

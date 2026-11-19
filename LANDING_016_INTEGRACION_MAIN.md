@@ -4,7 +4,7 @@
 - **Rama:** `feature/landing-integracion-final-local`
 - **SHA local inicial:** `28ea5117f23e39c8760d4684115473773d43345c`
 - **`origin/main` integrado:** `80ef7b1388aa709dbef692154c66b0c5a9966715`
-- **SHA final:** commit local de merge que contiene este informe; SHA completo comunicado por separado al cierre (un commit no puede incluir de forma literal su propio hash).
+- **SHA final:** `f1cefb4a28e3a700e234720c799949ce0615d8a3`.
 - **Fecha:** 2026-11-19
 - **Costo adicional autorizado:** $0 MXN; no se usaron créditos.
 
@@ -43,7 +43,7 @@ La cobertura comprobó navegación y recarga SPA, modales y teclado, cinco enlac
 
 ## Seguridad, privacidad y publicación
 
-- **`picomatch`:** el audit actual reportó cero vulnerabilidades, pero no hubo cambio de dependencias que concilie el resultado con las 11 entradas High históricas del advisory `GHSA-fc5q-39xc-vjpf`. Se conserva la discrepancia; no se ocultó ni aceptó formalmente el riesgo. Repetir `npm audit --json` y `npm ls picomatch --all`, revisar el advisory vigente y obtener decisión humana antes de release.
+- **`picomatch`:** el audit de LANDING-016 reportó cero vulnerabilidades. La discrepancia con las 11 entradas High históricas queda explicada por la retirada del advisory `GHSA-fc5q-39xc-vjpf` el 2026-11-18: GitHub dice que no es un problema de seguridad. En LANDING-017 se volvió a ejecutar `npm audit --json` (exit 0, cero) y `npm ls picomatch --all` (exit 0; sigue instalado transitivamente como herramienta). No se modificaron dependencias ni existe aceptación de un riesgo de seguridad que GitHub retiró. La CI deberá confirmar el audit y reportar otros avisos por separado.
 - **Privacidad:** el aviso permanece **BORRADOR NO RATIFICADO**. Responsable legal completo, domicilio, tratamientos/proveedores reales y revisión legal final siguen pendientes.
 - **Eliminación:** no está operativa. La ventana de siete días depende de confirmación del Backend; Android/Backend requieren implementación y validación de Mark y Ame. El canal web por correo sigue sin habilitarse operativamente.
 - **Analytics/GTM/Search Console:** GA4 real y GTM no se activaron. Search Console no se verificó remotamente ni se publicó sitemap.
@@ -53,3 +53,11 @@ La cobertura comprobó navegación y recarga SPA, modales y teclado, cinco enlac
 ## Archivos sin seguimiento preservados
 
 Al inicio y al cierre se mantuvieron `evidence/` y `LANDING_013.diff` sin seguimiento y fuera del commit. La instalación y pruebas no los eliminaron. No hay cambios remotos ni cargos conocidos.
+
+## Addendum LANDING-017
+
+El SHA de este informe es `f1cefb4a28e3a700e234720c799949ce0615d8a3`; `origin/main` continúa en `80ef7b1388aa709dbef692154c66b0c5a9966715`. El preflight local fue limpio salvo por `evidence/` y `LANDING_013.diff`, preservados deliberadamente.
+
+La revisión directa del advisory oficial confirmó `Withdrawn` (2026-11-18, no es un problema de seguridad). Audit actual: 0 hallazgos; el paquete permanece en el árbol dev, sin cambios de dependencias.
+
+Vercel no fue verificable para esta publicación: la consulta del proyecto por conector devolvió 403 y Computer Use detuvo Edge porque no pudo determinar su URL con suficiente confianza. No se hizo push/PR ni se generó despliegue. El gate de costo y la configuración actual de Vercel quedan **NO VERIFICADOS** y bloquean publicación bajo la política de $0 MXN. Ver `LANDING_017_PUBLICACION_OFICIAL.md`.

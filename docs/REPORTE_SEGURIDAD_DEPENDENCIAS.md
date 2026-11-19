@@ -5,6 +5,8 @@
 **SHA de código revisado:** `9cd90686781e41afc9c4cfd3f4e4298b08d8285a`  
 **Cambio de dependencias:** ninguno. El hallazgo permanece visible.
 
+> **Actualización LANDING-017 (2026-11-19):** el resultado y la interpretación siguientes son históricos al 2026-11-17. GitHub retiró `GHSA-fc5q-39xc-vjpf` el 2026-11-18 porque no constituye un problema de seguridad. El `npm audit --json` actual reporta 0 vulnerabilidades; el árbol aún contiene `picomatch@4.0.7` como herramienta transitiva. No se cambió ninguna dependencia. Consulta `LANDING_017_PUBLICACION_OFICIAL.md` para la evidencia actual y el bloqueo de publicación no relacionado con este advisory.
+
 ## Resultado ejecutivo
 
 La auditoría completa registra **11 entradas high** en el grafo transitivo, todas asociadas a `picomatch@4.0.7` y sus consumidores. No son 11 advisories independientes: las entradas agregadas incluyen paquetes que heredan el mismo advisory por diferentes caminos.

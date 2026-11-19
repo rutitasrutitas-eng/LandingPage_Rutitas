@@ -198,3 +198,11 @@ La verificación técnica de repositorios que faltaba en esta primera pasada se 
 - `npm audit --audit-level=high` reportó cero en esta ejecución. Se conserva como riesgo pendiente la evidencia LANDING-011 de 11 entradas High de `GHSA-fc5q-39xc-vjpf`; no se modificaron dependencias ni se registró aceptación humana.
 - Las capturas de `evidence/landing-014/` y `LANDING_013.diff` se preservaron localmente y no se añadieron a commits. Ver `LANDING_015_CONSOLIDACION_FINAL.md` e inventario LANDING-011–015.
 - Bloqueos antes de release: aceptación/cierre humano del advisory, ratificación de Constitución SDD, revisión legal e identidad/domicilio, validación de eliminación por Mark/Ame y del canal web, consentimiento/propiedad de GA4 y comprobación HTTP autorizada de los headers. Costo adicional autorizado sigue en $0 MXN.
+
+## LANDING-017 — preflight de publicación oficial — 2026-11-19
+
+- SHA de entrada `f1cefb4a28e3a700e234720c799949ce0615d8a3`, rama `feature/landing-integracion-final-local`; `origin/main` confirmado en `80ef7b1388aa709dbef692154c66b0c5a9966715`. `evidence/` y `LANDING_013.diff` se conservaron localmente.
+- GitHub Advisory Database marca `GHSA-fc5q-39xc-vjpf` como retirado el 2026-11-18 porque no es un problema de seguridad. `npm audit --json` actual exit 0, 0 vulnerabilidades; `npm ls picomatch --all` confirma que el paquete permanece en herramientas dev/build. La evidencia de 11 High previa se conserva como histórica, no como riesgo vigente. No hubo cambios de dependencias.
+- No fue posible verificar Vercel: conector oficial respondió 403 por falta de acceso al scope y Computer Use detuvo la inspección de Edge por no identificar con suficiente confianza la URL. No se evadió el bloqueo ni se cambió permisos. Plan, cargos/cuotas/créditos, estado `Only build production`, rama de producción y Preview actuales quedan sin verificar.
+- Por el gate de costo cero, no se hizo push ni se abrió PR. Estado: **BLOQUEADA** por verificación económica/Vercel inaccesible. No hay CI ni deployment para este SHA y no se generaron cargos conocidos.
+- Privacidad continúa borrador no ratificado; eliminación no operativa, con dependencias de Mark/Ame; GA4/GTM/GSC no activados; headers solo validados en configuración local; Constitución SDD pendiente. Detalle: `LANDING_017_PUBLICACION_OFICIAL.md`.

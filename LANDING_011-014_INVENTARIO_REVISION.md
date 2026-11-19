@@ -47,12 +47,12 @@
 - `test-results/`, `dist/` y `node_modules/` están ignorados por Git. `test-results/` conserva rastros de ejecución previos y no se borró.
 - `evidence/` y `LANDING_013.diff` se mantienen locales y no forman parte de los cinco commits. No se incorporaron archivos temporales al historial.
 
-## Conciliación del advisory `GHSA-fc5q-39xc-vjpf`
+## Conciliación del advisory `GHSA-fc5q-39xc-vjpf` — estado actualizado
 
 - LANDING-011 (2026-11-18) registró `npm audit --json` exit 1 con 11 entradas High que corresponden al mismo advisory asociado a `picomatch@4.0.7`; el audit omit-dev reportó 0. Eran rutas múltiples, no once advisories raíz.
 - La ejecución local de LANDING-014 (2026-11-19) reportó 0 vulnerabilidades con `npm audit --audit-level=high`, sin cambios a `package.json` ni lockfile.
-- El resultado nuevo no prueba que el paquete o advisory se haya corregido. Se conservan ambas evidencias; no se añade excepción y no se acepta formalmente el riesgo.
-- Antes de release, repetir `npm audit --json` y `npm ls picomatch --all`, cotejar el advisory vigente y registrar cierre compatible o aceptación humana explícita.
+- **Actualización LANDING-017 (2026-11-19):** la ficha oficial de [GitHub Advisory Database](https://github.com/advisories/GHSA-fc5q-39xc-vjpf) indica que el advisory fue retirado el 2026-11-18 porque no representa un problema de seguridad. `npm audit --json` actual reportó 0 vulnerabilidades; `npm ls picomatch --all` confirma que `picomatch@4.0.7` sigue en herramientas dev/build. No se modificaron dependencias.
+- Se conservan las dos auditorías con sus fechas: 11 entradas High mientras el advisory estaba publicado y 0 después de retirarse. No se acepta ni se enmascara un riesgo vigente; antes de release, CI debe pasar el audit y deben revisarse por separado avisos nuevos.
 
 ## Indexación y Vercel
 

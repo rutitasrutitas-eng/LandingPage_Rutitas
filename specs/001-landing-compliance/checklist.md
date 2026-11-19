@@ -37,10 +37,10 @@
 - [ ] LANDING-006: aprobación legal, canal de privacidad, datos/plazos/proveedores reales y borrado remoto siguen pendientes.
 - [x] LANDING-007: carga directa y reload del hero esperan `complete`, `naturalWidth > 0`, `decode()` y dimensión visible; se revisó la nueva captura desktop.
 - [x] LANDING-007: se cotejaron PR Android #9/#10 abiertos y Backend PR #6 fusionado; se separaron tests simulados de las pruebas reales contra servidor, que siguen pendientes.
-- [ ] LANDING-007: `npm audit --audit-level=high` informa 11 hallazgos high por `picomatch@4.0.7`; no hay parche publicado según advisory al corte ni se aplicó downgrade major. Resolver o aprobar formalmente el riesgo antes del release.
+- [x] LANDING-007 histórico: el audit registró 11 hallazgos high mientras `GHSA-fc5q-39xc-vjpf` estaba activo; GitHub retiró el advisory el 2026-11-18 porque no era un problema de seguridad. No se hizo downgrade.
 - [x] LANDING-008 preparación: ejecutados `npm audit --json`, `npm audit --omit=dev --audit-level=high`, `npm ls picomatch --all` y búsqueda del bundle de producción.
 - [x] LANDING-008 preparación: GHSA y npm registry vigentes revisados; latest sigue en 4.0.7, advisory sin versión patched; no se modificaron dependencias ni se ocultó el resultado.
-- [ ] LANDING-008 pendiente: mitigar la dependencia de desarrollo cuando se publique un fix compatible o documentar aceptación humana del riesgo residual antes de release.
+- [x] LANDING-008 pendiente histórico supersedido: ya no se requiere fix/aceptación por el advisory retirado; mantener auditoría de CI para avisos distintos.
 
 ## LANDING-008 — preparación local para revisión GitHub
 
@@ -50,7 +50,7 @@
 - [x] Checklist Vercel identifica verificaciones administrativas y el posible efecto del primer push; ninguna configuración remota fue modificada.
 - [x] ZIP incluye reporte, capturas, diff, borrador PR, checklist, resultados, SHA y bloqueos.
 - [x] CI, push, PR, merge, Preview y despliegue permanecen sin ejecutar por instrucción.
-- [ ] Aceptación formal del riesgo residual high y su uso previo a cualquier release.
+- [x] Reconciliación documental de LANDING-017: GHSA-fc5q-39xc-vjpf retirado; `npm audit --json` actual reporta 0. Ver `LANDING_017_PUBLICACION_OFICIAL.md`.
 - [x] Auditoría de costo cero Vercel documenta observaciones, precios públicos y límites de evidencia; no hizo llamadas, instalaciones, cambios, despliegues ni commits.
 - [x] Diagnóstico del conector oficial registra `list_teams=[]`, errores 403 de equipo/proyecto y 404 al solicitar consentimiento; no se intentó una vía alternativa.
 - [ ] Completar las secciones de cuenta no verificadas con capturas manuales de Billing, Usage, AI Gateway budgets/credits y Project Git/Protection sin datos sensibles.
@@ -79,7 +79,7 @@
 - [x] Verificados `npm audit --json` (11 High, exit 1), audit omit-dev (0, exit 0), `npm ls picomatch --all` y bundle reconstruido sin cadenas del paquete.
 - [x] Verificado en Edge: proyecto Git conectado, production branch `main`, Ignored Build Step `Automatic`, opción PR-only disponible/no aplicada, Require Log In activo/Standard Protection y sin excepciones visibles.
 - [x] Documentados escenarios push/PR y límites económicos; recomendación de mantener push detenido bajo política $0 MXN. Sin llamadas AI, instalaciones o cambios remotos.
-- [ ] Resolver con fix compatible o aceptación humana el riesgo High residual de GHSA-fc5q-39xc-vjpf antes del release.
+- [x] El riesgo histórico de GHSA-fc5q-39xc-vjpf dejó de ser un hallazgo activo al retirarse el advisory el 2026-11-18; la auditoría LANDING-017 reporta 0. Otros hallazgos siguen sujetos al audit de CI.
 - [ ] Confirmación administrativa del estado habilitado de Preview Branch Tracking y de un control efectivo de costo antes de publicación.
 - [x] `npm run sdd:verify` (30 documentos, 22/14/8/9 requisitos trazados) y `git diff --check` exit 0 tras esta edición documental.
 - [x] No hubo push, PR, merge, Preview, despliegue, cambio remoto ni commit para LANDING-011.
@@ -93,7 +93,7 @@
 - [x] No se inició deployment ni se hizo push, PR, merge, commit, instalación o consumo de créditos.
 - [ ] No se hizo prueba de push; el efecto esperado no está demostrado experimentalmente.
 - [ ] Revisar riesgo de cuotas: deployments cancelados por Ignored Build Step pueden contar para cuotas; el ajuste no garantiza costo adicional cero.
-- [ ] Aceptación humana del riesgo High `picomatch`, ratificación SDD y revisión legal del aviso siguen pendientes antes de release.
+- [ ] Ratificación SDD y revisión legal del aviso siguen pendientes antes de release. La actualización de `picomatch` se registra en LANDING-017 y no figura como bloqueo vigente.
 
 ## LANDING-013 — eliminación programada de cuentas — 2026-11-18
 
@@ -105,7 +105,7 @@
 - [x] Coordinación confirma que Mark, Ame, Ulises y la coordinación atenderán conjuntamente los mensajes recibidos en el correo oficial; la responsabilidad compartida no habilita aún el proceso.
 - [ ] Asignar internamente una persona responsable por solicitud y aprobar el proceso de verificación, seguimiento, cancelación y confirmación antes de habilitar el canal web.
 - [ ] El sitio es solo un recurso informativo local; hasta disponer de solicitud web funcional y validada, no presentar cumplimiento operativo de Google Play ni desplegar estas instrucciones.
-- [ ] El riesgo High `GHSA-fc5q-39xc-vjpf`/`picomatch` sigue pendiente de resolución compatible o aceptación formal; no se reauditaron dependencias ni se modificaron.
+- [x] Estado previo de `picomatch` actualizado en LANDING-017: advisory retirado, audit 0; la auditoría de LANDING-013 no había vuelto a ejecutar npm audit y se conserva como evidencia histórica.
 
 - [x] El texto de ambas páginas públicas usa solo «Equipo de Rutitas» y `rutitas.rutitas@gmail.com`; no publica nombres individuales. La prueba unitaria comprueba esta condición.
 
@@ -118,8 +118,16 @@
 - [x] Search Console HTML se copió desde Downloads sin alterar bytes; SHA-256 coincide entre origen, `public/` y `dist/`. Preview local devolvió HTTP 200 y el cuerpo exacto. No se hizo verificación remota ni publicación.
 - [x] Vitest 19/19; Playwright 27 passed/5 skips intencionales y prueba GA sintética dirigida 1/1; lint, typecheck, build, SDD, `npm audit --audit-level=high` y `git diff --check` exit 0.
 - [ ] CI remoto, despliegue, publicación de sitemap y Search Console requieren autorización posterior. Las metas de rutas legales dependen de JavaScript; el HTML estático de fallback contiene metadatos de portada y no garantiza `noindex` universal para crawlers sin JS.
-- [ ] El riesgo formal histórico `GHSA-fc5q-39xc-vjpf` requiere actualización/aceptación humana aunque el `npm audit` local de esta tarea reportó 0 vulnerabilidades; no se modificaron dependencias.
+- [x] LANDING-017 verificó la retirada de `GHSA-fc5q-39xc-vjpf` y repitió `npm audit --json` (0 vulnerabilidades); no se modificaron dependencias.
 - [x] `vercel.json` declara `X-Robots-Tag: noindex, follow` para las cuatro variantes de rutas legales y conserva el rewrite SPA; `npm run test:vercel-headers` valida localmente rutas, valores, Home y rewrite. No hay prueba HTTP de Vercel: requiere autorización de publicación y verificación posterior.
 - [ ] No declarar efectividad en crawlers sin JavaScript hasta que una respuesta HTTP autorizada confirme el header en las cuatro rutas sin iniciar despliegues no aprobados.
 - [x] LANDING-015 se consolidó en cinco commits locales trazables; diff-check y estado final registrados en `LANDING_015_CONSOLIDACION_FINAL.md`. Push/PR/merge/deployment no ejecutados.
 - [x] LANDING-014 update: YouTube es el quinto enlace HTTPS. Canal responde 200, metadatos «Rutitas UTTT» y mismo ID; no se verificó visualmente el avatar. Ver inventario para el diff completo y conciliación del audit.
+
+## LANDING-017 — publicación controlada — 2026-11-19
+
+- [x] `origin/main` y HEAD coinciden con las referencias autorizadas; los cambios de trabajo anteriores y artefactos locales se preservaron.
+- [x] Advisory `GHSA-fc5q-39xc-vjpf` verificado en GitHub como retirado/no es un problema de seguridad; audit actual exit 0/0; árbol de dependencia registrado sin cambiar paquetes.
+- [x] Actualizadas evidencias de LANDING-011/016, documentación de seguridad, matriz, checklist y memoria sin borrar la salida High histórica.
+- [ ] Vercel plan, cuotas/cargos/créditos, `Only build production`, rama y protecciones quedaron NO VERIFICADOS por 403 del conector y bloqueo de Computer Use al no poder identificar la URL de Edge.
+- [ ] Push/PR/CI/deployment no ejecutados. Requieren completar el gate económico Vercel; release conserva pendientes legales, SDD y operativos.

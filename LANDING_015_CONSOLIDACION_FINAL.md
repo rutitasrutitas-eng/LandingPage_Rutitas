@@ -57,7 +57,7 @@ Resultados locales únicamente. No hay evidencia CI para estos commits.
 
 ## Seguridad y riesgos pendientes
 
-- **Dependencias — revisión humana bloqueante para release:** LANDING-011 registró 11 entradas High de `GHSA-fc5q-39xc-vjpf` sobre `picomatch@4.0.7`; esta revisión reportó 0 con `npm audit --audit-level=high`. No cambiaron manifests ni lockfile, así que el resultado posterior no demuestra que el advisory o el paquete se hayan corregido. No se ocultó el riesgo, no se añadió excepción y no se acepta formalmente. Antes de release repetir `npm audit --json`, `npm ls picomatch --all`, contrastar el advisory vigente y documentar cierre compatible o aceptación explícita.
+- **Dependencias — estado al cierre LANDING-015:** LANDING-011 registró 11 entradas High de `GHSA-fc5q-39xc-vjpf` sobre `picomatch@4.0.7`; LANDING-014 reportó 0 en `npm audit`. La ficha oficial fue retirada el 2026-11-18 por no ser un problema de seguridad. Este addendum posterior concilia ambos resultados; la actualización y audit de LANDING-017 están registrados en `LANDING_017_PUBLICACION_OFICIAL.md`. No hubo cambios de dependencias.
 - **Privacidad:** aviso **BORRADOR NO RATIFICADO**. Identidad legal completa, domicilio, inventario y confirmación de tratamientos/proveedores, retención real y revisión legal final pendientes.
 - **Eliminación de cuentas:** no está operativa. Android/Backend dependen de implementación y validación de Mark/Ame. El periodo de siete días solo comenzará tras confirmación del Backend. El correo todavía no habilita solicitudes; coordinación confirmó atención conjunta y recomienda asignar una persona responsable por caso.
 - **Analytics y servicios:** Measurement ID real no configurado; no se activó GA4, GTM, Search Console ni publicación del sitemap. La prueba usa ID sintético y request interceptado localmente.
@@ -66,4 +66,4 @@ Resultados locales únicamente. No hay evidencia CI para estos commits.
 
 ## Siguiente paso
 
-Revisión humana del diff y de los cinco commits. Antes de publicar, resolver o aceptar formalmente el riesgo de dependencias, completar revisiones legales/operativas y autorizar expresamente cualquier push o verificación HTTP desplegada. Este documento no autoriza publicación.
+Revisión humana del diff y de los cinco commits. Antes de publicar, completar revisiones legales/operativas, confirmar los controles económicos y autorizar expresamente cualquier push o verificación HTTP desplegada. El estado actualizado del advisory consta en LANDING-017. Este documento no autoriza publicación.
