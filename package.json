@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:vercel-headers": "node scripts/verify-vercel-robots.mjs",
     "sdd:verify": "node scripts/verify-sdd.mjs"
   },
   "dependencies": {

@@ -29,4 +29,4 @@ Rediseñar incrementalmente la portada de React/Vite con la identidad existente.
 
 ## Restricciones
 
-No añadir dependencias sin necesidad, no modificar los PNG oficiales, no añadir teléfono/soporte sobre el tablero, no inventar URL Play ni Measurement ID, no aprobar los borradores legales, no alterar Vercel, no fusionar el PR ni desplegar producción.
+Restricciones de la solicitud original: no añadir dependencias sin necesidad, no modificar los PNG oficiales, no añadir teléfono/soporte sobre el tablero, no inventar URL Play ni Measurement ID, no aprobar los borradores legales, no alterar Vercel, no fusionar el PR ni desplegar producción. El PR #9 fue fusionado después por revisión humana el 2026-11-12; esa instrucción no describe el estado actual.

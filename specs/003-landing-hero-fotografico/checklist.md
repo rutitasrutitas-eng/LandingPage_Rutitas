@@ -21,6 +21,6 @@
 ## Entrega
 
 - [x] Capturas viewport 1440×900 y 390×844, sin `fullPage`, más métricas JSON de siete resoluciones, guardadas fuera del repo.
-- [x] PR Draft #9 existente actualizado hacia `main`; no se fusiona.
-- [ ] Preview desde sesión autorizada: no verificada; URL redirige a SSO (302) y API Vercel devuelve 403. No se generó enlace temporal.
-- [x] Sin merge, deploy de producción, cambios Vercel o aprobación legal automática.
+- [x] PR #9 se abrió como Draft y fue fusionado a `main` por revisión humana el 2026-11-12; merge commit `0481387180eab973b7c0416b073099638a3f7328`.
+- [x] Preview revisada desde Edge con sesión autorizada el 2026-11-12; SHA y tres rutas documentados en Memoria y reporte.
+- [x] Sin despliegue manual a producción, cambios Vercel ni aprobación legal automática. La Preview GitHub/Vercel fue automática.
