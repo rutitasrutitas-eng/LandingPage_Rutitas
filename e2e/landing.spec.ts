@@ -297,6 +297,8 @@ test('LANDING-005: project information and FAQ stay accurate and keyboard access
   const dialog = page.getByRole('dialog')
   await expect(dialog).toContainText('piloto está previsto')
   await expect(dialog).toContainText('reservas ni viajes reales')
+  await expect(dialog).toContainText('únicamente para testers internos autorizados de Google Play')
+  await expect(dialog).toContainText('No hay una descarga pública ni una ficha pública autorizada')
 
   const questions = [
     '¿Qué es Rutitas?', '¿Para quién está pensado?', '¿La aplicación ya está disponible?', '¿Cómo funcionará?',

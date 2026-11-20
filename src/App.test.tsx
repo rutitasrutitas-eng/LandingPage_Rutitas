@@ -222,6 +222,8 @@ describe('Rutitas landing and legal pages', () => {
     }
     expect(within(dialog).getByText(/no existe integración operativa confirmada/i)).toBeInTheDocument()
     expect(within(dialog).getByText(/no hay evidencia de eliminación remota operativa/i)).toBeInTheDocument()
+    expect(within(dialog).getByText(/no hay una versión pública.*testers internos autorizados de Google Play/i)).toBeInTheDocument()
+    expect(within(dialog).getByText(/no hay una descarga pública ni una ficha pública autorizada/i)).toBeInTheDocument()
   })
 })
 describe('privacy-first GA4 setup', () => {

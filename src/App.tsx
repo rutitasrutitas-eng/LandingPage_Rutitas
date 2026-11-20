@@ -82,14 +82,14 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
         {[
           ['¿Qué es Rutitas?', 'Es un proyecto universitario de movilidad compartida que busca facilitar la organización de trayectos y la colaboración entre integrantes de una comunidad educativa.'],
           ['¿Para quién está pensado?', 'Inicialmente está pensado para la comunidad UTTT. Un piloto está previsto, sujeto a validación y coordinación; no se anuncia como servicio activo.'],
-          ['¿La aplicación ya está disponible?', 'No. La aplicación está en desarrollo y todavía no se ofrece para uso público.'],
+          ['¿La aplicación ya está disponible?', 'No hay una versión pública. Si se aprueba una versión de prueba, será únicamente para testers internos autorizados de Google Play.'],
           ['¿Cómo funcionará?', 'La propuesta busca ayudar a consultar trayectos y, más adelante, coordinar opciones para compartir viajes. Reservas y viajes reales aún no están disponibles.'],
           ['¿Puedo consultar rutas?', 'El Backend incluye código para consultar un catálogo de rutas, y Android muestra datos locales en modo DEMO. No existe integración operativa confirmada para usuarios.'],
           ['¿Puedo reservar un asiento?', 'No desde Rutitas actualmente. La reserva real depende de integración y pruebas que todavía están pendientes.'],
           ['¿Cómo se protegerán mis datos?', 'El aviso de privacidad sigue como borrador. Las prácticas, responsables, proveedores y medidas aplicables deben confirmarse antes de operar.'],
           ['¿Dónde puedo consultar el aviso de privacidad?', 'En esta landing, mediante el enlace “Privacidad” del pie de página. El texto está pendiente de aprobación legal.'],
           ['¿Cómo podré eliminar mi cuenta?', 'La ruta “Eliminar cuenta” explica el estado actual. Android permite una baja local de datos DEMO; no hay evidencia de eliminación remota operativa.'],
-          ['¿Dónde podré descargar Rutitas?', 'La descarga se anunciará cuando exista una ficha oficial de Google Play. Por ahora la landing indica “Próximamente”.'],
+          ['¿Dónde podré descargar Rutitas?', 'No hay una descarga pública ni una ficha pública autorizada. Una versión interna, si se aprueba, solo estará disponible para testers autorizados de Google Play.'],
         ].map(([question, answer]) => <details className="faq-item" key={question}>
           <summary>{question}</summary><p>{answer}</p>
         </details>)}

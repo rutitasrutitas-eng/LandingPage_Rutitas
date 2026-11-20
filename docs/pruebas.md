@@ -1,5 +1,20 @@
 # Estrategia y casos de prueba — LANDING-001
 
+## LANDING-018 — preflight local de lanzamiento — 2026-11-19
+
+| Control | Comando | Resultado |
+|---|---|---|
+| Vitest | `npm run test -- --reporter=dot` | Exit 0; 19/19 pasaron en 2 archivos. |
+| Playwright | `npm run test:e2e` | Exit 0; 27 pasaron, 5 omitidas de 32: cuatro pruebas que requieren el ID sintético de Analytics y la foto hero exclusiva de escritorio en mobile-chromium. |
+| Lint / tipos | `npm run lint`; `npm run typecheck` | Ambos exit 0, sin warnings de ESLint ni errores TS. |
+| Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos. |
+| Headers locales | `npm run test:vercel-headers` | Exit 0; 4 rutas legales, rewrite SPA conservado y Home sin regla noindex. No es comprobación HTTP en Vercel. |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 28 requisitos 001 y 14/8/9 requisitos 002/003/004 trazados. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0; cero vulnerabilidades. No se cambiaron paquetes ni lockfile. |
+| Diff / secretos | `git diff --check`; búsqueda local de formatos comunes de secretos | Sin errores de whitespace ni coincidencias. Gitleaks no está instalado; esta búsqueda no sustituye ese escaneo. Git mostró solo advertencias LF/CRLF. |
+
+No se ejecutaron `npm ci`, GitHub Actions, solicitudes HTTP de producción, push, PR, merge o deployment durante la línea base local. Revalidación Edge del 2026-11-19: equipo Hobby, sin tarjeta ni invoices, AI Gateway $0/Auto-reload Off; no hay proyectos Priority asociados; `Only build production` y rama `main` confirmados. El API de cargos del conector respondió 403, por lo que el ledger separado no se consultó. Vercel documenta que Hobby debe pasar a Pro para elevar un proyecto y que el precio aplica por proyecto; el control sin proyectos no presenta cargo actual. No se modificó configuración ni se consumieron créditos.
+
 > **Conciliación de seguridad LANDING-017 (2026-11-19):** las corridas fechadas abajo que registraron 11 avisos High de `GHSA-fc5q-39xc-vjpf` son evidencia histórica del estado de la base de advisories en esas fechas. GitHub retiró el advisory el 2026-11-18; la auditoría local posterior (`npm audit --json`) terminó exit 0 con 0 vulnerabilidades. El paquete `picomatch` sigue transitivamente instalado, pero no se presenta aquel GHSA como hallazgo activo. Ejecutar y registrar de nuevo el audit de CI para este PR.
 
 ## LANDING-010 — revalidación antes de consolidación local — 2026-11-18
@@ -291,7 +306,7 @@ Entorno local Windows, Node/npm ya instalados, Vite 6.4.5, Chromium y mobile-Chr
 | Search Console local | Build y preview local | El archivo de `public/` se copió a `dist/` con SHA-256 idéntico al origen (`E2A8335CC2E0C53494BA450C479DE8176EEED44F20016A855758BFE7EEB10057`); `http://127.0.0.1:4174/googlee72a4fcd7bd338a1.html` respondió HTTP 200 con cuerpo exacto. No se consultó/verificó propiedad remota. |
 | Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos, JS 263.67 kB y CSS 21.48 kB tras habilitar YouTube. |
 | SDD | `npm run sdd:verify` | Exit 0; 30 documentos, 25 requisitos 001 y trazabilidad 14/8/9 para 002/003/004. |
-| Dependencias | `npm audit --audit-level=high` | Exit 0, 0 vulnerabilidades según el audit local ejecutado el 2026-11-19. No se cambiaron dependencias. El estado formal pendiente heredado de `GHSA-fc5q-39xc-vjpf` no se da por aceptado/cerrado por este resultado; requiere revisión humana del reporte actualizado. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0, 0 vulnerabilidades según el audit local ejecutado el 2026-11-19. No se cambiaron dependencias. LANDING-017 confirmó que `GHSA-fc5q-39xc-vjpf` fue retirado por GitHub Advisory Database como no problema de seguridad; las 11 alertas High previas se conservan como evidencia histórica, no como riesgo activo. |
 | Formato | `git diff --check` | Exit 0; sin errores. |
 
 Las páginas `/privacidad` y `/eliminar-cuenta` actualizan `noindex,follow` mediante JavaScript. El HTML SPA inicial contiene los metadatos estáticos de la portada; no se garantiza que crawlers sin JavaScript interpreten el `noindex` dinámico. Google no ha verificado el archivo y el sitemap no se ha publicado. No se configuró el ID real `G-MKN6YXXZ8Y`, no se activó GTM ni se cambió Vercel. No hubo CI remoto, push, PR, merge, commit o despliegue.
@@ -316,7 +331,7 @@ La URL suministrada por coordinación (https://www.youtube.com/channel/UCNam3EUf
 
 No hubo CI remoto ni respuesta HTTP de Vercel. Los headers están declarados en el repositorio y la prueba solo inspecciona configuración local; comportamiento tras rewrite, respuesta desplegada y resultado en crawlers quedan sin verificar. Cinco commits locales trazables; no se hizo push, PR, merge, Preview o despliegue.
 
-## LANDING-017 — preflight de publicación — 2026-11-19
+## LANDING-017 — preflight de publicación — 2026-11-19 (resultado histórico)
 
 | Control | Comando/medio | Resultado real |
 |---|---|---|
@@ -327,4 +342,4 @@ No hubo CI remoto ni respuesta HTTP de Vercel. Los headers están declarados en 
 | Vercel | Conector oficial + Microsoft Edge, solo lectura | El conector devolvió HTTP 403 por falta de autorización al scope del equipo. Computer Use se detuvo porque no pudo determinar con confianza la URL activa de Edge. No se evadió el bloqueo; plan, cargos/uso/cuotas/créditos, conexión Git, rama productiva, `Only build production`, protección y previews actuales **NO VERIFICADOS**. |
 | Publicación | GitHub/Vercel | No hubo push, PR, CI, Preview, merge, deployment ni cargos conocidos. El gate económico impidió la publicación. |
 
-La publicación está **BLOQUEADA por falta de verificación actual de Vercel/costo cero**. No está bloqueada por el advisory retirado. Aviso legal, eliminación de cuenta, ratificación SDD, Analytics/Search Console y headers HTTP siguen sujetos a sus gates separados.
+En la fecha de esa inspección, la publicación quedó **BLOQUEADA por falta de verificación actual de Vercel/costo cero**. Esa conclusión fue supersedida por la revalidación de Edge de LANDING-018 que se documenta en `LANDING_018_LANZAMIENTO.md`: panel Priority sin proyectos asignados y gate económico satisfecho solo para push controlado y PR Draft. Aviso legal, eliminación de cuenta, ratificación SDD, Analytics/Search Console y headers HTTP conservan sus gates separados.
