@@ -1,10 +1,10 @@
 # LANDING-018 — lanzamiento informativo condicionado
 
 **Fecha:** 2026-11-19
-**Estado:** **PREPARADA PARA PUSH CONTROLADO Y PR DRAFT**
+**Estado:** **BLOQUEADA ANTES DEL PR POR PREVIEW AUTOMÁTICA INESPERADA**
 **Rama:** `feature/landing-integracion-final-local`
 **HEAD al iniciar:** `b87f899d77bf467d24364071d7df0bbadedc63bb`
-**HEAD al cierre de validación local:** commit LANDING-018 descrito en el historial Git; el SHA final se entrega en el cierre de ejecución.
+**HEAD remoto tras el primer push:** `c11fcf1e549576b16675a0da54d093d2e335fa25`
 **`origin/main`:** `80ef7b1388aa709dbef692154c66b0c5a9966715`
 **Proyecto Vercel:** `landing-page-rutitas`, equipo `rutitasrutitas-8977`
 **Costo adicional autorizado:** $0 MXN; no se consumieron créditos.
@@ -15,7 +15,7 @@ La preparación local y sus validaciones concluyeron. El FAQ ahora explica que n
 
 **La revalidación de cuenta del 2026-11-19 satisface el gate económico para publicar la rama y abrir un PR Draft.** En Billing se observó Hobby activo, sin método de pago ni facturas; AI Gateway muestra saldo `$0.00` y `Auto-reload Off`. El control de `Priority projects` se ve azul/activado, pero su panel indica `No Priority projects`; la configuración del proyecto ofrece `Upgrade to Priority` y señala que requiere Pro. La documentación oficial de Vercel confirma que Hobby debe actualizar a Pro para usar Priority Projects, y que el cargo de `$200 USD/mes` aplica por cada proyecto elevado en Pro/Enterprise. No hay proyecto Priority ni obligación de pago actual visible. No se modificó el control.
 
-El repositorio del proyecto sigue conectado y la rama productiva es `main`. `Ignored Build Step` muestra `Only build production`. El deployment productivo consultado está listo y proviene de `main` en `80ef7b1388aa709dbef692154c66b0c5a9966715`. La UI no mostró un deployment iniciado por esta inspección. La configuración hace esperar que un push a una rama no productiva omita el build Preview, pero ese comportamiento aún no se ha probado mediante push. El gate permite el push de la rama y un PR Draft; no autoriza merge ni producción. La aprobación legal del aviso y del responsable sigue pendiente.
+El repositorio del proyecto sigue conectado y la rama productiva es `main`. `Ignored Build Step` muestra `Only build production`. El deployment productivo consultado está listo y proviene de `main` en `80ef7b1388aa709dbef692154c66b0c5a9966715`. Tras el push autorizado, Vercel mostró una Preview nueva para `feature/landing-integracion-final-local`; esto contradice el resultado esperado de la configuración. El estado del build no aparece en la tarjeta revisada y no se verificó por separado. Se detuvo el flujo antes de crear PR. No se canceló ni modificó el recurso. Merge y producción siguen bloqueados por aprobación legal.
 
 ## Alcance público comprobado localmente
 
@@ -82,19 +82,21 @@ La rama continúa en `feature/landing-integracion-final-local`; HEAD es `b87f899
 
 | Elemento | Estado |
 |---|---|
-| SHA remoto de rama | No existía referencia remota para `feature/landing-integracion-final-local` en la consulta inmediatamente previa; push aún pendiente. |
-| PR / URL | Ninguno todavía. |
-| GitHub Actions / CI | El workflow local corre en `pull_request` hacia `main` o `feature/landing-001-compliance`, y `workflow_dispatch`; no tiene trigger `push`. CI se ejecutará al abrir PR hacia `main`. |
+| SHA remoto de rama | Push no forzado completado: `c11fcf1e549576b16675a0da54d093d2e335fa25`; coincide con HEAD local. |
+| PR / URL | Ninguno. No se creó porque Vercel inició una Preview inesperada. |
+| GitHub Actions / CI | No hay ejecución CI para este SHA. `quality.yml` no tiene trigger `push`; no se abrió PR porque se detuvo ante la Preview inesperada. |
 | Merge a `main` | No realizado. |
-| Vercel deployment / URL | Ninguno nuevo; no se inició Preview ni Production. El dominio/HTTP no se probó en este ciclo. |
+| Vercel deployment / URL | Edge mostró una nueva Preview para esta rama: `https://landing-page-rutitas-git-feature-lan-644e28-rutitasrutitas-8977.vercel.app/`. Vercel la listó en “Recent Previews”; el estado exacto del build no se confirmó. No se inició deployment manual ni Production. |
 | Search Console / Analytics real | Sin verificación ni activación. |
+
+Después de aparecer la Preview no se volvió a consultar Usage/Billing; por tanto, el uso de build/cuotas y cualquier cargo asociado a ese deployment quedan **NO VERIFICADOS**. No se consumieron créditos de IA ni se cambió una configuración de facturación.
 
 ## Bloqueos y acción necesaria
 
-1. Inmediatamente antes de publicar, comprobar que continúan Hobby, sin método de pago/facturas, AI Gateway `$0.00`/Auto-reload Off, cero proyectos Priority, repo correcto y `Only build production`.
-2. Tras el push autorizado, revisar Deployments antes de abrir el PR. Si aparece un build Preview ejecutándose, detenerse antes de crear el PR y pedir una decisión humana; no cancelar recursos.
-3. Abrir solo PR Draft hacia `main` si el push termina y no aparece Preview inesperada. Revisar GitHub Actions real y no marcar Ready for Review.
+1. **Detenido antes del PR:** Vercel mostró una Preview inesperada tras el push. Coordinación debe decidir el tratamiento del Preview; no fue cancelado ni alterado.
+2. Antes de cualquier continuación, revisar en Edge el estado exacto del deployment y el impacto económico; el conector Vercel respondió 403 para la lectura de deployments.
+3. No crear PR Draft hasta recibir instrucción humana tras revisar la Preview. CI no se inició porque el workflow no corre con push y aún no hay PR.
 4. Mantener el aviso de privacidad como borrador no ratificado. Aprobación legal del responsable y del contenido sigue pendiente antes de merge o producción.
 5. No hacer merge ni despliegue manual; no activar GA4, GTM, Search Console ni funciones de eliminación.
 
-**Resultado:** **APTA PARA CONTINUAR CON PUSH CONTROLADO Y PR DRAFT.** Siguen bloqueados el merge y la publicación productiva por aprobación legal y las demás validaciones humanas de release.
+**Resultado:** **BLOQUEADA ANTES DEL PR.** El push de la rama fue autorizado y completado, pero Vercel creó/listó una Preview inesperada; se requiere decisión humana antes de continuar. Merge y publicación productiva siguen bloqueados por aprobación legal y los demás gates de release.
