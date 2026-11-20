@@ -5,6 +5,7 @@
 **PR:** [#14 Draft](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/14)
 **Base remota previa:** `c11fcf1e549576b16675a0da54d093d2e335fa25`
 **HEAD local antes de LANDING-019:** `e3eab7e26f8ad9148a2b9d134939432340ecad7e`
+**Commit de contenido LANDING-019:** `6a1baf0e6a3580a3162480f0a25a40b6b765cb50`
 **Costo adicional autorizado:** `$0 MXN`. No activar servicios ni consumir créditos.
 
 ## Corrección factual
@@ -48,9 +49,11 @@ Se registran aquí únicamente resultados efectivamente ejecutados para este cam
 | `npm run sdd:verify` | Exit 0; 30 documentos, 29 requisitos 001, 14 requisitos 002, 8 requisitos 003 y 9 requisitos 004 trazados. |
 | `npm audit --audit-level=high` | Exit 0; 0 vulnerabilidades reportadas. No es garantía de riesgo cero. |
 | `git diff --check` | Exit 0; solo avisos de normalización LF/CRLF. |
-| CI del SHA actualizado | Pendiente de push/ejecución; no afirmar aprobado antes del resultado real |
+| CI del SHA `6a1baf0e6a3580a3162480f0a25a40b6b765cb50` | Run [44673981352](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/44673981352) completado con éxito. Pasaron Gitleaks, instalación lockfile, SDD, lint, typecheck, build, unitarias/integración, Chromium, browser tests y `npm audit`. Vercel status `Canceled by Ignored Build Step`; Preview omitida, no build. |
 
 Cambios limitados a copy de privacidad/eliminación, documentación factual, aprobación y trazabilidad SDD. Se excluyen `LANDING_013.diff`, `evidence/` y archivos temporales. No se autoriza merge, despliegue productivo, activación de servicios ni cambio de configuración Vercel.
+
+La lectura económica de Vercel que habilitó el PR observó Hobby y ausencia de método de pago/facturas, con AI Gateway sin saldo ni recarga automática. Para el push LANDING-019, Vercel registró una Preview omitida por Ignored Build Step, sin build. No se volvió a abrir Billing/Usage tras este push; no se afirma una lectura nueva de cargos o consumo agregado. No se consumieron créditos ni se activaron servicios.
 
 ### Archivos de esta entrega
 

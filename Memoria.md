@@ -225,6 +225,8 @@ La verificación técnica de repositorios que faltaba en esta primera pasada se 
 - El dato de infraestructura no prueba que Android o visitantes públicos usen la API, ni qué datos personales fueron recibidos, consultados o almacenados. Se requiere comprobación independiente del tratamiento efectivo y ratificación de proveedores, funciones, ubicaciones y transferencias.
 - La evidencia Android documentada mantiene `DEMO_MODE=true` y pruebas con respuestas simuladas; reservas y viajes multiusuario no están operativos. El mecanismo remoto de eliminación permanece pendiente de implementación y validación por Mark y Ame.
 - La candidata `/privacidad` mantiene la marca **BORRADOR NO RATIFICADO**, GA4/GTM siguen apagados y `/eliminar-cuenta` permanece informativa. Identidad legal, domicilio, contacto/proceso, finalidades, datos, retención, derechos y revisión legal requieren decisión humana. Ver `LANDING_019_CIERRE_CONTENIDO.md` y `docs/VALIDACIONES_PRIVACIDAD.md`.
+- Commit/push correctivo LANDING-019: `6a1baf0e6a3580a3162480f0a25a40b6b765cb50`; PR #14 sigue Draft. Actions run `44673981352` pasó todos los checks, incluido Gitleaks y `npm audit`. Vercel registró el deployment como Ignored por `Only build production`, sin build de Preview.
+- La constancia de riesgo general de dependencias tiene SHA/run de referencia, pero permanece sin firma; los resultados exitosos no equivalen a riesgo cero ni a aceptación humana. No se hizo merge ni despliegue.
 
 ### Revalidación económica y técnica Vercel (2026-11-19)
 

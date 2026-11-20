@@ -34,7 +34,7 @@ Histórico al corte inicial: el checklist registraba el push, una Preview cuyo e
 - [x] Android DEMO, reservas/viajes no operativos y eliminación remota pendiente siguen explícitos; el aviso continúa no ratificado.
 - [x] GA4 y GTM permanecen desactivados/no confirmados.
 - [x] Validación local: lint, typecheck, build, SDD, audit High y `git diff --check` exitosos; Vitest 19/19; Playwright 27 aprobadas/5 omitidas intencionales.
-- [ ] Push del commit LANDING-019 autorizado y CI del SHA resultante revisado.
+- [x] Commit/push LANDING-019 `6a1baf0e6a3580a3162480f0a25a40b6b765cb50`; CI run `44673981352` aprobó Gitleaks, SDD, lint, typecheck, build, unit/integration, browser tests y dependency audit. Vercel omitió la Preview por Ignored Build Step; no se ejecutó build.
 - [ ] Coordinación ratifica identidad legal/domicilio, contacto, tratamientos y finalidades, proveedores efectivos, retención, derechos y procedimiento de eliminación.
 - [ ] Persona autorizada firma aceptación expresa del riesgo residual general de dependencias para el SHA y alcance revisados. CI/audit aprobados no significan riesgo cero.
 - [ ] PR #14 permanece Draft hasta aprobación humana; no merge ni producción sin autorización específica.
