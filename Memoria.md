@@ -219,6 +219,13 @@ La verificación técnica de repositorios que faltaba en esta primera pasada se 
 - Vercel Billing API respondió 403 para la cuenta/equipo. La UI observada previamente muestra `Priority projects` activado con tarifa mensual; no hay evidencia suficiente sobre suscripción, proyecto asociado o importe de factura. Se generó un enlace de consentimiento de lectura para autorizar el conector, pendiente de aprobación humana.
 - No push, PR, CI, merge ni deployment. LANDING-018 permanece bloqueada por la obligación económica no descartada y la aprobación legal pendiente. HEAD local sigue `b87f899d77bf467d24364071d7df0bbadedc63bb`; cambios locales de LANDING-018 están sin commit y `origin/main` sigue `80ef7b1388aa709dbef692154c66b0c5a9966715`.
 
+## LANDING-019 — actualización factual del Backend para candidata de privacidad — 2026-11-19
+
+- Coordinación comunicó que infraestructura reportó la API de siete endpoints desplegada/verificada en Microsoft Azure con MongoDB Atlas. El registro histórico de LANDING-006/017, que decía no haber evidencia de despliegue al corte de sus revisiones, se conserva como histórico y no describe esta información posterior.
+- El dato de infraestructura no prueba que Android o visitantes públicos usen la API, ni qué datos personales fueron recibidos, consultados o almacenados. Se requiere comprobación independiente del tratamiento efectivo y ratificación de proveedores, funciones, ubicaciones y transferencias.
+- La evidencia Android documentada mantiene `DEMO_MODE=true` y pruebas con respuestas simuladas; reservas y viajes multiusuario no están operativos. El mecanismo remoto de eliminación permanece pendiente de implementación y validación por Mark y Ame.
+- La candidata `/privacidad` mantiene la marca **BORRADOR NO RATIFICADO**, GA4/GTM siguen apagados y `/eliminar-cuenta` permanece informativa. Identidad legal, domicilio, contacto/proceso, finalidades, datos, retención, derechos y revisión legal requieren decisión humana. Ver `LANDING_019_CIERRE_CONTENIDO.md` y `docs/VALIDACIONES_PRIVACIDAD.md`.
+
 ### Revalidación económica y técnica Vercel (2026-11-19)
 
 - Edge confirmó Hobby activo, sin método de pago ni facturas; AI Gateway `$0.00` y Auto-reload Off. En Usage (últimos 30 días) se observaron 39.56 MB de Fast Data Transfer, 694 solicitudes CDN y 29 minutos de Build Time; AI Gateway Traces 0.

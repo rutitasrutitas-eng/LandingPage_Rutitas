@@ -58,3 +58,7 @@ La salida de E2E cambia al combinar LANDING-005 y LANDING-006: la corrida sinté
 ## Pendientes de revisión
 
 Consultar `docs/PENDIENTES_LEGALES_RUTITAS.md` y `docs/PLAN_REVISION_PUBLICACION.md`. No retirar la marca de borrador ni publicar hasta que las personas responsables confirmen los datos y autoricen explícitamente la publicación.
+
+## Addendum LANDING-019 — información posterior de infraestructura
+
+La descripción original de este reporte corresponde al corte de su revisión. El 2026-11-19 coordinación comunicó que infraestructura reportó los siete endpoints desplegados/verificados en Azure con MongoDB Atlas. Esto actualiza el estado de infraestructura, pero no demuestra disponibilidad pública, integración Android, tratamiento efectivo de datos personales, contratos, ubicaciones ni transferencias. Ver `docs/VALIDACIONES_PRIVACIDAD.md`; el aviso sigue como borrador y la eliminación remota como no operativa.

@@ -101,7 +101,7 @@ export function AccountDeletionPage() {
 
         <section aria-labelledby="deletion-request">
           <h2 id="deletion-request">1. Cómo solicitar la eliminación</h2>
-          <p>Desde Android se prevé solicitar la eliminación con un control dentro de la cuenta. El Equipo de Rutitas debe implementar y validar la solicitud en la app y el Backend. Hoy no hay un mecanismo remoto operativo; la baja disponible en Android DEMO solo borra datos locales y no elimina cuentas de un servidor.</p>
+          <p>Desde Android se prevé solicitar la eliminación con un control dentro de la cuenta. El equipo de infraestructura reportó que la API del Backend está desplegada con siete endpoints técnicos de autenticación, perfil y consulta de rutas; esos endpoints no constituyen un mecanismo de eliminación de cuenta. El Equipo de Rutitas debe implementar y validar la solicitud en la app y el Backend. Hoy no hay un mecanismo remoto operativo; la baja disponible en Android DEMO solo borra datos locales y no elimina cuentas de un servidor.</p>
           <p>La política de Google Play contempla una vía web accesible fuera de Android para solicitar la eliminación. Esta página prepara una guía pública del estado y del procedimiento propuesto, pero por ahora es informativa y no recibe ni tramita solicitudes.</p>
           <div className="draft-notice" role="note">
             <strong>Procedimiento web propuesto · todavía no habilitado</strong>

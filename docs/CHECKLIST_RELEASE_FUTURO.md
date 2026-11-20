@@ -1,6 +1,6 @@
 # Checklist de release futuro — sin autorización de merge ni producción
 
-## LANDING-018 — estado local (2026-11-19)
+## LANDING-018 — estado al corte inicial (histórico, 2026-11-19)
 
 - [x] Copy informativo aclara que no hay versión pública Android; una versión de prueba, si se aprueba, sería solo para testers internos autorizados.
 - [x] Validaciones locales: Vitest 19/19; Playwright 27 passed/5 skipped; lint, typecheck, build, headers, SDD, audit y diff-check pasaron. No CI remoto.
@@ -26,4 +26,15 @@
 - [ ] Antes de liberar, verificar por HTTP autorizado `X-Robots-Tag: noindex, follow` en `/privacidad`, `/privacidad/`, `/eliminar-cuenta` y `/eliminar-cuenta/`; la prueba actual valida únicamente `vercel.json`, no el comportamiento desplegado.
 - [ ] Obtener autorización humana explícita para producción y registrar plan de reversión.
 
-Este checklist registra la autorización condicionada. El push fue realizado; el comportamiento real de `Only build production` no evitó que Vercel listara una Preview inesperada. El PR Draft quedó detenido hasta que coordinación revise ese recurso. El advisory retirado no es un bloqueo vigente. Revisión legal, ratificación SDD y otros gates siguen pendientes antes del merge/producción.
+Histórico al corte inicial: el checklist registraba el push, una Preview cuyo estado aún no se había confirmado y el PR sin abrir. La revisión posterior confirmó la Preview omitida, abrió el PR #14 Draft y completó CI; el estado posterior está en la adenda LANDING-019 y `LANDING_018_LANZAMIENTO.md`.
+
+## Adenda LANDING-019 — estado actual previo al push
+
+- [x] Candidata de privacidad distingue el deployment de siete endpoints reportado por infraestructura en Azure/MongoDB Atlas de disponibilidad pública y tratamiento real no comprobado.
+- [x] Android DEMO, reservas/viajes no operativos y eliminación remota pendiente siguen explícitos; el aviso continúa no ratificado.
+- [x] GA4 y GTM permanecen desactivados/no confirmados.
+- [x] Validación local: lint, typecheck, build, SDD, audit High y `git diff --check` exitosos; Vitest 19/19; Playwright 27 aprobadas/5 omitidas intencionales.
+- [ ] Push del commit LANDING-019 autorizado y CI del SHA resultante revisado.
+- [ ] Coordinación ratifica identidad legal/domicilio, contacto, tratamientos y finalidades, proveedores efectivos, retención, derechos y procedimiento de eliminación.
+- [ ] Persona autorizada firma aceptación expresa del riesgo residual general de dependencias para el SHA y alcance revisados. CI/audit aprobados no significan riesgo cero.
+- [ ] PR #14 permanece Draft hasta aprobación humana; no merge ni producción sin autorización específica.

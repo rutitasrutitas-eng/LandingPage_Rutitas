@@ -2,10 +2,10 @@
 
 **ESTADO: BORRADOR PARA REVISIÓN INTERNA. NO APROBADO PARA PUBLICACIÓN COMO AVISO DEFINITIVO.**
 
-**Versión de trabajo:** 17 de noviembre de 2026.
+**Versión de trabajo:** 19 de noviembre de 2026.
 **Entrada en vigor:** Pendiente de aprobación.
 
-Este documento de trabajo acompaña el diseño de `/privacidad`. Coteja las ramas/SHA de Android y Backend anotadas en `docs/VALIDACIONES_PRIVACIDAD.md`, sin afirmar que sus servicios estén desplegados o traten actualmente datos de personas usuarias. No constituye asesoría legal ni aviso definitivo.
+Este documento de trabajo acompaña el diseño de `/privacidad`. Conserva como evidencia histórica el cotejo de ramas/SHA de Android y Backend del 17 de noviembre en `docs/VALIDACIONES_PRIVACIDAD.md` y agrega por separado el informe posterior de infraestructura. No constituye asesoría legal ni aviso definitivo.
 
 ## 1. Responsable del tratamiento
 
@@ -19,7 +19,7 @@ La coordinación identifica al **Equipo de Rutitas** como responsable operativo 
 
 Este aviso está pensado para el sitio web de presentación de Rutitas y la aplicación Android. La Landing Page actual no permite crear cuentas ni dispone de un formulario de registro.
 
-En el código Backend revisado aparecen correo, nombre visible, teléfono opcional, identificador, rol, estado y fechas de actividad, además de hash de contraseña. Este inventario describe campos en código, no tratamiento productivo ni despliegue.
+El modelo de datos Backend revisado contempla correo, nombre visible, teléfono opcional, identificador, rol, estado y fechas de actividad, además de hash de contraseña. El informe posterior proporcionado por infraestructura reporta la API de siete endpoints desplegada y verificada en Microsoft Azure con MongoDB Atlas. El despliegue no confirma por sí solo qué datos personales se recibieron, consultaron o almacenaron; el tratamiento efectivo requiere comprobación independiente.
 
 La rama Android revisada usa `DEMO_MODE=true`, mantiene perfil y datos de demostración localmente con Room, y declara permisos de cámara y ubicación aproximada y precisa. Contiene funciones para guardar fotografías/documentos localmente. No demuestra que estos datos se envíen a un servidor ni que se usen con cuentas reales.
 
@@ -27,7 +27,7 @@ La rama Android revisada usa `DEMO_MODE=true`, mantiene perfil y datos de demost
 
 ## 3. Finalidades de uso
 
-El Backend revisado declara registro, inicio/cierre de sesión, lectura/edición del perfil propio y consulta de catálogo/detalle de rutas. Android revisado evita llamar al Backend mientras está en DEMO. No se confirmó despliegue ni uso para personas usuarias.
+Los siete endpoints técnicos reportados corresponden a registro, inicio/cierre de sesión, lectura/edición del perfil propio y consulta de catálogo/detalle de rutas. Su despliegue no demuestra que estén ofrecidos al público ni que Android los consuma. La versión Android revisada conserva `DEMO_MODE=true` y los tests de cliente revisados usan respuestas simuladas; no hay evidencia suficiente de solicitudes reales ni de tratamiento de datos de usuarios.
 
 El proyecto contempla funciones futuras para coordinar viajes compartidos, gestionar conductores, solicitudes y reservas, pero esas funcionalidades aún no deben anunciarse como servicios operativos. Las finalidades adicionales o secundarias que se implementen se informarán y, cuando corresponda, se solicitará consentimiento.
 
@@ -41,11 +41,11 @@ El manifiesto Android revisado declara cámara y ubicación aproximada/precisa. 
 
 La coordinación de viajes podría requerir mostrar datos limitados del trayecto o del perfil a integrantes de la comunidad. El equipo debe aprobar qué se muestra, a quién y durante cuánto tiempo antes de activar estas funciones.
 
-**Proveedor actualmente usado:** Vercel aloja la Landing. Esto no acredita que el Backend esté desplegado allí ni que se use para almacenar perfiles o rutas.
+**Proveedores de infraestructura reportados:** Vercel aloja la Landing. El informe de infraestructura recibido reporta que Microsoft Azure aloja la API del Backend y que MongoDB Atlas forma parte de esa infraestructura. Este informe no permite concluir qué datos personales han sido transmitidos o almacenados, ni confirma contratos, regiones, transferencias o subencargados.
 
-**Código disponible, sin operación confirmada:** el Backend contiene repositorios MongoDB, pero no se confirmó una conexión a MongoDB Atlas. La Landing incluye una integración opcional de Google Analytics, pero no se verificó un ID real ni recolección activa.
+**Integración opcional sin medición real confirmada:** la Landing incluye código opcional de Google Analytics, pero no se verificó un ID real ni recolección activa. Google Tag Manager no está activado.
 
-**Contemplados o pendientes de confirmación:** Microsoft Azure, MongoDB Atlas, Google Maps Platform, Google Analytics como servicio de medición y Google Play como canal futuro de distribución Android. Esta lista no confirma contratos, configuración, activación, envío de datos, ubicación, transferencias ni tratamiento productivo. La configuración de servicios externos debe verificarse antes de habilitarlos.
+**Previstos o pendientes de confirmación:** Google Maps Platform y Google Play como posible canal futuro de distribución Android. Su inclusión no confirma activación ni tratamiento. La configuración de Analytics y los proveedores efectivos de cada tratamiento deben verificarse antes de describirlos como activos.
 
 La política del proyecto autoriza **$0 MXN de costo adicional**. No significa que los proveedores sean gratuitos ni que exista una garantía del proveedor; no se habilitarán servicios que puedan superar el límite aprobado.
 
@@ -77,4 +77,4 @@ La Landing Page almacena localmente la preferencia sobre analítica. Su código 
 
 La versión aprobada del aviso, su fecha de entrada en vigor y los cambios relevantes se comunicarán mediante la misma dirección `/privacidad` y por otros medios que el responsable establezca cuando sea necesario.
 
-**Pendiente de cierre:** identidad legal completa y domicilio, datos y finalidades reales, proveedores/transferencias efectivos, periodo previsto de hasta 2 meses, implementación y validación de eliminación por Mark y Ame, atención del contacto y revisión legal final. El aviso se mantiene como borrador no ratificado.
+**Pendiente de cierre:** identidad legal completa y domicilio, datos y finalidades reales, confirmación documentada de proveedores/transferencias y del tratamiento efectivo, ratificación del periodo previsto de hasta 2 meses, implementación y validación de eliminación por Mark y Ame, atención del contacto, derechos/procedimientos y revisión legal final. El aviso se mantiene como borrador no ratificado.

@@ -2,7 +2,7 @@
 
 **Estado:** Borrador técnico, no ratificado. Fecha de revisión de repositorios: 17 de noviembre de 2026.
 
-## Verificación técnica vigente en GitHub (solo lectura)
+## Verificación técnica histórica en GitHub (solo lectura)
 
 **Corte consultado:** 2026-11-17. Se consultaron PR metadata, diff/archivos en sus SHA de cabecera, rama `main` y check-runs públicos. Las referencias describen código disponible, no una integración operativa ni tratamiento de datos en producción.
 
@@ -66,7 +66,22 @@ Estas decisiones actualizan el contenido, pero no sustituyen la validación del 
 | Google Maps Platform | Contemplado / pendiente | No se confirmó uso/transmisión en la app operativa; permisos Android no prueban uso del proveedor. |
 | Google Play | Previsto para distribución / pendiente | No se confirmó ficha pública ni distribución activa de la aplicación. |
 
-La matriz anterior separa código/configuración de servicios activados, tratamiento de datos y contratos. Esos hechos requieren confirmación del equipo antes de retirar la condición de borrador.
+La matriz anterior separa código/configuración de servicios activados, tratamiento de datos y contratos. Corresponde al corte del 2026-11-17; no debe leerse como la última información de infraestructura. La confirmación de despliegue posterior se registra aparte abajo. Los datos de tratamiento y contratos continúan pendientes.
+
+## Informe posterior de infraestructura — 2026-11-19
+
+Coordinación informó que infraestructura reportó el despliegue y verificación de los siete endpoints del Backend en Microsoft Azure con MongoDB Atlas. Esta es información recibida de coordinación; no se inspeccionaron recursos Azure/Atlas ni se hicieron solicitudes HTTP en esta actualización.
+
+| Hecho | Estado y límite |
+|---|---|
+| API Backend | Despliegue/verificación de siete endpoints reportados por infraestructura: registro, login/logout, perfil propio GET/PATCH y catálogo/listado/detalle de rutas, según el contrato revisado. Esto describe infraestructura y endpoints técnicos, no disponibilidad de producto al público. |
+| Proveedores | Microsoft Azure y MongoDB Atlas se clasifican como infraestructura del Backend **reportada como desplegada/en uso**. Contratos, regiones, subencargados, transfers y servicios exactos continúan por confirmar con evidencia del equipo. Vercel aloja la Landing. |
+| Tratamiento de datos | El despliegue no demuestra si hubo solicitudes de usuarios reales ni qué datos se recibieron, consultaron, registraron o almacenaron. Se requiere comprobación separada de tráfico autorizado y registros/configuración de datos, sin exponer información personal. |
+| Android | El último cotejo documentado de Android (2026-11-17) muestra `DEMO_MODE=true`; PR #9/#10 y pruebas del cliente no prueban integración real contra la API. Confirmar de nuevo SHA/estado antes de una decisión de release. |
+| Reservas y viajes multiusuario | No se incluyen como funciones operativas confirmadas. Los endpoints de catálogo de rutas no prueban reservas ni coordinación de viajes. |
+| Eliminación remota | Sigue pendiente/no operativa; los siete endpoints reportados son de autenticación, perfil y catálogo, no constituyen el mecanismo de baja. El flujo Android/Backend requiere implementación y validación de Mark y Ame. |
+
+La condición de borrador permanece. Este informe no confirma categorías reales de datos personales ni sustituye la revisión legal.
 
 ## Auditoría de dependencias — actualización del 2026-11-17
 

@@ -5,14 +5,18 @@
 Antes de publicar `/privacidad` como aviso definitivo, la persona responsable debe confirmar y aprobar cada rubro con base en las prácticas reales de Rutitas:
 
 - [ ] Nombre/razón social, domicilio/datos de identificación del responsable del tratamiento.
-- [ ] Canal oficial de contacto de privacidad, atendido y monitoreado.
+- [ ] Confirmar que `rutitas.rutitas@gmail.com` es el canal oficial, monitoreado y adecuado; responsable operativo informado: Equipo de Rutitas. Esto no identifica al responsable legal.
 - [ ] Datos personales que realmente recopila la app y la landing; origen, categorías y obligatoriedad.
+- [ ] Revisar por separado los datos que procesa la Landing, los datos locales de Android DEMO y cualquier dato que realmente llegue a la API desplegada.
+- [ ] Verificar de forma independiente si la API recibió/procesó datos de personas usuarias y cuáles; el reporte de despliegue de infraestructura no prueba tratamiento efectivo.
 - [ ] Finalidades reales y base legal aplicable para cada tratamiento.
 - [ ] Si, cuándo y cómo se utiliza ubicación precisa o aproximada; permisos y controles disponibles.
 - [ ] Si se solicitan documentos de conductores; tipos de documentos, personal autorizado, finalidad y salvaguardas existentes.
-- [ ] Proveedores/servicios de terceros, sus funciones y transferencias de datos que ocurren realmente.
+- [ ] Ratificar el informe de infraestructura: siete endpoints Backend reportados en Azure con MongoDB Atlas; confirmar los proveedores efectivos, funciones, ubicaciones, contratos, encargados/subencargados y transferencias asociadas a datos reales.
+- [ ] Confirmar por separado el estado de Vercel, Google Analytics/Tag Manager, Google Maps Platform y Google Play; no inferir activación por el código o por estar previstos.
 - [ ] Sistemas, ubicación de almacenamiento, accesos y medidas técnicas/organizativas que estén implantadas y verificadas.
 - [ ] Plazos reales de conservación por categoría, criterios de eliminación y excepciones justificadas.
+- [ ] Ratificar o ajustar la conservación prevista de hasta 2 meses por categoría y punto inicial; mantenerla separada de los 7 días de recuperación previstos para una eliminación solicitada.
 - [ ] Medios y procedimiento operativo para ejercer derechos de titulares, requisitos y responsable de respuesta.
 - [ ] Fecha de entrada en vigor/actualización y ciclo de revisión del aviso.
 
