@@ -124,6 +124,20 @@
 - [x] LANDING-015 se consolidó en cinco commits locales trazables; diff-check y estado final registrados en `LANDING_015_CONSOLIDACION_FINAL.md`. Push/PR/merge/deployment no ejecutados.
 - [x] LANDING-014 update: YouTube es el quinto enlace HTTPS. Canal responde 200, metadatos «Rutitas UTTT» y mismo ID; no se verificó visualmente el avatar. Ver inventario para el diff completo y conciliación del audit.
 
+## LANDING-020 — GA4, SEO y titularidad (local)
+
+- [x] LP-REQ-030 y tareas L20 trazadas antes del cambio funcional.
+- [x] La cuenta oficial aparece como Administradora efectiva de GA4. Medición mejorada apagada; ocultación de correo y 17 claves de query guardada tras confirmación de coordinación.
+- [x] GTM: la cuenta oficial ya tenía rol de administradora; contenedor muestra cero cambios/etiqueta no instalada.
+- [x] Propiedad URL-prefix de Search Console creada bajo la cuenta oficial; el archivo de verificación nuevo se añadió localmente y el anterior se conserva. Sigue sin verificar porque el sitio publicado aún no sirve el nuevo archivo.
+- [x] Eventos `primary_cta_click`, `faq_open` y `social_click` usan solo acciones existentes, consentimiento afirmativo y parámetros estáticos; Vitest comprueba la integración sin PII.
+- [x] JSON-LD `WebSite` factual, metadatos estáticos, sitemap/robots y archivo de verificación GSC conservados; build local confirma su inclusión. Las páginas legales conservan `noindex,follow`.
+- [x] Validaciones locales: lint, typecheck, Vitest 21/21, Playwright 27 aprobadas/5 omitidas intencionalmente, GA sintético E2E 1/1, build, SDD, audit 0 vulnerabilidades, headers y diff-check aprobados.
+- [x] Constitución SDD ratificada por coordinación el 2026-11-25. Excepción única LANDING-020 autoriza commit, push solo a `feature/landing-020-ga4-seo`, PR a `main` y CI; no autoriza merge, Production, cambios Vercel ni activación GA4/GTM.
+- [x] Lighthouse local contra build: desktop Performance 98, Accessibility 100, Best Practices 100, SEO 100; mobile 81, Accessibility 100, Best Practices 100, SEO 100. Se mejoró descubrimiento de hero y formato/tamaño de logo sin dependencias nuevas.
+- [x] Archivo GSC nuevo servido en Vite Preview local con HTTP 200 y cuerpo exacto (53 bytes, SHA-256 registrado); producción aún no verificada porque no hubo despliegue de este cambio. Sitemap/indexación pendientes de verificación publicada.
+- [ ] Ads, Google Signals y retención de eventos no se revisaron exhaustivamente en la consola; siguen pendientes antes de activar GA4. La revisión legal también bloquea activación y publicación productiva.
+
 ## LANDING-017 — publicación controlada — 2026-11-19
 
 - [x] `origin/main` y HEAD coinciden con las referencias autorizadas; los cambios de trabajo anteriores y artefactos locales se preservaron.

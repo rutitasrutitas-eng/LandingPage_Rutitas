@@ -79,7 +79,7 @@ export function PrivacyPage() {
         </section>
         <section aria-labelledby="privacy-analytics">
           <h2 id="privacy-analytics">Analítica y tecnologías similares</h2>
-          <p>El código de esta landing solo carga Google Analytics si se configura un ID válido y la persona acepta la analítica opcional. El equipo debe confirmar la propiedad, su configuración, los eventos recibidos y el consentimiento aplicable antes de declarar la medición activa. Actualmente no se afirma que haya una propiedad o eventos verificados.</p>
+          <p>La propiedad GA4 y el flujo del sitio están configurados, pero la Landing no tiene configurado el ID de medición y no envía eventos. Si se habilita más adelante, Google Analytics solo se cargará después de una aceptación expresa. Search Console tiene una propiedad creada, todavía sin verificar; el estado y las decisiones pendientes se describen en el borrador extendido de privacidad.</p>
         </section>
         <div className="draft-notice draft-notice-bottom">Este texto sigue pendiente de revisión legal y validación del equipo. No lo uses como aviso definitivo.</div>
       </main>

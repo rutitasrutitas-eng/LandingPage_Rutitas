@@ -2,7 +2,7 @@
 
 ## Autoridad
 
-- Sigue `.specify/memory/constitution.md`; permanece `PENDIENTE_RATIFICACION` hasta revisión humana.
+- Sigue `.specify/memory/constitution.md`; fue ratificada por coordinación el 25-11-2026. La ratificación es técnica y no sustituye aprobaciones legales.
 - La especificación activa es `specs/001-landing-compliance/spec.md`. Antes de cada cambio, enlaza su requisito y tarea en `tasks.md`/`docs/matriz-trazabilidad.md`.
 - Conserva React/Vite, identidad visual, portada y comportamiento válidos. No reemplaces el proyecto ni elimines contenido por simplificación.
 
@@ -25,4 +25,4 @@
 
 - Una tarea documental/código termina cuando satisface el criterio de aceptación y guarda prueba reproducible, o registra el bloqueo y la evidencia faltante.
 - Actualiza `Memoria.md`, `docs/matriz-trazabilidad.md`, checklist y pruebas con resultados reales.
-- Esta guía no autoriza commits, push, cambios en dashboard/configuración de Vercel ni despliegue de producción. Preview puede usarse solo si ya está disponible sin cambiar configuración y la revisión lo requiere.
+- Por regla general, esta guía no autoriza commits, push, cambios en dashboard/configuración de Vercel ni despliegues. Excepción única LANDING-020, ratificada el 25-11-2026: autoriza completar los cambios de esa tarea, crear commit, hacer push solo de `feature/landing-020-ga4-seo`, abrir PR a `main`, ejecutar CI y usar una Preview solo si está disponible dentro del plan gratuito y sin cambios adicionales de configuración. Excluye `evidence/`, `LANDING_013.diff` y archivos ajenos. No autoriza merge, producción, cambio de Vercel ni activación GA4/GTM. No es autorización permanente.

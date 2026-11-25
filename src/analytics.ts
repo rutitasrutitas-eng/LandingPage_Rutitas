@@ -10,6 +10,11 @@ type AnalyticsWindow = Window & {
   __rutitasPageViews?: Set<string>
 }
 
+export type RutitasAnalyticsEvent =
+  | { name: 'primary_cta_click', params: { cta: 'discover' | 'project' } }
+  | { name: 'faq_open', params: { faq: 'about' | 'audience' | 'availability' | 'how_it_works' | 'routes' | 'booking' | 'privacy' | 'account_deletion' | 'download' } }
+  | { name: 'social_click', params: { network: 'facebook' | 'instagram' | 'youtube' | 'x' | 'tiktok' } }
+
 export function isValidMeasurementId(value: unknown): value is string {
   return typeof value === 'string' && /^G-[A-Z0-9]{6,}$/i.test(value.trim())
 }
@@ -88,4 +93,14 @@ export function enableAnalytics(measurementId: unknown): boolean {
   }
 
   return true
+}
+
+/** Sends only a closed set of static interaction values after explicit opt-in. */
+export function trackAnalyticsEvent(measurementId: unknown, event: RutitasAnalyticsEvent): boolean {
+  if (!isValidMeasurementId(measurementId) || readAnalyticsConsent() !== 'granted') return false
+  if (!enableAnalytics(measurementId)) return false
+
+  const runtime = window as AnalyticsWindow
+  runtime.gtag?.('event', event.name, event.params)
+  return Boolean(runtime.gtag)
 }

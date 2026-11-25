@@ -26,6 +26,14 @@ test('LANDING-014: opt-in uses a synthetic GA4 ID, sends no external request and
   const gaConfig = analyticsState.entries.find(entry => entry[0] === 'config')
   expect(analyticsState.consentValue).toBe('granted')
   expect(pageViews).toHaveLength(1)
+  expect(JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? '')).toEqual({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Rutitas',
+    url: 'https://landing-page-rutitas.vercel.app/',
+    inLanguage: 'es-MX',
+    description: 'Proyecto universitario de movilidad compartida en desarrollo, pensado inicialmente para la comunidad UTTT.',
+  })
   expect(gaConfig).toEqual(['config', 'G-SYNTHETIC123', expect.objectContaining({ send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false })])
   expect(analyticsState.scripts.some(source => source.includes('GTM-'))).toBe(false)
   expect(interceptedRequests).toEqual(['https://www.googletagmanager.com/gtag/js?id=G-SYNTHETIC123'])
