@@ -27,7 +27,7 @@ export default function AnalyticsConsent() {
       {isOpen && <aside className="analytics-consent" aria-labelledby="analytics-consent-title">
         <div>
           <strong id="analytics-consent-title">Analítica opcional</strong>
-          <p>Con tu permiso, usamos Google Analytics para conocer visitas generales. No enviamos nombres, correos ni otros datos personales.</p>
+          <p>Si aceptas, Google Analytics podrá medir visitas y algunas acciones generales del sitio. Los eventos preparados no incluyen texto libre ni parámetros de URL. Consulta el aviso de privacidad para conocer el estado y los límites de esta medición.</p>
         </div>
         <div className="analytics-consent-actions">
           {consent !== null && <button type="button" className="consent-reject" onClick={() => setIsOpen(false)}>Cerrar</button>}

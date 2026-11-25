@@ -2,7 +2,7 @@
 
 **ESTADO: BORRADOR PARA REVISIÓN INTERNA. NO APROBADO PARA PUBLICACIÓN COMO AVISO DEFINITIVO.**
 
-**Versión de trabajo:** 19 de noviembre de 2026.
+**Versión de trabajo:** 25 de noviembre de 2026.
 **Entrada en vigor:** Pendiente de aprobación.
 
 Este documento de trabajo acompaña el diseño de `/privacidad`. Conserva como evidencia histórica el cotejo de ramas/SHA de Android y Backend del 17 de noviembre en `docs/VALIDACIONES_PRIVACIDAD.md` y agrega por separado el informe posterior de infraestructura. No constituye asesoría legal ni aviso definitivo.
@@ -71,10 +71,16 @@ El contacto proporcionado por coordinación es `rutitas.rutitas@gmail.com`; la L
 
 ## 9. Analítica y tecnologías del navegador
 
-La Landing Page almacena localmente la preferencia sobre analítica. Su código únicamente está preparado para cargar Google Analytics 4 cuando exista un identificador válido y la persona visitante consienta expresamente. Se debe validar cualquier tratamiento efectivo antes de habilitarlo en producción.
+Google Analytics 4 tiene una propiedad y un flujo configurados para la Landing (`G-MKN6YXXZ8Y`); la cuenta oficial aparece como Administradora. La medición mejorada quedó desactivada y se guardó la ocultación de correo y de 17 claves de parámetros URL. La Landing pública no tiene configurado el Measurement ID: la consola no muestra datos recibidos y el sitio no carga la etiqueta ni envía eventos. No se habilitó GTM.
+
+Si una versión futura habilita GA4 después de aprobación, la carga será condicional a un identificador válido y al consentimiento afirmativo. La preferencia se guarda localmente en el navegador y podrá rechazarse o revocarse desde «Preferencias de analítica» cuando el control esté disponible. El código preparado limita los eventos manuales a vistas de página con la ruta sin query y acciones generales existentes (CTA, apertura de preguntas y clic en redes), sin texto libre ni identificadores personales. No hay medición mejorada ni señales publicitarias habilitadas por la configuración del código; la revisión exhaustiva de ajustes publicitarios históricos de la propiedad queda pendiente.
+
+La propiedad URL-prefix de Google Search Console para `https://landing-page-rutitas.vercel.app/` fue creada bajo la cuenta oficial. Aún no está verificada: producción no sirve el archivo de verificación nuevo. No se ha enviado sitemap ni solicitado indexación. Google informa que la recopilación de datos de una propiedad puede empezar al añadirla, incluso antes de verificarla; no se confirmó que ya haya datos disponibles para Rutitas. Esto no significa que la Landing mida analítica de navegación y no permite afirmar un tratamiento concreto de datos personales de visitantes. Fuente: [Ayuda de verificación de propiedad de Search Console](https://support.google.com/webmasters/answer/9008080?hl=es).
+
+Los datos técnicos que Google Analytics o Search Console puedan procesar, su retención, región, destinatarios y condiciones deben confirmarse con las consolas/proveedores y ser ratificados por el responsable. Vercel aloja la Landing; Microsoft Azure y MongoDB Atlas son infraestructura de Backend reportada como desplegada, pero no se ha verificado tratamiento efectivo de datos personales. Google Maps Platform y Google Play son previstos o pendientes de confirmar como proveedores efectivos.
 
 ## 10. Actualizaciones
 
 La versión aprobada del aviso, su fecha de entrada en vigor y los cambios relevantes se comunicarán mediante la misma dirección `/privacidad` y por otros medios que el responsable establezca cuando sea necesario.
 
-**Pendiente de cierre:** identidad legal completa y domicilio, datos y finalidades reales, confirmación documentada de proveedores/transferencias y del tratamiento efectivo, ratificación del periodo previsto de hasta 2 meses, implementación y validación de eliminación por Mark y Ame, atención del contacto, derechos/procedimientos y revisión legal final. El aviso se mantiene como borrador no ratificado.
+**Pendiente de cierre:** identidad legal completa y domicilio, inventario del tratamiento efectivo, finalidades y datos técnicos que los proveedores procesan, confirmación de proveedores/transferencias, ratificación del periodo previsto de hasta 2 meses, implementación y validación de eliminación por Mark y Ame, procedimiento operativo para derechos/eliminación, derechos y plazos de respuesta, y revisión legal final. El plazo de recuperación de 7 días tras confirmación del Backend es distinto de la conservación general prevista. El aviso se mantiene como borrador no ratificado.

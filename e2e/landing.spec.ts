@@ -252,12 +252,17 @@ test('privacy page remains readable across the accepted viewport sizes', async (
 
 test('privacy and account deletion distinguish local DEMO code from remote service', async ({ page }) => {
   await page.goto('/privacidad')
-  await expect(page.locator('#datos')).toContainText('DEMO_MODE=true')
-  await expect(page.locator('#datos')).toContainText('no acredita transmisión a un servidor')
-  await expect(page.locator('#datos')).toContainText('desplegada y verificada en Microsoft Azure con MongoDB Atlas')
-  await expect(page.locator('#datos')).toContainText('El despliegue no confirma por sí solo qué datos personales')
-  await expect(page.locator('#finalidades')).toContainText('no hay evidencia suficiente de solicitudes reales o de tratamiento de datos de usuarios')
-  await expect(page.locator('#finalidades')).toContainText('Las reservas y la coordinación de viajes multiusuario siguen previstas, no operativas')
+  await expect(page.locator('#datos')).toContainText('modo DEMO')
+  await expect(page.locator('#datos')).toContainText('Esto no demuestra que se envíen a un servidor')
+  await expect(page.locator('#datos')).toContainText('siete endpoints técnicos para autenticación, perfil y consulta de rutas')
+  await expect(page.locator('#datos')).toContainText('No hay evidencia suficiente para confirmar que el público pueda usarlos')
+  await expect(page.locator('#finalidades')).toContainText('Reservas y viajes multiusuario aún no están disponibles')
+  const analytics = page.locator('#analitica')
+  await expect(analytics).toContainText('Actualmente la Landing no envía analítica a GA4')
+  await expect(analytics).toContainText('La preferencia podrá cambiarse desde')
+  await expect(analytics).toContainText('no incluye el texto escrito por las personas ni parámetros de URL')
+  await expect(analytics).toContainText('La propiedad de Search Console se creó para esta dirección')
+  await expect(analytics).toContainText('la recopilación de datos de esa propiedad puede comenzar desde su creación')
   await page.goto('/eliminar-cuenta')
   const deletionDetails = page.locator('section[aria-labelledby="deletion-request"]')
   await expect(deletionDetails).toContainText('baja disponible en Android DEMO solo borra datos locales')
@@ -330,6 +335,9 @@ test('LANDING-005: project information and FAQ stay accurate and keyboard access
 
 test('metadata describes the project without promising an unavailable download', async ({ page }) => {
   await page.goto('/')
+  await expect(page.locator('link[rel="preload"][href="/assets/rutitas-auto-hero-mobile.webp"]')).toHaveAttribute('media', '(max-width: 670px)')
+  await expect(page.locator('link[rel="preload"][href="/assets/rutitas-auto-hero.webp"]')).toHaveAttribute('media', '(min-width: 671px)')
+  await expect(page.locator('.brand picture source[type="image/webp"]')).toHaveAttribute('srcset', '/assets/rutitas-logo.webp')
   await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /en desarrollo/)
   await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /en desarrollo/)
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/favicon.svg')

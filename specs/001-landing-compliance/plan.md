@@ -44,7 +44,17 @@
 
 ## Restricciones de ejecución
 
+### LANDING-020 — GA4 y SEO (local)
+
+- Trazar LP-REQ-030/L20-T-001–008 antes de tocar código.
+- Verificar el Measurement ID y permisos existentes en consola; aceptar/confirmar únicamente el acceso GA autorizado. Crear la propiedad URL-prefix GSC exacta bajo la cuenta oficial, autorizada por coordinación si no existía; no crear contenedores.
+- Centralizar eventos tipados solo para controles presentes, con guardia de consentimiento y valores estáticos; no usar parámetros de URL ni campos introducidos por personas.
+- Mantener vacía la configuración productiva GA4 hasta que se ratifiquen aviso y consentimiento. No cargar GTM.
+- Añadir solo metadatos/datos estructurados que puedan sustentarse en el contenido actual. Preservar el archivo GSC existente y añadir el archivo exacto ofrecido para la nueva propiedad sin sustituir verificaciones anteriores; `noindex` legal se conserva.
+- Ejecutar Lighthouse local en móvil/escritorio; corregir solo oportunidades verificables de carga de recursos y documentar métricas como locales, no productivas.
+- Validar con ID sintético, solicitudes bloqueadas, suites existentes, SDD y auditoría. No declarar verificada la propiedad hasta que el archivo nuevo esté desplegado y Google confirme la verificación; sitemap/indexación quedan condicionados a ello.
+
 - No editar Constitution/AGENTS/memoria base de otros proyectos; este trabajo queda dentro del repo de la landing.
-- No efectuar commits, push, cambios de Vercel ni producción.
+- La ratificación SDD del 2026-11-25 habilita únicamente para LANDING-020 commit, push de `feature/landing-020-ga4-seo`, PR a `main` y CI normal. No habilita merge, Production, cambios Vercel, GA4/GTM, consumo de créditos ni permisos futuros.
 - No ratificar textos ni completar hechos legales/operativos desconocidos.
 - Si una prueba externa requiere credenciales, consentimiento no anticipado, cuenta GA4 o tienda, registrar como pendiente y detener únicamente esa prueba.

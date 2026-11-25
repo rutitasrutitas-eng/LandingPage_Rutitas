@@ -45,8 +45,13 @@ for (const path of requiredFiles) {
 }
 
 const constitution = contents.get('.specify/memory/constitution.md') ?? ''
-if (!constitution.includes('PENDIENTE_RATIFICACION')) {
-  failures.push('La Constitución debe seguir pendiente de ratificación humana.')
+const constitutionIsRatified = constitution.includes('**Estado: RATIFICADA')
+const constitutionIsPending = constitution.includes('**Estado: PENDIENTE_RATIFICACION')
+if (!constitutionIsRatified && !constitutionIsPending) {
+  failures.push('La Constitución debe indicar un estado de ratificación reconocido.')
+}
+if (constitutionIsRatified && !constitution.includes('Ratificación formal:')) {
+  failures.push('La ratificación debe identificar responsable y fecha en gestión de cambios.')
 }
 
 const specification = contents.get('specs/001-landing-compliance/spec.md') ?? ''

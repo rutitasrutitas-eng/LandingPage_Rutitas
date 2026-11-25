@@ -32,8 +32,20 @@ Antes de publicar `/eliminar-cuenta` como canal de cumplimiento, el equipo debe 
 
 ## Analítica y tienda
 
-- [ ] Administrador entrega/autoriza la propiedad GA4, Measurement ID, texto de consentimiento y política de analítica.
-- [ ] Administrador verifica consentimiento, ausencia de PII y eventos esperados en Tag Assistant y GA4 Realtime.
+- [x] Coordinación confirmó la propiedad GA4 `565238699`, flujo `G-MKN6YXXZ8Y`, y la cuenta oficial como Administradora efectiva. La medición mejorada está apagada y la ocultación de correo/17 claves de query está guardada.
+- [ ] Ratificar propósito, base legal, información técnica que pueda recibir Google, retención y texto de consentimiento antes de configurar el ID real en producción. Actualmente no hay Measurement ID en la Landing ni datos recibidos.
+- [ ] Antes de cualquier activación, inspeccionar en GA4 la retención de eventos, Google Signals, personalización publicitaria y estado efectivo de recopilación. En esta sesión no se pudo consultar la consola; no se deben tratar esos controles como verificados.
+- [ ] Cuando exista autorización legal y activación aprobada, comprobar opt-in, revocación, ausencia de PII y eventos esperados en Tag Assistant/GA4 Realtime; no se ejecutó esta validación real.
+- [x] Search Console URL-prefix `https://landing-page-rutitas.vercel.app/` creado bajo la cuenta oficial con autorización; archivo de verificación nuevo agregado localmente, aún no publicado ni verificado. La propiedad se creó, pero no se envió sitemap ni se solicitó indexación.
 - [ ] Equipo entrega la URL pública de Google Play que corresponde a Rutitas; validar ficha, enlace y QR en Preview.
+
+## Ratificaciones humanas pendientes para el aviso
+
+- [ ] Identidad legal completa, domicilio y régimen aplicable del responsable; confirmar si el responsable legal es persona física, persona moral o institución. «Equipo de Rutitas» es responsable operativo, no identidad legal.
+- [ ] Ratificar el inventario y las finalidades por superficie: Landing, Android `DEMO_MODE=true` y Backend. Confirmar de forma independiente si existen datos de usuarios en el Backend desplegado; la existencia de siete endpoints no lo demuestra.
+- [ ] Confirmar proveedores efectivos y sus funciones, condiciones, regiones y transferencias: Vercel; GA4 (propiedad configurada, sin colección desde la Landing); Azure/MongoDB Atlas (despliegue reportado, tratamiento de datos no verificado); Search Console (propiedad creada, sin verificar, aunque Google indica que la recolección de la propiedad puede iniciar antes de verificarla); Maps/Play (uso efectivo pendiente).
+- [ ] Ratificar la conservación prevista de hasta 2 meses por categorías, punto inicial y excepciones; mantenerla distinta de los 7 días de recuperación que solo iniciarían tras confirmación del Backend.
+- [ ] Aprobar procedimiento y plazos de derechos, el canal realmente atendido y la verificación de identidad. El correo oficial no inicia la eliminación ni verifica identidad; la eliminación remota permanece no operativa.
+- [ ] Obtener revisión legal final y autorización humana explícita antes de retirar «BORRADOR NO RATIFICADO» o publicar aviso definitivo.
 
 **Regla de cierre:** no quitar los marcadores ni marcar ningún checkbox como aprobado hasta que la persona responsable confirme la información. No pegar secretos, credenciales, identificadores privados o datos personales en este documento.

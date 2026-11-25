@@ -3,6 +3,8 @@ import { AccountDeletionPage, NotFoundPage } from './LegalPages'
 import PrivacyRutitas from './PrivacyRutitas'
 import SiteFooter from './SiteFooter'
 import { updatePageMetadata } from './seo'
+import { trackAnalyticsEvent } from './analytics'
+import { gaMeasurementId } from './config'
 
 type ModalId = 'funciona' | 'proyecto' | 'seguridad' | null
 
@@ -79,19 +81,25 @@ function Modal({ view, onClose }: { view: Exclude<ModalId, null>, onClose: () =>
       <div className="modal-points">{content.points.map(([n, t, d]) => <div className="modal-point" key={t}><span className="point-num">{n}</span><div><strong>{t}</strong><span>{d}</span></div></div>)}</div>
       {view === 'proyecto' && <section className="faq-section" aria-labelledby="faq-title">
         <h3 id="faq-title">Preguntas frecuentes</h3>
-        {[
-          ['¿Qué es Rutitas?', 'Es un proyecto universitario de movilidad compartida que busca facilitar la organización de trayectos y la colaboración entre integrantes de una comunidad educativa.'],
-          ['¿Para quién está pensado?', 'Inicialmente está pensado para la comunidad UTTT. Un piloto está previsto, sujeto a validación y coordinación; no se anuncia como servicio activo.'],
-          ['¿La aplicación ya está disponible?', 'No hay una versión pública. Si se aprueba una versión de prueba, será únicamente para testers internos autorizados de Google Play.'],
-          ['¿Cómo funcionará?', 'La propuesta busca ayudar a consultar trayectos y, más adelante, coordinar opciones para compartir viajes. Reservas y viajes reales aún no están disponibles.'],
-          ['¿Puedo consultar rutas?', 'El Backend incluye código para consultar un catálogo de rutas, y Android muestra datos locales en modo DEMO. No existe integración operativa confirmada para usuarios.'],
-          ['¿Puedo reservar un asiento?', 'No desde Rutitas actualmente. La reserva real depende de integración y pruebas que todavía están pendientes.'],
-          ['¿Cómo se protegerán mis datos?', 'El aviso de privacidad sigue como borrador. Las prácticas, responsables, proveedores y medidas aplicables deben confirmarse antes de operar.'],
-          ['¿Dónde puedo consultar el aviso de privacidad?', 'En esta landing, mediante el enlace “Privacidad” del pie de página. El texto está pendiente de aprobación legal.'],
-          ['¿Cómo podré eliminar mi cuenta?', 'La ruta “Eliminar cuenta” explica el estado actual. Android permite una baja local de datos DEMO; no hay evidencia de eliminación remota operativa.'],
-          ['¿Dónde podré descargar Rutitas?', 'No hay una descarga pública ni una ficha pública autorizada. Una versión interna, si se aprueba, solo estará disponible para testers autorizados de Google Play.'],
-        ].map(([question, answer]) => <details className="faq-item" key={question}>
-          <summary>{question}</summary><p>{answer}</p>
+        {([
+          ['¿Qué es Rutitas?', 'Es un proyecto universitario de movilidad compartida que busca facilitar la organización de trayectos y la colaboración entre integrantes de una comunidad educativa.', 'about'],
+          ['¿Para quién está pensado?', 'Inicialmente está pensado para la comunidad UTTT. Un piloto está previsto, sujeto a validación y coordinación; no se anuncia como servicio activo.', 'audience'],
+          ['¿La aplicación ya está disponible?', 'No hay una versión pública. Si se aprueba una versión de prueba, será únicamente para testers internos autorizados de Google Play.', 'availability'],
+          ['¿Cómo funcionará?', 'La propuesta busca ayudar a consultar trayectos y, más adelante, coordinar opciones para compartir viajes. Reservas y viajes reales aún no están disponibles.', 'how_it_works'],
+          ['¿Puedo consultar rutas?', 'El Backend incluye código para consultar un catálogo de rutas, y Android muestra datos locales en modo DEMO. No existe integración operativa confirmada para usuarios.', 'routes'],
+          ['¿Puedo reservar un asiento?', 'No desde Rutitas actualmente. La reserva real depende de integración y pruebas que todavía están pendientes.', 'booking'],
+          ['¿Cómo se protegerán mis datos?', 'El aviso de privacidad sigue como borrador. Las prácticas, responsables, proveedores y medidas aplicables deben confirmarse antes de operar.', 'privacy'],
+          ['¿Dónde puedo consultar el aviso de privacidad?', 'En esta landing, mediante el enlace “Privacidad” del pie de página. El texto está pendiente de aprobación legal.', 'privacy'],
+          ['¿Cómo podré eliminar mi cuenta?', 'La ruta “Eliminar cuenta” explica el estado actual. Android permite una baja local de datos DEMO; no hay evidencia de eliminación remota operativa.', 'account_deletion'],
+          ['¿Dónde podré descargar Rutitas?', 'No hay una descarga pública ni una ficha pública autorizada. Una versión interna, si se aprueba, solo estará disponible para testers autorizados de Google Play.', 'download'],
+        ] as const).map(([question, answer, faq]) => <details className="faq-item" key={question}>
+          <summary onClick={event => {
+            const details = event.currentTarget.parentElement
+            if (details instanceof HTMLDetailsElement && !details.open) trackAnalyticsEvent(gaMeasurementId, { name: 'faq_open', params: { faq } })
+          }}>
+            {question}
+          </summary>
+          <p>{answer}</p>
         </details>)}
       </section>}
       <button className="modal-done" onClick={onClose}>Entendido <Icon name="check" size={16}/></button>
@@ -127,7 +135,7 @@ function HomePage() {
   return <>
     <div className="site-shell" inert={modal !== null}>
     <header className="topbar">
-      <a className="brand" href="#inicio" aria-label="Rutitas — inicio"><img src="/assets/rutitas-logo.png" alt="Rutitas"/></a>
+      <a className="brand" href="#inicio" aria-label="Rutitas — inicio"><picture><source type="image/webp" srcSet="/assets/rutitas-logo.webp"/><img src="/assets/rutitas-logo.png" alt="Rutitas" width="500" height="206" decoding="async"/></picture></a>
       <nav id="primary-navigation" className={`desktop-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navegación principal">
         <button aria-haspopup="dialog" onClick={event => openModal(event, 'funciona')}>Cómo funciona</button>
         <button aria-haspopup="dialog" onClick={event => openModal(event, 'seguridad')}>Seguridad</button>
@@ -158,8 +166,8 @@ function HomePage() {
         <h1 id="hero-title" aria-label="La uni se vive en el camino."><span>La uni se vive</span><span>en el camino<span className="hero-period">.</span></span></h1>
         <p className="hero-subtitle">Compartir el trayecto también es parte de la experiencia.</p>
         <div className="hero-actions">
-          <button className="primary-cta" aria-haspopup="dialog" onClick={event => openModal(event, 'funciona')}>Descubre Rutitas <Icon name="arrow" size={19}/></button>
-          <button className="secondary-cta" aria-haspopup="dialog" onClick={event => openModal(event, 'proyecto')}>Conoce el proyecto</button>
+          <button className="primary-cta" aria-haspopup="dialog" onClick={event => { trackAnalyticsEvent(gaMeasurementId, { name: 'primary_cta_click', params: { cta: 'discover' } }); openModal(event, 'funciona') }}>Descubre Rutitas <Icon name="arrow" size={19}/></button>
+          <button className="secondary-cta" aria-haspopup="dialog" onClick={event => { trackAnalyticsEvent(gaMeasurementId, { name: 'primary_cta_click', params: { cta: 'project' } }); openModal(event, 'proyecto') }}>Conoce el proyecto</button>
         </div>
         <div className="hero-trust"><span className="trust-mark"><Icon name="shield" size={15}/></span><span>PROPUESTA UNIVERSITARIA · UTTT</span></div>
       </section>
