@@ -145,3 +145,17 @@
 - [x] Actualizadas evidencias de LANDING-011/016, documentación de seguridad, matriz, checklist y memoria sin borrar la salida High histórica.
 - [ ] Vercel plan, cuotas/cargos/créditos, `Only build production`, rama y protecciones quedaron NO VERIFICADOS por 403 del conector y bloqueo de Computer Use al no poder identificar la URL de Edge.
 - [ ] Push/PR/CI/deployment no ejecutados. Requieren completar el gate económico Vercel; release conserva pendientes legales, SDD y operativos.
+
+## LANDING-021 — privacidad candidata y consentimiento — 2026-11-25
+
+- [x] Candidata conserva la identidad comunicada por coordinación y omite el domicilio personal hasta contar con autorización expresa vigente; se conserva «BORRADOR NO RATIFICADO». La inclusión no es ratificación legal.
+- [x] Distingue Landing informativa, Android `DEMO_MODE=true`, siete endpoints Backend reportados en Azure/Atlas, tratamiento efectivo no comprobado, viajes/reservas no operativos y eliminación remota pendiente.
+- [x] Contacto oficial y atención conjunta del Equipo de Rutitas documentados; se recomienda responsable por solicitud. Procedimiento ARCO propuesto en `docs/LANDING_021_PRIVACIDAD_ARCO.md`; sigue no aprobado ni operativo.
+- [x] Política general de hasta 2 meses permanece propuesta; plazo futuro de recuperación de 7 días empieza solo tras confirmación del Backend de solicitud validada.
+- [x] GA4 ID de producción vacío y GTM desactivado; código actualiza el consentimiento al reaceptar sin recarga y bloquea eventos propios cuando estado `denied`.
+- [x] Validación afectada: Vitest 23/23; E2E sintética 2/2 (Chromium/mobile-Chromium); lint, typecheck, build, SDD (30 docs; 32 requisitos LP; trazabilidad 14/8/9), y `git diff --check` aprobados. npm audit no repetido al no cambiar dependencias; CI pendiente.
+- [ ] Inspeccionar en GA4 retención/reset, Signals, personalización, datos del usuario y recolección; bloqueado por falta de navegador Edge controlable. No activar nada mientras no se revise.
+- [ ] CI de GitHub del nuevo SHA: no hay ejecución. PR #15 fue cerrado/fusionado externamente a las 20:49:51 UTC desde el SHA anterior `0a236f2` hacia `887486d`; el commit L21 `38f689d` quedó en la rama después del merge y no está en `main`. Se requiere decisión humana para continuar la revisión; no crear otro PR ni hacer otro push en esta tarea.
+- [ ] Ratificación humana/legal de carácter del responsable, tratamientos, finalidades/bases, proveedores/transferencias, retención, ARCO y aviso final.
+- [ ] Mark y Ame implementan/prueban eliminación remota; no se ofrece canal por email como operativo.
+- [ ] No merge, producción, GA4/GTM, cambios Vercel ni gastos adicionales en esta tarea.

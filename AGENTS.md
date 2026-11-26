@@ -15,7 +15,7 @@
 
 ## Seguridad y ejecución
 
-- No añadas secretos, cookies de sesión o datos personales a Git, pruebas, logs, memoria o artefactos.
+- No añadas secretos, cookies de sesión o datos personales a Git, pruebas, logs, memoria o artefactos. **Excepción LANDING-021 limitada:** coordinación autorizó incluir la identidad comunicada en la candidata y el correo oficial. La publicación del domicilio personal no está autorizada en esta rama; omítelo de páginas, documentos, memoria, pruebas, logs y artefactos hasta una autorización expresa vigente. El aviso permanece no ratificado.
 - No habilites Analytics sin ID válido y consentimiento afirmativo; no envíes PII.
 - Mantén Google Play inactivo hasta tener URL HTTPS real de Play.
 - No agregues/actualices dependencias sin justificación en plan, lockfile y auditoría.
@@ -25,4 +25,4 @@
 
 - Una tarea documental/código termina cuando satisface el criterio de aceptación y guarda prueba reproducible, o registra el bloqueo y la evidencia faltante.
 - Actualiza `Memoria.md`, `docs/matriz-trazabilidad.md`, checklist y pruebas con resultados reales.
-- Por regla general, esta guía no autoriza commits, push, cambios en dashboard/configuración de Vercel ni despliegues. Excepción única LANDING-020, ratificada el 25-11-2026: autoriza completar los cambios de esa tarea, crear commit, hacer push solo de `feature/landing-020-ga4-seo`, abrir PR a `main`, ejecutar CI y usar una Preview solo si está disponible dentro del plan gratuito y sin cambios adicionales de configuración. Excluye `evidence/`, `LANDING_013.diff` y archivos ajenos. No autoriza merge, producción, cambio de Vercel ni activación GA4/GTM. No es autorización permanente.
+- Por regla general, esta guía no autoriza commits, push, cambios en dashboard/configuración de Vercel ni despliegues. Excepción LANDING-020, ratificada el 25-11-2026: autorizó el commit inicial, push solo de `feature/landing-020-ga4-seo`, PR a `main`, CI normal y Preview solo si Vercel la genera dentro del plan gratuito sin cambiar configuración. **Ampliación LANDING-021, autorizada por coordinación el 25-11-2026:** permite recuperar en `feature/landing-021-privacidad-consentimiento` los cambios de privacidad candidata/ARCO y ciclo de consentimiento, crear commits trazables, push únicamente de esta rama, abrir un nuevo PR Draft hacia `main`, ejecutar CI y usar Preview gratuita si está disponible. No se reutiliza PR #15, ya fusionado externamente. Se excluyen `evidence/`, `LANDING_013.diff` y archivos ajenos. Ninguna excepción autoriza merge, producción, cambio de Vercel, activación GA4/GTM, ni elimina aprobación legal o de riesgo pendientes. No es autorización permanente.

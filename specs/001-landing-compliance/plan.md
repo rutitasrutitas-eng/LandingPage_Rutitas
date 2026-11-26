@@ -55,6 +55,14 @@
 - Validar con ID sintético, solicitudes bloqueadas, suites existentes, SDD y auditoría. No declarar verificada la propiedad hasta que el archivo nuevo esté desplegado y Google confirme la verificación; sitemap/indexación quedan condicionados a ello.
 
 - No editar Constitution/AGENTS/memoria base de otros proyectos; este trabajo queda dentro del repo de la landing.
-- La ratificación SDD del 2026-11-25 habilita únicamente para LANDING-020 commit, push de `feature/landing-020-ga4-seo`, PR a `main` y CI normal. No habilita merge, Production, cambios Vercel, GA4/GTM, consumo de créditos ni permisos futuros.
+- La ratificación SDD del 2026-11-25 habilita para LANDING-020 commit, push de `feature/landing-020-ga4-seo`, PR a `main` y CI normal. La ampliación fechada LANDING-021 permite un commit adicional, push de la misma rama y actualización del PR #15 para LP-REQ-032, más CI normal. Ninguna de las dos autoriza merge, Production, cambios Vercel, activación GA4/GTM ni consumo de créditos.
 - No ratificar textos ni completar hechos legales/operativos desconocidos.
 - Si una prueba externa requiere credenciales, consentimiento no anticipado, cuenta GA4 o tienda, registrar como pendiente y detener únicamente esa prueba.
+
+### LANDING-021 — privacidad candidata y ciclo de consentimiento (2026-11-25)
+
+- Trazar LP-REQ-032 antes de los cambios. Incorporar los datos confirmados por coordinación; no elevar el aviso a ratificado.
+- Verificar el ciclo denegado→concedido→revocado→concedido en la misma página y tras recarga, deduplicación de `page_view` y bloqueo de eventos/requests cuando no hay consentimiento. Usar ID sintético y bloquear la red hacia Google en las pruebas.
+- La consola GA4 se inspecciona solo en lectura para retención, reset de actividad, Signals, personalización y datos de usuario. No activar la Landing, guardar cambios de cuenta ni usar el ID real.
+- Mantener la web de eliminación informativa; el correo se presenta como contacto ARCO sujeto al procedimiento y no como confirmación de identidad ni inicio de los 7 días.
+- Ejecutar solo las pruebas afectadas y controles indicados en L21-T-004. Extender de forma fechada y limitada la excepción de gobernanza para el commit y PR #15; no hacer merge ni deployment.

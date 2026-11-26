@@ -8,6 +8,7 @@ type AnalyticsWindow = Window & {
   gtag?: Gtag
   __rutitasConfiguredAnalytics?: Set<string>
   __rutitasPageViews?: Set<string>
+  __rutitasConsentGranted?: boolean
 }
 
 export type RutitasAnalyticsEvent =
@@ -38,7 +39,9 @@ export function saveAnalyticsConsent(consent: Exclude<Consent, null>): boolean {
 }
 
 export function revokeAnalyticsConsent(): void {
+  saveAnalyticsConsent('denied')
   const runtime = window as AnalyticsWindow
+  runtime.__rutitasConsentGranted = false
   runtime.gtag?.('consent', 'update', {
     analytics_storage: 'denied',
     ad_storage: 'denied',
@@ -64,7 +67,6 @@ export function enableAnalytics(measurementId: unknown): boolean {
       ad_user_data: 'denied',
       ad_personalization: 'denied',
     })
-    runtime.gtag('consent', 'update', { analytics_storage: 'granted' })
     runtime.gtag('js', new Date())
     runtime.gtag('config', measurementId, {
       send_page_view: false,
@@ -72,6 +74,19 @@ export function enableAnalytics(measurementId: unknown): boolean {
       allow_ad_personalization_signals: false,
     })
     runtime.__rutitasConfiguredAnalytics.add(measurementId)
+  }
+
+  // Consent can be revoked and later granted again without a page reload.
+  // Apply the affirmative state on every enable, while keeping advertising
+  // storage and advertising features denied.
+  if (!runtime.__rutitasConsentGranted) {
+    runtime.gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    })
+    runtime.__rutitasConsentGranted = true
   }
 
   const scriptId = `rutitas-ga-${measurementId}`
