@@ -52,7 +52,7 @@ Para `38f689d`, la API de GitHub devolvió cero workflow runs de Actions. El est
 
 La rama actual parte de `887486d504e3f1985d9327dde226f9e7879537b9`. Los cambios de `38f689d` y las seis correcciones documentales se aplicaron sin conflictos mediante cherry-pick sin commit. La revisión vigente retira el domicilio personal de las superficies públicas y de toda la historia nueva; no reescribe la rama remota anterior. La búsqueda en los archivos de trabajo no encontró referencias al domicilio. Los resultados nuevos de revalidación están en `docs/pruebas.md`.
 
-Los cambios recuperados siguen locales y sin commit al momento de esta actualización. `evidence/` y `LANDING_013.diff` permanecen intactos y excluidos. No se cambiaron servicios ni configuración; se añadieron controles deterministas a los flujos E2E generales y se alinearon dos aserciones con el texto vigente.
+El commit de recuperación ya se publicó en la nueva rama. `evidence/` y `LANDING_013.diff` permanecen intactos y excluidos. No se cambiaron servicios ni configuración; se añadieron controles deterministas a los flujos E2E generales y se alinearon dos aserciones con el texto vigente.
 
 ## Validación de la rama recuperada
 
@@ -60,4 +60,13 @@ Los cambios recuperados siguen locales y sin commit al momento de esta actualiza
 - Lint, typecheck, build, SDD, reglas locales de headers, `npm audit` (**0 vulnerabilidades reportadas**) y `git diff --check`/`git diff --cached --check`: aprobados. E2E intercepta solicitudes; no contactó GA4 real. El resultado del audit no equivale a riesgo cero ni a aceptación humana de riesgo.
 - Search Console: el recurso publicado responde HTTP 200, `text/html; charset=utf-8`, 53 bytes, con contenido/hash igual al archivo local. No se accedió a la consola ni se verificó titularidad, se envió sitemap o solicitó indexación.
 - Computer Use detuvo el acceso al no poder identificar con confianza la URL activa. Se respetó el bloqueo sin intentar eludirlo. Los controles de GA4 continúan NO VERIFICADOS; ID real vacío y GTM desactivado.
-- El nuevo SHA aún no existe: falta commit local, push autorizado, nuevo PR Draft y CI. No se ha hecho merge ni despliegue productivo.
+- Commit local/remoto: `bde7f10dd16483533ec26d280a8d63fa18b884a5` en `feature/landing-021-privacidad-consentimiento`, basado en `main` `887486d504e3f1985d9327dde226f9e7879537b9`; push normal completado.
+- El conector GitHub devolvió HTTP 403 `Resource not accessible by integration` al crear el nuevo Draft PR; `gh auth status` no pudo ejecutarse porque la CLI no está instalada. PR #15 no se reutilizó. Crear PR manualmente: https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/compare/main...feature/landing-021-privacidad-consentimiento?expand=1.
+- Para este SHA hay cero workflow runs de GitHub Actions y el status combinado solo muestra Vercel `success`. Sin PR no se dispara el workflow `pull_request`; el status no demuestra si Vercel completó u omitió el build. No se hizo merge ni despliegue productivo.
+- Estos datos posteriores al push se actualizaron localmente y no se publicaron en un segundo push.
+
+## Actualización de coordinación — 2026-11-26
+
+Coordinación confirmó que el PR **#16** existe y permanece Draft. GitHub confirma base `main`, head `feature/landing-021-privacidad-consentimiento` y SHA `bde7f10dd16483533ec26d280a8d63fa18b884a5`. La ejecución [45756697489](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/45756697489) terminó con conclusión `success` para ese SHA. Esta evidencia corresponde al commit anterior a la actualización de tres documentos; el commit documental y su CI se registrarán aparte.
+
+La descripción del PR se actualizará una vez que se publique el commit documental. El PR debe seguir Draft. El aviso permanece no ratificado, el domicilio personal no se publica, GA4/GTM no se activan, y no se autoriza merge ni producción.
