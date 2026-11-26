@@ -38,7 +38,7 @@
 
 La captura anterior de Android `feature/integracion-android-ci-cd` (`4b2ea8d10f4dbc94830db515a65dd3d00c6a66ad`) queda como **cotejo histórico**, no como referencia vigente de la integración en PR.
 
-### Landing y analítica
+### Landing y analítica — corte histórico del 2026-11-17
 
 - Landing local: no contiene formulario de registro. Analytics requiere ID válido y consentimiento afirmativo.
 - No se verificó Measurement ID real, propiedad GA4 ni envío a servicio externo. Las pruebas con ID sintético interceptan las solicitudes externas.
@@ -83,6 +83,20 @@ Coordinación informó que infraestructura reportó el despliegue y verificació
 
 La condición de borrador permanece. Este informe no confirma categorías reales de datos personales ni sustituye la revisión legal.
 
+## Actualización LANDING-021 — 2026-11-25
+
+Coordinación proporcionó identidad y domicilio para la candidata pública y autorizó expresamente su publicación en el aviso; los valores se encuentran solo en `src/PrivacyRutitas.tsx`, `src/LegalPages.tsx` y `docs/AVISO_PRIVACIDAD_RUTITAS_BORRADOR.md`. El carácter legal y el régimen aplicable siguen pendientes de ratificación. No se replica información personal en esta matriz interna.
+
+| Tema | Estado candidato / evidencia | Pendiente |
+|---|---|---|
+| Contacto y atención | `rutitas.rutitas@gmail.com` confirmado como contacto oficial. Coordinación confirma atención conjunta del Equipo de Rutitas; se recomienda responsable asignado por caso. | Designar formalmente quién tramita ARCO; aprobar identidad segura, folio, seguimiento y respuesta. El email por sí mismo no prueba identidad. |
+| ARCO | Candidata propone asunto «Solicitud de privacidad — Rutitas», descripción mínima, acuse, asignación, verificación segura, registro y respuesta. Incluye referencia a plazos LFPDPPP arts. 28–31 sujeta a revisión. | Proceso no aprobado ni operativo; confirmar régimen aplicable, requisitos exactos, identidad y cómputo legal. Fuente revisada: Cámara de Diputados, LFPDPPP, https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf. |
+| Analytics | El código local requiere consentimiento, admite revocación y reaceptación sin recarga, y bloquea eventos propios con estado denied. El ID real sigue vacío; no se activa GA4/GTM. | La consola Edge no pudo consultarse: ventana minimizada sin reactivación disponible por la herramienta y navegador automatizado Edge no disponible. Retención, reset, Signals, publicidad, datos de usuario y estado de recopilación son **NO VERIFICADOS**. |
+| Eliminación | Continúa no operativa remotamente. Email no inicia plazo; los siete días empezarían tras confirmación Backend de una solicitud validada. | Mark/Ame deben implementar y validar Android/Backend; coordinación debe habilitar un canal externo real y proceso seguro. |
+| Dato legal | Los hechos indicados se incorporaron a una candidata con advertencia BORRADOR NO RATIFICADO. | Ratificación legal, finalidades/datos por superficie, proveedores y transferencias, retención y aprobación final. |
+
+La revisión normativa consultó el texto vigente publicado por la Cámara de Diputados. La candidata no afirma cumplimiento ni constituye asesoría legal.
+
 ## Auditoría de dependencias — actualización del 2026-11-17
 
 > **Nota posterior (LANDING-017, 2026-11-19):** las cifras y el estado del advisory descritos en esta sección corresponden exclusivamente a la consulta del 2026-11-17. GitHub retiró `GHSA-fc5q-39xc-vjpf` el 2026-11-18 como no problema de seguridad; `npm audit --json` local del 2026-11-19 reportó 0 vulnerabilidades. Se conserva la evidencia histórica sin mantener este advisory como riesgo activo. El árbol de herramientas aún contiene `picomatch@4.0.7`; revisar el audit de CI por otros avisos.
@@ -91,15 +105,15 @@ La condición de borrador permanece. Este informe no confirma categorías reales
 
 El árbol está en dependencias de desarrollo/build; no se encontró `picomatch` en dependencias runtime directas de la Landing. Esto no convierte el hallazgo en resuelto: un proceso local/CI que procese patrones no confiables puede ser relevante. `npm audit fix --force` propone degradar Vitest a `3.1.4` como cambio major; no se ejecutó ni se aplicó override/downgrade por la ausencia de versión corregida declarada y el riesgo de incompatibilidad. Se requiere una actualización compatible cuando el advisory publique un fix y volver a correr `npm ci`, pruebas, build y audit.
 
-## Falta aprobación documentada
+## Pendientes restantes tras LANDING-021 — 2026-11-25
 
-- [ ] Identificación legal completa y domicilio del responsable; el Equipo de Rutitas está indicado solo como responsable operativo, y el régimen aplicable sigue por definir.
-- [ ] Confirmar atención del correo `rutitas.rutitas@gmail.com`, quién responderá y el procedimiento ARCO/privacidad; la Landing no recibe solicitudes.
+- [x] Coordinación proporcionó y autorizó incluir en la candidata pública la identidad y domicilio del responsable indicado. La ratificación del carácter legal, régimen aplicable y publicación definitiva sigue pendiente. El detalle no se duplica en esta documentación interna.
+- [x] Coordinación confirmó el correo oficial `rutitas.rutitas@gmail.com` y su atención conjunta por el Equipo de Rutitas. [ ] Designar responsable formal por solicitud, aprobar verificación/seguimiento y habilitar proceso ARCO; la Landing no recibe solicitudes.
 - [ ] Inventario de datos exacto de Android y Backend: obligatorios, opcionales y sensibles.
 - [ ] Cotejar de nuevo ramas/SHA de Android y Backend al preparar una versión legal para aprobación.
 - [ ] Determinar uso verdadero de permisos de ubicación y cámara, fotos, documentos y datos de viajes.
 - [ ] Finalidades primarias y secundarias con consentimiento aplicable.
-- [ ] Confirmar en uso efectivo y por sistema los proveedores, funciones, ubicación, transferencias y subencargados. Vercel aloja la Landing; GA está integrado pero sin uso real verificado. Azure, Atlas, Maps, medición GA y Play siguen contemplados o pendientes.
+- [ ] Confirmar en uso efectivo y por sistema proveedores, funciones, ubicación, transferencias y subencargados. Vercel aloja la Landing; Azure/Atlas son infraestructura Backend reportada, sin tratamiento efectivo verificado; GA4 configurado pero sin medición desde la Landing; GTM no habilitado; Maps/Play pendientes de confirmar como proveedores efectivos.
 - [ ] Validar técnicamente/legalmente la previsión de hasta 2 meses, inicio, categorías, respaldos y excepciones.
 - [ ] Mark y Ame deben implementar y validar el botón de Android y el mecanismo seguro en Backend; definir protocolo de identidad/respuesta y probar el borrado remoto antes de presentarlo como disponible.
 - [ ] Medidas de seguridad efectivamente implementadas; no declarar certificaciones inexistentes.
@@ -111,7 +125,7 @@ El árbol está en dependencias de desarrollo/build; no se encontró `picomatch`
 
 Estas referencias fueron entregadas dentro del paquete; Codex no las revisó como asesoría legal ni las usa para declarar cumplimiento. Deben verificarse por la persona responsable antes de ratificar el texto.
 
-- https://www.ordenjuridico.gob.mx/Documentos/Federal/html/wo125102.html — LFPDPPP actual artículos 15-18 y 21-29; verificar si el responsable es particular.
+- https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf — LFPDPPP publicada por Cámara de Diputados, texto vigente consultado el 2026-11-25; arts. 28–31 referidos por la propuesta ARCO, con aplicabilidad pendiente de revisión legal.
 - https://support.google.com/googleplay/android-developer/answer/10144311 — política de privacidad accesible y Data safety.
 - https://support.google.com/googleplay/android-developer/answer/13327111 — enlace web de eliminación y mecanismo dentro de app.
 - https://legal.blablacar.com/es-mx/privacy-policy/ — categorías por comunidad/viajes.

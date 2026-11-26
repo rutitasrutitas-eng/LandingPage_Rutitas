@@ -363,3 +363,18 @@ Revalidación final tras los cambios de rendimiento: `npm run lint`, `npm run ty
 Lighthouse CLI 13.6.0 ejecutado con Chromium local contra Vite Preview: escritorio Performance 100, Accessibility 100, Best Practices 100, SEO 100; móvil 98, 100, 100 y 100 respectivamente. LCP observado: 0.6 s desktop y 2.4 s mobile; CLS 0 y TBT 0 ms en ambas capturas. Reports JSON en `%TEMP%\rutitas-landing020-lighthouse\desktop-final.json` y `mobile-final.json`, fuera del repositorio. Se corrigió la imagen de marca de 634,149 B a WebP 28,342 B con PNG de fallback (ahorro 605,807 B, aproximadamente 95.5 %) y se añadieron preloads responsivos para la foto hero. Las cifras son mediciones locales y no predicen de forma garantizada Production.
 
 La prueba sintética verifica lógica local, no recepción en la propiedad real ni consentimiento legal aprobado. GSC sirve exactamente el token en el build local, pero verificación Google, sitemap e indexación requieren despliegue/publicación y confirmación. La propiedad GSC puede iniciar procesamiento desde su creación según Google; no se confirma que haya informes/datos de Rutitas. Retención GA4, Google Signals y personalización publicitaria no se pudieron inspeccionar en esta sesión; no activar el ID real hasta revisar esos ajustes y completar la aprobación legal.
+
+## LANDING-021 — consentimiento y candidata ARCO (2026-11-25)
+
+| Control | Ejecución | Resultado real |
+|---|---|---|
+| Vitest afectado | `npm run test -- --reporter=dot src/App.test.tsx src/analytics.test.ts src/AnalyticsConsent.test.tsx` | Exit 0; 3 archivos, **23/23 pruebas aprobadas**. Cubre visita sin preferencia, rechazo, opt-in, revocación, reaceptación sin recarga, persistencia, eventos bloqueados, `page_view` único y contenido de aviso/canal. |
+| E2E GA sintético | `$env:LANDING_E2E_GA_SYNTHETIC='1'; npm run test:e2e -- e2e/analytics-consent.spec.ts` | Exit 0; **2/2** (Chromium y mobile-Chromium). ID `G-SYNTHETIC123`; solicitudes a Google interceptadas/abortadas; prueba confirma cero eventos propios durante `denied`, ninguna nueva solicitud de colección tras revocación y persistencia tras recarga. No hay datos transmitidos a GA4 real. |
+| Lint / Typecheck | `npm run lint`; `npm run typecheck` | Ambos exit 0. |
+| Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos; JS 264.17 kB (gzip 81.71 kB), CSS 21.48 kB (gzip 5.48 kB). |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos; 32 requisitos LP, 14 L002, 8 L003, 9 L004 con trazabilidad. |
+| Formato | `git diff --check` | Exit 0; sin whitespace errors. Git emitió avisos LF/CRLF en archivos de texto, sin cambio de contenido por el chequeo. |
+| Auditoría de dependencias | No reejecutada | LANDING-021 no modifica `package.json` ni `package-lock.json`; el resultado anterior de `npm audit` no se presenta como ejecución actual. CI del PR repetirá sus controles normales. |
+| GA4 consola | Computer Use, solo lectura, intento sin éxito | NO VERIFICADO: Edge estaba minimizado y la integración de navegador informó Edge no disponible. No se cambiaron preferencias ni se activó medición. Retención, reset, Signals, personalización, user-provided data y recopilación quedan pendientes. |
+
+La primera corrida dirigida encontró tres aserciones desactualizadas/accesibilidad mal seleccionada y una actualización `granted` duplicada durante interacción. Se corrigieron el selector de test y la lógica para actualizar consentimiento solo al entrar de nuevo al estado concedido; la corrida final anterior pasa. No se ejecutó la suite completa local de Vitest/E2E porque el alcance pidió repetir solo las pruebas afectadas; CI deberá correr el workflow completo. Sin Lighthouse porque estos cambios no alteran diseño, carga visual ni SEO.
