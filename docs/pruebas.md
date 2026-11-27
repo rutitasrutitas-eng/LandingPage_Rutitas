@@ -363,3 +363,52 @@ Revalidación final tras los cambios de rendimiento: `npm run lint`, `npm run ty
 Lighthouse CLI 13.6.0 ejecutado con Chromium local contra Vite Preview: escritorio Performance 100, Accessibility 100, Best Practices 100, SEO 100; móvil 98, 100, 100 y 100 respectivamente. LCP observado: 0.6 s desktop y 2.4 s mobile; CLS 0 y TBT 0 ms en ambas capturas. Reports JSON en `%TEMP%\rutitas-landing020-lighthouse\desktop-final.json` y `mobile-final.json`, fuera del repositorio. Se corrigió la imagen de marca de 634,149 B a WebP 28,342 B con PNG de fallback (ahorro 605,807 B, aproximadamente 95.5 %) y se añadieron preloads responsivos para la foto hero. Las cifras son mediciones locales y no predicen de forma garantizada Production.
 
 La prueba sintética verifica lógica local, no recepción en la propiedad real ni consentimiento legal aprobado. GSC sirve exactamente el token en el build local, pero verificación Google, sitemap e indexación requieren despliegue/publicación y confirmación. La propiedad GSC puede iniciar procesamiento desde su creación según Google; no se confirma que haya informes/datos de Rutitas. Retención GA4, Google Signals y personalización publicitaria no se pudieron inspeccionar en esta sesión; no activar el ID real hasta revisar esos ajustes y completar la aprobación legal.
+
+## LANDING-021 — consentimiento y candidata ARCO (2026-11-25)
+
+| Control | Ejecución | Resultado real |
+|---|---|---|
+| Vitest afectado | `npm run test -- --reporter=dot src/App.test.tsx src/analytics.test.ts src/AnalyticsConsent.test.tsx` | Exit 0; 3 archivos, **23/23 pruebas aprobadas**. Cubre visita sin preferencia, rechazo, opt-in, revocación, reaceptación sin recarga, persistencia, eventos bloqueados, `page_view` único y contenido de aviso/canal. |
+| E2E GA sintético | `$env:LANDING_E2E_GA_SYNTHETIC='1'; npm run test:e2e -- e2e/analytics-consent.spec.ts` | Exit 0; **2/2** (Chromium y mobile-Chromium). ID `G-SYNTHETIC123`; solicitudes a Google interceptadas/abortadas; prueba confirma cero eventos propios durante `denied`, ninguna nueva solicitud de colección tras revocación y persistencia tras recarga. No hay datos transmitidos a GA4 real. |
+| Lint / Typecheck | `npm run lint`; `npm run typecheck` | Ambos exit 0. |
+| Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos; JS 264.17 kB (gzip 81.71 kB), CSS 21.48 kB (gzip 5.48 kB). |
+| SDD | `npm run sdd:verify` | Exit 0; 30 documentos; 32 requisitos LP, 14 L002, 8 L003, 9 L004 con trazabilidad. |
+| Formato | `git diff --check` | Exit 0; sin whitespace errors. Git emitió avisos LF/CRLF en archivos de texto, sin cambio de contenido por el chequeo. |
+| Auditoría de dependencias | No reejecutada | LANDING-021 no modifica `package.json` ni `package-lock.json`; el resultado anterior de `npm audit` no se presenta como ejecución actual. CI del PR repetirá sus controles normales. |
+| GA4 consola | Computer Use, solo lectura, intento sin éxito | NO VERIFICADO: Edge estaba minimizado y la integración de navegador informó Edge no disponible. No se cambiaron preferencias ni se activó medición. Retención, reset, Signals, personalización, user-provided data y recopilación quedan pendientes. |
+
+## LANDING-021 — recuperación desde main y revalidación (2026-11-25)
+
+| Control | Ejecución | Resultado observado |
+|---|---|---|
+| Fuente remota y rama | `git fetch origin main`; rama nueva basada en main SHA `887486d504e3f1985d9327dde226f9e7879537b9`; recuperación local `git cherry-pick --no-commit` de `38f689d` y del respaldo documental `c74a9ab` | Sin conflictos. No se reescribió la rama anterior. `evidence/` y `LANDING_013.diff` permanecen sin seguimiento y excluidos. |
+| Domicilio | Búsqueda de marcadores de domicilio en archivos de trabajo y revisión de las superficies candidatas | No se encontró domicilio personal en el árbol de trabajo. Las referencias históricas que señalaban autorización para publicarlo se corrigieron; PR/branch remotos anteriores no se reescriben. |
+| Consentimiento (E2E sintético) | `$env:LANDING_E2E_GA_SYNTHETIC='1'; $env:VITE_GA_MEASUREMENT_ID='G-SYNTHETIC123'; npm run test:e2e -- --workers=4` | Exit 0; **33 aprobadas, 0 fallidas, 1 omitida** de 34 instancias. Se cubren rechazo inicial, aceptación, revocación, nueva aceptación sin recarga, persistencia, deduplicación y no emisión/solicitudes de colección tras revocar. La omitida es la regresión de captura/carga de foto, configurada solo para desktop; se ejecutó en Chromium desktop. La etiqueta y solicitudes externas usaron ID sintético/intercepción, nunca el flujo real. |
+| Vitest | `npm run test` | Exit 0; **24/24** pruebas, 4 archivos. |
+| Lint / Typecheck | `npm run lint`; `npm run typecheck` | Ambos exit 0. |
+| Build | `npm run build` | Exit 0; Vite 6.4.5, 37 módulos. ID de producción sin configurar. |
+| SDD / headers | `npm run sdd:verify`; `npm run test:vercel-headers` | Ambos exit 0; SDD: 30 documentos y trazabilidad; headers: 4 rutas legales, rewrite SPA conservado. Son comprobaciones locales, no HTTP de producción. |
+| Dependencias | `npm audit --audit-level=high` | Exit 0; el audit actual reportó **0 vulnerabilidades**. Esto no equivale a riesgo cero ni constituye aceptación humana de riesgos. No hubo cambios a dependencias/lockfile. |
+| Diff | `git diff --check`; `git diff --cached --check` | Ambos exit 0; sin errores de whitespace. |
+| Search Console, recurso público | `Invoke-WebRequest` de `https://landing-page-rutitas.vercel.app/google2565d67923084a99.html` y comparación SHA-256 con el archivo local | HTTP 200, `text/html; charset=utf-8`, 53 bytes; SHA-256 coincide exactamente (`6B59…65CA`). Esto solo acredita el recurso HTTP; no acredita verificación de propiedad ni envíos a Search Console. |
+| Consolas GA4/Search Console | Computer Use autorizado | La herramienta detuvo la inspección porque no pudo determinar con suficiente confianza la URL del navegador activo. Se respetó el bloqueo; no hubo workaround ni cambios. Titularidad/verificación GSC, sitemap, indexación y controles de GA4 siguen **NO VERIFICADOS**. ID real vacío y GTM apagado. |
+| Push, GitHub Actions y Vercel | Push normal de `feature/landing-021-privacidad-consentimiento` al SHA `bde7f10dd16483533ec26d280a8d63fa18b884a5`; consulta de runs y status combinado | Push aceptado. Cero workflow runs de Actions para el SHA; solo status Vercel `success`, sin detalle para afirmar que hubo build u omisión. El conector no pudo crear el PR Draft (403) y `gh` no está instalado; el workflow `pull_request` no se dispara hasta crear el PR. Sin merge ni despliegue manual. |
+| PR #16 y CI inicial | GitHub PR #16; ejecución [45756697489](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/45756697489) | Coordinación confirmó el PR; lectura actual confirma abierto, Draft, base `main`, head/SHA `bde7f10dd16483533ec26d280a8d63fa18b884a5`. La ejecución del workflow `Quality and security checks` terminó `success`. Esto valida el SHA inicial, no el próximo commit documental. |
+
+En las primeras corridas completas de Playwright se detectó que las pruebas generales heredaban el diálogo de consentimiento inicial y que dos aserciones buscaban texto anterior. Se cambió el preestado E2E general a rechazo explícito y se alinearon las aserciones con el copy actual; la corrida final es la registrada arriba. Las pruebas específicas de Analytics conservan un contexto limpio para cubrir el primer consentimiento.
+
+La primera corrida dirigida encontró tres aserciones desactualizadas/accesibilidad mal seleccionada y una actualización `granted` duplicada durante interacción. Se corrigieron el selector de test y la lógica para actualizar consentimiento solo al entrar de nuevo al estado concedido; la corrida final anterior pasa. No se ejecutó la suite completa local de Vitest/E2E porque el alcance pidió repetir solo las pruebas afectadas. Tras el push, PR #15 ya aparecía fusionado desde el SHA anterior; la API de GitHub devolvió cero Actions runs para `38f689d`. El estado de Vercel fue `Canceled by Ignored Build Step`, sin build. No se afirma CI aprobado para LANDING-021. Sin Lighthouse porque estos cambios no alteran diseño, carga visual ni SEO.
+
+## LANDING-021 — controles GA4 reabiertos y persistencia — 2026-11-26
+
+| Control | Método | Resultado observado |
+|---|---|---|
+| Retención de datos | Consola GA4; se guardó la retención de usuario autorizada y luego se navegó fuera y se reabrió el apartado | Eventos 2 meses; usuario 2 meses; el reinicio al registrar actividad nueva aparece apagado. Guardar quedó deshabilitado tras guardar. |
+| Personalización y recogida | Consola GA4; “No permitir ninguno” y “Aplicar”; luego se salió y reabrió | `0 de 307` regiones permitidas; recogida granular de ubicación/dispositivo apagada. Signals y datos proporcionados por usuarios siguen desactivados. |
+| Flujo web y ocultación | Detalles del flujo reabiertos | Medición mejorada apagada; ocultación indica correo activo y 17 claves de parámetro URL. Consola muestra recogida web no activada y ningún dato recibido. |
+| GTM | Cuenta oficial; contenedor `GTM-NFJDHQXM`; se abrieron workspace y pestaña Versiones | No hay etiquetas en el workspace y el contenedor “no tiene ninguna versión”; no se observó versión publicada. |
+| Vinculaciones | Consola GA4, solo lectura | Google Ads, AdMob, AdSense, Ad Manager, Display & Video 360 y Floodlight muestran cero vinculaciones completadas. No se modificaron. |
+| Landing | Revisión estática de código/configuración local | `.env.example` deja `VITE_GA_MEASUREMENT_ID` vacío; `src/analytics.ts` exige ID válido y consentimiento. No se inspeccionó la variable de producción de Vercel. |
+| Transmisión y despliegue | Observación de consola | No se activó GA4/GTM, no se enviaron eventos reales, no se accedió a Vercel ni Search Console y no se inició despliegue. |
+
+Esta actualización supersede los estados **NO VERIFICADOS** de la consola GA4 registrados para el intento del 25-11-2026; esos registros son históricos. La comprobación no representa una prueba de recepción de datos, no prueba ausencia de tratamientos anteriores y no sustituye la aprobación legal. La retención de GA4 no ratifica la conservación general propuesta para otras superficies de Rutitas.

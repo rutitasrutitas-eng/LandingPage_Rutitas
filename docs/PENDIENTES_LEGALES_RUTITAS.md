@@ -4,8 +4,8 @@
 
 ## Para aprobar el aviso
 
-- La coordinación identificó al Equipo de Rutitas como responsable operativo. Sigue pendiente identificar al responsable legal completo (persona o entidad), su domicilio y régimen aplicable. La referencia a la UTTT no acredita que la Universidad sea responsable, patrocinadora u operadora.
-- La coordinación indicó `rutitas.rutitas@gmail.com` como contacto y confirmó atención conjunta de mensajes por el Equipo de Rutitas. Sigue pendiente aprobar el procedimiento de verificación, seguimiento y respuesta para solicitudes de eliminación; se recomienda asignar una persona responsable por solicitud. Esta atención compartida no habilita por sí misma el canal de eliminación.
+- Coordinación comunicó una identidad personal para la versión candidata; falta ratificar que describe correctamente al responsable legal, su carácter y régimen aplicable. El domicilio personal se omite de la candidata y de esta documentación hasta una autorización expresa vigente para su publicación. La referencia a la UTTT no acredita que la Universidad sea responsable, patrocinadora u operadora.
+- Coordinación confirmó `rutitas.rutitas@gmail.com` como contacto oficial y la atención conjunta por el Equipo de Rutitas. Se recomienda asignar una persona responsable por cada solicitud. El procedimiento ARCO está propuesto en `LANDING_021_PRIVACIDAD_ARCO.md`, pero faltan aprobación, designación formal, método seguro de identidad, sistema de folio/seguimiento y puesta en operación. El canal de eliminación no está habilitado.
 - Revisar inventario real por sistema: campos de registro y perfil, credenciales, identificadores, ubicación, viajes, fotos y documentos. Separar campos obligatorios/opcionales y datos locales de dispositivos de cualquier tratamiento remoto.
 - Definir finalidades, bases/consentimientos y avisos para cada etapa. Confirmar el flujo de alta/login y la vinculación con la comunidad universitaria.
 - Cotejar por sistema los proveedores, funciones, ubicaciones, transferencias, encargados y subencargados. Vercel aloja la Landing. Coordinación informó que infraestructura reportó el Backend de siete endpoints desplegado/verificado en Azure con MongoDB Atlas; esto no confirma tratamiento real de datos personales, contratos, regiones ni transferencias. Google Analytics está integrado opcionalmente, sin ID/medición real verificada; Google Maps Platform y Google Play siguen previstos o pendientes de confirmación. No inferir contratos ni tratamientos.
@@ -13,7 +13,7 @@
 - La política aprobada limita el costo adicional autorizado a $0 MXN. Esto no establece que los proveedores sean gratuitos; se debe verificar cualquier efecto de costo antes de habilitar servicios.
 - Verificar medidas técnicas y organizativas desplegadas, controles de acceso, HTTPS, respaldos, registros y respuesta ante incidentes. No atribuir certificaciones o protección no auditada.
 - Revisar restricciones por edad, consentimiento de tutores cuando aplique, y concordancia con futuros avisos dentro de la app y declaraciones de Google Play.
-- Aprobar versión, fecha de entrada en vigor y proceso para informar cambios. Conservar la advertencia “borrador” hasta la aprobación del responsable.
+- Aprobar versión, fecha de entrada en vigor y proceso para informar cambios. Conservar la advertencia “borrador” hasta la aprobación del responsable. Confirmar finalidades, tratamientos reales y proveedores antes de publicar como aviso vigente.
 
 ## Eliminar cuentas y datos
 

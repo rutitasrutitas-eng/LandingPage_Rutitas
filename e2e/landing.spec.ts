@@ -4,11 +4,9 @@ import { resolve } from 'node:path'
 import { writeFile } from 'node:fs/promises'
 
 test.beforeEach(async ({ page }) => {
-  if (process.env.VITE_GA_MEASUREMENT_ID) {
-    // General landing flows start with an explicit opt-out. A dedicated test
-    // retains a clean context for the undecided/consent prompt path.
-    await page.addInitScript(() => localStorage.setItem('rutitas.analytics-consent', 'denied'))
-  }
+  // General landing flows use a deterministic opted-out state. Dedicated
+  // analytics specs retain a clean context to exercise the initial prompt.
+  await page.addInitScript(() => localStorage.setItem('rutitas.analytics-consent', 'denied'))
 })
 
 const screens = [
@@ -258,9 +256,9 @@ test('privacy and account deletion distinguish local DEMO code from remote servi
   await expect(page.locator('#datos')).toContainText('No hay evidencia suficiente para confirmar que el público pueda usarlos')
   await expect(page.locator('#finalidades')).toContainText('Reservas y viajes multiusuario aún no están disponibles')
   const analytics = page.locator('#analitica')
-  await expect(analytics).toContainText('Actualmente la Landing no envía analítica a GA4')
-  await expect(analytics).toContainText('La preferencia podrá cambiarse desde')
-  await expect(analytics).toContainText('no incluye el texto escrito por las personas ni parámetros de URL')
+  await expect(analytics).toContainText('La Landing no tiene configurado el ID de medición y no envía eventos a GA4')
+  await expect(analytics).toContainText('permite rechazar o revocar la preferencia')
+  await expect(analytics).toContainText('no incluyen texto libre ni identificadores personales')
   await expect(analytics).toContainText('La propiedad de Search Console se creó para esta dirección')
   await expect(analytics).toContainText('la recopilación de datos de esa propiedad puede comenzar desde su creación')
   await page.goto('/eliminar-cuenta')

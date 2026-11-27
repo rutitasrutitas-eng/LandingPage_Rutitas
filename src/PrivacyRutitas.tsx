@@ -40,16 +40,16 @@ export default function PrivacyRutitas() {
             <p className="pr-lead">Queremos que sepas qué información utiliza Rutitas, para qué la necesita y cómo puedes ejercer tus derechos.</p>
             <div className="pr-notice" role="status">
               <span className="pr-notice-dot" aria-hidden="true" />
-              <p><strong>Borrador de revisión interna.</strong> Este aviso aún no es definitivo. La identificación legal y domicilio del responsable, los tratamientos y proveedores efectivos, la aplicación de los plazos y las prácticas reales de Android y Backend requieren confirmación y revisión legal antes de publicarlo como aviso vigente.</p>
+              <p><strong>Borrador no ratificado.</strong> Coordinación proporcionó la identidad y el domicilio indicados abajo para esta versión candidata. Aún deben confirmarse legalmente el carácter del responsable, los tratamientos efectivos, los proveedores y la aplicación de los plazos antes de usar este texto como aviso vigente.</p>
             </div>
             <p className="pr-version">Versión de trabajo: 25 de noviembre de 2026 · Entrada en vigor: pendiente de aprobación</p>
           </div>
         </div>
 
         <section className="pr-summary" aria-label="Aspectos importantes de privacidad">
-          <div><strong>Tu cuenta</strong><span>Datos para identificarte y acceder a Rutitas.</span></div>
+          <div><strong>Tu cuenta</strong><span>La Landing no permite crear cuentas; el uso público del Backend no está confirmado.</span></div>
           <div><strong>Tus recorridos</strong><span>La información de viajes pertenece a funcionalidades en desarrollo.</span></div>
-          <div><strong>Tus decisiones</strong><span>Puedes consultar este aviso y ejercer tus derechos mediante el canal que se habilite.</span></div>
+          <div><strong>Tus decisiones</strong><span>Consulta la propuesta de contacto ARCO; el procedimiento aún debe aprobarse y habilitarse.</span></div>
         </section>
 
         <div className="pr-layout">
@@ -63,7 +63,7 @@ export default function PrivacyRutitas() {
               <span className="pr-section-num">01 / RESPONSABLE</span>
               <h2 id="h-responsable">Quién protege tus datos</h2>
               <p>Rutitas es un proyecto universitario de movilidad compartida. El <strong>Equipo de Rutitas</strong> coordina su operación.</p>
-              <p>La persona o entidad que asumirá legalmente la responsabilidad del tratamiento y su domicilio están pendientes de confirmación. La comunidad universitaria piloto no se considera responsable legal por este solo hecho.</p>
+              <p>Para esta versión candidata, coordinación indica como persona responsable a <strong>David Rafael Aguilar Solis</strong>. Su carácter y los datos de identificación aplicables requieren ratificación legal; el domicilio se mantiene pendiente de autorización expresa para publicación. La comunidad universitaria piloto no se considera responsable por el solo hecho de participar.</p>
             </section>
 
             <section id="datos" aria-labelledby="h-datos" className="pr-section">
@@ -79,6 +79,7 @@ export default function PrivacyRutitas() {
               <h2 id="h-finalidades">Para qué usamos tu información</h2>
               <p>Hoy la Landing presenta el proyecto. Android se mantiene en modo DEMO y sus datos de ejemplo son locales. Aunque la infraestructura reportó un Backend desplegado, el uso real por personas usuarias y el tratamiento de datos no están confirmados.</p>
               <p>La finalidad futura de Rutitas es facilitar que una comunidad universitaria conozca rutas compartidas y, después, pueda coordinar viajes. Reservas y viajes multiusuario aún no están disponibles; este aviso deberá actualizarse antes de ofrecerlos.</p>
+              <p>No se han confirmado finalidades secundarias. Cualquier uso distinto de presentar el proyecto o probar localmente la DEMO debe validarse y comunicarse antes de activarse.</p>
             </section>
 
             <section id="permisos" aria-labelledby="h-permisos" className="pr-section">
@@ -114,22 +115,22 @@ export default function PrivacyRutitas() {
             <section id="derechos" aria-labelledby="h-derechos" className="pr-section">
               <span className="pr-section-num">08 / DERECHOS</span>
               <h2 id="h-derechos">Tus derechos sobre tus datos</h2>
-              <p>De acuerdo con el régimen legal que resulte aplicable, las personas titulares pueden ejercer derechos de acceso, rectificación, cancelación y oposición (ARCO), así como solicitar información sobre el uso de sus datos y revocar consentimientos cuando corresponda.</p>
-              <div className="pr-pending"><strong>Pendiente de aprobación:</strong> procedimiento y plazos para recibir, verificar y responder solicitudes. No envíes contraseñas, tokens ni documentos personales innecesarios.</div>
+              <p>Las personas pueden solicitar acceso, rectificación, cancelación u oposición (ARCO), y revocar consentimientos cuando corresponda. La propuesta es escribir a <a href="mailto:rutitas.rutitas@gmail.com?subject=Solicitud%20de%20privacidad%20%E2%80%94%20Rutitas">rutitas.rutitas@gmail.com</a> con el asunto «Solicitud de privacidad — Rutitas», indicar el derecho solicitado y describir los datos necesarios para localizar el caso. El equipo acusaría recibo, asignaría una persona responsable y daría seguimiento.</p>
+              <p>Para proteger la cuenta, el equipo propondría una verificación proporcional de identidad por un medio seguro acordado con la persona solicitante; el correo por sí solo no acredita identidad. No se deben enviar contraseñas, tokens ni documentos innecesarios por correo. Como referencia sujeta a revisión legal, la legislación aplicable prevé comunicar la determinación dentro de 20 días y, si procede, hacerla efectiva dentro de los 15 días siguientes; puede existir una ampliación justificada conforme a la ley.</p>
+              <div className="pr-pending"><strong>Procedimiento propuesto, aún sujeto a aprobación y puesta en operación:</strong> aunque el buzón de contacto está atendido por el Equipo de Rutitas, todavía se deben aprobar la verificación segura, el registro/folio, la asignación y seguimiento, la persona o área responsable formal y el proceso de respuesta. Esta propuesta no habilita solicitudes de eliminación de cuentas por correo.</div>
             </section>
 
             <section id="contacto" aria-labelledby="h-contacto" className="pr-section">
               <span className="pr-section-num">09 / CONTACTO</span>
               <h2 id="h-contacto">Contacto de privacidad</h2>
-              <p>Contacto oficial de privacidad: <a href="mailto:rutitas.rutitas@gmail.com">rutitas.rutitas@gmail.com</a>. La coordinación confirmó que el Equipo de Rutitas atenderá conjuntamente los mensajes recibidos.</p>
-              <p>Esta confirmación no habilita solicitudes de eliminación por correo: el procedimiento de verificación de identidad y seguimiento sigue pendiente. La identidad legal completa y domicilio del responsable también requieren validación. Esta Landing no recibe ni almacena solicitudes o documentos. No compartas contraseñas ni tokens por correo.</p>
+              <p>Contacto oficial de privacidad: <a href="mailto:rutitas.rutitas@gmail.com">rutitas.rutitas@gmail.com</a>. El Equipo de Rutitas atenderá conjuntamente los mensajes y se recomienda asignar una persona responsable por solicitud. Esta Landing no recibe ni almacena solicitudes o documentos. El correo sirve como contacto de privacidad, pero todavía no es un canal operativo para solicitar la eliminación de cuentas ni verifica identidad. No compartas contraseñas, tokens o documentos innecesarios por correo.</p>
             </section>
 
             <section id="analitica" aria-labelledby="h-analitica" className="pr-section">
               <span className="pr-section-num">10 / SITIO WEB</span>
               <h2 id="h-analitica">Analítica y almacenamiento del navegador</h2>
-              <p>Actualmente la Landing no envía analítica a GA4. Si se autoriza habilitarla en el futuro, GA4 solo se cargará después de aceptar la opción de analítica. La preferencia podrá cambiarse desde «Preferencias de analítica» cuando esté disponible. No se habilitó Google Tag Manager ni la medición mejorada de GA4.</p>
-              <p>La medición prevista se limita a visitas y acciones generales del sitio; no incluye el texto escrito por las personas ni parámetros de URL en los eventos preparados. La cuenta de GA4 tiene activada la ocultación de correos y parámetros sensibles. Google podría procesar datos técnicos de conexión, dispositivo o navegador; las categorías, plazos y condiciones aplicables deben confirmarse antes de activar la medición.</p>
+              <p>La Landing no tiene configurado el ID de medición y no envía eventos a GA4. El código preparado solo cargaría la etiqueta tras el consentimiento afirmativo; permite rechazar o revocar la preferencia y, tras una nueva aceptación, reanudar la medición sin recargar. El ID real permanece desactivado y Google Tag Manager no está habilitado.</p>
+              <p>La propiedad de GA4 tiene desactivada la medición mejorada y guardada la ocultación de correo y de claves de parámetros URL. La revisión de retención de eventos, restablecimiento de actividad, Google Signals, personalización publicitaria y recopilación de datos proporcionados por usuarios no se completó en esta revisión. Si se autoriza en el futuro, los eventos preparados se limitan a vistas de página sin query y acciones generales; no incluyen texto libre ni identificadores personales. El proveedor puede recibir datos técnicos de conexión, dispositivo o navegador; las categorías, plazos y condiciones deben confirmarse antes de activar el servicio.</p>
               <p>La propiedad de Search Console se creó para esta dirección, pero aún no está verificada. Google indica que la recopilación de datos de esa propiedad puede comenzar desde su creación; no se confirmó que Rutitas ya tenga informes disponibles.</p>
             </section>
 
@@ -137,7 +138,7 @@ export default function PrivacyRutitas() {
               <span className="pr-section-num">11 / ACTUALIZACIONES</span>
               <h2 id="h-cambios">Cambios al aviso</h2>
               <p>Las actualizaciones al aviso deberán comunicarse mediante esta misma dirección y, cuando el cambio lo requiera, por los medios adicionales definidos por el responsable. La fecha de entrada en vigor y la versión aprobada aparecerán en la parte superior.</p>
-              <div className="pr-pending"><strong>Pendiente:</strong> confirmar tratamientos y proveedores, completar la identidad legal y domicilio del responsable y obtener la revisión legal final. El Equipo de Rutitas aún no ha ratificado este texto como aviso definitivo.</div>
+              <div className="pr-pending"><strong>Pendiente:</strong> ratificar legalmente la identidad y el carácter del responsable; confirmar tratamientos, proveedores y plazos; aprobar el procedimiento ARCO y obtener revisión legal final. El Equipo de Rutitas aún no ha ratificado este texto como aviso definitivo.</div>
             </section>
           </div>
         </div>
