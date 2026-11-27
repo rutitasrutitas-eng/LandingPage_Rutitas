@@ -30,3 +30,10 @@ Se utilizaron las pantallas de administración de Analytics y Tag Manager de la 
 - Esta evidencia de configuración no constituye aceptación legal, aprobación del aviso ni ratificación de la retención general de Rutitas.
 
 Referencias de trazabilidad: `LANDING_021_CIERRE_PRIVACIDAD.md`, `docs/VALIDACIONES_PRIVACIDAD.md`, `docs/pruebas.md`, `docs/matriz-trazabilidad.md` y `Memoria.md`.
+
+## Publicación documental y CI
+
+- El registro de esta inspección y su actualización documental está en el commit `3efa9e7155da8a65e6f67e11704b5f23c666b409`, rama `feature/landing-021-privacidad-consentimiento`.
+- La ejecución de GitHub Actions [45915521507](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/45915521507) terminó **Success** para ese SHA. En el PR #16 se muestran 3/3 comprobaciones exitosas; el PR continúa Draft.
+- La evidencia de consola fue observada visualmente y persistida aquí como registro de texto. No se conservaron capturas; no se copiaron datos de sesión ni credenciales.
+- El CI valida el cambio documental y workflow del repositorio; no acredita recopilación real, consentimiento legal, configuración de producción en Vercel ni ausencia absoluta de riesgo.

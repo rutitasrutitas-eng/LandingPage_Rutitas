@@ -1,9 +1,12 @@
 # LANDING-021 — cierre técnico y aprobación pendiente
 
-**Fecha:** 25 de noviembre de 2026
+**Fecha de actualización:** 26 de noviembre de 2026
 **Rama de recuperación:** `feature/landing-021-privacidad-consentimiento`
-**PR:** nuevo Draft pendiente de creación; PR #15 fue fusionado externamente y no se reutiliza.
-**Estado actual:** cambios recuperados localmente desde `38f689d6250c7d5ecafe3124cbfd277cadb76709`, más correcciones documentales protegidas. El SHA recuperado no está en `main`; aún debe validarse, confirmarse y publicarse en la nueva rama autorizada.
+**PR actual:** [#16 — Draft](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/16), abierto hacia `main`.
+**SHA actual:** `3efa9e7155da8a65e6f67e11704b5f23c666b409`.
+**Estado actual:** configuración GA4 autorizada aplicada y comprobada al reabrir sus pantallas; los cambios documentales están publicados en la rama indicada. CI para este SHA terminó correctamente (workflow `Quality and security checks`, ejecución [45915521507](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/45915521507)). El PR se mantiene Draft.
+
+> Las secciones que registran la recuperación, el primer push y estados “pendientes” describen las observaciones históricas de sus fechas. El estado más reciente se encuentra en “Actualización de configuración GA4” y “Cierre actual — 26-11-2026”.
 
 ## Cambios
 
@@ -27,9 +30,9 @@
 
 La primera vuelta reportó tres expectativas de prueba desactualizadas y una transición `granted` duplicada, corregidas antes de los resultados finales. Ver `docs/pruebas.md`.
 
-## Controles externos y límites
+## Controles externos y límites — observación histórica del 25-11-2026
 
-- No fue posible inspeccionar la consola autenticada de GA4: Edge estaba minimizado y la integración no ofreció una pestaña Edge. Por tanto, retención de eventos, reset de actividad, Google Signals, personalización publicitaria, user-provided data y recopilación efectiva quedan **NO VERIFICADOS**. No se modificó la cuenta ni se activó medición.
+- En la inspección del 25-11-2026 no fue posible abrir la consola autenticada de GA4. Ese estado histórico de **NO VERIFICADO** fue supersedido por la inspección autenticada y los cambios confirmados el 26-11-2026, descritos al final. En ambas revisiones no se activó medición.
 - `VITE_GA_MEASUREMENT_ID` sigue vacío, GTM sigue inactivo, Search Console no se verificó en remoto ni se desplegó, y no se hizo operación Vercel.
 - La LFPDPPP oficial consultada (Cámara de Diputados, arts. 28–31) se usa como referencia candidata; la aplicabilidad y redacción final requieren responsable legal. Fuente: [texto vigente de la LFPDPPP](https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf).
 
@@ -42,13 +45,13 @@ La primera vuelta reportó tres expectativas de prueba desactualizadas y una tra
 5. Aprobar legalmente el texto, la versión y su fecha de vigencia; la autorización de coordinación para incluir datos en borrador no es aprobación legal.
 6. Revisar los controles GA4 faltantes antes de cualquier activación; no activar el Measurement ID real ni GTM mientras tanto.
 
-## Integración remota y evento externo
+## Integración remota y evento externo — registro histórico previo al PR #16
 
 La excepción SDD de recuperación permite esta rama nueva, un commit trazable, push y nuevo PR Draft. El commit `38f689d` se creó y publicó antes, sin force push. PR #15 ya aparece **merged/closed** desde `0a236f27de64ba42d49cc5192508231ea46a488b`, con merge commit `887486d504e3f1985d9327dde226f9e7879537b9` a las 2026-11-25 20:49:51 UTC. Ese merge fue externo; Codex no lo realizó. `origin/main` es `887486d`, y `38f689d` no es ancestro de `main`, aunque sí está en la rama remota.
 
 Para `38f689d`, la API de GitHub devolvió cero workflow runs de Actions. El estado observado de Vercel fue `success` con descripción `Canceled by Ignored Build Step`: se omitió el build, no se observó Preview construida. La nueva rama recuperada y su Draft PR siguen pendientes. No se hizo force push, merge ni despliegue.
 
-## Estado recuperado para nueva revisión
+## Estado recuperado para nueva revisión — registro histórico previo al último commit
 
 La rama actual parte de `887486d504e3f1985d9327dde226f9e7879537b9`. Los cambios de `38f689d` y las seis correcciones documentales se aplicaron sin conflictos mediante cherry-pick sin commit. La revisión vigente retira el domicilio personal de las superficies públicas y de toda la historia nueva; no reescribe la rama remota anterior. La búsqueda en los archivos de trabajo no encontró referencias al domicilio. Los resultados nuevos de revalidación están en `docs/pruebas.md`.
 
@@ -65,11 +68,11 @@ El commit de recuperación ya se publicó en la nueva rama. `evidence/` y `LANDI
 - Para este SHA hay cero workflow runs de GitHub Actions y el status combinado solo muestra Vercel `success`. Sin PR no se dispara el workflow `pull_request`; el status no demuestra si Vercel completó u omitió el build. No se hizo merge ni despliegue productivo.
 - Estos datos posteriores al push se actualizaron localmente y no se publicaron en un segundo push.
 
-## Actualización de coordinación — 2026-11-26
+## Actualización de coordinación — 2026-11-26 (antes del último commit documental)
 
 Coordinación confirmó que el PR **#16** existe y permanece Draft. GitHub confirma base `main`, head `feature/landing-021-privacidad-consentimiento` y SHA `bde7f10dd16483533ec26d280a8d63fa18b884a5`. La ejecución [45756697489](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/45756697489) terminó con conclusión `success` para ese SHA. Esta evidencia corresponde al commit anterior a la actualización de tres documentos; el commit documental y su CI se registrarán aparte.
 
-La descripción del PR se actualizará una vez que se publique el commit documental. El PR debe seguir Draft. El aviso permanece no ratificado, el domicilio personal no se publica, GA4/GTM no se activan, y no se autoriza merge ni producción.
+En ese punto la descripción aún estaba pendiente de actualización. Posteriormente se publicó el commit documental `3efa9e7` y se actualizó la descripción del PR; el estado efectivo se registra en “Cierre actual — 26-11-2026”. El PR sigue Draft. El aviso permanece no ratificado, el domicilio personal no se publica, GA4/GTM no se activan, y no se autoriza merge ni producción.
 
 ## Actualización de configuración GA4 — 2026-11-26
 
@@ -96,3 +99,12 @@ La revisión del repositorio confirma que `.env.example` mantiene `VITE_GA_MEASU
 La evidencia consiste en observación visual de las pantallas de retención, recogida, flujo web, etiquetas/versiones GTM y vinculaciones desde la sesión de la cuenta oficial el 26-11-2026. No se guardaron capturas en el repositorio ni datos de sesión.
 
 El aviso sigue **BORRADOR NO RATIFICADO**. La propiedad puede estar configurada sin que Analytics se encuentre activado desde la Landing; la revisión de controles no sustituye la ratificación legal ni autoriza activar el Measurement ID real.
+
+## Cierre actual — 26-11-2026
+
+- Rama `feature/landing-021-privacidad-consentimiento`, SHA local/remoto `3efa9e7155da8a65e6f67e11704b5f23c666b409`; el árbol de trabajo quedó limpio salvo los elementos preexistentes excluidos `LANDING_013.diff` y `evidence/`.
+- PR [#16](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/pull/16) conserva estado **Draft** y su descripción ahora refleja los ajustes GA4 verificados, el SHA actual, el resultado del CI y los límites de verificación.
+- CI: [Quality and security checks — ejecución 45915521507](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/45915521507), conclusión **Success** para `3efa9e7155da8a65e6f67e11704b5f23c666b409`. GitHub muestra 3/3 checks exitosos en el PR.
+- La verificación de GA4 fue visual en las consolas de la cuenta oficial. Se guardó el registro reproducible en `docs/LANDING_021_EVIDENCIA_GA4_2026-11-26.md`; no se guardaron capturas de pantalla en el repositorio.
+- No se inspeccionó el entorno remoto de Vercel, por lo que la variable de producción sigue **NO VERIFICADA**. No se activaron GA4/GTM ni se enviaron eventos; no se hizo merge ni despliegue.
+- Siguen pendientes la ratificación legal del aviso, la confirmación de los tratamientos y del canal ARCO, la implementación/validación de eliminación remota y la aceptación humana del riesgo residual de dependencias antes de release.
