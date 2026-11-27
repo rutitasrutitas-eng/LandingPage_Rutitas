@@ -398,3 +398,17 @@ La prueba sintética verifica lógica local, no recepción en la propiedad real 
 En las primeras corridas completas de Playwright se detectó que las pruebas generales heredaban el diálogo de consentimiento inicial y que dos aserciones buscaban texto anterior. Se cambió el preestado E2E general a rechazo explícito y se alinearon las aserciones con el copy actual; la corrida final es la registrada arriba. Las pruebas específicas de Analytics conservan un contexto limpio para cubrir el primer consentimiento.
 
 La primera corrida dirigida encontró tres aserciones desactualizadas/accesibilidad mal seleccionada y una actualización `granted` duplicada durante interacción. Se corrigieron el selector de test y la lógica para actualizar consentimiento solo al entrar de nuevo al estado concedido; la corrida final anterior pasa. No se ejecutó la suite completa local de Vitest/E2E porque el alcance pidió repetir solo las pruebas afectadas. Tras el push, PR #15 ya aparecía fusionado desde el SHA anterior; la API de GitHub devolvió cero Actions runs para `38f689d`. El estado de Vercel fue `Canceled by Ignored Build Step`, sin build. No se afirma CI aprobado para LANDING-021. Sin Lighthouse porque estos cambios no alteran diseño, carga visual ni SEO.
+
+## LANDING-021 — controles GA4 reabiertos y persistencia — 2026-11-26
+
+| Control | Método | Resultado observado |
+|---|---|---|
+| Retención de datos | Consola GA4; se guardó la retención de usuario autorizada y luego se navegó fuera y se reabrió el apartado | Eventos 2 meses; usuario 2 meses; el reinicio al registrar actividad nueva aparece apagado. Guardar quedó deshabilitado tras guardar. |
+| Personalización y recogida | Consola GA4; “No permitir ninguno” y “Aplicar”; luego se salió y reabrió | `0 de 307` regiones permitidas; recogida granular de ubicación/dispositivo apagada. Signals y datos proporcionados por usuarios siguen desactivados. |
+| Flujo web y ocultación | Detalles del flujo reabiertos | Medición mejorada apagada; ocultación indica correo activo y 17 claves de parámetro URL. Consola muestra recogida web no activada y ningún dato recibido. |
+| GTM | Cuenta oficial; contenedor `GTM-NFJDHQXM`; se abrieron workspace y pestaña Versiones | No hay etiquetas en el workspace y el contenedor “no tiene ninguna versión”; no se observó versión publicada. |
+| Vinculaciones | Consola GA4, solo lectura | Google Ads, AdMob, AdSense, Ad Manager, Display & Video 360 y Floodlight muestran cero vinculaciones completadas. No se modificaron. |
+| Landing | Revisión estática de código/configuración local | `.env.example` deja `VITE_GA_MEASUREMENT_ID` vacío; `src/analytics.ts` exige ID válido y consentimiento. No se inspeccionó la variable de producción de Vercel. |
+| Transmisión y despliegue | Observación de consola | No se activó GA4/GTM, no se enviaron eventos reales, no se accedió a Vercel ni Search Console y no se inició despliegue. |
+
+Esta actualización supersede los estados **NO VERIFICADOS** de la consola GA4 registrados para el intento del 25-11-2026; esos registros son históricos. La comprobación no representa una prueba de recepción de datos, no prueba ausencia de tratamientos anteriores y no sustituye la aprobación legal. La retención de GA4 no ratifica la conservación general propuesta para otras superficies de Rutitas.

@@ -1,5 +1,26 @@
 # Validaciones obligatorias del aviso de privacidad Rutitas
 
+## Actualización de configuración GA4 — 2026-11-26
+
+Inspección autenticada en la cuenta oficial de Rutitas, con lectura salvo los cuatro ajustes expresamente autorizados por coordinación. La evidencia visual se observó en la consola; no se guardaron capturas ni datos de sesión en el repositorio.
+
+| Control | Resultado observado tras reabrir |
+|---|---|
+| Propiedad / flujo | Propiedad `565238699`, flujo web Rutitas Landing Page, Measurement ID `G-MKN6YXXZ8Y`, URL `https://landing-page-rutitas.vercel.app/` |
+| Retención de eventos / usuarios | 2 meses / 2 meses |
+| Borrar por actividad nueva | Desactivado |
+| Google Signals / datos proporcionados por usuarios | Desactivados / desactivados |
+| Personalización de anuncios | 0 de 307 regiones permitidas |
+| Recogida granular ubicación/dispositivo | Desactivada |
+| Medición mejorada | Desactivada |
+| Ocultación | Correo activa; 17 claves de parámetro URL |
+| Recogida del flujo | La consola indica que no está activada y no muestra datos recibidos |
+| GTM `GTM-NFJDHQXM` | Workspace sin etiquetas; contenedor sin versiones publicadas observadas |
+| Vinculaciones publicitarias inspeccionadas | Google Ads, AdMob, AdSense, Ad Manager, Display & Video 360 y Floodlight: sin vinculaciones completadas |
+| Landing local | `.env.example` mantiene `VITE_GA_MEASUREMENT_ID=` vacío; el código requiere ID válido y consentimiento. No se inspeccionó Vercel en esta revisión. |
+
+La configuración de retención de GA4 no confirma la política general de retención de Rutitas ni demuestra que no haya existido tratamiento anterior. No se activaron Analytics/GTM ni se generaron eventos reales. El aviso continúa BORRADOR NO RATIFICADO; su aprobación legal y la confirmación de finalidades/proveedores permanecen pendientes.
+
 **Estado:** Borrador técnico, no ratificado. Fecha de revisión de repositorios: 17 de noviembre de 2026.
 
 ## Verificación técnica histórica en GitHub (solo lectura)

@@ -70,3 +70,29 @@ El commit de recuperación ya se publicó en la nueva rama. `evidence/` y `LANDI
 Coordinación confirmó que el PR **#16** existe y permanece Draft. GitHub confirma base `main`, head `feature/landing-021-privacidad-consentimiento` y SHA `bde7f10dd16483533ec26d280a8d63fa18b884a5`. La ejecución [45756697489](https://github.com/rutitasrutitas-eng/LandingPage_Rutitas/actions/runs/45756697489) terminó con conclusión `success` para ese SHA. Esta evidencia corresponde al commit anterior a la actualización de tres documentos; el commit documental y su CI se registrarán aparte.
 
 La descripción del PR se actualizará una vez que se publique el commit documental. El PR debe seguir Draft. El aviso permanece no ratificado, el domicilio personal no se publica, GA4/GTM no se activan, y no se autoriza merge ni producción.
+
+## Actualización de configuración GA4 — 2026-11-26
+
+La revisión autenticada de la propiedad **Rutitas** (`565238699`, flujo web `G-MKN6YXXZ8Y`) se completó en modo lectura para verificar la persistencia. La configuración anterior descrita en este informe como “NO VERIFICADA” corresponde a la inspección del 25-11-2026 y queda supersedida por esta actualización; se conserva como historial.
+
+| Control | Antes de esta actualización | Estado guardado y reabierto |
+|---|---|---|
+| Retención de eventos | 2 meses | 2 meses (sin cambio) |
+| Retención de datos de usuario | 14 meses | 2 meses |
+| Reinicio de retención con actividad nueva | Activado | Desactivado |
+| Personalización publicitaria | Permitida en 307/307 regiones | No permitida en 0/307 regiones |
+| Recogida granular de ubicación/dispositivo | Activada | Desactivada |
+| Google Signals | Desactivado | Desactivado (conservado) |
+| Datos proporcionados por usuarios | Desactivados | Desactivados (conservado) |
+| Medición mejorada | Desactivada | Desactivada (conservada) |
+| Ocultación de correo y parámetros sensibles | Correo activo; 17 claves URL | Conservada; 17 claves URL |
+
+El ajuste de las 307 regiones se aplicó con “No permitir ninguno” y “Aplicar”; al reabrir la sección mostró `0 de 307` regiones permitidas. La conservación de GA4 de dos meses es un control de la propiedad y **no ratifica** el plazo general de conservación de datos de Rutitas, que sigue pendiente de validación por sistema/categoría y aprobación legal.
+
+El flujo web indica que la recogida no está activada y no muestra datos recibidos. En la cuenta oficial, GTM `GTM-NFJDHQXM` muestra una lista de etiquetas vacía en el espacio de trabajo y “Este contenedor no tiene ninguna versión”; por tanto, no se observó ninguna versión publicada. Las vinculaciones inspeccionadas de Google Ads, AdMob, AdSense, Ad Manager, Display & Video 360 y Floodlight muestran cero vinculaciones. No se cambiaron esas vinculaciones.
+
+La revisión del repositorio confirma que `.env.example` mantiene `VITE_GA_MEASUREMENT_ID` vacío y el código carga GA solo con ID válido y consentimiento afirmativo. Esto verifica la configuración local de código; **no se abrió el panel de Vercel ni se verificó su entorno de producción**. No se activaron GA4/GTM, no se enviaron eventos, no se tocaron Search Console ni Vercel y no hubo despliegue.
+
+La evidencia consiste en observación visual de las pantallas de retención, recogida, flujo web, etiquetas/versiones GTM y vinculaciones desde la sesión de la cuenta oficial el 26-11-2026. No se guardaron capturas en el repositorio ni datos de sesión.
+
+El aviso sigue **BORRADOR NO RATIFICADO**. La propiedad puede estar configurada sin que Analytics se encuentre activado desde la Landing; la revisión de controles no sustituye la ratificación legal ni autoriza activar el Measurement ID real.
